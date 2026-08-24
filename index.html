@@ -466,7 +466,81 @@
       transform: scale(1.02);
     }
 
-    /* CONTINUOUS HORIZONTAL RIBBON LIGHTBOX (SCREENS 32 & 33) */
+    
+    /* FAVORITE BUTTON ON CARDS */
+    .card-fav-btn {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: #18181B;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      z-index: 10;
+    }
+    .card-fav-btn:hover {
+      transform: scale(1.1);
+    }
+    .card-fav-btn.active {
+      color: #DC2626;
+      background: #FFFFFF;
+    }
+
+    /* CENTERED HORIZONTAL RIBBON LIGHTBOX (SCREEN 33 FIX) */
+    .lightbox-ribbon-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+    }
+    .lightbox-ribbon-track {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      left: 0;
+    }
+    .lightbox-ribbon-card {
+      min-width: 55vw;
+      max-width: 55vw;
+      height: 68vh;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      opacity: 0.35;
+      transform: scale(0.9);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #18181B;
+      flex-shrink: 0;
+    }
+    .lightbox-ribbon-card.active {
+      opacity: 1;
+      transform: scale(1);
+      cursor: default;
+    }
+    .lightbox-ribbon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* OLD CONTINUOUS HORIZONTAL RIBBON (SCREENS 32 & 33) */
     .lightbox-modal {
       position: fixed;
       top: 0;
@@ -1074,7 +1148,14 @@
           </div>
 
           <!-- Sort Select -->
-          <div style="width: 200px;">
+                    <!-- View Switcher (Grid / Map) & Wishlist Button -->
+          <div style="display: flex; align-items: center; gap: 0.35rem; background: #FAF8F5; border: 1px solid #EAE6DF; padding: 0.2rem; border-radius: 0.4rem;">
+            <button onclick="setViewMode('grid', this)" type="button" id="btnViewGrid" class="btn btn-dark" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;">⊞ Сетка</button>
+            <button onclick="setViewMode('map', this)" type="button" id="btnViewMap" class="btn btn-light" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;">🗺 Карта</button>
+          </div>
+          <button onclick="toggleFavoritesFilter()" type="button" id="btnFavoritesFilter" class="btn btn-light" style="padding: 0.55rem 0.85rem; font-size: 0.75rem;">♡ Избранное <span id="favoritesCountBadge">(0)</span></button>
+
+          <div style="width: 190px;">
             <select id="sortSelect" onchange="applyFilters()">
               <option value="score_desc">Сначала высокий балл ↓</option>
               <option value="score_asc">Сначала низкий балл ↑</option>
@@ -1402,19 +1483,13 @@
           </div>
         </div>
 
-        <!-- REAL ATTACHED PHOTOS GALLERY -->
-        <div style="border: 1px solid #EAE6DF; border-radius: 0.5rem; padding: 1.35rem; background: #FFFFFF;">
+                <!-- RE-AUDIT TIMELINE & INSPECTION HISTORY -->
+        <div id="modalAuditHistorySection" style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.5rem; padding: 1.35rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.75rem;">
-            <span style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; color: #71717A; letter-spacing: 0.05em;">Фотогалерея инспекции</span>
-            <label id="btnDossierAddPhoto" class="hidden btn btn-light" style="padding: 0.3rem 0.75rem; font-size: 0.6875rem; cursor: pointer;">
-              <span>+ Прикрепить фото</span>
-              <input type="file" accept="image/*" multiple onchange="handleDossierDirectPhotoUpload(event)" style="display: none;">
-            </label>
+            <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #71717A;">ИСТОРИЯ КОНТРОЛЬНЫХ ВИЗИТОВ</span>
+            <span id="modalAuditCountBadge" style="font-size: 0.6875rem; font-weight: 800; color: #18181B; background: #FFFFFF; border: 1px solid #EAE6DF; padding: 0.15rem 0.55rem; border-radius: 0.25rem;">2 проверки</span>
           </div>
-          <div id="modalPhotosGalleryList" class="photo-grid"></div>
-          <div id="modalPhotosEmptyHint" style="font-size: 0.75rem; color: #A1A1AA; font-style: italic;">
-            Фотографии визита пока не загружены инспектором.
-          </div>
+          <div id="modalAuditTimelineList" style="display: flex; flex-direction: column; gap: 0.65rem;"></div>
         </div>
 
         <!-- 6 Pillars Progress -->
@@ -1506,6 +1581,45 @@
             <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Шеф-повар / Концепт-шеф</label>
             <input type="text" id="formChef" placeholder="Имя шефа">
           </div>
+        </div>
+
+                <!-- INSPECTOR SERVICE STOPWATCH TIMERS -->
+        <div style="background: #18181B; color: #FFFFFF; border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.85rem;">
+          <div class="flex items-center justify-between">
+            <div>
+              <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; color: #C5A880; font-weight: 800;">ПРОФЕССИОНАЛЬНЫЙ СЕКУНДОМЕР ИНСПЕКТОРА</span>
+              <strong style="display: block; font-size: 0.875rem; color: #FFF; margin-top: 0.1rem;">Физический замер тайминга сервиса</strong>
+            </div>
+            <button type="button" onclick="resetAllTimers()" class="btn btn-light" style="padding: 0.25rem 0.55rem; font-size: 0.625rem;">Сброс таймеров</button>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.65rem; text-align: center;">
+            <div style="background: #27272A; padding: 0.65rem; border-radius: 0.35rem;">
+              <span style="font-size: 0.625rem; color: #A1A1AA; display: block;">1. Вода / Напитки</span>
+              <strong id="timerDisplay1" class="font-mono" style="font-size: 1.15rem; color: #FFF; display: block; margin: 0.2rem 0;">00:00</strong>
+              <button type="button" id="timerBtn1" onclick="toggleTimer(1)" class="btn btn-light" style="padding: 0.2rem 0.5rem; font-size: 0.625rem; width: 100%;">Старт</button>
+            </div>
+
+            <div style="background: #27272A; padding: 0.65rem; border-radius: 0.35rem;">
+              <span style="font-size: 0.625rem; color: #A1A1AA; display: block;">2. Первое горячее</span>
+              <strong id="timerDisplay2" class="font-mono" style="font-size: 1.15rem; color: #FFF; display: block; margin: 0.2rem 0;">00:00</strong>
+              <button type="button" id="timerBtn2" onclick="toggleTimer(2)" class="btn btn-light" style="padding: 0.2rem 0.5rem; font-size: 0.625rem; width: 100%;">Старт</button>
+            </div>
+
+            <div style="background: #27272A; padding: 0.65rem; border-radius: 0.35rem;">
+              <span style="font-size: 0.625rem; color: #A1A1AA; display: block;">3. Пауза курсов</span>
+              <strong id="timerDisplay3" class="font-mono" style="font-size: 1.15rem; color: #FFF; display: block; margin: 0.2rem 0;">00:00</strong>
+              <button type="button" id="timerBtn3" onclick="toggleTimer(3)" class="btn btn-light" style="padding: 0.2rem 0.5rem; font-size: 0.625rem; width: 100%;">Старт</button>
+            </div>
+
+            <div style="background: #27272A; padding: 0.65rem; border-radius: 0.35rem;">
+              <span style="font-size: 0.625rem; color: #A1A1AA; display: block;">4. Расчет счета</span>
+              <strong id="timerDisplay4" class="font-mono" style="font-size: 1.15rem; color: #FFF; display: block; margin: 0.2rem 0;">00:00</strong>
+              <button type="button" id="timerBtn4" onclick="toggleTimer(4)" class="btn btn-light" style="padding: 0.2rem 0.5rem; font-size: 0.625rem; width: 100%;">Старт</button>
+            </div>
+          </div>
+
+          <button type="button" onclick="applyTimersToScore()" class="btn btn-gold" style="width: 100%; font-size: 0.6875rem; padding: 0.45rem;">⚡ Конвертировать замеры в баллы сервиса</button>
         </div>
 
         <!-- Dynamic Granular Checklist -->
@@ -1666,7 +1780,25 @@
       "Valet-Parking",
       "Сомелье",
       "Панорамный вид"
-    ]
+    ],
+    "coords": {
+      "lat": 55.7483,
+      "lng": 37.5833
+    },
+    "history": [
+      {
+        "date": "2026-02-10",
+        "score": 90,
+        "notes": "Первичная инспекция: замечания по плотности посадки в центральном зале."
+      },
+      {
+        "date": "2026-08-10",
+        "score": 96,
+        "notes": "Повторная инспекция: исправлена синхронность отдачи курсов, идеальный соус."
+      }
+    ],
+    "audit_count": 2,
+    "score_delta": 6
   },
   {
     "id": 2,
@@ -1718,7 +1850,25 @@
       "Speakeasy",
       "Джаз",
       "Бронь обязательна"
-    ]
+    ],
+    "coords": {
+      "lat": 59.9288,
+      "lng": 30.3475
+    },
+    "history": [
+      {
+        "date": "2025-11-15",
+        "score": 94,
+        "notes": "Первичная инспекция: отличная миксология, теснота в гардеробе."
+      },
+      {
+        "date": "2026-08-11",
+        "score": 99,
+        "notes": "Контрольная проверка: эталонный прозрачный лед, кураторская акустика."
+      }
+    ],
+    "audit_count": 2,
+    "score_delta": 5
   },
   {
     "id": 3,
@@ -1770,7 +1920,25 @@
       "Дворянский этикет",
       "Историческое меню",
       "Винная карта"
-    ]
+    ],
+    "coords": {
+      "lat": 55.7634,
+      "lng": 37.6053
+    },
+    "history": [
+      {
+        "date": "2026-01-20",
+        "score": 91,
+        "notes": "Первичный аудит: классика дворянского сервиса."
+      },
+      {
+        "date": "2026-08-12",
+        "score": 94,
+        "notes": "Повторный визит: качество пожарской котлеты подтверждено на высшем уровне."
+      }
+    ],
+    "audit_count": 2,
+    "score_delta": 3
   },
   {
     "id": 4,
@@ -1822,7 +1990,25 @@
       "Розетки",
       "Свежая выпечка",
       "Завтраки целый день"
-    ]
+    ],
+    "coords": {
+      "lat": 55.7562,
+      "lng": 37.6041
+    },
+    "history": [
+      {
+        "date": "2026-03-05",
+        "score": 82,
+        "notes": "Первичный аудит: высокая стабильность эспрессо."
+      },
+      {
+        "date": "2026-08-13",
+        "score": 85,
+        "notes": "Повторный аудит: улучшена скорость отдачи утренней выпечки."
+      }
+    ],
+    "audit_count": 2,
+    "score_delta": 3
   },
   {
     "id": 5,
@@ -1873,7 +2059,20 @@
       "Крафтовая лапша",
       "Аутентично",
       "Быстрая отдача"
-    ]
+    ],
+    "coords": {
+      "lat": 55.7479,
+      "lng": 37.5819
+    },
+    "history": [
+      {
+        "date": "2026-08-14",
+        "score": 88,
+        "notes": "Первичный контрольный аудит"
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0
   },
   {
     "id": 6,
@@ -1924,7 +2123,20 @@
       "Хлеб на закваске",
       "Кофе to-go",
       "Без маргарина"
-    ]
+    ],
+    "coords": {
+      "lat": 59.9365,
+      "lng": 30.3168
+    },
+    "history": [
+      {
+        "date": "2026-08-15",
+        "score": 85,
+        "notes": "Первичный контрольный аудит"
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0
   },
   {
     "id": 7,
@@ -1975,7 +2187,25 @@
       "Заказ в приложении",
       "Детский уголок",
       "Готовность 15 мин"
-    ]
+    ],
+    "coords": {
+      "lat": 56.8348,
+      "lng": 60.5985
+    },
+    "history": [
+      {
+        "date": "2026-02-18",
+        "score": 75,
+        "notes": "Первичный аудит: стандартная отдача за 18 минут."
+      },
+      {
+        "date": "2026-08-16",
+        "score": 78,
+        "notes": "Повторный аудит: ускорена сборка до 12 минут, чистота в санузле."
+      }
+    ],
+    "audit_count": 2,
+    "score_delta": 3
   },
   {
     "id": 8,
@@ -2026,7 +2256,20 @@
       "Выпечка при вас",
       "До 700 ₽",
       "Натуральный морс"
-    ]
+    ],
+    "coords": {
+      "lat": 55.7571,
+      "lng": 37.6225
+    },
+    "history": [
+      {
+        "date": "2026-08-17",
+        "score": 75,
+        "notes": "Первичный контрольный аудит"
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0
   },
   {
     "id": 9,
@@ -2077,7 +2320,20 @@
       "В ГУМе",
       "До 600 ₽",
       "Сытные обеды"
-    ]
+    ],
+    "coords": {
+      "lat": 55.7548,
+      "lng": 37.6214
+    },
+    "history": [
+      {
+        "date": "2026-08-18",
+        "score": 64,
+        "notes": "Первичный контрольный аудит"
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0
   },
   {
     "id": 10,
@@ -2128,13 +2384,26 @@
     "features": [
       "Перчатки",
       "Фастфуд"
-    ]
+    ],
+    "coords": {
+      "lat": 55.7523,
+      "lng": 37.5927
+    },
+    "history": [
+      {
+        "date": "2026-08-19",
+        "score": 50,
+        "notes": "Первичный контрольный аудит"
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0
   }
 ];
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v25');
+      var stored = localStorage.getItem('planka_guide_db_v26');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -2164,7 +2433,7 @@
 
     function saveDB() {
       try {
-        localStorage.setItem('planka_guide_db_v25', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v26', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
@@ -2361,6 +2630,7 @@
         var isDraft = (v.status === 'draft');
         if (isDraft && !isAdmin) continue;
         if (currentDraftsOnlyFilter && !isDraft) continue;
+        if (currentFavoritesOnlyFilter && !isFavorite(v.id)) continue;
         var matchesSearch = !search || 
                             v.name.toLowerCase().indexOf(search) !== -1 || 
                             v.format.toLowerCase().indexOf(search) !== -1 || 
@@ -2587,6 +2857,7 @@
 
       // Photos Gallery
       renderDossierTriptych();
+      renderDossierAuditHistory();
       renderDossierGallery();
 
       // Author Private Section
@@ -2693,7 +2964,240 @@
       if (lb) lb.classList.add('open');
     }
 
+    
+    // FAVORITES (WISHLIST) ENGINE
+    var favorites = [];
+    try {
+      var favStored = localStorage.getItem('planka_favorites');
+      if (favStored) favorites = JSON.parse(favStored);
+    } catch(e) {}
+
+    var currentFavoritesOnlyFilter = false;
+    var currentCollectionFilter = 'all';
+    var currentViewMode = 'grid';
+
+    function isFavorite(id) {
+      return favorites.indexOf(id) !== -1;
+    }
+
+    function toggleFavorite(id, e) {
+      if (e) e.stopPropagation();
+      var idx = favorites.indexOf(id);
+      if (idx !== -1) {
+        favorites.splice(idx, 1);
+      } else {
+        favorites.push(id);
+      }
+      try {
+        localStorage.setItem('planka_favorites', JSON.stringify(favorites));
+      } catch(err) {}
+      updateFavoritesUI();
+      renderVenues();
+    }
+
+    function updateFavoritesUI() {
+      var badge = document.getElementById('favoritesCountBadge');
+      if (badge) badge.innerText = '(' + favorites.length + ')';
+    }
+
+    function toggleFavoritesFilter() {
+      currentFavoritesOnlyFilter = !currentFavoritesOnlyFilter;
+      var btn = document.getElementById('btnFavoritesFilter');
+      if (btn) {
+        if (currentFavoritesOnlyFilter) {
+          btn.classList.remove('btn-light');
+          btn.classList.add('btn-dark');
+        } else {
+          btn.classList.remove('btn-dark');
+          btn.classList.add('btn-light');
+        }
+      }
+      applyFilters();
+    }
+
+    // CURATED COLLECTIONS FILTER
+    function setCollectionFilter(col, btn) {
+      currentCollectionFilter = col;
+      var btns = document.querySelectorAll('.collection-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      if (btn) btn.classList.add('active');
+
+      if (col === 'breakfast') {
+        currentFormatFilter = 'Кофейня';
+      } else if (col === 'laptop') {
+        currentFormatFilter = 'Кофейня';
+      } else if (col === 'bars') {
+        currentFormatFilter = 'Коктейльный бар';
+      } else if (col === 'quality') {
+        currentQualityFilter = true;
+      } else if (col === 'ekb') {
+        var cFlt = document.getElementById('cityFilter');
+        if (cFlt) cFlt.value = 'Екатеринбург';
+      } else {
+        currentFormatFilter = 'all';
+        currentQualityFilter = false;
+      }
+      applyFilters();
+    }
+
+    // VIEW SWITCHER (GRID vs MAP)
+    function setViewMode(mode, btn) {
+      currentViewMode = mode;
+      var gridEl = document.getElementById('venuesGrid');
+      var mapEl = document.getElementById('mapViewContainer');
+      var btnG = document.getElementById('btnViewGrid');
+      var btnM = document.getElementById('btnViewMap');
+
+      if (mode === 'map') {
+        if (gridEl) gridEl.classList.add('hidden');
+        if (mapEl) mapEl.classList.remove('hidden');
+        if (btnG) { btnG.classList.remove('btn-dark'); btnG.classList.add('btn-light'); }
+        if (btnM) { btnM.classList.remove('btn-light'); btnM.classList.add('btn-dark'); }
+        renderCityMap();
+      } else {
+        if (mapEl) mapEl.classList.add('hidden');
+        if (gridEl) gridEl.classList.remove('hidden');
+        if (btnM) { btnM.classList.remove('btn-dark'); btnM.classList.add('btn-light'); }
+        if (btnG) { btnG.classList.remove('btn-light'); btnG.classList.add('btn-dark'); }
+      }
+    }
+
+    function renderCityMap() {
+      var citySelect = document.getElementById('cityFilter');
+      var city = citySelect ? citySelect.value : 'all';
+      var searchQuery = city === 'all' ? 'Рестораны Москва СПб Екатеринбург' : ('Рестораны ' + city);
+      var iframeUrl = 'https://yandex.ru/map-widget/v1/?text=' + encodeURIComponent(searchQuery) + '&z=11';
+      var iframe = document.getElementById('cityMapIframe');
+      if (iframe) iframe.setAttribute('src', iframeUrl);
+    }
+
+    // STOPWATCH TIMERS FOR INSPECTOR
+    var timerIntervals = [null, null, null, null];
+    var timerSeconds = [0, 0, 0, 0];
+
+    function toggleTimer(num) {
+      var idx = num - 1;
+      var btn = document.getElementById('timerBtn' + num);
+      if (timerIntervals[idx]) {
+        clearInterval(timerIntervals[idx]);
+        timerIntervals[idx] = null;
+        if (btn) btn.innerText = 'Старт';
+      } else {
+        timerIntervals[idx] = setInterval(function() {
+          timerSeconds[idx]++;
+          var m = Math.floor(timerSeconds[idx] / 60);
+          var s = timerSeconds[idx] % 60;
+          var disp = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+          var el = document.getElementById('timerDisplay' + num);
+          if (el) el.innerText = disp;
+        }, 1000);
+        if (btn) btn.innerText = 'Стоп';
+      }
+    }
+
+    function resetAllTimers() {
+      for (var i = 0; i < 4; i++) {
+        if (timerIntervals[i]) clearInterval(timerIntervals[i]);
+        timerIntervals[i] = null;
+        timerSeconds[i] = 0;
+        var el = document.getElementById('timerDisplay' + (i+1));
+        var btn = document.getElementById('timerBtn' + (i+1));
+        if (el) el.innerText = '00:00';
+        if (btn) btn.innerText = 'Старт';
+      }
+    }
+
+    function applyTimersToScore() {
+      // Automatic conversion of physical stopwatches to service points
+      var drinksSec = timerSeconds[0];
+      var hotSec = timerSeconds[1];
+      var pauseSec = timerSeconds[2];
+      var billSec = timerSeconds[3];
+
+      var points = 15;
+      if (drinksSec > 300) points -= 2; // > 5 min
+      if (hotSec > 1200) points -= 3; // > 20 min
+      if (pauseSec > 1000) points -= 2; // > 16 min
+      if (billSec > 240) points -= 2; // > 4 min
+
+      var sTimingEl = document.getElementById('sub_r13');
+      if (sTimingEl) sTimingEl.value = Math.max(1, Math.min(5, Math.round(points / 3)));
+      recalcGranularScore();
+      alert('Замеры времени сервиса (' + timerSeconds.map(function(s){ return Math.floor(s/60) + 'м'; }).join(', ') + ') успешно пересчитаны в баллы тайминга!');
+    }
+
+    // PERFECT HORIZONTAL RIBBON CENTERING (SCREEN 33 FIX)
     function renderLightboxRibbon() {
+      if (!activeLightboxVenue) return;
+      var track = document.getElementById('lightboxRibbonTrack');
+      var counter = document.getElementById('lightboxCounter');
+      var progressFill = document.getElementById('lightboxProgressFill');
+      var photos = activeLightboxVenue.photos || [];
+
+      if (!track) return;
+
+      if (photos.length === 0) {
+        track.innerHTML = '<div style="color: #FFF; font-size: 0.875rem;">Фотографии пока не загружены</div>';
+        if (counter) counter.innerText = '0 / 0';
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < photos.length; i++) {
+        var isActive = (i === currentLightboxIndex);
+        html += '<div class="lightbox-ribbon-card ' + (isActive ? 'active' : '') + '" onclick="setLightboxIndex(' + i + ')">' +
+          '<img src="' + photos[i] + '" class="lightbox-ribbon-img" alt="Фото ' + (i + 1) + '">' +
+        '</div>';
+      }
+      track.innerHTML = html;
+
+      // Exact Center Transform Calculation
+      var cardWidthVw = window.innerWidth <= 768 ? 85 : 55;
+      var gapVw = 1.5;
+      var halfScreenVw = 50;
+      var halfCardVw = cardWidthVw / 2;
+      
+      // Calculate offset so active card center aligns with 50vw
+      var shiftVw = (50 - (cardWidthVw / 2)) - (currentLightboxIndex * (cardWidthVw + gapVw));
+      track.style.transform = 'translateX(' + shiftVw + 'vw)';
+
+      if (counter) counter.innerText = (currentLightboxIndex + 1) + ' / ' + photos.length;
+      if (progressFill) {
+        var pct = ((currentLightboxIndex + 1) / photos.length) * 100;
+        progressFill.style.width = pct + '%';
+      }
+    }
+
+    // RENDER AUDIT HISTORY IN DOSSIER
+    function renderDossierAuditHistory() {
+      var list = document.getElementById('modalAuditTimelineList');
+      var badge = document.getElementById('modalAuditCountBadge');
+      if (!list || !activeModalVenue) return;
+
+      var history = activeModalVenue.history || [
+        { date: activeModalVenue.date || "2026-08-10", score: activeModalVenue.total_score, notes: "Контрольный аудит заведения." }
+      ];
+
+      if (badge) badge.innerText = history.length + ' ' + (history.length === 1 ? 'проверка' : (history.length < 5 ? 'проверки' : 'проверок'));
+
+      var hhtml = '';
+      for (var i = 0; i < history.length; i++) {
+        var item = history[i];
+        hhtml += '<div style="background: #FFFFFF; border: 1px solid #EAE6DF; border-radius: 0.35rem; padding: 0.75rem 0.95rem; display: flex; align-items: center; justify-content: space-between;">' +
+          '<div>' +
+            '<div class="flex items-center gap-2">' +
+              '<strong style="font-size: 0.75rem; color: #18181B;">Визит №' + (i + 1) + ' (' + item.date + ')</strong>' +
+              (i === history.length - 1 ? '<span style="background: #18181B; color: #FFF; font-size: 0.5625rem; font-family: ui-monospace, monospace; padding: 0.1rem 0.35rem; border-radius: 0.2rem; font-weight: 800;">ТЕКУЩИЙ</span>' : '') +
+            '</div>' +
+            '<p style="font-size: 0.6875rem; color: #52525B; margin-top: 0.2rem;">' + item.notes + '</p>' +
+          '</div>' +
+          '<span class="font-mono" style="font-weight: 900; font-size: 1rem; color: #18181B; margin-left: 1rem;">' + item.score + ' б.</span>' +
+        '</div>';
+      }
+      list.innerHTML = hhtml;
+    }
+
+    function _old_ribbon() {
       if (!activeLightboxVenue) return;
       var track = document.getElementById('lightboxRibbonTrack');
       var counter = document.getElementById('lightboxCounter');
@@ -2789,6 +3293,7 @@
           if (loadedCount === files.length) {
             saveDB();
             renderDossierTriptych();
+      renderDossierAuditHistory();
       renderDossierGallery();
             alert('Фотографии успешно добавлены к заведению!');
           }
@@ -2803,6 +3308,7 @@
         activeModalVenue.photos.splice(idx, 1);
         saveDB();
         renderDossierTriptych();
+      renderDossierAuditHistory();
       renderDossierGallery();
       }
     }
