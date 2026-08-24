@@ -1033,6 +1033,11 @@
             </select>
           </div>
 
+                    <!-- Theme Toggle Button -->
+          <button onclick="toggleTheme()" type="button" id="btnThemeToggle" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сменить тему">
+            <span id="themeIcon">🌙</span>
+          </button>
+
           <!-- Public Nav links -->
           <div class="header-nav-scroll" style="display: flex; align-items: center; gap: 1.25rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
             <a href="#strategy" style="color: #52525B; text-decoration: none;">Стратегия</a>
@@ -1504,6 +1509,9 @@
         </div>
 
         <div class="flex items-center gap-3">
+                    <button onclick="openShareModal(activeModalVenue.id)" type="button" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.6875rem;">↗ Поделиться</button>
+          <button id="btnModalCertificate" onclick="openCertificateModal(activeModalVenue.id)" type="button" class="btn btn-gold hidden" style="padding: 0.45rem 0.75rem; font-size: 0.6875rem;">📄 Сертификат (А4)</button>
+
           <div id="modalAdminActions" class="hidden" style="align-items: center; gap: 0.5rem;">
             <button onclick="editCurrentModalVenue()" type="button" class="btn btn-light" title="Редактировать">✏️ Редактировать</button>
             <button onclick="deleteCurrentModalVenue()" type="button" class="btn btn-light" style="color: #DC2626;" title="Удалить">🗑 Удалить</button>
@@ -1518,23 +1526,23 @@
       <!-- Modal Body -->
       <div style="display: flex; flex-direction: column; gap: 1.75rem; font-size: 0.8125rem;">
         
-        <!-- Meta Details -->
+                <!-- Meta Details -->
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.5rem; padding: 1.15rem; text-align: center;">
           <div>
             <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Средний чек</span>
-            <span id="modalCheck" style="font-weight: 900; color: #18181B; font-size: 0.875rem;">7 000 ₽</span>
+            <span id="modalCheck" style="font-weight: 900; color: inherit; font-size: 0.875rem;">7 000 ₽</span>
           </div>
           <div>
-            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Класс</span>
-            <span id="modalSegment" style="font-weight: 800; color: #18181B;">Премиум</span>
+            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Индекс ценности</span>
+            <span id="modalValueScore" style="font-weight: 800; color: inherit;">8.8 / 10</span>
           </div>
           <div>
             <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Дата аудита</span>
-            <span id="modalDate" style="font-weight: 800; color: #18181B;">2026-08-10</span>
+            <span id="modalDate" style="font-weight: 800; color: inherit;">2026-08-10</span>
           </div>
           <div>
             <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Статус гида</span>
-            <span id="modalGradeText" style="font-weight: 800; color: #18181B;">Знак Качества</span>
+            <span id="modalGradeText" style="font-weight: 800; color: inherit;">Знак Качества</span>
           </div>
         </div>
 
@@ -1649,6 +1657,90 @@
         </div>
 
       </div>
+    </div>
+  </div>
+
+    <!-- FLOATING COMPARISON BAR -->
+  <div id="floatingCompareBar" class="floating-compare-bar hidden">
+    <div style="font-size: 0.75rem; font-weight: 800;">
+      Сравнение заведений: <span id="compareCountLabel" style="color: #C5A880;">(0/3)</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="clearComparison()" type="button" class="btn btn-light" style="padding: 0.35rem 0.75rem; font-size: 0.6875rem;">Очистить</button>
+      <button onclick="openCompareModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.85rem; font-size: 0.6875rem;">Сравнить ➔</button>
+    </div>
+  </div>
+
+  <!-- MODAL: SHARE & QR CODE -->
+  <div id="shareModal" class="modal-overlay" onclick="closeShareModal()">
+    <div class="modal-box text-center" style="max-width: 440px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 0.75rem; margin-bottom: 1.25rem;">
+        <h3 class="font-serif" style="font-size: 1.2rem; font-weight: 900; color: inherit;">Поделиться заведением</h3>
+        <button onclick="closeShareModal()" type="button" style="background: #F5F2EB; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+      </div>
+      <div id="shareQrContainer" style="background: #FFFFFF; padding: 1rem; border-radius: 0.5rem; border: 1px solid #EAE6DF; display: inline-block; margin-bottom: 1rem;">
+        <img id="shareQrImage" src="" style="width: 180px; height: 180px;" alt="QR код">
+      </div>
+      <strong id="shareVenueTitle" style="font-size: 1.1rem; display: block; color: inherit; margin-bottom: 0.25rem;">White Rabbit</strong>
+      <p id="shareVenueDesc" style="font-size: 0.75rem; color: #71717A; margin-bottom: 1.25rem;">Москва • Знак Качества 96/100</p>
+      <div class="flex gap-2" style="flex-wrap: wrap;">
+        <button onclick="copyShareUrl()" type="button" class="btn btn-dark" style="flex: 1; padding: 0.65rem;">📋 Копировать ссылку</button>
+        <button onclick="shareViaTelegram()" type="button" class="btn btn-light" style="flex: 1; padding: 0.65rem;">Telegram ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: OFFICIAL A4 CERTIFICATE (FOR PRINTING) -->
+  <div id="certificateModal" class="modal-overlay" onclick="closeCertificateModal()">
+    <div class="modal-box" style="max-width: 720px; padding: 1.75rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 0.75rem; margin-bottom: 1.25rem;">
+        <h3 class="font-serif" style="font-size: 1.15rem; font-weight: 900; color: inherit;">Официальный диплом Знака Качества</h3>
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" type="button" class="btn btn-dark" style="padding: 0.45rem 0.85rem; font-size: 0.6875rem;">🖨 Печать (PDF)</button>
+          <button onclick="closeCertificateModal()" type="button" style="background: #F5F2EB; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+        </div>
+      </div>
+      <div id="certificatePrintArea" style="background: #FAF8F5; border: 4px double #C5A880; border-radius: 0.5rem; padding: 3rem 2.5rem; text-align: center; color: #18181B; position: relative;">
+        <div style="font-family: ui-monospace, monospace; font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #8C6D37; margin-bottom: 0.5rem;">PLANKA GUIDE • QUALITY STANDARD</div>
+        <h1 class="font-serif" style="font-size: 2.25rem; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; color: #18181B; margin-bottom: 0.35rem;">СЕРТИФИКАТ КАЧЕСТВА</h1>
+        <div style="width: 80px; height: 2px; background: #C5A880; margin: 0 auto 1.5rem auto;"></div>
+        <p style="font-size: 0.875rem; color: #52525B; margin-bottom: 1.25rem;">Настоящим дипломом подтверждается, что заведение</p>
+        <h2 class="font-serif" id="certVenueName" style="font-size: 2.5rem; font-weight: 900; color: #18181B; margin-bottom: 0.25rem;">White Rabbit</h2>
+        <p id="certVenueCity" style="font-size: 0.9375rem; font-weight: 700; color: #71717A; margin-bottom: 1.75rem;">город Москва</p>
+        <div style="background: #FFFFFF; border: 1px solid #C5A880; border-radius: 0.5rem; padding: 1.25rem; display: inline-block; min-width: 260px; margin-bottom: 1.75rem; box-shadow: 0 4px 15px rgba(197, 168, 128, 0.15);">
+          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 800; text-transform: uppercase; color: #8C6D37; display: block;">ИТОГОВЫЙ БАЛЛ ИНСПЕКЦИИ</span>
+          <span id="certVenueScore" style="font-size: 2.75rem; font-weight: 900; font-family: ui-monospace, monospace; color: #18181B;">96</span><span style="font-size: 1.25rem; color: #71717A;"> / 100</span>
+          <strong style="display: block; font-size: 0.75rem; color: #8C6D37; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem;">УДОСТОЕНО ЗНАКА КАЧЕСТВА</strong>
+        </div>
+        <p style="font-size: 0.8125rem; color: #52525B; max-width: 480px; margin: 0 auto 2rem auto; line-height: 1.6;">
+          Заведение прошло контроль параметров тайминга, чистоты кухни, санитарии зала и стабильности рецептур по 100-балльной шкале PLANKA GUIDE.
+        </p>
+        <div class="flex items-center justify-between" style="border-top: 1px solid #EAE6DF; padding-top: 1.25rem; font-size: 0.75rem;">
+          <div style="text-align: left;">
+            <span style="display: block; color: #71717A;">Дата верификации:</span>
+            <strong id="certDate">2026-08-10</strong>
+          </div>
+          <div style="text-align: center;">
+            <span style="display: block; font-family: ui-monospace, monospace; font-size: 0.625rem; color: #8C6D37; font-weight: 800;">РЕГЛАМЕНТ ТАЙНОГО АУДИТА</span>
+            <strong style="font-size: 0.8125rem;">planka-guide.ru</strong>
+          </div>
+          <div style="text-align: right;">
+            <span style="display: block; color: #71717A;">Главный инспектор:</span>
+            <strong>PLANKA AUDIT COMMISSION</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: COMPARE VENUES -->
+  <div id="compareModal" class="modal-overlay" onclick="closeCompareModal()">
+    <div class="modal-box" style="max-width: 960px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 0.85rem; margin-bottom: 1.5rem;">
+        <h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: inherit;">Сравнение заведений</h3>
+        <button onclick="closeCompareModal()" type="button" style="background: #F5F2EB; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+      </div>
+      <div id="compareTableContainer" style="overflow-x: auto;"></div>
     </div>
   </div>
 
@@ -1933,6 +2025,179 @@
       'Екатеринбург': 13
     };
 
+    
+    // THEME SWITCHER
+    function toggleTheme() {
+      var isDark = document.body.classList.toggle('dark-theme');
+      try { localStorage.setItem('planka_theme', isDark ? 'dark' : 'light'); } catch(e) {}
+      var icon = document.getElementById('themeIcon');
+      if (icon) icon.innerText = isDark ? '☀️' : '🌙';
+    }
+
+    function checkTheme() {
+      var saved = 'light';
+      try { saved = localStorage.getItem('planka_theme') || 'light'; } catch(e) {}
+      if (saved === 'dark') {
+        document.body.classList.add('dark-theme');
+        var icon = document.getElementById('themeIcon');
+        if (icon) icon.innerText = '☀️';
+      }
+    }
+
+    // COMPARE ENGINE
+    var compareList = [];
+    function isComparing(id) {
+      return compareList.indexOf(id) !== -1;
+    }
+
+    function toggleCompare(id, e) {
+      if (e) e.stopPropagation();
+      var idx = compareList.indexOf(id);
+      if (idx !== -1) {
+        compareList.splice(idx, 1);
+      } else {
+        if (compareList.length >= 3) {
+          alert('В сравнение можно добавить максимум 3 заведения.');
+          return;
+        }
+        compareList.push(id);
+      }
+      updateCompareBar();
+      renderSelection();
+      renderVenues();
+    }
+
+    function updateCompareBar() {
+      var bar = document.getElementById('floatingCompareBar');
+      var label = document.getElementById('compareCountLabel');
+      if (!bar) return;
+      if (compareList.length > 0) {
+        bar.classList.remove('hidden');
+        if (label) label.innerText = '(' + compareList.length + '/3)';
+      } else {
+        bar.classList.add('hidden');
+      }
+    }
+
+    function clearComparison() {
+      compareList = [];
+      updateCompareBar();
+      renderSelection();
+      renderVenues();
+    }
+
+    function openCompareModal() {
+      if (compareList.length === 0) return;
+      var selectedVenues = venues.filter(function(v) { return compareList.indexOf(v.id) !== -1; });
+      var container = document.getElementById('compareTableContainer');
+      if (!container) return;
+
+      var html = '<table style="width: 100%; border-collapse: collapse; font-size: 0.75rem; text-align: left;">' +
+        '<thead><tr style="border-bottom: 2px solid #EAE6DF;"><th style="padding: 0.75rem; color: #71717A; width: 140px;">Критерий</th>';
+
+      for (var i = 0; i < selectedVenues.length; i++) {
+        var sv = selectedVenues[i];
+        html += '<th style="padding: 0.75rem; min-width: 220px;">' +
+          '<strong style="font-family: \'Playfair Display\', Georgia, serif; font-size: 1.15rem; color: inherit; display: block;">' + sv.name + '</strong>' +
+          '<span style="font-size: 0.6875rem; color: #71717A;">' + sv.city + ' • ' + sv.format + '</span>' +
+        '</th>';
+      }
+      html += '</tr></thead><tbody>';
+
+      var rows = [
+        { label: "Итоговый балл", key: function(v){ return '<strong class="font-mono" style="font-size: 1.25rem;">' + v.total_score + '/100</strong> ' + (v.total_score >= 90 ? '<span class="badge-gold">Знак Качества</span>' : '<span class="badge-regular">' + v.grade + '</span>'); } },
+        { label: "Средний чек", key: function(v){ return '<strong>' + v.avg_check.toLocaleString('ru-RU') + ' ₽</strong> (' + (v.price_tier || '₽₽') + ')'; } },
+        { label: "Индекс ценности", key: function(v){ return '<strong>' + (v.value_score || 8.5) + ' / 10</strong>'; } },
+        { label: "Шеф-повар", key: function(v){ return v.chef || 'Не указан'; } },
+        { label: "Фирменное блюдо", key: function(v){ return '<strong>' + v.signature_dish + '</strong><br><span style="font-style: italic; color: #52525B;">«' + v.dish_review + '»</span>'; } },
+        { label: "Гастрономия (из 35)", key: function(v){ return (v.scores ? v.scores.food : 30) + ' б.'; } },
+        { label: "Сервис и тайминг (из 15)", key: function(v){ return (v.scores ? v.scores.service : 14) + ' б.'; } },
+        { label: "Санитария (из 10)", key: function(v){ return (v.scores ? v.scores.sanitation : 10) + ' б.'; } },
+        { label: "Сильные стороны", key: function(v){ return (v.pros || []).map(function(p){ return '• ' + p; }).join('<br>'); } },
+        { label: "Замечания", key: function(v){ return (v.cons || []).map(function(c){ return '• ' + c; }).join('<br>'); } }
+      ];
+
+      for (var r = 0; r < rows.length; r++) {
+        var rowItem = rows[r];
+        html += '<tr style="border-bottom: 1px solid #EAE6DF;"><td style="padding: 0.75rem; font-weight: 800; color: #71717A; background: #FAF8F5;">' + rowItem.label + '</td>';
+        for (var c = 0; c < selectedVenues.length; c++) {
+          html += '<td style="padding: 0.75rem;">' + rowItem.key(selectedVenues[c]) + '</td>';
+        }
+        html += '</tr>';
+      }
+
+      html += '</tbody></table>';
+      container.innerHTML = html;
+      openModal('compareModal');
+    }
+
+    function closeCompareModal() {
+      closeModal('compareModal');
+    }
+
+    // SHARE MODAL
+    function openShareModal(venueId) {
+      var v = null;
+      for (var i = 0; i < venues.length; i++) {
+        if (venues[i].id === venueId) { v = venues[i]; break; }
+      }
+      if (!v) return;
+
+      document.getElementById('shareVenueTitle').innerText = v.name;
+      document.getElementById('shareVenueDesc').innerText = v.city + ' • Знак Качества ' + v.total_score + '/100';
+
+      var shareUrl = window.location.origin + window.location.pathname + '#venue-' + v.id;
+      var qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(shareUrl);
+      var qrImg = document.getElementById('shareQrImage');
+      if (qrImg) qrImg.setAttribute('src', qrApiUrl);
+
+      openModal('shareModal');
+    }
+
+    function closeShareModal() {
+      closeModal('shareModal');
+    }
+
+    function copyShareUrl() {
+      if (!activeModalVenue) return;
+      var shareUrl = window.location.origin + window.location.pathname + '#venue-' + activeModalVenue.id;
+      if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).then(function() {
+          alert('Ссылка на заведение скопирована в буфер обмена!');
+        });
+      } else {
+        alert('Ссылка: ' + shareUrl);
+      }
+    }
+
+    function shareViaTelegram() {
+      if (!activeModalVenue) return;
+      var shareUrl = window.location.origin + window.location.pathname + '#venue-' + activeModalVenue.id;
+      var text = 'Ресторанный аудит PLANKA GUIDE: ' + activeModalVenue.name + ' (' + activeModalVenue.total_score + '/100 б.)';
+      window.open('https://t.me/share/url?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(text), '_blank');
+    }
+
+    // OFFICIAL A4 CERTIFICATE MODAL
+    function openCertificateModal(venueId) {
+      var v = null;
+      for (var i = 0; i < venues.length; i++) {
+        if (venues[i].id === venueId) { v = venues[i]; break; }
+      }
+      if (!v) return;
+
+      document.getElementById('certVenueName').innerText = v.name;
+      document.getElementById('certVenueCity').innerText = 'город ' + v.city + (v.district ? ' (' + v.district + ')' : '');
+      document.getElementById('certVenueScore').innerText = v.total_score;
+      document.getElementById('certDate').innerText = v.date || '2026-08-10';
+
+      openModal('certificateModal');
+    }
+
+    function closeCertificateModal() {
+      closeModal('certificateModal');
+    }
+
+
     function saveDB() {
       try {
         localStorage.setItem('planka_guide_db_v29', JSON.stringify(venues));
@@ -2002,6 +2267,7 @@
         localStorage.setItem('planka_favorites', JSON.stringify(favorites));
       } catch(err) {}
       updateFavoritesUI();
+      renderSelection();
       renderVenues();
       updateMapMarkers();
     }
@@ -2335,6 +2601,9 @@
             '<button type="button" class="card-fav-btn ' + (isFavorite(tv.id) ? 'active' : '') + '" onclick="toggleFavorite(' + tv.id + ', event)" title="В избранное">' +
               (isFavorite(tv.id) ? '♥' : '♡') +
             '</button>' +
+            '<button type="button" class="card-compare-btn ' + (isComparing(tv.id) ? 'active' : '') + '" onclick="toggleCompare(' + tv.id + ', event)" title="Сравнить">' +
+              (isComparing(tv.id) ? '✓ Сравнить' : '+ Сравнить') +
+            '</button>' +
             '<div class="michelin-photo-btn" onclick="openPhotoLightboxDirect(' + tv.id + ', event)" title="Смотреть фото">' +
               '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
               '<span>' + (tv.photos ? tv.photos.length : 0) + '</span>' +
@@ -2441,6 +2710,9 @@
             '<div class="card-score-badge">' + item.total_score + ' / 100</div>' +
             '<button type="button" class="card-fav-btn ' + (isFavorite(item.id) ? 'active' : '') + '" onclick="toggleFavorite(' + item.id + ', event)" title="В избранное">' +
               (isFavorite(item.id) ? '♥' : '♡') +
+            '</button>' +
+            '<button type="button" class="card-compare-btn ' + (isComparing(item.id) ? 'active' : '') + '" onclick="toggleCompare(' + item.id + ', event)" title="Сравнить">' +
+              (isComparing(item.id) ? '✓ Сравнить' : '+ Сравнить') +
             '</button>' +
             '<div class="michelin-photo-btn" onclick="openPhotoLightboxDirect(' + item.id + ', event)" title="Смотреть фото">' +
               '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
@@ -2576,6 +2848,10 @@
       var m = document.getElementById(id);
       if (m) m.classList.add('open');
     }
+    function closeVenueModal() {
+      closeModal('venueModal');
+    }
+
     function closeModal(id) {
       var m = document.getElementById(id);
       if (m) m.classList.remove('open');
@@ -2622,7 +2898,7 @@
       }
     }
 
-    function openVenueModal(id) {
+        function openVenueModal(id) {
       var target = null;
       for (var i = 0; i < venues.length; i++) {
         if (venues[i].id === id) { target = venues[i]; break; }
@@ -2636,12 +2912,21 @@
       document.getElementById('modalDistrict').innerText = target.district || target.city;
       document.getElementById('modalMapAddress').innerText = target.city + ', ' + (target.address || '');
       document.getElementById('modalCheck').innerText = target.avg_check.toLocaleString('ru-RU') + ' ₽';
+      if (document.getElementById('modalValueScore')) {
+        document.getElementById('modalValueScore').innerText = (target.value_score || 8.8) + ' / 10';
+      }
       document.getElementById('modalSegment').innerText = target.segment;
       document.getElementById('modalDate').innerText = target.date;
       document.getElementById('modalGradeText').innerText = target.status === 'draft' ? 'Черновик инспектора' : target.grade;
       document.getElementById('modalDish').innerText = target.signature_dish;
       document.getElementById('modalDishReview').innerText = '«' + target.dish_review + '»';
       document.getElementById('modalScoreBadge').innerText = target.total_score + '/100';
+
+      var certBtn = document.getElementById('btnModalCertificate');
+      if (certBtn) {
+        if (target.total_score >= 90 || isAdmin) certBtn.classList.remove('hidden');
+        else certBtn.classList.add('hidden');
+      }
 
       document.getElementById('modalChef').innerText = target.chef || 'Шеф-повар не указан';
       document.getElementById('modalConcept').innerText = target.concept || 'Концептуальная кухня';
@@ -3533,10 +3818,14 @@
         closeAuditEditorModal();
         closeSyncModal();
         closeLegalModal();
+        closeShareModal();
+        closeCertificateModal();
+        closeCompareModal();
       }
     });
 
     // Start Application
+    checkTheme();
     checkCookieConsent();
     updateAdminUI();
     updateStats();
