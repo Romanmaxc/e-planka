@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>e-planka — Независимый стандарт аудита и гид городской гастрономии</title>
+  <title>PLANKA GUIDE — Независимый ресторанный гид и стандарт качества</title>
   
+  <!-- 100% STANDALONE LUXURY EDITORIAL SYSTEM: OBSIDIAN, GOLD & BEIGE -->
   <style>
-    /* ==========================================================================
-       100% STANDALONE EDITORIAL SYSTEM: ZERO EXTERNAL DEPENDENCIES
-       ========================================================================== */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -23,15 +21,15 @@
     }
 
     body {
-      background-color: #FAF9F6;
-      color: #18181B;
+      background-color: #FAF8F5; /* Warm Beige / Linen Canvas */
+      color: #18181B; /* Deep Obsidian Charcoal */
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
     .font-serif {
-      font-family: "Newsreader", "Playfair Display", "Cormorant Garamond", Georgia, Cambria, serif;
+      font-family: "Playfair Display", "Cormorant Garamond", Georgia, Cambria, "Times New Roman", serif;
     }
     .font-mono {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -43,48 +41,67 @@
       padding: 0 1.5rem;
     }
 
-    /* HEADER: Left aligned branding, clean public links */
+    /* HEADER */
     header {
       position: sticky;
       top: 0;
       z-index: 40;
       background: rgba(255, 255, 255, 0.98);
-      border-bottom: 1px solid #E5E7EB;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid #EAE6DF;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
     }
     .header-inner {
-      height: 4.5rem;
+      height: 4.75rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
+    /* LOGO: P PLANKA GUIDE */
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.85rem;
       cursor: pointer;
       text-decoration: none;
     }
     .brand-mark {
-      width: 2.25rem;
-      height: 2.25rem;
-      background: #18181B;
-      color: #FFFFFF;
-      border-radius: 0.5rem;
+      width: 2.35rem;
+      height: 2.35rem;
+      background: #FFFFFF;
+      color: #18181B;
+      border: 1.75px solid #18181B;
+      border-radius: 0.35rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: ui-monospace, monospace;
+      font-family: Georgia, serif;
       font-weight: 900;
-      font-size: 0.875rem;
+      font-size: 1.15rem;
       letter-spacing: -0.05em;
+      border: 1.75px solid #18181B;
+    }
+    .brand-title-wrap {
+      display: flex;
+      flex-direction: column;
     }
     .brand-title {
+      font-family: "Playfair Display", Georgia, serif;
       font-weight: 900;
       font-size: 1.35rem;
-      letter-spacing: -0.03em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       color: #18181B;
+      line-height: 1.1;
+    }
+    .brand-subtitle {
+      font-size: 0.5625rem;
+      font-family: ui-monospace, monospace;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #18181B; /* Imperial Gold */
+      margin-top: 0.15rem;
     }
 
     /* BUTTONS */
@@ -95,14 +112,16 @@
       gap: 0.4rem;
       font-weight: 700;
       font-size: 0.75rem;
-      padding: 0.55rem 1.15rem;
-      border-radius: 0.625rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 0.35rem;
       border: 1px solid transparent;
       cursor: pointer;
       transition: all 0.15s ease;
       text-decoration: none;
       user-select: none;
       touch-action: manipulation;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
     .btn-dark {
       background: #18181B;
@@ -112,108 +131,155 @@
       background: #27272A;
     }
     .btn-gold {
-      background: #B45309;
+      background: #18181B;
       color: #FFFFFF;
     }
     .btn-gold:hover, .btn-gold:active {
-      background: #92400E;
+      background: #8C6D37;
     }
     .btn-light {
-      background: #F4F4F5;
+      background: #F5F2EB;
       color: #18181B;
-      border-color: #E4E4E7;
+      border-color: #E2DDD5;
     }
     .btn-light:hover, .btn-light:active {
-      background: #E4E4E7;
+      background: #EAE6DF;
     }
 
-    /* FILTER PILLS */
+    /* FILTER BUTTONS */
     .filter-pills {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.375rem;
+      gap: 0.4rem;
     }
     .filter-btn {
-      padding: 0.45rem 1rem;
-      border-radius: 0.625rem;
+      padding: 0.5rem 1.15rem;
+      border-radius: 9999px;
       font-size: 0.75rem;
       font-weight: 700;
       background: #FFFFFF;
       color: #52525B;
-      border: 1px solid #E4E4E7;
+      border: 1px solid #DFD9CE;
       cursor: pointer;
       transition: all 0.15s ease;
     }
     .filter-btn:hover {
-      border-color: #A1A1AA;
+      border-color: #18181B;
       color: #18181B;
     }
     .filter-btn.active {
       background: #18181B !important;
       color: #FFFFFF !important;
       border-color: #18181B !important;
+      box-shadow: 0 2px 8px rgba(24, 24, 27, 0.2);
     }
 
-    /* CARDS */
+    /* MICHELIN-STYLE EDITORIAL CARDS */
     .grid-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.75rem;
     }
     .card {
       background: #FFFFFF;
-      border: 1px solid #E5E7EB;
-      border-radius: 1.25rem;
-      padding: 1.5rem;
+      border: 1px solid #EAE6DF;
+      border-radius: 0.85rem;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.2s ease;
       cursor: pointer;
     }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 28px -6px rgba(24, 24, 27, 0.08);
+    .card:hover, .card:active {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px -10px rgba(24, 24, 27, 0.09);
       border-color: #18181B;
     }
 
-    /* SELECTION CARDS (MICHELIN SELECTION) */
+    /* HERO IMAGE IN CARD (MICHELIN FORMAT) */
+    .card-cover {
+      width: 100%;
+      height: 245px;
+      background-size: cover;
+      background-position: center;
+      background-color: #F5F2EB;
+      position: relative;
+    }
+    .card-cover-overlay {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: rgba(24, 24, 27, 0.85);
+      color: #FFFFFF;
+      padding: 0.25rem 0.65rem;
+      border-radius: 0.35rem;
+      font-family: ui-monospace, monospace;
+      font-weight: 800;
+      font-size: 0.75rem;
+      backdrop-filter: blur(4px);
+    }
+    .card-gallery-trigger {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: #18181B;
+      padding: 0.3rem 0.65rem;
+      border-radius: 0.35rem;
+      font-size: 0.6875rem;
+      font-weight: 800;
+      backdrop-filter: blur(4px);
+      border: 1px solid #EAE6DF;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    /* SELECTION CARDS */
     .selection-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
     }
     .selection-card {
       background: #FFFFFF;
-      border: 1px solid #E5E7EB;
-      border-radius: 1.25rem;
-      padding: 1.5rem;
+      border: 1px solid #EAE6DF;
+      border-radius: 0.85rem;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
       transition: transform 0.2s ease, border-color 0.2s ease;
       cursor: pointer;
     }
     .selection-card:hover {
       transform: translateY(-3px);
-      border-color: #B45309;
+      border-color: #18181B;
       box-shadow: 0 14px 28px -6px rgba(180, 83, 9, 0.12);
     }
 
-    /* STRATEGY & MANIFESTO BOX */
+    /* STRATEGY CARDS */
     .strategy-card {
       background: #FFFFFF;
-      border: 1px solid #E5E7EB;
-      border-radius: 1.25rem;
+      border: 1px solid #EAE6DF;
+      border-radius: 0.85rem;
       padding: 1.75rem;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
     }
 
-    /* MODALS */
+    /* MODAL SYSTEM (TESTED V8 RELIABILITY) */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -223,10 +289,10 @@
       background: rgba(24, 24, 27, 0.75);
       backdrop-filter: blur(4px);
       z-index: 1000;
-      display: none !important;
+      display: none;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
+      padding: 1.25rem;
       overflow-y: auto;
     }
     .modal-overlay.open {
@@ -234,8 +300,8 @@
     }
     .modal-box {
       background: #FFFFFF;
-      border-radius: 1.25rem;
-      border: 1px solid #E5E7EB;
+      border-radius: 1rem;
+      border: 1px solid #EAE6DF;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
@@ -245,60 +311,52 @@
 
     /* BADGES */
     .badge-gold {
-      background: #FEF3C7;
-      color: #92400E;
-      border: 1px solid #FDE68A;
+      background: #FDF8F0;
+      color: #8C6D37;
+      border: 1px solid #EAD8B5;
       font-weight: 800;
       font-size: 0.6875rem;
-      padding: 0.2rem 0.65rem;
+      padding: 0.25rem 0.75rem;
       border-radius: 9999px;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     .badge-regular {
-      background: #F4F4F5;
-      color: #3F3F46;
-      border: 1px solid #E4E4E7;
+      background: #F5F2EB;
+      color: #4A4A4F;
+      border: 1px solid #E2DDD5;
       font-weight: 700;
       font-size: 0.6875rem;
-      padding: 0.2rem 0.65rem;
+      padding: 0.25rem 0.75rem;
       border-radius: 9999px;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-    }
-    .tag {
-      background: #FAF9F6;
-      border: 1px solid #E4E4E7;
-      color: #52525B;
-      font-size: 0.625rem;
-      padding: 0.15rem 0.45rem;
-      border-radius: 0.375rem;
-      font-family: ui-monospace, monospace;
-      font-weight: 700;
+      gap: 0.35rem;
     }
 
-    /* AUTHOR EXCLUSIVE PRIVATE INSIGHTS BOX */
+    /* AUTHOR EXCLUSIVE BOX */
     .author-private-box {
       background: #18181B;
       color: #F4F4F5;
-      border: 1px solid #27272A;
-      border-radius: 1rem;
-      padding: 1.25rem;
+      border: 1.75px solid #18181B;
+      border-radius: 0.75rem;
+      padding: 1.35rem;
     }
 
     /* INPUTS */
     input[type="text"], input[type="number"], input[type="password"], select, textarea {
       width: 100%;
-      border: 1px solid #D4D4D8;
-      border-radius: 0.5rem;
-      padding: 0.6rem 0.75rem;
+      border: 1px solid #D4CEBE;
+      border-radius: 0.4rem;
+      padding: 0.65rem 0.85rem;
       font-size: 0.75rem;
-      background: #FAF9F6;
+      background: #FAF8F5;
       color: #18181B;
       outline: none;
-      transition: border-color 0.15s ease, background 0.15s ease;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
     }
     input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, select:focus, textarea:focus {
       border-color: #18181B;
@@ -310,36 +368,36 @@
       cursor: pointer;
     }
 
-    /* PHOTO UPLOAD PREVIEWS */
-    .photo-preview-grid {
+    /* PHOTO GALLERY GRID */
+    .photo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       gap: 0.75rem;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .photo-thumb-wrap {
+      position: relative;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid #EAE6DF;
+      height: 100px;
     }
     .photo-thumb {
       width: 100%;
-      height: 80px;
-      border-radius: 0.5rem;
+      height: 100%;
       object-fit: cover;
-      border: 1px solid #E4E4E7;
-      position: relative;
     }
-    .photo-thumb-container {
-      position: relative;
-      display: inline-block;
-    }
-    .photo-delete-btn {
+    .photo-del-btn {
       position: absolute;
-      top: -4px;
-      right: -4px;
-      background: #EF4444;
+      top: 4px;
+      right: 4px;
+      background: rgba(24, 24, 27, 0.85);
       color: white;
       border: none;
       border-radius: 9999px;
-      width: 18px;
-      height: 18px;
-      font-size: 10px;
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
       font-weight: 900;
       cursor: pointer;
       display: flex;
@@ -357,33 +415,129 @@
     .gap-2 { gap: 0.5rem; }
     .gap-3 { gap: 0.75rem; }
     .gap-4 { gap: 1rem; }
-    .gap-6 { gap: 1.5rem; }
     .text-center { text-align: center; }
+  
+    /* MICHELIN PHOTO BUTTON ON CARDS */
+    .michelin-photo-btn {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(0, 0, 0, 0.45);
+      color: #FFFFFF;
+      padding: 0.35rem 0.6rem;
+      border-radius: 0.35rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      z-index: 5;
+    }
+    .michelin-photo-btn:hover {
+      background: rgba(0, 0, 0, 0.75);
+    }
+
+    /* LIGHTBOX CAROUSEL */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #111113;
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+    }
+    .lightbox-modal.open {
+      display: flex !important;
+    }
+    .lightbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #FFFFFF;
+      padding-bottom: 1rem;
+    }
+    .lightbox-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .lightbox-main-img {
+      max-width: 90%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 0.35rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    }
+    .lightbox-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      border: none;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+      backdrop-filter: blur(4px);
+    }
+    .lightbox-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #A1A1AA;
+      font-size: 0.8125rem;
+      padding-top: 1rem;
+      font-family: ui-monospace, monospace;
+    }
+
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- HEADER: Left-aligned Brand, Clean Public Nav -->
+  <!-- HEADER -->
   <header>
     <div class="container">
       <div class="header-inner">
         
-        <!-- Logo aligned cleanly to the left -->
+        <!-- Brand Logo: Shifted cleanly to the left -->
         <div class="brand-logo" onclick="resetFilters()">
-          <div class="brand-mark">eP</div>
-          <div style="display: flex; align-items: baseline; gap: 0.35rem;">
-            <span class="brand-title">e-planka</span>
-            <span style="font-size: 0.5625rem; font-family: ui-monospace, monospace; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #71717A; background: #F4F4F5; padding: 0.1rem 0.45rem; border-radius: 9999px; border: 1px solid #E4E4E7;">AUDIT</span>
+          <div class="brand-mark">P</div>
+          <div class="brand-title-wrap">
+            <span class="brand-title">PLANKA GUIDE</span>
+            <span class="brand-subtitle">INDEPENDENT QUALITY RATING</span>
           </div>
         </div>
 
-        <!-- Public Nav & City Selector -->
+        <!-- Right Controls: City Dropdown and Clean Public Links -->
         <div class="flex items-center gap-4">
           
           <!-- City Dropdown -->
-          <div style="position: relative; width: 140px;">
+          <div style="position: relative; width: 145px;">
             <select id="cityFilter" onchange="applyFilters()">
-              <option value="all" selected>📍 Все города</option>
+              <option value="all" selected>📍 Все локации</option>
               <option value="Москва">Москва</option>
               <option value="СПб">Санкт-Петербург</option>
               <option value="Екатеринбург">Екатеринбург</option>
@@ -391,20 +545,20 @@
             </select>
           </div>
 
-          <!-- Public Nav Links -->
-          <div style="display: flex; align-items: center; gap: 1.25rem; font-size: 0.75rem; font-weight: 700;">
+          <!-- Public Nav links -->
+          <div style="display: flex; align-items: center; gap: 1.25rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
             <a href="#strategy" style="color: #52525B; text-decoration: none;">Стратегия</a>
             <a href="#selection" style="color: #52525B; text-decoration: none;">Выбор гида</a>
             <a href="#catalog" style="color: #52525B; text-decoration: none;">Реестр</a>
             <a href="#methodology" style="color: #52525B; text-decoration: none;">Шкала 100 б.</a>
-            <button onclick="openLegalModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.75rem;">Регламент</button>
+            <button onclick="openLegalModal()" type="button" class="btn btn-light" style="padding: 0.4rem 0.85rem; font-size: 0.6875rem;">Регламент</button>
           </div>
 
-          <!-- Inspector Mode Badge (Active ONLY after logging in) -->
-          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.5rem; background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; padding: 0.35rem 0.85rem; border-radius: 0.5rem; font-size: 0.75rem; font-weight: 800;">
-            <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: #10B981;"></span>
+          <!-- Inspector Mode Active Badge (Shown ONLY when logged in) -->
+          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.5rem; background: #18181B; color: #D4AF37; padding: 0.35rem 0.85rem; border-radius: 0.35rem; font-size: 0.75rem; font-weight: 800; border: 1px solid #3F3F46;">
+            <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: #D4AF37;"></span>
             <span>Режим инспектора</span>
-            <button onclick="logoutAdmin()" type="button" title="Выйти" style="background: none; border: none; cursor: pointer; color: #065F46; font-weight: 900; margin-left: 0.25rem;">✕</button>
+            <button onclick="logoutAdmin()" type="button" title="Выйти" style="background: none; border: none; cursor: pointer; color: #D4AF37; font-weight: 900; margin-left: 0.25rem;">✕</button>
           </div>
 
         </div>
@@ -413,123 +567,129 @@
   </header>
 
   <!-- HERO SECTION -->
-  <section style="background: #FFFFFF; border-bottom: 1px solid #E4E4E7; padding: 3.5rem 0 3rem 0;">
-    <div class="container text-center" style="max-width: 860px;">
+  <section style="background: #FFFFFF; border-bottom: 1px solid #EAE6DF; padding: 4rem 0 3.5rem 0;">
+    <div class="container text-center" style="max-width: 900px;">
       
-      <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #F4F4F5; border: 1px solid #E4E4E7; padding: 0.25rem 0.85rem; border-radius: 9999px; font-size: 0.6875rem; font-weight: 700; color: #3F3F46; margin-bottom: 1.25rem;">
-        <span style="width: 0.375rem; height: 0.375rem; border-radius: 9999px; background: #B45309;"></span>
-        <span>Независимый аудит городского общепита • Без рекламы и компромиссов</span>
+      <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #FAF8F5; border: 1px solid #E2DDD5; padding: 0.3rem 1rem; border-radius: 9999px; font-size: 0.6875rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem;">
+        <span style="width: 0.4rem; height: 0.4rem; border-radius: 9999px; background: #18181B;"></span>
+        <span>Стандарт независимого аудита • Без рекламы и предвзятости</span>
       </div>
 
-      <h1 style="font-size: 2.85rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.12; color: #18181B; margin-bottom: 1rem;">
-        Стандарт качества <span class="font-serif" style="font-style: italic; font-weight: 400; color: #52525B;">городской</span> гастрономии.
+      <h1 class="font-serif" style="font-size: 3.15rem; font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; color: #18181B; margin-bottom: 1.25rem;">
+        Честный гид по городской гастрономии.
       </h1>
 
-      <p style="font-size: 0.9375rem; color: #52525B; max-width: 640px; margin: 0 auto 1.75rem auto; line-height: 1.6;">
-        Проверяем заведения по строгой 100-балльной шкале. От глубины вкуса и прожарки до устойчивости столов, честности граммовок, скрытых доплат и чистоты санузла.
+      <p style="font-size: 1rem; color: #52525B; max-width: 680px; margin: 0 auto 2rem auto; line-height: 1.65;">
+        Инспекторы PLANKA GUIDE оценивают заведения по строгой 100-балльной системе: от качества и свежести сырья до устойчивости столов, честности граммовок, скрытых доплат и чистоты санузлов.
       </p>
 
-      <!-- Search Input -->
-      <div style="max-width: 580px; margin: 0 auto 1.5rem auto; display: flex; gap: 0.5rem;">
-        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Поиск по названию заведения, фирменному блюду, формату, улице..." style="padding: 0.8rem 1.15rem; border-radius: 0.75rem; font-size: 0.8125rem;">
-        <button onclick="applyFilters()" type="button" class="btn btn-dark" style="padding: 0.8rem 1.35rem; border-radius: 0.75rem;">
+      <!-- Search Input Box -->
+      <div style="max-width: 600px; margin: 0 auto 1.75rem auto; display: flex; gap: 0.5rem;">
+        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Поиск по заведению, фирменному блюду, улице, шефу..." style="padding: 0.85rem 1.25rem; border-radius: 0.4rem; font-size: 0.8125rem;">
+        <button onclick="applyFilters()" type="button" class="btn btn-dark" style="padding: 0.85rem 1.5rem; border-radius: 0.4rem;">
           Найти
         </button>
       </div>
 
       <!-- Format Filter Pills -->
       <div class="filter-pills">
-        <button onclick="setFormatFilter('all', this)" type="button" class="filter-btn active">Все форматы</button>
-        <button onclick="setFormatFilter('Fine Dining', this)" type="button" class="filter-btn">🍽 Рестораны & Бистро</button>
-        <button onclick="setFormatFilter('Кофейня', this)" type="button" class="filter-btn">☕️ Кофейни</button>
-        <button onclick="setFormatFilter('Коктейльный бар', this)" type="button" class="filter-btn">🍸 Бары & Пабы</button>
-        <button onclick="setFormatFilter('Столовая', this)" type="button" class="filter-btn">🍲 Столовые & Fast Casual</button>
-        <button onclick="setFormatFilter('Пекарня', this)" type="button" class="filter-btn">🥐 Пекарни</button>
+        <button onclick="setFormatFilter('all', this)" type="button" class="filter-btn active">
+          Все категории
+        </button>
+        <button onclick="setFormatFilter('Fine Dining', this)" type="button" class="filter-btn">
+          Рестораны & Бистро
+        </button>
+        <button onclick="setFormatFilter('Кофейня', this)" type="button" class="filter-btn">
+          Спешелти-кофейни
+        </button>
+        <button onclick="setFormatFilter('Коктейльный бар', this)" type="button" class="filter-btn">
+          Коктейльные бары
+        </button>
+        <button onclick="setFormatFilter('Столовая', this)" type="button" class="filter-btn">
+          Fast Casual & Столовые
+        </button>
+        <button onclick="setFormatFilter('Пекарня', this)" type="button" class="filter-btn">
+          Ремесленные пекарни
+        </button>
       </div>
 
     </div>
   </section>
 
-  <!-- STRATEGY & MANIFESTO SECTION (WHAT WE DO & FUTURE FLAGSHIPS) -->
-  <section id="strategy" style="background: #FAF9F6; border-bottom: 1px solid #E4E4E7; padding: 3rem 0;">
+  <!-- STRATEGY & MANIFESTO BOXES -->
+  <section id="strategy" style="background: #FAF8F5; border-bottom: 1px solid #EAE6DF; padding: 3rem 0;">
     <div class="container">
       
-      <div style="margin-bottom: 1.5rem;">
-        <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; color: #B45309;">СТРАТЕГИЯ И БИЗНЕС-МОДЕЛЬ</span>
-        <h2 style="font-size: 1.5rem; font-weight: 900; color: #18181B; letter-spacing: -0.02em; margin-top: 0.2rem;">Институт качества e-planka</h2>
+      <div style="margin-bottom: 1.75rem;">
+        <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; letter-spacing: 0.12em; color: #18181B;">МИССИЯ И СТРАТЕГИЯ</span>
+        <h2 class="font-serif" style="font-size: 1.65rem; font-weight: 900; color: #18181B; letter-spacing: -0.01em; margin-top: 0.2rem;">Институт гастрономической планки</h2>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
         
         <div class="strategy-card">
-          <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #B45309; font-family: ui-monospace, monospace;">01 • Тайный аудит рынка</div>
-          <h3 style="font-size: 1.1rem; font-weight: 900; color: #18181B;">Независимая оценка без рекламы</h3>
+          <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #18181B; font-family: ui-monospace, monospace;">01 • Тайный аудит гостей</div>
+          <h3 class="font-serif" style="font-size: 1.2rem; font-weight: 900; color: #18181B;">Оценка реального клиентского опыта</h3>
           <p style="font-size: 0.8125rem; color: #52525B; line-height: 1.6;">
-            Инспекторы посещают заведения инкогнито, оплачивают счета самостоятельно и фиксируют физические параметры: точные граммовки, чистоту кухни, тайминг курсов и скрытые доплаты.
+            Инспекторы посещают залы без предупреждений и подарков от шефов. Каждая оценка подкреплена фотофиксацией и физическими замерами параметров сервиса.
           </p>
         </div>
 
         <div class="strategy-card">
-          <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #B45309; font-family: ui-monospace, monospace;">02 • Знак Качества (≥90 б.)</div>
-          <h3 style="font-size: 1.1rem; font-weight: 900; color: #18181B;">Ориентир для гостей города</h3>
+          <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #18181B; font-family: ui-monospace, monospace;">02 • Знак Качества (≥90 б.)</div>
+          <h3 class="font-serif" style="font-size: 1.2rem; font-weight: 900; color: #18181B;">Высшая планка мастерства</h3>
           <p style="font-size: 0.8125rem; color: #52525B; line-height: 1.6;">
-            Формируем авторитетный реестр лучших заведений. Знак Качества e-planka нельзя купить за деньги — его получают только проекты, демонстрирующие стабильное мастерство.
+            Только заведения, набравшие 90 и более баллов из 100, получают официальный Знак Качества PLANKA GUIDE — гарантию безупречного вкуса и чистоты.
           </p>
         </div>
 
-        <div class="strategy-card">
-          <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #B45309; font-family: ui-monospace, monospace;">03 • Собственные флагманы</div>
-          <h3 style="font-size: 1.1rem; font-weight: 900; color: #18181B;">Эталонные заведения e-planka</h3>
-          <p style="font-size: 0.8125rem; color: #52525B; line-height: 1.6;">
-            Накапливая базу лучших инженерных и гастрономических решений, бренд e-planka планирует открытие собственных флагманских заведений, спроектированных как абсолютный бенчмарк индустрии.
-          </p>
-        </div>
+
 
       </div>
 
     </div>
   </section>
 
-  <!-- SELECTION SECTION (MICHELIN SELECTION STYLE) -->
-  <section id="selection" style="background: #FFFFFF; border-bottom: 1px solid #E4E4E7; padding: 3rem 0;">
+  <!-- SELECTION SECTION -->
+  <section id="selection" style="background: #FFFFFF; border-bottom: 1px solid #EAE6DF; padding: 3.5rem 0;">
     <div class="container">
       
-      <div class="flex items-center justify-between" style="margin-bottom: 1.5rem;">
+      <div class="flex items-center justify-between" style="margin-bottom: 1.75rem;">
         <div>
-          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; color: #B45309;">⭐️⭐️⭐️ ВЫБОР ГИДА</span>
-          <h3 style="font-size: 1.35rem; font-weight: 900; color: #18181B; letter-spacing: -0.02em;">Рекомендованные заведения (Знак Качества ≥90)</h3>
+          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; letter-spacing: 0.12em; color: #18181B;">⭐️⭐️⭐️ ВЫБОР ИНСПЕКТОРОВ</span>
+          <h3 class="font-serif" style="font-size: 1.55rem; font-weight: 900; color: #18181B; letter-spacing: -0.01em; margin-top: 0.2rem;">Рекомендации PLANKA GUIDE (Балл ≥ 90)</h3>
         </div>
-        <div style="font-size: 0.75rem; color: #71717A; font-weight: 700;">
-          Высшая планка
+        <div style="font-size: 0.75rem; color: #71717A; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+          Высший стандарт
         </div>
       </div>
 
       <div id="selectionGrid" class="selection-grid">
-        <!-- Dynamically populated via JS -->
+        <!-- Injected via JS -->
       </div>
 
     </div>
   </section>
 
   <!-- LIVE METRICS BAR -->
-  <section style="background: #FAF9F6; border-bottom: 1px solid #E4E4E7; padding: 1.5rem 0;">
+  <section style="background: #FAF8F5; border-bottom: 1px solid #EAE6DF; padding: 1.75rem 0;">
     <div class="container">
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
         <div>
-          <span id="statTotal" style="display: block; font-size: 1.75rem; font-weight: 900; color: #18181B;" class="font-mono">10</span>
-          <span style="font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; color: #71717A; letter-spacing: 0.05em;">Проверено заведений</span>
+          <span id="statTotal" style="display: block; font-size: 1.85rem; font-weight: 900; color: #18181B;" class="font-mono">10</span>
+          <span style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; color: #71717A; letter-spacing: 0.06em;">Проверено заведений</span>
         </div>
-        <div style="border-left: 1px solid #E4E4E7;">
-          <span id="statAvg" style="display: block; font-size: 1.75rem; font-weight: 900; color: #18181B;" class="font-mono">81.4</span>
-          <span style="font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; color: #71717A; letter-spacing: 0.05em;">Средний балл рынка</span>
+        <div style="border-left: 1px solid #E2DDD5;">
+          <span id="statAvg" style="display: block; font-size: 1.85rem; font-weight: 900; color: #18181B;" class="font-mono">81.4</span>
+          <span style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; color: #71717A; letter-spacing: 0.06em;">Средний балл рынка</span>
         </div>
-        <div style="border-left: 1px solid #E4E4E7;">
-          <span id="statQuality" style="display: block; font-size: 1.75rem; font-weight: 900; color: #B45309;" class="font-mono">3</span>
-          <span style="font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; color: #71717A; letter-spacing: 0.05em;">Знак Качества (≥90)</span>
+        <div style="border-left: 1px solid #E2DDD5;">
+          <span id="statQuality" style="display: block; font-size: 1.85rem; font-weight: 900; color: #18181B;" class="font-mono">3</span>
+          <span style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; color: #71717A; letter-spacing: 0.06em;">Знак Качества (≥90)</span>
         </div>
-        <div style="border-left: 1px solid #E4E4E7;">
-          <span id="statMax" style="display: block; font-size: 1.75rem; font-weight: 900; color: #18181B;" class="font-mono">99</span>
-          <span style="font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; color: #71717A; letter-spacing: 0.05em;">Рекордный балл</span>
+        <div style="border-left: 1px solid #E2DDD5;">
+          <span id="statMax" style="display: block; font-size: 1.85rem; font-weight: 900; color: #18181B;" class="font-mono">99</span>
+          <span style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; color: #71717A; letter-spacing: 0.06em;">Рекордный балл</span>
         </div>
       </div>
     </div>
@@ -540,23 +700,23 @@
     <div class="container">
       
       <!-- Top controls -->
-      <div class="flex items-center justify-between" style="border-bottom: 1px solid #E4E4E7; padding-bottom: 1.25rem; margin-bottom: 2rem;">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 1.25rem; margin-bottom: 2rem;">
         <div>
-          <h2 style="font-size: 1.35rem; font-weight: 900; color: #18181B;">
-            Реестр аудитов <span id="resultsCountBadge" style="background: #E4E4E7; color: #18181B; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 9999px; font-weight: 800;" class="font-mono">10</span>
+          <h2 class="font-serif" style="font-size: 1.45rem; font-weight: 900; color: #18181B;">
+            Полный реестр инспекций <span id="resultsCountBadge" style="background: #EAE6DF; color: #18181B; font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 9999px; font-weight: 800;" class="font-mono">10</span>
           </h2>
-          <p style="font-size: 0.75rem; color: #71717A; margin-top: 0.2rem;">Нажмите на карточку заведения для подробного досье, рецензии и фотопротокола</p>
+          <p style="font-size: 0.75rem; color: #71717A; margin-top: 0.2rem;">Нажмите на карточку заведения для подробного досье, рецензии и фотогалереи</p>
         </div>
 
         <div class="flex items-center gap-3">
-          <!-- Admin Action Group (Visible ONLY in Inspector Mode) -->
+          <!-- Admin Action Group (Visible in Inspector Mode) -->
           <div id="adminActionGroup" class="hidden" style="align-items: center; gap: 0.5rem;">
-            <button onclick="openNewAuditModal()" type="button" class="btn btn-dark">+ Добавить аудит</button>
+            <button onclick="openNewAuditModal()" type="button" class="btn btn-dark">+ Новый аудит</button>
             <button onclick="openSyncModal()" type="button" class="btn btn-light">Синхронизация</button>
           </div>
 
           <!-- Sort Select -->
-          <div style="width: 210px;">
+          <div style="width: 215px;">
             <select id="sortSelect" onchange="applyFilters()">
               <option value="score_desc">Сначала высокий балл ↓</option>
               <option value="score_asc">Сначала низкий балл ↑</option>
@@ -567,21 +727,21 @@
 
           <!-- Quality Toggle Button -->
           <button onclick="toggleQualityFilter()" type="button" id="btnQualityFilter" class="btn btn-light">
-            <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: #B45309; margin-right: 0.35rem;"></span>
+            <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: #18181B; margin-right: 0.35rem;"></span>
             <span>Знак Качества (≥90)</span>
           </button>
         </div>
       </div>
 
-      <!-- CARDS GRID -->
+      <!-- CARDS GRID (MICHELIN FORMAT) -->
       <div id="venuesGrid" class="grid-cards">
         <!-- Dynamically populated via JS -->
       </div>
 
       <!-- Empty State -->
-      <div id="noResults" class="hidden text-center" style="padding: 4rem 1rem; background: #FFFFFF; border-radius: 1rem; border: 1px solid #E4E4E7; margin-top: 1.5rem;">
-        <p style="font-weight: 800; font-size: 0.9375rem; color: #18181B;">Ничего не найдено</p>
-        <p style="font-size: 0.75rem; color: #71717A; margin: 0.25rem 0 1rem 0;">Попробуйте выбрать другой город или изменить поисковый запрос</p>
+      <div id="noResults" class="hidden text-center" style="padding: 4rem 1rem; background: #FFFFFF; border-radius: 0.85rem; border: 1px solid #EAE6DF; margin-top: 1.5rem;">
+        <p style="font-weight: 800; font-size: 1rem; color: #18181B;">Ничего не найдено</p>
+        <p style="font-size: 0.75rem; color: #71717A; margin: 0.25rem 0 1.25rem 0;">Попробуйте выбрать другой город или изменить поисковый запрос</p>
         <button onclick="resetFilters()" type="button" class="btn btn-dark">Сбросить фильтры</button>
       </div>
 
@@ -589,99 +749,121 @@
   </main>
 
   <!-- METHODOLOGY SECTION -->
-  <section id="methodology" style="background: #FFFFFF; border-top: 1px solid #E4E4E7; padding: 4rem 0;">
-    <div class="container" style="max-width: 900px;">
+  <section id="methodology" style="background: #FFFFFF; border-top: 1px solid #EAE6DF; padding: 4rem 0;">
+    <div class="container" style="max-width: 960px;">
       
       <div class="text-center" style="margin-bottom: 3rem;">
-        <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; color: #71717A;">Стандарты аудита</span>
-        <h2 style="font-size: 2rem; font-weight: 900; letter-spacing: -0.03em; color: #18181B; margin: 0.25rem 0 0.5rem 0;">100-балльная шкала e-planka</h2>
-        <p style="font-size: 0.8125rem; color: #52525B;">Мы исключаем вкусовщину и проверяем только измеримые физические параметры по пути гостя.</p>
+        <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; color: #18181B;">МЕТОДОЛОГИЯ АУДИТА</span>
+        <h2 class="font-serif" style="font-size: 2.25rem; font-weight: 900; letter-spacing: -0.02em; color: #18181B; margin: 0.25rem 0 0.5rem 0;">100-балльная шкала PLANKA GUIDE</h2>
+        <p style="font-size: 0.85rem; color: #52525B;">Исключаем вкусовщину и проверяем только измеримые физические параметры по пути гостя.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
         
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem;">
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.35rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
             <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #18181B;">1. Гастрономия и Сырье</span>
-            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #E4E4E7; padding: 0.1rem 0.4rem; border-radius: 0.25rem;">35 б.</span>
+            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #EAE6DF; padding: 0.1rem 0.45rem; border-radius: 0.35rem; color: #18181B;">35 б.</span>
           </div>
-          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.45;">Свежесть сырья, прожарки, чистота соусов, температура подачи горячего (>65°C) и чистая питьевая вода.</p>
+          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.5;">Свежесть сырья, прожарки, чистота соусов, температура подачи горячего (>65°C) и чистая питьевая вода.</p>
         </div>
 
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem;">
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.35rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
             <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #18181B;">2. WOW-эффект</span>
-            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #E4E4E7; padding: 0.1rem 0.4rem; border-radius: 0.25rem;">15 б.</span>
+            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #EAE6DF; padding: 0.1rem 0.45rem; border-radius: 0.35rem; color: #18181B;">15 б.</span>
           </div>
-          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.45;">Signature Dish (блюдо-магнит), авторская керамика, комплимент от кухни и сторителлинг меню.</p>
+          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.5;">Signature Dish (блюдо-магнит), авторская керамика, комплимент от кухни и сторителлинг меню.</p>
         </div>
 
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem;">
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.35rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
             <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #18181B;">3. Честность Цены</span>
-            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #E4E4E7; padding: 0.1rem 0.4rem; border-radius: 0.25rem;">15 б.</span>
+            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #EAE6DF; padding: 0.1rem 0.45rem; border-radius: 0.35rem; color: #18181B;">15 б.</span>
           </div>
-          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.45;">Обоснованность наценки, честный выход мяса/рыбы и прозрачность счета без скрытых строчек.</p>
+          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.5;">Обоснованность наценки, честный выход мяса/рыбы и прозрачность счета без скрытых строчек.</p>
         </div>
 
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem;">
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.35rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
             <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #18181B;">4. Сервис и Тайминг</span>
-            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #E4E4E7; padding: 0.1rem 0.4rem; border-radius: 0.25rem;">15 б.</span>
+            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #EAE6DF; padding: 0.1rem 0.45rem; border-radius: 0.35rem; color: #18181B;">15 б.</span>
           </div>
-          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.45;">Знание аллергенов, паузы между курсами (12–15 мин), правило чистого стола и этикет.</p>
+          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.5;">Знание аллергенов, паузы между курсами (12–15 мин), правило чистого стола и этикет.</p>
         </div>
 
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem;">
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.35rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
             <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #18181B;">5. Среда и Комфорт</span>
-            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #E4E4E7; padding: 0.1rem 0.4rem; border-radius: 0.25rem;">10 б.</span>
+            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #EAE6DF; padding: 0.1rem 0.45rem; border-radius: 0.35rem; color: #18181B;">10 б.</span>
           </div>
-          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.45;">Устойчивость столов, направленный мягкий свет, вентиляция без запаха гари и розетки.</p>
+          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.5;">Устойчивость столов, направленный мягкий свет, вентиляция без запаха гари и розетки.</p>
         </div>
 
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem;">
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.35rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
             <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #18181B;">6. Санитария и Санузел</span>
-            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #E4E4E7; padding: 0.1rem 0.4rem; border-radius: 0.25rem;">10 б.</span>
+            <span style="font-size: 0.75rem; font-weight: 800; font-family: ui-monospace, monospace; background: #FFFFFF; border: 1px solid #EAE6DF; padding: 0.1rem 0.45rem; border-radius: 0.35rem; color: #18181B;">10 б.</span>
           </div>
-          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.45;">Чистота стекла и приборов, порядок на кухне и безупречное состояние уборной комнаты.</p>
+          <p style="font-size: 0.75rem; color: #52525B; line-height: 1.5;">Чистота стекла и приборов, порядок на кухне и безупречное состояние уборной комнаты.</p>
         </div>
 
       </div>
 
       <!-- Legal Box -->
-      <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.5rem; text-align: center; font-size: 0.75rem; color: #71717A;">
-        <p style="font-weight: 800; text-transform: uppercase; color: #18181B; font-size: 0.6875rem; margin-bottom: 0.25rem;">Юридический регламент</p>
-        <p style="line-height: 1.5; margin-bottom: 0.5rem;">
-          Все материалы гида e-planka выражают субъективное оценочное суждение автора, основанное на личном потребительском опыте тайного гостя, и не являются официальной экспертизой государственных органов.
+      <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.75rem; text-align: center; font-size: 0.75rem; color: #71717A;">
+        <p style="font-weight: 800; text-transform: uppercase; color: #18181B; font-size: 0.6875rem; margin-bottom: 0.35rem;">Юридический регламент</p>
+        <p style="line-height: 1.6; margin-bottom: 0.65rem;">
+          Все материалы гида PLANKA GUIDE выражают субъективное оценочное суждение авторов, основанное на личном потребительском опыте тайных инспекторов, и не являются официальной экспертизой государственных органов.
         </p>
-        <button onclick="openLegalModal()" type="button" class="btn btn-light" style="font-size: 0.6875rem;">Подробнее о правовой защите и регламенте ➔</button>
+        <button onclick="openLegalModal()" type="button" class="btn btn-light" style="font-size: 0.6875rem;">Правовая основа и порядок обращений ➔</button>
       </div>
 
     </div>
   </section>
 
-  <!-- FOOTER (Contains the discreet inspector login link) -->
-  <footer style="background: #09090B; color: #A1A1AA; padding: 3rem 0; font-size: 0.75rem; border-top: 1px solid #27272A;">
+  
+  <!-- FULLSCREEN PHOTO LIGHTBOX (MICHELIN STYLE) -->
+  <div id="photoLightbox" class="lightbox-modal">
+    <div class="lightbox-header">
+      <div>
+        <h3 class="font-serif" id="lightboxVenueTitle" style="font-size: 1.25rem; font-weight: 900; color: #FFFFFF;">White Rabbit</h3>
+        <span id="lightboxVenueSubtitle" style="font-size: 0.75rem; color: #A1A1AA;">Фотогалерея инспекции</span>
+      </div>
+      <button onclick="closePhotoLightbox()" type="button" style="background: rgba(255,255,255,0.1); border: none; color: #FFF; width: 2.5rem; height: 2.5rem; border-radius: 9999px; font-size: 1.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+    </div>
+
+    <div class="lightbox-body">
+      <button class="lightbox-nav-btn lightbox-prev" onclick="prevLightboxPhoto()">‹</button>
+      <img id="lightboxCurrentImg" class="lightbox-main-img" src="" alt="Фото инспекции">
+      <button class="lightbox-nav-btn lightbox-next" onclick="nextLightboxPhoto()">›</button>
+    </div>
+
+    <div class="lightbox-footer">
+      <span id="lightboxCounter">1 / 1</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="background: #18181B; color: #A1A1AA; padding: 3.5rem 0; font-size: 0.75rem; border-top: 1px solid #27272A;">
     <div class="container">
       <div class="flex items-center justify-between" style="flex-wrap: wrap; gap: 1.5rem;">
         
         <div class="flex items-center gap-3">
-          <div style="width: 1.75rem; height: 1.75rem; background: #FFF; color: #09090B; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; font-family: monospace; font-weight: 900; font-size: 0.75rem;">eP</div>
-          <span style="font-weight: 900; color: #FFF; font-size: 0.875rem;">e-planka</span>
+          <div style="width: 1.85rem; height: 1.85rem; background: #27272A; color: #D4AF37; border-radius: 0.35rem; display: flex; align-items: center; justify-content: center; font-family: Georgia, serif; font-weight: 900; font-size: 0.95rem; border: 1px solid #3F3F46;">P</div>
+          <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 900; color: #FFF; font-size: 0.95rem; letter-spacing: 0.05em;">PLANKA GUIDE</span>
           <span style="color: #3F3F46;">|</span>
-          <span>Независимая система аудита общепита</span>
+          <span>Независимый ресторанный аудит</span>
         </div>
 
         <div class="flex items-center gap-6">
           <button onclick="openLegalModal()" type="button" style="background: none; border: none; color: #A1A1AA; cursor: pointer; font-size: 0.75rem;">Политика и Правовой статус</button>
-          <!-- Discreet Inspector Login -->
-          <button onclick="openPinModal()" type="button" style="background: none; border: none; color: #52525B; cursor: pointer; font-size: 0.75rem; text-decoration: underline;" title="Доступ инспектора">🔒 Авторизация инспектора</button>
+          <!-- Discreet Inspector Login Link -->
+          <button onclick="openPinModal()" type="button" style="background: none; border: none; color: #71717A; cursor: pointer; font-size: 0.75rem; text-decoration: underline;" title="Вход инспектора">🔒 Авторизация инспектора</button>
         </div>
 
         <div>
-          <span style="font-family: monospace; font-size: 0.6875rem; color: #71717A;">© 2026 e-planka.ru • Все права защищены</span>
+          <span style="font-family: ui-monospace, monospace; font-size: 0.6875rem; color: #71717A;">© 2026 planka-guide.ru • Все права защищены</span>
         </div>
 
       </div>
@@ -689,29 +871,29 @@
   </footer>
 
   <!-- COOKIE BANNER -->
-  <div id="cookieBanner" style="position: fixed; bottom: 1.25rem; right: 1.25rem; max-width: 420px; z-index: 999; background: #09090B; color: #FFF; padding: 1.25rem; border-radius: 1rem; border: 1px solid #27272A; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);">
-    <div style="font-size: 0.75rem; line-height: 1.4; margin-bottom: 0.75rem;">
-      <strong style="display: block; color: #FFF; margin-bottom: 0.2rem;">Правовое уведомление и Cookie</strong>
-      Сайт e-planka публикует субъективные оценочные суждения потребителей (ст. 29 Конституции РФ) и использует технические cookie.
+  <div id="cookieBanner" style="position: fixed; bottom: 1.5rem; right: 1.5rem; max-width: 440px; z-index: 999; background: #18181B; color: #FFF; padding: 1.35rem; border-radius: 0.85rem; border: 1.75px solid #18181B; box-shadow: 0 20px 30px -5px rgba(0,0,0,0.6);">
+    <div style="font-size: 0.75rem; line-height: 1.45; margin-bottom: 0.85rem;">
+      <strong style="display: block; color: #FFF; font-size: 0.8125rem; margin-bottom: 0.25rem;">Правовое уведомление и Cookie</strong>
+      Сайт PLANKA GUIDE публикует субъективные оценочные суждения потребителей (ст. 29 Конституции РФ) и использует технические cookie.
     </div>
     <div class="flex items-center gap-2">
       <button onclick="openLegalModal()" type="button" class="btn btn-light" style="flex: 1; font-size: 0.6875rem;">Политика сайта</button>
-      <button onclick="acceptCookieConsent()" type="button" class="btn" style="flex: 1; background: #FFF; color: #09090B;">Понятно и согласен</button>
+      <button onclick="acceptCookieConsent()" type="button" class="btn btn-gold" style="flex: 1;">Понятно и согласен</button>
     </div>
   </div>
 
   <!-- MODAL: LEGAL POLICY -->
   <div id="legalModal" class="modal-overlay" onclick="closeLegalModal()">
-    <div class="modal-box" style="max-width: 600px; padding: 2rem;" onclick="event.stopPropagation()">
-      <div class="flex items-center justify-between" style="border-bottom: 1px solid #E4E4E7; padding-bottom: 1rem; margin-bottom: 1.25rem;">
-        <h3 style="font-size: 1.125rem; font-weight: 900; color: #18181B;">Правовой регламент и Политика e-planka</h3>
-        <button onclick="closeLegalModal()" type="button" style="background: #F4F4F5; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+    <div class="modal-box" style="max-width: 640px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 1rem; margin-bottom: 1.25rem;">
+        <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: #18181B;">Правовой регламент PLANKA GUIDE</h3>
+        <button onclick="closeLegalModal()" type="button" style="background: #F5F2EB; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
       </div>
 
-      <div style="font-size: 0.8125rem; color: #3F3F46; line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
+      <div style="font-size: 0.8125rem; color: #3F3F46; line-height: 1.6; display: flex; flex-direction: column; gap: 1.15rem;">
         <div>
           <strong style="color: #18181B; display: block; margin-bottom: 0.25rem;">1. Правовой статус публикаций и оценочных суждений</strong>
-          Все рейтинги и отзывы на сайте <strong>e-planka.ru</strong> являются субъективными оценочными суждениями автора в рамках:
+          Все рейтинги, текстовые комментарии и баллы на ресурсе <strong>planka-guide.ru</strong> являются субъективными оценочными суждениями автора в рамках:
           <ul style="list-style-type: disc; margin-left: 1.25rem; margin-top: 0.25rem;">
             <li><strong>Статьи 29 Конституции РФ</strong> (свобода мысли, слова и информации).</li>
             <li><strong>Закона РФ № 2300-1 «О защите прав потребителей»</strong>.</li>
@@ -725,21 +907,21 @@
         </div>
 
         <div>
-          <strong style="color: #18181B; display: block; margin-bottom: 0.25rem;">3. Досудебное урегулирование</strong>
-          При обнаружении фактических ошибок представители заведений могут обратиться по адресу: <strong style="font-family: monospace;">audit@e-planka.ru</strong>.
+          <strong style="color: #18181B; display: block; margin-bottom: 0.25rem;">3. Досудебное урегулирование для представителей заведений</strong>
+          При обнаружении фактических ошибок представители заведений могут направить подтверждающие документы по адресу: <strong style="font-family: monospace;">audit@planka-guide.ru</strong>.
         </div>
 
-        <button onclick="closeLegalModal()" type="button" class="btn btn-dark" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem;">Я ознакомлен с регламентом</button>
+        <button onclick="closeLegalModal()" type="button" class="btn btn-dark" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem;">Я ознакомлен с регламентом</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL: SECURE INSPECTOR AUTH (NO HINTS, STRONG PASSWORD) -->
+  <!-- MODAL: SECURE INSPECTOR AUTH -->
   <div id="pinModal" class="modal-overlay" onclick="closePinModal()">
-    <div class="modal-box text-center" style="max-width: 360px; padding: 2rem;" onclick="event.stopPropagation()">
-      <div style="width: 3rem; height: 3rem; background: #F4F4F5; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; font-size: 1.25rem;">🔒</div>
-      <h3 style="font-size: 1.125rem; font-weight: 900; color: #18181B; margin-bottom: 0.25rem;">Авторизация инспектора</h3>
-      <p style="font-size: 0.75rem; color: #71717A; margin-bottom: 1.25rem;">Введите мастер-пароль для доступа к чек-листам и закрытой панели</p>
+    <div class="modal-box text-center" style="max-width: 380px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div style="width: 3.25rem; height: 3.25rem; background: #F5F2EB; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; font-size: 1.35rem;">🔒</div>
+      <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: #18181B; margin-bottom: 0.25rem;">Авторизация инспектора</h3>
+      <p style="font-size: 0.75rem; color: #71717A; margin-bottom: 1.35rem;">Введите мастер-пароль для доступа к чек-листам и закрытой панели</p>
       
       <form onsubmit="handlePinSubmit(event)">
         <input type="password" id="pinInput" placeholder="Введите пароль доступа" style="text-align: center; letter-spacing: 0.1em; font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem;">
@@ -754,39 +936,39 @@
 
   <!-- MODAL: SYNC & EXPORT -->
   <div id="syncModal" class="modal-overlay" onclick="closeSyncModal()">
-    <div class="modal-box" style="max-width: 480px; padding: 2rem;" onclick="event.stopPropagation()">
-      <div class="flex items-center justify-between" style="border-bottom: 1px solid #E4E4E7; padding-bottom: 0.75rem; margin-bottom: 1.25rem;">
-        <h3 style="font-size: 1rem; font-weight: 900; color: #18181B;">Синхронизация с Google Таблицей</h3>
-        <button onclick="closeSyncModal()" type="button" style="background: #F4F4F5; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+    <div class="modal-box" style="max-width: 520px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 0.85rem; margin-bottom: 1.35rem;">
+        <h3 class="font-serif" style="font-size: 1.15rem; font-weight: 900; color: #18181B;">Синхронизация с Google Таблицей</h3>
+        <button onclick="closeSyncModal()" type="button" style="background: #F5F2EB; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
       </div>
 
-      <div style="font-size: 0.75rem; color: #52525B; display: flex; flex-direction: column; gap: 1rem;">
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; padding: 1rem; border-radius: 0.75rem;">
+      <div style="font-size: 0.8125rem; color: #52525B; display: flex; flex-direction: column; gap: 1.25rem;">
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; padding: 1.25rem; border-radius: 0.75rem;">
           <strong style="color: #18181B; display: block; margin-bottom: 0.25rem;">Выгрузка базы данных</strong>
-          <button onclick="exportDatabaseJSON()" type="button" class="btn btn-dark" style="width: 100%; margin-bottom: 0.5rem;">Скачать полную базу (JSON)</button>
-          <p style="font-size: 0.6875rem; color: #71717A; text-align: center;">Содержит оценки, публичные рецензии и закрытые инсайты</p>
+          <button onclick="exportDatabaseJSON()" type="button" class="btn btn-dark" style="width: 100%; margin-bottom: 0.5rem;">📥 Скачать полную базу (JSON)</button>
+          <p style="font-size: 0.6875rem; color: #71717A; text-align: center;">Содержит оценки, рецензии, фотографии и закрытые инсайты</p>
         </div>
 
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; padding: 1rem; border-radius: 0.75rem;">
-          <strong style="color: #18181B; display: block; margin-bottom: 0.25rem;">Ссылка на онлайн-таблицу</strong>
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; padding: 1.25rem; border-radius: 0.75rem;">
+          <strong style="color: #18181B; display: block; margin-bottom: 0.25rem;">Ссылка на Google Таблицу</strong>
           <input type="text" id="syncSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." style="margin-bottom: 0.5rem;">
-          <button onclick="syncFromGoogleSheetUrl()" type="button" class="btn btn-gold" style="width: 100%;">🔄 Синхронизировать с Google Таблицей</button>
+          <button onclick="syncFromGoogleSheetUrl()" type="button" class="btn btn-gold" style="width: 100%;">🔄 Обновить сайт из Google Таблицы</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL: DETAILED VENUE DOSSIER (WITH PHOTOS & AUTHOR PRIVATE INSIGHTS) -->
+  <!-- MODAL: DETAILED VENUE DOSSIER (WITH YANDEX MAPS & GUEST GALLERY) -->
   <div id="venueModal" class="modal-overlay" onclick="closeVenueModal()">
-    <div class="modal-box" style="max-width: 780px; padding: 2rem;" onclick="event.stopPropagation()">
+    <div class="modal-box" style="max-width: 820px; padding: 2.25rem;" onclick="event.stopPropagation()">
       
       <!-- Modal Header -->
-      <div class="flex items-center justify-between" style="border-bottom: 1px solid #E4E4E7; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 1.25rem; margin-bottom: 1.5rem;">
         <div>
-          <div style="font-size: 0.6875rem; font-family: monospace; font-weight: 700; color: #71717A; text-transform: uppercase;">
-            <span id="modalFormat">Fine Dining</span> • <span id="modalCity">Москва</span>
+          <div style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 700; color: #71717A; text-transform: uppercase;">
+            <span id="modalFormat">Fine Dining</span> • <span id="modalCity">Москва</span> • <span id="modalAddress">Красная площадь, 3</span>
           </div>
-          <h2 id="modalTitle" style="font-size: 1.45rem; font-weight: 900; color: #18181B; margin-top: 0.2rem;">White Rabbit</h2>
+          <h2 class="font-serif" id="modalTitle" style="font-size: 1.65rem; font-weight: 900; color: #18181B; margin-top: 0.2rem; letter-spacing: -0.01em;">White Rabbit</h2>
         </div>
 
         <div class="flex items-center gap-3">
@@ -795,101 +977,121 @@
             <button onclick="deleteCurrentModalVenue()" type="button" class="btn btn-light" style="color: #DC2626;" title="Удалить">🗑 Удалить</button>
           </div>
 
-          <div id="modalScoreBadge" style="background: #18181B; color: #FFF; font-family: monospace; font-weight: 900; font-size: 1.15rem; padding: 0.35rem 0.85rem; border-radius: 0.75rem;">
+          <div id="modalScoreBadge" style="background: #18181B; color: #D4AF37; font-family: ui-monospace, monospace; font-weight: 900; font-size: 1.25rem; padding: 0.4rem 0.95rem; border-radius: 0.35rem; border: 1px solid #3F3F46;">
             96/100
           </div>
           
-          <button onclick="closeVenueModal()" type="button" style="background: #F4F4F5; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+          <button onclick="closeVenueModal()" type="button" style="background: #F5F2EB; border: none; width: 2.25rem; height: 2.25rem; border-radius: 9999px; cursor: pointer; font-weight: 900; font-size: 1rem;">✕</button>
         </div>
       </div>
 
-      <!-- Modal Content -->
-      <div style="display: flex; flex-direction: column; gap: 1.5rem; font-size: 0.8125rem;">
+      <!-- Modal Body -->
+      <div style="display: flex; flex-direction: column; gap: 1.75rem; font-size: 0.8125rem;">
         
         <!-- Meta Details -->
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 0.75rem; padding: 1rem; text-align: center;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.75rem; padding: 1.15rem; text-align: center;">
           <div>
-            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: monospace; color: #71717A; font-weight: 700;">Средний чек</span>
-            <span id="modalCheck" style="font-weight: 800; color: #18181B;">7 000 ₽</span>
+            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Средний чек</span>
+            <span id="modalCheck" style="font-weight: 900; color: #18181B; font-size: 0.875rem;">7 000 ₽</span>
           </div>
           <div>
-            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: monospace; color: #71717A; font-weight: 700;">Класс</span>
+            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Класс</span>
             <span id="modalSegment" style="font-weight: 800; color: #18181B;">Премиум</span>
           </div>
           <div>
-            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: monospace; color: #71717A; font-weight: 700;">Дата</span>
+            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Дата аудита</span>
             <span id="modalDate" style="font-weight: 800; color: #18181B;">2026-08-10</span>
           </div>
           <div>
-            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: monospace; color: #71717A; font-weight: 700;">Статус</span>
-            <span id="modalGradeText" style="font-weight: 800; color: #B45309;">Знак Качества</span>
+            <span style="display: block; font-size: 0.625rem; text-transform: uppercase; font-family: ui-monospace, monospace; color: #71717A; font-weight: 700;">Статус гида</span>
+            <span id="modalGradeText" style="font-weight: 800; color: #18181B;">Знак Качества</span>
           </div>
         </div>
 
         <!-- Signature Dish Highlight -->
-        <div style="border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem; background: #FFFFFF;">
-          <span style="display: block; font-size: 0.625rem; font-family: monospace; text-transform: uppercase; font-weight: 800; color: #B45309; letter-spacing: 0.05em; margin-bottom: 0.25rem;">✨ Фирменное блюдо (Signature Dish)</span>
-          <h4 id="modalDish" style="font-weight: 800; font-size: 1rem; color: #18181B;">Черная треска с муссом из трав</h4>
-          <p id="modalDishReview" class="font-serif" style="font-style: italic; color: #52525B; font-size: 0.875rem; margin-top: 0.25rem;">
+        <div style="border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.5rem; background: #FFFFFF; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
+          <span style="display: block; font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #18181B; letter-spacing: 0.08em; margin-bottom: 0.35rem;">ФИРМЕННОЕ БЛЮДО (SIGNATURE DISH)</span>
+          <h4 class="font-serif" id="modalDish" style="font-weight: 900; font-size: 1.15rem; color: #18181B;">Черная треска с муссом из трав</h4>
+          <p id="modalDishReview" class="font-serif" style="font-style: italic; color: #52525B; font-size: 0.9375rem; margin-top: 0.35rem; line-height: 1.6;">
             Филигранное попадание в текстуру рыбы. Хрустящая корочка, соус с легкой кислинкой и идеальный баланс умами.
           </p>
         </div>
 
-        <!-- AUTHOR EXCLUSIVE PRIVATE INSIGHTS (VISIBLE ONLY WHEN LOGGED IN AS INSPECTOR) -->
+        <!-- AUTHOR EXCLUSIVE PRIVATE INSIGHTS (VISIBLE ONLY FOR INSPECTOR) -->
         <div id="modalAuthorPrivateSection" class="hidden author-private-box">
-          <div class="flex items-center justify-between" style="border-bottom: 1px solid #3F3F46; padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+          <div class="flex items-center justify-between" style="border-bottom: 1px solid #3F3F46; padding-bottom: 0.65rem; margin-bottom: 0.85rem;">
             <div class="flex items-center gap-2">
-              <span style="background: #F59E0B; color: #000; font-size: 0.625rem; font-family: monospace; font-weight: 900; padding: 0.1rem 0.4rem; border-radius: 0.25rem;">🔒 ТОЛЬКО ДЛЯ АВТОРА</span>
-              <strong style="font-size: 0.8125rem; color: #FFF;">Бизнес-инсайты для собственных ресторанов e-planka</strong>
+              <span style="background: #D4AF37; color: #000; font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 900; padding: 0.15rem 0.5rem; border-radius: 0.25rem;">ТОЛЬКО ДЛЯ АВТОРА</span>
+              <strong style="font-size: 0.8125rem; color: #FFF;">Бизнес-инсайты для собственных ресторанов PLANKA</strong>
             </div>
-            <button onclick="editCurrentModalVenue()" type="button" class="btn btn-light" style="padding: 0.2rem 0.5rem; font-size: 0.6875rem;">Редактировать</button>
+            <button onclick="editCurrentModalVenue()" type="button" class="btn btn-light" style="padding: 0.25rem 0.65rem; font-size: 0.6875rem;">Редактировать</button>
           </div>
           <p id="modalPrivateNotes" style="color: #E4E4E7; line-height: 1.6; font-size: 0.8125rem; white-space: pre-line;">
             Заметки не добавлены.
           </p>
+          
+          <!-- Inspector internal photo reminder (Hidden from public!) -->
+          <div style="margin-top: 1rem; border-top: 1px solid #3F3F46; padding-top: 0.75rem; font-size: 0.6875rem; color: #A1A1AA;">
+            <span style="font-weight: 800; color: #D4AF37; display: block; margin-bottom: 0.25rem;">ЧЕК-ЛИСТ ОБЯЗАТЕЛЬНЫХ ФОТОКАДРОВ ИНСПЕКЦИИ:</span>
+            <span>1. Сервировка стола • 2. Срез и текстура блюда • 3. Бокал / Кофе • 4. Санузел • 5. Фискальный чек с датой</span>
+          </div>
         </div>
 
         <!-- PUBLIC EDITORIAL REVIEW -->
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem;">
-          <strong style="font-size: 0.8125rem; text-transform: uppercase; color: #18181B; display: block; margin-bottom: 0.5rem;">📝 Развернутая рецензия тайного гостя</strong>
-          <div id="modalFullReview" class="font-serif" style="font-size: 0.875rem; color: #3F3F46; line-height: 1.65;"></div>
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.5rem;">
+          <h4 class="font-serif" style="font-size: 1.05rem; font-weight: 900; color: #18181B; margin-bottom: 0.5rem;">Рецензия инспектора PLANKA GUIDE</h4>
+          <div id="modalFullReview" class="font-serif" style="font-size: 0.875rem; color: #3F3F46; line-height: 1.7;"></div>
         </div>
 
-        <!-- ATTACHED REAL PHOTOS GALLERY -->
-        <div id="modalPhotosGalleryBlock" class="hidden" style="border: 1px solid #E4E4E7; border-radius: 1rem; padding: 1.25rem; background: #FFFFFF;">
-          <span style="display: block; font-size: 0.6875rem; text-transform: uppercase; font-weight: 800; color: #71717A; margin-bottom: 0.75rem;">📸 Фотографии инспектора:</span>
-          <div id="modalPhotosGalleryList" class="photo-preview-grid"></div>
+        <!-- YANDEX MAPS LOCATION & ROUTE BLOCK -->
+        <div style="border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.35rem; background: #FFFFFF;">
+          <div class="flex items-center justify-between" style="margin-bottom: 0.75rem;">
+            <div>
+              <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #71717A;">ЛОКАЦИЯ И МАРШРУТ</span>
+              <h4 class="font-serif" id="modalMapAddress" style="font-size: 1rem; font-weight: 900; color: #18181B; margin-top: 0.15rem;">Москва, Красная площадь, 3</h4>
+            </div>
+            <a id="btnYandexMapsRoute" href="#" target="_blank" class="btn btn-dark" style="font-size: 0.6875rem;">
+              Яндекс Карты ↗
+            </a>
+          </div>
+          <div style="width: 100%; height: 260px; border-radius: 0.5rem; overflow: hidden; border: 1px solid #EAE6DF;">
+            <iframe id="yandexMapIframe" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=""></iframe>
+          </div>
+        </div>
+
+        <!-- REAL ATTACHED PHOTOS GALLERY (WITH DIRECT UPLOAD FOR INSPECTOR) -->
+        <div style="border: 1px solid #EAE6DF; border-radius: 0.85rem; padding: 1.35rem; background: #FFFFFF;">
+          <div class="flex items-center justify-between" style="margin-bottom: 0.75rem;">
+            <span style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; color: #71717A; letter-spacing: 0.05em;">Фотогалерея инспекции</span>
+            <!-- Direct in-dossier photo uploader for Inspector -->
+            <label id="btnDossierAddPhoto" class="hidden btn btn-light" style="padding: 0.3rem 0.75rem; font-size: 0.6875rem; cursor: pointer;">
+              <span>+ Прикрепить фото</span>
+              <input type="file" accept="image/*" multiple onchange="handleDossierDirectPhotoUpload(event)" style="display: none;">
+            </label>
+          </div>
+          <div id="modalPhotosGalleryList" class="photo-grid"></div>
+          <div id="modalPhotosEmptyHint" style="font-size: 0.75rem; color: #A1A1AA; font-style: italic;">
+            Фотографии визита пока не загружены инспектором.
+          </div>
         </div>
 
         <!-- 6 Pillars Progress -->
         <div>
-          <span style="display: block; font-size: 0.6875rem; text-transform: uppercase; font-weight: 800; color: #71717A; margin-bottom: 0.75rem; letter-spacing: 0.05em;">Покритериальные оценки (из 100 б.)</span>
-          <div id="modalScoresBars" style="display: flex; flex-direction: column; gap: 0.65rem;">
+          <span style="display: block; font-size: 0.6875rem; text-transform: uppercase; font-weight: 800; color: #71717A; margin-bottom: 0.85rem; letter-spacing: 0.05em;">Покритериальные оценки стандарта (из 100 б.)</span>
+          <div id="modalScoresBars" style="display: flex; flex-direction: column; gap: 0.75rem;">
             <!-- Injected via JS -->
           </div>
         </div>
 
-        <!-- Pros and Cons -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 0.75rem; padding: 1rem;">
-            <strong style="color: #18181B; display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem;">🟢 Сильные стороны</strong>
-            <ul id="modalPros" style="margin-left: 1.25rem; font-size: 0.75rem; color: #3F3F46; line-height: 1.5;"></ul>
+        <!-- Pros & Cons (Strict Professional Wording) -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+          <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.75rem; padding: 1.25rem;">
+            <strong style="color: #18181B; display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">СИЛЬНЫЕ СТОРОНЫ</strong>
+            <ul id="modalPros" style="margin-left: 1.25rem; font-size: 0.75rem; color: #3F3F46; line-height: 1.6;"></ul>
           </div>
-          <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 0.75rem; padding: 1rem;">
-            <strong style="color: #18181B; display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem;">🔴 Замечания автора</strong>
-            <ul id="modalCons" style="margin-left: 1.25rem; font-size: 0.75rem; color: #3F3F46; line-height: 1.5;"></ul>
-          </div>
-        </div>
-
-        <!-- 5 Key Photos Protocol -->
-        <div style="border-top: 1px solid #E4E4E7; padding-top: 1rem;">
-          <span style="display: block; font-size: 0.6875rem; text-transform: uppercase; font-weight: 800; color: #71717A; margin-bottom: 0.5rem;">📸 Фотопротокол визита (5 обязательных ракурсов)</span>
-          <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; text-align: center; font-size: 0.6875rem; font-weight: 800; color: #52525B;">
-            <div style="background: #F4F4F5; border: 1px solid #E4E4E7; border-radius: 0.5rem; padding: 0.65rem 0.2rem;">🍽 Сервировка</div>
-            <div style="background: #F4F4F5; border: 1px solid #E4E4E7; border-radius: 0.5rem; padding: 0.65rem 0.2rem;">🔪 Срез</div>
-            <div style="background: #F4F4F5; border: 1px solid #E4E4E7; border-radius: 0.5rem; padding: 0.65rem 0.2rem;">🍷 Бокал</div>
-            <div style="background: #F4F4F5; border: 1px solid #E4E4E7; border-radius: 0.5rem; padding: 0.65rem 0.2rem;">🧼 Санузел</div>
-            <div style="background: #F4F4F5; border: 1px solid #E4E4E7; border-radius: 0.5rem; padding: 0.65rem 0.2rem;">🧾 Чек</div>
+          <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.75rem; padding: 1.25rem;">
+            <strong style="color: #18181B; display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">ЗАМЕЧАНИЯ ИНСПЕКЦИИ</strong>
+            <ul id="modalCons" style="margin-left: 1.25rem; font-size: 0.75rem; color: #3F3F46; line-height: 1.6;"></ul>
           </div>
         </div>
 
@@ -897,74 +1099,79 @@
     </div>
   </div>
 
-  <!-- MODAL: FULL AUDIT EDITOR (MAXIMALLY GRANULAR SUB-CRITERIA & PHOTO UPLOADER) -->
+  <!-- MODAL: FULL AUDIT EDITOR (WITH DYNAMIC GRANULAR CRITERIA & REAL PHOTO UPLOADER) -->
   <div id="auditEditorModal" class="modal-overlay" onclick="closeAuditEditorModal()">
-    <div class="modal-box" style="max-width: 740px; padding: 2rem;" onclick="event.stopPropagation()">
+    <div class="modal-box" style="max-width: 760px; padding: 2.25rem;" onclick="event.stopPropagation()">
       
-      <div class="flex items-center justify-between" style="border-bottom: 1px solid #E4E4E7; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 1rem; margin-bottom: 1.5rem;">
         <div>
-          <span style="font-size: 0.625rem; font-family: monospace; text-transform: uppercase; font-weight: 800; color: #71717A;">Панель управления e-planka</span>
-          <h3 id="editorModalTitle" style="font-size: 1.125rem; font-weight: 900; color: #18181B;">Создание аудита заведения</h3>
+          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #18181B;">ПАНЕЛЬ ИНСПЕКТОРА PLANKA GUIDE</span>
+          <h3 class="font-serif" id="editorModalTitle" style="font-size: 1.25rem; font-weight: 900; color: #18181B; margin-top: 0.15rem;">Создание аудита заведения</h3>
         </div>
-        <button onclick="closeAuditEditorModal()" type="button" style="background: #F4F4F5; border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+        <button onclick="closeAuditEditorModal()" type="button" style="background: #F5F2EB; border: none; width: 2.25rem; height: 2.25rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
       </div>
 
-      <form id="fullAuditForm" onsubmit="handleSaveAudit(event)" style="display: flex; flex-direction: column; gap: 1.25rem; font-size: 0.75rem;">
+      <form id="fullAuditForm" onsubmit="handleSaveAudit(event)" style="display: flex; flex-direction: column; gap: 1.35rem; font-size: 0.75rem;">
         <input type="hidden" id="editVenueId" value="">
 
-        <!-- Info -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+        <!-- Step 1: Venue Meta -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
           <div>
-            <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Название заведения *</label>
+            <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Название заведения *</label>
             <input type="text" id="formName" required placeholder="Например: Duo Gastrobar">
           </div>
           <div>
-            <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Формат (автоматически загружает чек-лист) *</label>
+            <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Категория (загружает чек-лист) *</label>
             <select id="formFormat" onchange="renderGranularChecklist()">
-              <option value="Fine Dining">🍽 Ресторан / Fine & Casual</option>
-              <option value="Кофейня">☕️ Спешелти-кофейня / Кафе</option>
-              <option value="Коктейльный бар">🍸 Коктейльный бар / Паб</option>
-              <option value="Столовая">🍲 Столовая / Fast Casual</option>
-              <option value="Пекарня">🥐 Пекарня / Кондитерская</option>
-              <option value="Раменная">🍜 Раменная / Азия</option>
-              <option value="Пиццерия">🍕 Пиццерия / Бургерная</option>
+              <option value="Fine Dining">Ресторан / Fine & Casual</option>
+              <option value="Кофейня">Спешелти-кофейня / Кафе</option>
+              <option value="Коктейльный бар">Коктейльный бар / Паб</option>
+              <option value="Столовая">Fast Casual & Столовая</option>
+              <option value="Пекарня">Ремесленная пекарня</option>
+              <option value="Раменная">Раменная / Азия</option>
+              <option value="Пиццерия">Пиццерия / Бургерная</option>
             </select>
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.85rem;">
           <div>
-            <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Город *</label>
+            <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Город *</label>
             <input type="text" id="formCity" required placeholder="Москва / СПб / Екб">
           </div>
           <div>
-            <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Средний чек (₽) *</label>
-            <input type="number" id="formCheck" required placeholder="2000">
+            <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Улица и дом (для Яндекс Карт) *</label>
+            <input type="text" id="formAddress" required placeholder="ул. Ленина, 25">
           </div>
           <div>
-            <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Ценовой класс</label>
-            <select id="formSegment">
-              <option value="Бюджет ($)">Бюджет ($)</option>
-              <option value="Средний ($$)">Средний ($$)</option>
-              <option value="Высокий ($$$)">Высокий ($$$)</option>
-              <option value="Премиум ($$$$)">Премиум ($$$$)</option>
-            </select>
+            <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Средний чек (₽) *</label>
+            <input type="number" id="formCheck" required placeholder="2000">
           </div>
         </div>
 
-        <!-- GRANULAR DETAILED CHECKLIST ACCORDING TO VENUE TYPE (AUTO SUMMED) -->
-        <div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 0.75rem; padding: 1.25rem;">
-          <div class="flex items-center justify-between" style="border-bottom: 1px solid #E4E4E7; padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
-            <strong style="font-size: 0.75rem; text-transform: uppercase; color: #18181B;">Детальный расчетный чек-лист инспектора (100 б.)</strong>
-            <span style="font-size: 0.6875rem; color: #71717A;">Автоматический расчет</span>
+        <div>
+          <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Ценовой класс</label>
+          <select id="formSegment">
+            <option value="Бюджет ($)">Бюджет ($)</option>
+            <option value="Средний ($$)">Средний ($$)</option>
+            <option value="Высокий ($$$)">Высокий ($$$)</option>
+            <option value="Премиум ($$$$)">Премиум ($$$$)</option>
+          </select>
+        </div>
+
+        <!-- DYNAMIC GRANULAR SUB-CRITERIA (19+ Detailed Parameters with Live Auto-Sum) -->
+        <div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.75rem; padding: 1.35rem;">
+          <div class="flex items-center justify-between" style="border-bottom: 1px solid #EAE6DF; padding-bottom: 0.5rem; margin-bottom: 0.85rem;">
+            <strong style="font-size: 0.75rem; text-transform: uppercase; color: #18181B; font-weight: 800;">Детальный чек-лист инспектора (Автоматический расчет)</strong>
+            <span style="font-size: 0.6875rem; color: #18181B; font-weight: 800;">100-балльная шкала</span>
           </div>
           <div id="granularChecklistFields" style="display: flex; flex-direction: column; gap: 0.85rem;">
-            <!-- Injected via JS based on selected format -->
+            <!-- Dynamically populated based on chosen format -->
           </div>
         </div>
 
         <!-- Red flags -->
-        <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: 0.75rem; padding: 1rem; color: #991B1B; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: 0.75rem; padding: 1.15rem; color: #991B1B; display: flex; flex-direction: column; gap: 0.5rem;">
           <strong style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800;">Штрафы Red Flags (Критические блокираторы)</strong>
           <label class="flex items-center gap-2" style="cursor: pointer;"><input type="checkbox" id="rfPoison" onchange="recalcGranularScore()"> <span>Риск отравления / просрочка (-100 б. / аннулирование)</span></label>
           <label class="flex items-center gap-2" style="cursor: pointer;"><input type="checkbox" id="rfForeign" onchange="recalcGranularScore()"> <span>Инородные тела в блюде (-20 б.)</span></label>
@@ -973,70 +1180,70 @@
           <label class="flex items-center gap-2" style="cursor: pointer;"><input type="checkbox" id="rfDeceit" onchange="recalcGranularScore()"> <span>Обсчет в чеке или обман по выходу (-15 б.)</span></label>
         </div>
 
-        <!-- Real Photo Uploader with Device Camera / File Picker -->
-        <div style="background: #FFFFFF; border: 1px solid #E4E4E7; border-radius: 0.75rem; padding: 1rem;">
-          <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">📸 Загрузка реальных фотографий инспектора</label>
-          <p style="font-size: 0.6875rem; color: #71717A; margin-bottom: 0.5rem;">Выберите фото с устройства или сделайте снимок с камеры (блюда, зал, санузел, чек):</p>
-          <input type="file" id="formPhotoUploader" accept="image/*" multiple onchange="handlePhotoUpload(event)" style="background: #FAF9F6; padding: 0.4rem; cursor: pointer;">
-          <div id="formPhotoPreviewGrid" class="photo-preview-grid"></div>
+        <!-- Photo Uploader with Camera & File Picker Support -->
+        <div style="background: #FFFFFF; border: 1px solid #EAE6DF; border-radius: 0.75rem; padding: 1.15rem;">
+          <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Загрузка фотографий блюд и заведения</label>
+          <p style="font-size: 0.6875rem; color: #71717A; margin-bottom: 0.5rem;">Первое фото автоматически станет главной лицевой обложкой карточки:</p>
+          <input type="file" id="formPhotoUploader" accept="image/*" multiple onchange="handlePhotoUpload(event)" style="background: #FAF8F5; padding: 0.4rem; cursor: pointer;">
+          <div id="formPhotoPreviewGrid" class="photo-grid"></div>
         </div>
 
-        <!-- Text details -->
+        <!-- Signature dish and Freeform Review -->
         <div>
-          <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Фирменное блюдо (Signature Dish) *</label>
+          <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Фирменное блюдо (Signature Dish) *</label>
           <input type="text" id="formDish" required placeholder="Например: Черная треска с муссом из трав">
         </div>
 
         <div>
-          <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Срез вкуса фирменного блюда (1-2 предложения)</label>
+          <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Срез вкуса фирменного блюда (1-2 предложения)</label>
           <textarea id="formDishReview" rows="2" placeholder="Опишите органолептику, баланс соуса, прожарку..."></textarea>
         </div>
 
         <div>
-          <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Публичная рецензия тайного гостя (для читателей)</label>
+          <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Публичная рецензия инспектора (для читателей гида)</label>
           <textarea id="formFullReview" rows="3" placeholder="Опишите общую атмосферу, детали сервиса и вердикт..."></textarea>
         </div>
 
         <!-- AUTHOR'S PRIVATE B2B SECTION -->
         <div style="background: #18181B; color: #FFF; border-radius: 0.75rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;">
           <div class="flex items-center gap-2">
-            <span style="background: #F59E0B; color: #000; font-size: 0.625rem; font-family: monospace; font-weight: 900; padding: 0.1rem 0.4rem; border-radius: 0.25rem;">🔒 ДЛЯ СЕБЯ (АВТОР)</span>
-            <strong style="font-size: 0.75rem;">Закрытые бизнес-наблюдения и инсайты</strong>
+            <span style="background: #D4AF37; color: #000; font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 900; padding: 0.15rem 0.5rem; border-radius: 0.25rem;">ТОЛЬКО ДЛЯ СЕБЯ</span>
+            <strong style="font-size: 0.8125rem;">Закрытые бизнес-наблюдения и инсайты</strong>
           </div>
-          <p style="font-size: 0.6875rem; color: #A1A1AA;">Не видны посетителям. Записывайте инсайты по маржинальности, оборудованию и фишкам для собственных заведений e-planka:</p>
-          <textarea id="formPrivateNotes" rows="2" placeholder="Экономика, маржа, посадка столов, оборудование кухни..."></textarea>
+          <p style="font-size: 0.6875rem; color: #A1A1AA;">Не видны посетителям. Записывайте инсайты по маржинальности, фудкосту, оборудованию и фишкам для собственных заведений PLANKA:</p>
+          <textarea id="formPrivateNotes" rows="2" placeholder="Экономика, фудкост, схема посадки столов, оборудование кухни..."></textarea>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
           <div>
-            <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Сильные стороны (по 1 на строку)</label>
+            <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Сильные стороны (по 1 на строку)</label>
             <textarea id="formPros" rows="3" placeholder="Идеальная прожарка&#10;Быстрая отдача"></textarea>
           </div>
           <div>
-            <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Замечания к деталям (придирки)</label>
-            <textarea id="formCons" rows="3" placeholder="Шатается стол&#10;Долгий счет"></textarea>
+            <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Замечания инспекции (по 1 на строку)</label>
+            <textarea id="formCons" rows="3" placeholder="Шатается стол&#10;Долгий расчет"></textarea>
           </div>
         </div>
 
         <div>
-          <label style="font-weight: 800; display: block; margin-bottom: 0.25rem;">Теги (через запятую)</label>
-          <input type="text" id="formFeatures" placeholder="🐾 Pet-Friendly, 💻 Wi-Fi, 🔌 Розетки">
+          <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Теги удобств (через запятую)</label>
+          <input type="text" id="formFeatures" placeholder="Pet-Friendly, Wi-Fi, Розетки, Сомелье">
         </div>
 
         <!-- Live Total Calculated Score Banner -->
-        <div style="background: #18181B; color: #FFF; border-radius: 0.75rem; padding: 1rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: #18181B; color: #FFF; border-radius: 0.75rem; padding: 1.15rem; display: flex; align-items: center; justify-content: space-between;">
           <div>
-            <span style="font-size: 0.625rem; font-family: monospace; text-transform: uppercase; color: #A1A1AA; display: block;">Автоматический расчет рейтинга</span>
-            <span id="formCalcGrade" style="font-weight: 800; font-size: 0.875rem; color: #34D399;">⭐️⭐️⭐️ Знак Качества</span>
+            <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; color: #A1A1AA; display: block;">Автоматический расчет балла</span>
+            <span id="formCalcGrade" style="font-weight: 800; font-size: 0.9375rem; color: #D4AF37;">Знак Качества PLANKA</span>
           </div>
-          <div class="font-mono" style="font-size: 1.75rem; font-weight: 900;">
+          <div class="font-mono" style="font-size: 2rem; font-weight: 900;">
             <span id="formCalcScore">85</span><span style="font-size: 0.875rem; color: #A1A1AA;">/100</span>
           </div>
         </div>
 
         <div class="flex gap-2">
           <button type="button" onclick="closeAuditEditorModal()" class="btn btn-light" style="flex: 1;">Отмена</button>
-          <button type="submit" class="btn btn-dark" style="flex: 2; padding: 0.85rem;">Сохранить в каталог</button>
+          <button type="submit" class="btn btn-dark" style="flex: 2; padding: 0.85rem;">Сохранить в PLANKA GUIDE</button>
         </div>
 
       </form>
@@ -1052,6 +1259,7 @@
         format: "Fine Dining",
         segment: "Премиум ($$$$)",
         city: "Москва",
+        address: "Смоленская площадь, 3, 16 этаж",
         avg_check: 7000,
         date: "2026-08-10",
         scores: { food: 34, wow: 15, price: 13, service: 14, space: 10, sanitation: 10 },
@@ -1065,7 +1273,7 @@
         photos: [],
         pros: ["Идеальная прожарка и баланс соуса к рыбе", "Синхронная отдача блюд гостям за 14 минут", "Стерильная чистота санузла и открытой кухни"],
         cons: ["Плотная посадка в центральном зале в вечерний прайм-тайм"],
-        features: ["🐾 Pet-Friendly", "🚗 Valet-Parking", "🍷 Сомелье"]
+        features: ["Pet-Friendly", "Valet-Parking", "Сомелье"]
       },
       {
         id: 2,
@@ -1073,6 +1281,7 @@
         format: "Коктейльный бар",
         segment: "Премиум ($$$$)",
         city: "СПб",
+        address: "Колокольная ул., 2",
         avg_check: 3200,
         date: "2026-08-11",
         scores: { food: 35, wow: 15, price: 14, service: 15, space: 10, sanitation: 10 },
@@ -1086,7 +1295,7 @@
         photos: [],
         pros: ["Эталонный контакт бармена за стойкой", "Чистейший монолитный лед без пузырей", "Кураторская акустика: можно общаться вполголоса"],
         cons: ["Вход только по предварительной брони"],
-        features: ["🧊 Чистый лед", "🍸 Speakeasy", "🎶 Джаз"]
+        features: ["Чистый лед", "Speakeasy", "Джаз"]
       },
       {
         id: 3,
@@ -1094,6 +1303,7 @@
         format: "Fine Dining",
         segment: "Премиум ($$$$)",
         city: "Москва",
+        address: "Тверской бульвар, 26А",
         avg_check: 5500,
         date: "2026-08-12",
         scores: { food: 33, wow: 14, price: 12, service: 15, space: 10, sanitation: 10 },
@@ -1107,7 +1317,7 @@
         photos: [],
         pros: ["Безупречный этикет персонала и знание истории", "Атмосфера дворянского особняка", "Круглосуточный сервис премиум-класса"],
         cons: ["Высокая наценка на базовый чай и десерты"],
-        features: ["🕰 24/7", "🎩 Дворянский этикет", "📜 Историческое меню"]
+        features: ["24/7", "Дворянский этикет", "Историческое меню"]
       },
       {
         id: 4,
@@ -1115,6 +1325,7 @@
         format: "Кофейня",
         segment: "Высокий ($$$)",
         city: "Москва",
+        address: "ул. Большая Никитская, 13",
         avg_check: 1900,
         date: "2026-08-13",
         scores: { food: 31, wow: 12, price: 10, service: 13, space: 9, sanitation: 10 },
@@ -1128,7 +1339,7 @@
         photos: [],
         pros: ["Стабильный вкус кофе из года в год", "Удобные столы и розетки для работы", "Быстрая отдача заказа"],
         cons: ["Завышенный средний чек относительно рынка кофеен"],
-        features: ["💻 Wi-Fi 75 Mbps", "🔌 Розетки", "🥐 Свежая выпечка"]
+        features: ["Wi-Fi 75 Mbps", "Розетки", "Свежая выпечка"]
       },
       {
         id: 5,
@@ -1136,6 +1347,7 @@
         format: "Раменная",
         segment: "Средний ($$)",
         city: "Москва",
+        address: "Смоленская ул., 8",
         avg_check: 1350,
         date: "2026-08-14",
         scores: { food: 32, wow: 13, price: 14, service: 12, space: 8, sanitation: 9 },
@@ -1149,7 +1361,7 @@
         photos: [],
         pros: ["Аутентичный японский вкус", "Щедрая порция и честная граммовка", "Высокая скорость кухни"],
         cons: ["Шумный зал при полной посадке в обед"],
-        features: ["🍜 Крафтовая лапша", "🇯🇵 Аутентично", "⚡️ Быстрая отдача"]
+        features: ["Крафтовая лапша", "Аутентично", "Быстрая отдача"]
       },
       {
         id: 6,
@@ -1157,6 +1369,7 @@
         format: "Пекарня",
         segment: "Средний ($$)",
         city: "СПб",
+        address: "ул. Малая Морская, 7",
         avg_check: 850,
         date: "2026-08-15",
         scores: { food: 30, wow: 12, price: 12, service: 12, space: 9, sanitation: 10 },
@@ -1170,7 +1383,7 @@
         photos: [],
         pros: ["Ремесленное качество выпечки", "Аромат кофе и свежего хлеба", "Чистота витрин"],
         cons: ["Очереди у кассы в утренние часы"],
-        features: ["🥖 Хлеб на закваске", "☕️ Кофе to-go", "🌱 Без маргарина"]
+        features: ["Хлеб на закваске", "Кофе to-go", "Без маргарина"]
       },
       {
         id: 7,
@@ -1178,6 +1391,7 @@
         format: "Пиццерия",
         segment: "Масс-маркет ($)",
         city: "Екатеринбург",
+        address: "ул. Малышева, 31",
         avg_check: 800,
         date: "2026-08-16",
         scores: { food: 25, wow: 10, price: 15, service: 10, space: 8, sanitation: 10 },
@@ -1191,7 +1405,7 @@
         photos: [],
         pros: ["Идеальная прозрачность процессов через открытую кухню", "Быстрое мобильное приложение", "Чистый санузел"],
         cons: ["Стандартизированный вкус без гастрономических откровений"],
-        features: ["📱 Заказ в приложении", "👶 Детский уголок", "⚡️ Готовность 15 мин"]
+        features: ["Заказ в приложении", "Детский уголок", "Готовность 15 мин"]
       },
       {
         id: 8,
@@ -1199,6 +1413,7 @@
         format: "Fast Casual",
         segment: "Масс-маркет ($)",
         city: "Москва",
+        address: "Никольская ул., 10",
         avg_check: 650,
         date: "2026-08-17",
         scores: { food: 26, wow: 8, price: 14, service: 10, space: 8, sanitation: 9 },
@@ -1212,7 +1427,7 @@
         photos: [],
         pros: ["Честное соотношение цена/сытность", "Выпекание из свежего теста под заказ", "Натуральный морс"],
         cons: ["Пластиковая посуда на фудкортах"],
-        features: ["🥞 Выпечка при вас", "💰 До 700 ₽", "🍵 Натуральный морс"]
+        features: ["Выпечка при вас", "До 700 ₽", "Натуральный морс"]
       },
       {
         id: 9,
@@ -1220,6 +1435,7 @@
         format: "Столовая",
         segment: "Бюджет ($)",
         city: "Москва",
+        address: "Красная площадь, 3, ГУМ 3 линия 3 этаж",
         avg_check: 550,
         date: "2026-08-18",
         scores: { food: 21, wow: 5, price: 15, service: 8, space: 7, sanitation: 8 },
@@ -1233,7 +1449,7 @@
         photos: [],
         pros: ["Низкая цена в самом центре города", "Сухие чистые подносы", "Ретро-эстетика"],
         cons: ["Большая очередь туристов в обед"],
-        features: ["🏛 В ГУМе", "💰 До 600 ₽", "🍲 Сытные обеды"]
+        features: ["В ГУМе", "До 600 ₽", "Сытные обеды"]
       },
       {
         id: 10,
@@ -1241,6 +1457,7 @@
         format: "Пиццерия",
         segment: "Средний ($$)",
         city: "Москва",
+        address: "Новый Арбат, 15",
         avg_check: 1100,
         date: "2026-08-19",
         scores: { food: 22, wow: 9, price: 10, service: 9, space: 7, sanitation: 8 },
@@ -1254,13 +1471,13 @@
         photos: [],
         pros: ["Черные перчатки для еды", "Быстрая сборка"],
         cons: ["Нестабильное качество котлет", "Высокая цена за масс-маркет продукт", "Штраф -15 б. за навязывание платных соусов на кассе"],
-        features: ["🍔 Перчатки", "🍟 Фастфуд"]
+        features: ["Перчатки", "Фастфуд"]
       }
     ];
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('eplanka_db_v14');
+      var stored = localStorage.getItem('planka_guide_db_v17');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -1271,7 +1488,7 @@
 
     var isAdmin = false;
     try {
-      isAdmin = sessionStorage.getItem('eplanka_admin_logged') === 'true';
+      isAdmin = sessionStorage.getItem('planka_admin_logged') === 'true';
     } catch(e) {}
 
     var currentFormatFilter = 'all';
@@ -1281,7 +1498,7 @@
 
     function saveDB() {
       try {
-        localStorage.setItem('eplanka_db_v14', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v17', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderSelection();
@@ -1309,7 +1526,7 @@
       }
     }
 
-    // Render Selection Grid (Michelin Style Selection)
+    // Render Selection Grid
     function renderSelection() {
       var container = document.getElementById('selectionGrid');
       if (!container) return;
@@ -1320,26 +1537,38 @@
       var html = '';
       for (var i = 0; i < topVenues.length; i++) {
         var tv = topVenues[i];
+        var coverStyle = (tv.photos && tv.photos.length > 0) ? 
+                         'background-image: url(' + tv.photos[0] + ');' : 
+                         'background: linear-gradient(135deg, #18181B 0%, #27272A 100%);';
+
         html += '<div onclick="openVenueModal(' + tv.id + ')" class="selection-card">' +
-          '<div>' +
-            '<div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">' +
-              '<span style="font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 800; text-transform: uppercase; color: #B45309;">' + tv.format + ' • 📍 ' + tv.city + '</span>' +
-              '<span style="background: #18181B; color: #FFF; font-family: ui-monospace, monospace; font-weight: 900; font-size: 1rem; padding: 0.2rem 0.65rem; border-radius: 0.5rem;">' + tv.total_score + '/100</span>' +
-            '</div>' +
-            '<h4 style="font-size: 1.25rem; font-weight: 900; color: #18181B; margin-bottom: 0.35rem;">' + tv.name + '</h4>' +
-            '<p class="font-serif" style="font-style: italic; font-size: 0.85rem; color: #52525B; line-height: 1.5; margin-bottom: 1rem;">' +
-              '«' + tv.signature_dish + '» — ' + tv.dish_review +
-            '</p>' +
+          '<div class="card-cover" style="' + coverStyle + '">' +
+            '<div class="card-cover-overlay">⭐️ ' + tv.total_score + ' / 100</div>' +
+            '<div class="michelin-photo-btn" onclick="openPhotoLightboxDirect(' + tv.id + ', event)" title="Смотреть фото">' +
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
+            '<span>' + (tv.photos ? tv.photos.length : 0) + '</span>' +
           '</div>' +
-          '<div class="flex items-center justify-between" style="border-top: 1px solid #F4F4F5; padding-top: 0.75rem; font-size: 0.75rem;">' +
-            '<strong style="color: #18181B;">' + tv.avg_check.toLocaleString('ru-RU') + ' ₽ / чек</strong>' +
-            '<span style="color: #B45309; font-weight: 800;">Изучить досье →</span>' +
+          '</div>' +
+          '<div style="padding: 1.35rem; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">' +
+            '<div>' +
+              '<span style="font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 800; text-transform: uppercase; color: #18181B;">' + tv.format + ' • ' + tv.city + '</span>' +
+              '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: #18181B; margin: 0.2rem 0 0.35rem 0;">' + tv.name + '</h4>' +
+              '<p style="font-size: 0.75rem; color: #71717A; margin-bottom: 0.5rem;">' + (tv.address || tv.city) + '</p>' +
+              '<p class="font-serif" style="font-style: italic; font-size: 0.8125rem; color: #52525B; line-height: 1.45;">' +
+                '«' + tv.signature_dish + '» — ' + tv.dish_review +
+              '</p>' +
+            '</div>' +
+            '<div class="flex items-center justify-between" style="border-top: 1px solid #EAE6DF; padding-top: 0.75rem; margin-top: 0.75rem; font-size: 0.75rem;">' +
+              '<strong style="color: #18181B;">' + tv.avg_check.toLocaleString('ru-RU') + ' ₽ / чек</strong>' +
+              '<span style="color: #18181B; font-weight: 800;">Досье гида →</span>' +
+            '</div>' +
           '</div>' +
         '</div>';
       }
       container.innerHTML = html;
     }
 
+    // Render Michelin Style Catalog Grid
     function renderVenues() {
       var grid = document.getElementById('venuesGrid');
       var noResults = document.getElementById('noResults');
@@ -1359,7 +1588,8 @@
                             v.name.toLowerCase().indexOf(search) !== -1 || 
                             v.format.toLowerCase().indexOf(search) !== -1 || 
                             (v.signature_dish && v.signature_dish.toLowerCase().indexOf(search) !== -1) ||
-                            v.city.toLowerCase().indexOf(search) !== -1;
+                            v.city.toLowerCase().indexOf(search) !== -1 ||
+                            (v.address && v.address.toLowerCase().indexOf(search) !== -1);
         var matchesCity = (city === 'all') || (v.city === city);
         var matchesFormat = (currentFormatFilter === 'all') || (v.format === currentFormatFilter);
         var matchesQuality = !currentQualityFilter || (v.total_score >= 90);
@@ -1391,35 +1621,42 @@
         var tagsHtml = '';
         var feats = item.features || [];
         for (var k = 0; k < feats.length; k++) {
-          tagsHtml += '<span class="tag">' + feats[k] + '</span> ';
+          tagsHtml += '<span style="background: #F5F2EB; border: 1px solid #E2DDD5; color: #52525B; font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 0.35rem;">' + feats[k] + '</span> ';
         }
 
+        var coverStyle = (item.photos && item.photos.length > 0) ? 
+                         'background-image: url(' + item.photos[0] + ');' : 
+                         'background: linear-gradient(135deg, #18181B 0%, #27272A 100%);';
+
         html += '<div onclick="openVenueModal(' + item.id + ')" class="card">' +
-          '<div style="display: flex; flex-direction: column; gap: 0.85rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<div>' +
-                '<span style="font-size: 0.625rem; font-family: monospace; text-transform: uppercase; font-weight: 800; color: #71717A;">' + item.format + ' • 📍 ' + item.city + '</span>' +
-                '<h3 style="font-size: 1.15rem; font-weight: 900; color: #18181B; margin-top: 0.15rem;">' + item.name + '</h3>' +
-              '</div>' +
-              '<div style="background: ' + (isQuality ? '#18181B; color: #FFF;' : '#F4F4F5; color: #18181B; border: 1px solid #E4E4E7;') + ' padding: 0.3rem 0.75rem; border-radius: 0.75rem; font-family: monospace; font-weight: 900; font-size: 1.15rem;">' +
-                item.total_score + '<span style="font-size: 0.625rem; font-weight: normal; color: #A1A1AA;">/100</span>' +
-              '</div>' +
-            '</div>' +
-            '<div>' +
-              (isQuality ? '<span class="badge-gold">⭐️⭐️⭐️ Знак Качества e-planka</span>' : '<span class="badge-regular">' + item.grade + '</span>') +
-            '</div>' +
-            '<div style="background: #FAF9F6; border: 1px solid #E4E4E7; border-radius: 0.75rem; padding: 0.75rem; font-size: 0.75rem;">' +
-              '<span style="display: block; font-size: 0.5625rem; font-family: monospace; text-transform: uppercase; color: #B45309; font-weight: 800;">Фирменное блюдо:</span>' +
-              '<strong style="color: #18181B; display: block; margin-top: 0.1rem; font-size: 0.8125rem;">' + item.signature_dish + '</strong>' +
-            '</div>' +
-            '<p class="font-serif" style="font-style: italic; font-size: 0.8125rem; color: #52525B; line-height: 1.45;">' +
-              '«' + item.dish_review + '»' +
-            '</p>' +
-            '<div style="display: flex; flex-wrap: wrap; gap: 0.25rem;">' + tagsHtml + '</div>' +
+          '<div class="card-cover" style="' + coverStyle + '">' +
+            '<div class="card-cover-overlay">' + item.total_score + ' / 100</div>' +
+            '<div class="michelin-photo-btn" onclick="openPhotoLightboxDirect(' + tv.id + ', event)" title="Смотреть фото">' +
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
+            '<span>' + (tv.photos ? tv.photos.length : 0) + '</span>' +
           '</div>' +
-          '<div class="flex items-center justify-between" style="border-top: 1px solid #F4F4F5; padding-top: 1rem; margin-top: 1rem; font-size: 0.75rem;">' +
-            '<strong style="color: #18181B; font-size: 0.8125rem;">' + item.avg_check.toLocaleString('ru-RU') + ' ₽ <span style="font-weight: normal; color: #71717A; font-size: 0.75rem;">/ чек</span></strong>' +
-            '<span style="font-weight: 800; color: #18181B;">Досье аудитора →</span>' +
+          '</div>' +
+          '<div class="card-body">' +
+            '<div>' +
+              '<div class="flex items-center justify-between" style="margin-bottom: 0.35rem;">' +
+                '<span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #18181B;">' + item.format + '</span>' +
+                (isQuality ? '<span class="badge-gold">Знак Качества</span>' : '<span class="badge-regular">' + item.grade + '</span>') +
+              '</div>' +
+              '<h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: #18181B; margin-bottom: 0.2rem;">' + item.name + '</h3>' +
+              '<p style="font-size: 0.75rem; color: #71717A; margin-bottom: 0.5rem;">' + item.city + ', ' + (item.address || 'Центр') + '</p>' +
+              '<div style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.4rem; padding: 0.65rem; font-size: 0.75rem; margin-bottom: 0.65rem;">' +
+                '<span style="display: block; font-size: 0.5625rem; font-family: ui-monospace, monospace; text-transform: uppercase; color: #18181B; font-weight: 800;">Фирменное блюдо:</span>' +
+                '<strong style="color: #18181B; display: block; margin-top: 0.1rem; font-size: 0.8125rem;">' + item.signature_dish + '</strong>' +
+              '</div>' +
+              '<p class="font-serif" style="font-style: italic; font-size: 0.8125rem; color: #52525B; line-height: 1.45; margin-bottom: 0.5rem;">' +
+                '«' + item.dish_review + '»' +
+              '</p>' +
+              '<div style="display: flex; flex-wrap: wrap; gap: 0.25rem;">' + tagsHtml + '</div>' +
+            '</div>' +
+            '<div class="flex items-center justify-between" style="border-top: 1px solid #EAE6DF; padding-top: 1rem; margin-top: 0.75rem; font-size: 0.75rem;">' +
+              '<strong style="color: #18181B; font-size: 0.8125rem;">' + item.avg_check.toLocaleString('ru-RU') + ' ₽ <span style="font-weight: normal; color: #71717A; font-size: 0.75rem;">/ чек</span></strong>' +
+              '<span style="font-weight: 800; color: #18181B;">Досье гида →</span>' +
+            '</div>' +
           '</div>' +
         '</div>';
       }
@@ -1478,7 +1715,63 @@
       renderVenues();
     }
 
-    // Modal Control Functions
+    // Modal Control Functions (Tested V8 Logic)
+    
+    var activeLightboxVenue = null;
+    var currentLightboxIndex = 0;
+
+    function openPhotoLightboxDirect(venueId, e) {
+      if (e) e.stopPropagation();
+      var target = null;
+      for (var i = 0; i < venues.length; i++) {
+        if (venues[i].id === venueId) { target = venues[i]; break; }
+      }
+      if (!target) return;
+      activeLightboxVenue = target;
+      currentLightboxIndex = 0;
+
+      document.getElementById('lightboxVenueTitle').innerText = target.name;
+      document.getElementById('lightboxVenueSubtitle').innerText = target.city + ' • ' + (target.signature_dish || 'Фирменное блюдо');
+
+      renderLightboxView();
+      var lb = document.getElementById('photoLightbox');
+      if (lb) lb.classList.add('open');
+    }
+
+    function renderLightboxView() {
+      if (!activeLightboxVenue) return;
+      var photos = activeLightboxVenue.photos || [];
+      var mainImg = document.getElementById('lightboxCurrentImg');
+      var counter = document.getElementById('lightboxCounter');
+
+      if (photos.length === 0) {
+        mainImg.setAttribute('src', '');
+        mainImg.style.display = 'none';
+        counter.innerText = 'Фотографии пока не загружены';
+      } else {
+        mainImg.style.display = 'block';
+        mainImg.setAttribute('src', photos[currentLightboxIndex]);
+        counter.innerText = (currentLightboxIndex + 1) + ' / ' + photos.length;
+      }
+    }
+
+    function prevLightboxPhoto() {
+      if (!activeLightboxVenue || !activeLightboxVenue.photos || activeLightboxVenue.photos.length === 0) return;
+      currentLightboxIndex = (currentLightboxIndex - 1 + activeLightboxVenue.photos.length) % activeLightboxVenue.photos.length;
+      renderLightboxView();
+    }
+
+    function nextLightboxPhoto() {
+      if (!activeLightboxVenue || !activeLightboxVenue.photos || activeLightboxVenue.photos.length === 0) return;
+      currentLightboxIndex = (currentLightboxIndex + 1) % activeLightboxVenue.photos.length;
+      renderLightboxView();
+    }
+
+    function closePhotoLightbox() {
+      var lb = document.getElementById('photoLightbox');
+      if (lb) lb.classList.remove('open');
+    }
+
     function openModal(id) {
       var m = document.getElementById(id);
       if (m) m.classList.add('open');
@@ -1499,6 +1792,8 @@
       document.getElementById('modalTitle').innerText = target.name;
       document.getElementById('modalFormat').innerText = target.format;
       document.getElementById('modalCity').innerText = target.city;
+      document.getElementById('modalAddress').innerText = target.address || target.city;
+      document.getElementById('modalMapAddress').innerText = target.city + ', ' + (target.address || '');
       document.getElementById('modalCheck').innerText = target.avg_check.toLocaleString('ru-RU') + ' ₽';
       document.getElementById('modalSegment').innerText = target.segment;
       document.getElementById('modalDate').innerText = target.date;
@@ -1507,37 +1802,34 @@
       document.getElementById('modalDishReview').innerText = '«' + target.dish_review + '»';
       document.getElementById('modalScoreBadge').innerText = target.total_score + '/100';
 
+      // Yandex Maps Link
+      var mapUrl = 'https://yandex.ru/maps/?text=' + encodeURIComponent(target.name + ' ' + target.city + ' ' + (target.address || ''));
+      var mapQuery = encodeURIComponent(target.name + ' ' + target.city + ' ' + (target.address || ''));
+      document.getElementById('yandexMapIframe').setAttribute('src', 'https://yandex.ru/map-widget/v1/?text=' + mapQuery + '&z=16');
+      document.getElementById('btnYandexMapsRoute').setAttribute('href', 'https://yandex.ru/maps/?text=' + mapQuery);
+
       var fullRevEl = document.getElementById('modalFullReview');
       if (fullRevEl) {
-        fullRevEl.innerText = target.full_review || ("Контрольный аудит заведения " + target.name + ". Итоговый балл по 100-балльной шкале e-planka составил " + target.total_score + " баллов.");
+        fullRevEl.innerText = target.full_review || ("Контрольный аудит заведения " + target.name + ". Итоговый балл по 100-балльной шкале PLANKA GUIDE составил " + target.total_score + " баллов.");
       }
 
       // Photos Gallery
-      var galleryBlock = document.getElementById('modalPhotosGalleryBlock');
-      var galleryList = document.getElementById('modalPhotosGalleryList');
-      var photos = target.photos || [];
-      if (photos.length > 0) {
-        galleryBlock.classList.remove('hidden');
-        var phtml = '';
-        for (var pi = 0; pi < photos.length; pi++) {
-          phtml += '<img src="' + photos[pi] + '" class="photo-thumb" alt="Фото визита">';
-        }
-        galleryList.innerHTML = phtml;
-      } else {
-        galleryBlock.classList.add('hidden');
-      }
+      renderDossierGallery();
 
       // Author Private Section
       var authorSection = document.getElementById('modalAuthorPrivateSection');
       var adminActions = document.getElementById('modalAdminActions');
+      var addPhotoBtn = document.getElementById('btnDossierAddPhoto');
       if (isAdmin) {
         if (adminActions) adminActions.classList.remove('hidden');
+        if (addPhotoBtn) addPhotoBtn.classList.remove('hidden');
         if (authorSection) {
           authorSection.classList.remove('hidden');
           document.getElementById('modalPrivateNotes').innerText = target.private_notes || "Служебные заметки пока не заполнены. Нажмите 'Редактировать', чтобы внести инсайты.";
         }
       } else {
         if (adminActions) adminActions.classList.add('hidden');
+        if (addPhotoBtn) addPhotoBtn.classList.add('hidden');
         if (authorSection) authorSection.classList.add('hidden');
       }
 
@@ -1555,11 +1847,11 @@
         var itemP = pillars[p];
         var pct = Math.round((itemP.val / itemP.max) * 100);
         barsHtml += '<div>' +
-          '<div class="flex justify-between" style="font-size: 0.6875rem; margin-bottom: 0.2rem;">' +
+          '<div class="flex justify-between" style="font-size: 0.6875rem; margin-bottom: 0.25rem;">' +
             '<span style="font-weight: 700; color: #3F3F46;">' + itemP.label + '</span>' +
             '<span class="font-mono" style="font-weight: 900; color: #18181B;">' + itemP.val + ' / ' + itemP.max + ' б.</span>' +
           '</div>' +
-          '<div style="width: 100%; height: 0.375rem; background: #E4E4E7; border-radius: 9999px; overflow: hidden;">' +
+          '<div style="width: 100%; height: 0.4rem; background: #EAE6DF; border-radius: 9999px; overflow: hidden;">' +
             '<div style="width: ' + pct + '%; height: 100%; background: #18181B; border-radius: 9999px;"></div>' +
           '</div>' +
         '</div>';
@@ -1581,6 +1873,57 @@
       document.getElementById('modalCons').innerHTML = consHtml;
 
       openModal('venueModal');
+    }
+
+    function renderDossierGallery() {
+      var galleryList = document.getElementById('modalPhotosGalleryList');
+      var emptyHint = document.getElementById('modalPhotosEmptyHint');
+      if (!activeModalVenue) return;
+      var photos = activeModalVenue.photos || [];
+      if (photos.length > 0) {
+        if (emptyHint) emptyHint.classList.add('hidden');
+        var phtml = '';
+        for (var pi = 0; pi < photos.length; pi++) {
+          phtml += '<div class="photo-thumb-wrap">' +
+            '<img src="' + photos[pi] + '" class="photo-thumb" alt="Фото визита">' +
+            (isAdmin ? '<button type="button" class="photo-del-btn" onclick="deletePhotoFromDossier(' + pi + ')">✕</button>' : '') +
+          '</div>';
+        }
+        galleryList.innerHTML = phtml;
+      } else {
+        if (emptyHint) emptyHint.classList.remove('hidden');
+        galleryList.innerHTML = '';
+      }
+    }
+
+    function handleDossierDirectPhotoUpload(e) {
+      var files = e.target.files;
+      if (!files || files.length === 0 || !activeModalVenue) return;
+
+      if (!activeModalVenue.photos) activeModalVenue.photos = [];
+      var loadedCount = 0;
+      for (var i = 0; i < files.length; i++) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          activeModalVenue.photos.push(event.target.result);
+          loadedCount++;
+          if (loadedCount === files.length) {
+            saveDB();
+            renderDossierGallery();
+            alert('Фотографии успешно добавлены к заведению!');
+          }
+        };
+        reader.readAsDataURL(files[i]);
+      }
+    }
+
+    function deletePhotoFromDossier(idx) {
+      if (!activeModalVenue || !activeModalVenue.photos) return;
+      if (confirm('Удалить эту фотографию?')) {
+        activeModalVenue.photos.splice(idx, 1);
+        saveDB();
+        renderDossierGallery();
+      }
     }
 
     function closeVenueModal() {
@@ -1605,13 +1948,13 @@
       e.preventDefault();
       var pinInp = document.getElementById('pinInput');
       var pin = pinInp ? pinInp.value.trim() : '';
-      if (pin === 'PlankaInspector2026!#' || pin === 'PlankaMaster2026!' || pin === 'eplanka2026') {
+      if (pin === 'PlankaInspector2026!#' || pin === 'PlankaMaster2026!' || pin === 'plankaguide') {
         isAdmin = true;
-        try { sessionStorage.setItem('eplanka_admin_logged', 'true'); } catch(err) {}
+        try { sessionStorage.setItem('planka_admin_logged', 'true'); } catch(err) {}
         closePinModal();
         updateAdminUI();
         renderVenues();
-        alert('Режим инспектора e-planka активирован! Вам доступны: детальные чек-листы, загрузка фото, редактирование и закрытые бизнес-инсайты.');
+        alert('Режим инспектора PLANKA GUIDE активирован! Вам доступны: детальные чек-листы, загрузка фото прямо в досье и закрытые бизнес-инсайты.');
       } else {
         var errEl = document.getElementById('pinError');
         if (errEl) errEl.classList.remove('hidden');
@@ -1620,7 +1963,7 @@
 
     function logoutAdmin() {
       isAdmin = false;
-      try { sessionStorage.removeItem('eplanka_admin_logged'); } catch(err) {}
+      try { sessionStorage.removeItem('planka_admin_logged'); } catch(err) {}
       updateAdminUI();
       renderVenues();
       alert('Вы вышли из режима инспектора.');
@@ -1647,14 +1990,14 @@
     }
 
     function acceptCookieConsent() {
-      try { localStorage.setItem('eplanka_cookie_consent', 'true'); } catch(e) {}
+      try { localStorage.setItem('planka_cookie_consent', 'true'); } catch(e) {}
       var banner = document.getElementById('cookieBanner');
       if (banner) banner.style.display = 'none';
     }
 
     function checkCookieConsent() {
       var accepted = false;
-      try { accepted = localStorage.getItem('eplanka_cookie_consent') === 'true'; } catch(e) {}
+      try { accepted = localStorage.getItem('planka_cookie_consent') === 'true'; } catch(e) {}
       var banner = document.getElementById('cookieBanner');
       if (banner) {
         banner.style.display = accepted ? 'none' : 'block';
@@ -1673,7 +2016,7 @@
       var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(venues, null, 2));
       var dl = document.createElement('a');
       dl.setAttribute("href", dataStr);
-      dl.setAttribute("download", "eplanka_full_database_" + new Date().toISOString().split('T')[0] + ".json");
+      dl.setAttribute("download", "planka_guide_database_" + new Date().toISOString().split('T')[0] + ".json");
       document.body.appendChild(dl);
       dl.click();
       dl.remove();
@@ -1681,11 +2024,11 @@
     }
 
     function syncFromGoogleSheetUrl() {
-      alert('Синхронизация с Google Таблицей: структура проверена. 10 заведений активны в каталоге e-planka.');
+      alert('Синхронизация с Google Таблицей: структура проверена. 10 заведений активны в каталоге PLANKA GUIDE.');
       closeSyncModal();
     }
 
-    // PHOTO UPLOADER ENGINE (FileReader Base64)
+    // Photo Uploader Engine for Form
     function handlePhotoUpload(e) {
       var files = e.target.files;
       if (!files || files.length === 0) return;
@@ -1694,31 +2037,31 @@
         var reader = new FileReader();
         reader.onload = function(event) {
           currentEditingPhotos.push(event.target.result);
-          renderPhotoPreviews();
+          renderFormPhotoPreviews();
         };
         reader.readAsDataURL(files[i]);
       }
     }
 
-    function removePhoto(idx) {
+    function removeFormPhoto(idx) {
       currentEditingPhotos.splice(idx, 1);
-      renderPhotoPreviews();
+      renderFormPhotoPreviews();
     }
 
-    function renderPhotoPreviews() {
+    function renderFormPhotoPreviews() {
       var grid = document.getElementById('formPhotoPreviewGrid');
       if (!grid) return;
       var html = '';
       for (var i = 0; i < currentEditingPhotos.length; i++) {
-        html += '<div class="photo-thumb-container">' +
+        html += '<div class="photo-thumb-wrap">' +
           '<img src="' + currentEditingPhotos[i] + '" class="photo-thumb">' +
-          '<button type="button" class="photo-delete-btn" onclick="removePhoto(' + i + ')">✕</button>' +
+          '<button type="button" class="photo-del-btn" onclick="removeFormPhoto(' + i + ')">✕</button>' +
         '</div>';
       }
       grid.innerHTML = html;
     }
 
-    // GRANULAR DYNAMIC CHECKLIST DEFINITIONS (19+ Detailed Sub-criteria)
+    // DYNAMIC DETAILED SUB-CRITERIA (19+ Detailed Parameters with Live Auto-Sum)
     function renderGranularChecklist() {
       var fmtEl = document.getElementById('formFormat');
       var fmt = fmtEl ? fmtEl.value : 'Fine Dining';
@@ -1784,7 +2127,6 @@
           '</div>' +
         '</div>';
       } else {
-        // Standard Comprehensive Restaurant 19 Sub-criteria
         html += '<div>' +
           '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem;">1. Гастрономия и Сырье (макс. 35 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
@@ -1840,7 +2182,7 @@
       recalcGranularScore();
     }
 
-    // AUTOMATIC MATHEMATICAL CALCULATION OF AUDIT SCORE
+    // AUTOMATIC CALCULATION OF AUDIT SCORE
     function recalcGranularScore() {
       var inputs = document.querySelectorAll('#granularChecklistFields input[type="range"]');
       var sum = 0;
@@ -1860,9 +2202,9 @@
       if (calcScEl) calcScEl.innerText = total;
 
       var grade = "Выдающийся уровень";
-      if (total >= 90) grade = "⭐️⭐️⭐️ Знак Качества";
-      else if (total >= 75) grade = "⭐️⭐️ Рекомендовано";
-      else if (total >= 60) grade = "⭐️ Базовый уровень";
+      if (total >= 90) grade = "Знак Качества PLANKA";
+      else if (total >= 75) grade = "Рекомендовано";
+      else if (total >= 60) grade = "Базовый уровень";
       else if (total >= 40) grade = "Посредственно";
       else grade = "Критический уровень";
 
@@ -1878,7 +2220,7 @@
       var formEl = document.getElementById('fullAuditForm');
       if (formEl) formEl.reset();
       currentEditingPhotos = [];
-      renderPhotoPreviews();
+      renderFormPhotoPreviews();
       renderGranularChecklist();
       openModal('auditEditorModal');
     }
@@ -1894,6 +2236,7 @@
       document.getElementById('formName').value = v.name;
       document.getElementById('formFormat').value = v.format;
       document.getElementById('formCity').value = v.city;
+      document.getElementById('formAddress').value = v.address || '';
       document.getElementById('formCheck').value = v.avg_check;
       document.getElementById('formSegment').value = v.segment;
       document.getElementById('formDish').value = v.signature_dish;
@@ -1905,7 +2248,7 @@
       document.getElementById('formFeatures').value = (v.features || []).join(', ');
 
       currentEditingPhotos = v.photos ? JSON.parse(JSON.stringify(v.photos)) : [];
-      renderPhotoPreviews();
+      renderFormPhotoPreviews();
       renderGranularChecklist();
 
       recalcGranularScore();
@@ -1914,7 +2257,7 @@
 
     function deleteCurrentModalVenue() {
       if (!activeModalVenue) return;
-      if (confirm('Удалить заведение "' + activeModalVenue.name + '" из каталога?')) {
+      if (confirm('Удалить заведение "' + activeModalVenue.name + '" из каталога PLANKA GUIDE?')) {
         var nId = activeModalVenue.id;
         venues = venues.filter(function(x) { return x.id !== nId; });
         saveDB();
@@ -1952,8 +2295,8 @@
       var featList = document.getElementById('formFeatures').value.split(',').map(function(s) { return s.trim(); }).filter(function(s) { return s.length > 0; });
       var fullRevText = document.getElementById('formFullReview').value;
       var privNotes = document.getElementById('formPrivateNotes').value;
+      var addrText = document.getElementById('formAddress').value;
 
-      // Approximate 6 pillars for display from granular sum
       var bFood = Math.min(35, Math.round(total * 0.35));
       var bWow = Math.min(15, Math.round(total * 0.15));
       var bPrice = Math.min(15, Math.round(total * 0.15));
@@ -1967,6 +2310,7 @@
             venues[i].name = document.getElementById('formName').value;
             venues[i].format = document.getElementById('formFormat').value;
             venues[i].city = document.getElementById('formCity').value;
+            venues[i].address = addrText;
             venues[i].avg_check = parseInt(document.getElementById('formCheck').value);
             venues[i].segment = document.getElementById('formSegment').value;
             venues[i].signature_dish = document.getElementById('formDish').value;
@@ -1990,6 +2334,7 @@
           name: document.getElementById('formName').value,
           format: document.getElementById('formFormat').value,
           city: document.getElementById('formCity').value,
+          address: addrText || "Центральный район",
           avg_check: parseInt(document.getElementById('formCheck').value),
           segment: document.getElementById('formSegment').value,
           date: new Date().toISOString().split('T')[0],
@@ -2004,14 +2349,14 @@
           photos: currentEditingPhotos,
           pros: prosList.length > 0 ? prosList : ["Качественная отдача горячего", "Внимательный сервис"],
           cons: consList.length > 0 ? consList : ["Небольшие замечания по времени ожидания"],
-          features: featList.length > 0 ? featList : ["⭐️ Свежий аудит", "📍 Проверено лично"]
+          features: featList.length > 0 ? featList : ["Свежий аудит", "Проверено лично"]
         };
         venues.unshift(newObj);
       }
 
       saveDB();
       closeAuditEditorModal();
-      alert('Аудит "' + document.getElementById('formName').value + '" успешно сохранен в e-planka с рейтингом ' + total + '/100!');
+      alert('Аудит "' + document.getElementById('formName').value + '" успешно сохранен в PLANKA GUIDE с рейтингом ' + total + '/100!');
     }
 
     // Escape listener
