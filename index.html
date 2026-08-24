@@ -1993,7 +1993,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v23');
+      var stored = localStorage.getItem('planka_guide_db_v24');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -2023,7 +2023,7 @@
 
     function saveDB() {
       try {
-        localStorage.setItem('planka_guide_db_v23', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v24', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
@@ -2746,59 +2746,191 @@
     }
 
     // Granular Sub-criteria
-    function renderGranularChecklist() {
+        function renderGranularChecklist() {
+      var fmtEl = document.getElementById('formFormat');
+      var fmt = fmtEl ? fmtEl.value : 'Fine Dining';
       var container = document.getElementById('granularChecklistFields');
       if (!container) return;
 
-      var html = '<div>' +
-        '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem;">1. Гастрономия и Сырье (макс. 35 б.):</span>' +
-        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-          '<div><label style="font-size:0.6875rem;">Свежесть сырья (0..10)</label><input type="range" id="sub_r1" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Точность прожарки (0..8)</label><input type="range" id="sub_r2" min="0" max="8" value="7" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Баланс соусов (0..7)</label><input type="range" id="sub_r3" min="0" max="7" value="6" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Температура подачи (0..5)</label><input type="range" id="sub_r4" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Вода и чистый лед (0..5)</label><input type="range" id="sub_r5" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+      var html = '';
+
+      if (fmt === 'Кофейня') {
+        html += '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">1. Кофейное зерно, эспрессо и молоко (макс. 35 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">100% арабика свежей обжарки / дескрипторы (0..15)</label><input type="range" id="sub_c1" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Эластичная микропена и t=60–65°C (0..10)</label><input type="range" id="sub_c2" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Фильтр / V60 / альтернатива (0..5)</label><input type="range" id="sub_c3" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Чистая питьевая вода гостю (0..5)</label><input type="range" id="sub_c4" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<div>' +
-        '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem;">2. WOW-эффект и Подача (макс. 15 б.):</span>' +
-        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-          '<div><label style="font-size:0.6875rem;">Signature Dish органолептика (0..6)</label><input type="range" id="sub_r6" min="0" max="6" value="5" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Крафтовая посуда (0..4)</label><input type="range" id="sub_r7" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Комплимент шефа (0..5)</label><input type="range" id="sub_r8" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">2. Среда для ноутбука и удобство (макс. 20 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Розетки у большинства столов (0..10)</label><input type="range" id="sub_c5" min="0" max="10" value="8" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Стабильный Wi-Fi >50 Mbps (0..10)</label><input type="range" id="sub_c6" min="0" max="10" value="8" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<div>' +
-        '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem;">3. Честность Цены и Порции (макс. 15 б.):</span>' +
-        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-          '<div><label style="font-size:0.6875rem;">Обоснованность наценки (0..5)</label><input type="range" id="sub_r9" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Честный выход мяса/рыбы (0..5)</label><input type="range" id="sub_r10" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Прозрачность счета (0..5)</label><input type="range" id="sub_r11" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">3. Выпечка и десерты (макс. 15 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Выпечка на сливочном масле 82.5% (0..8)</label><input type="range" id="sub_c7" min="0" max="8" value="7" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Свежесть и баланс сахара (0..7)</label><input type="range" id="sub_c8" min="0" max="7" value="6" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<div>' +
-        '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem;">4. Сервис, Тайминг и Этикет (макс. 15 б.):</span>' +
-        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-          '<div><label style="font-size:0.6875rem;">Знание меню и аллергенов (0..5)</label><input type="range" id="sub_r12" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Тайминг курсов 12-15 мин (0..5)</label><input type="range" id="sub_r13" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Правило чистого стола (0..5)</label><input type="range" id="sub_r14" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">4. Бариста, скорость и чистота санузла (макс. 30 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Контакт бариста и знание лотов (0..10)</label><input type="range" id="sub_c9" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Скорость отдачи заказа до 4 мин (0..10)</label><input type="range" id="sub_c10" min="0" max="10" value="8" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Чистота санузла и расходники (0..10)</label><input type="range" id="sub_c11" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>';
+      } else if (fmt === 'Коктейльный бар') {
+        html += '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">1. Миксология, лед и напитки (макс. 35 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Прозрачный монолитный лед ручного распила (0..12)</label><input type="range" id="sub_c1" min="0" max="12" value="12" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Баланс авторских кордиалов и кислотности (0..13)</label><input type="range" id="sub_c2" min="0" max="13" value="12" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Чистота барного стекла и линий (0..10)</label><input type="range" id="sub_c3" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<div>' +
-        '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem;">5. Среда, Свет и Мебель (макс. 10 б.):</span>' +
-        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-          '<div><label style="font-size:0.6875rem;">Устойчивость столов (0..4)</label><input type="range" id="sub_r15" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Мягкий свет и вентиляция (0..3)</label><input type="range" id="sub_r16" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Акустический комфорт (0..3)</label><input type="range" id="sub_r17" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">2. Атмосфера, полумрак и кураторский звук (макс. 25 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Кураторская акустика для беседы (0..15)</label><input type="range" id="sub_c4" min="0" max="15" value="14" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Световой сценарий и полумрак (0..10)</label><input type="range" id="sub_c5" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<div>' +
-        '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem;">6. Санитария и Санузел (макс. 10 б.):</span>' +
-        '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-          '<div><label style="font-size:0.6875rem;">Чистота приборов (0..5)</label><input type="range" id="sub_r18" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
-          '<div><label style="font-size:0.6875rem;">Стерильность санузла (0..5)</label><input type="range" id="sub_r19" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">3. Сервис за стойкой и санузел (макс. 40 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Эталонный контакт бармена и велкам-дринк (0..15)</label><input type="range" id="sub_c6" min="0" max="15" value="14" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Фингер-фуд и закуски (0..10)</label><input type="range" id="sub_c7" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Стерильность санузла в прайм-тайм (0..15)</label><input type="range" id="sub_c8" min="0" max="15" value="14" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>';
+      } else if (fmt === 'Столовая' || fmt === 'Fast Casual') {
+        html += '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">1. Качество базовых блюд и сырья (макс. 35 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Горячий наваристый суп/борщ >70°C (0..12)</label><input type="range" id="sub_c1" min="0" max="12" value="10" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Свежесть горячих мясных блюд и гарниров (0..13)</label><input type="range" id="sub_c2" min="0" max="13" value="10" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Натуральный морс / компот без химии (0..10)</label><input type="range" id="sub_c3" min="0" max="10" value="8" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
         '</div>' +
-      '</div>';
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">2. Скорость раздачи и гигиена подносов (макс. 35 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Сухие чистые подносы без жира и липкости (0..15)</label><input type="range" id="sub_c4" min="0" max="15" value="12" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Скорость прохождения кассы до 3 мин (0..10)</label><input type="range" id="sub_c5" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Оперативная уборка столов в зале (0..10)</label><input type="range" id="sub_c6" min="0" max="10" value="8" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">3. Честность цены и санузел (макс. 30 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Сытный честный обед до 600 ₽ (0..15)</label><input type="range" id="sub_c7" min="0" max="15" value="14" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Чистота санузла и рукомойников (0..15)</label><input type="range" id="sub_c8" min="0" max="15" value="12" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>';
+      } else if (fmt === 'Пекарня') {
+        html += '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">1. Ремесленный хлеб и слоистость (макс. 45 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Хлеб на живой закваске (0..15)</label><input type="range" id="sub_c1" min="0" max="15" value="14" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Сливочное масло 82.5% без маргарина (0..15)</label><input type="range" id="sub_c2" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Хруст корочки и пористость мякиша (0..15)</label><input type="range" id="sub_c3" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">2. Кофе и оформление витрины (макс. 30 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Качественный фильтр-кофе (0..15)</label><input type="range" id="sub_c4" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Аппетитная подсветка 2700K и чистота витрин (0..15)</label><input type="range" id="sub_c5" min="0" max="15" value="14" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">3. Сервис и уют (макс. 25 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Приветливость и знание состава выпечки (0..15)</label><input type="range" id="sub_c6" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Уютные посадочные места (0..10)</label><input type="range" id="sub_c7" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>';
+      } else if (fmt === 'Раменная') {
+        html += '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">1. Бульон, лапша и начинка (макс. 45 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Плотный бульон 12+ ч варки (0..20)</label><input type="range" id="sub_c1" min="0" max="20" value="18" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Упругая свежая крафтовая лапша (0..15)</label><input type="range" id="sub_c2" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Свинина тясю / маринованное яйцо (0..10)</label><input type="range" id="sub_c3" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">2. Скорость кухни и подача (макс. 30 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Отдача обжигающего рамена за 7–10 мин (0..15)</label><input type="range" id="sub_c4" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Традиционная керамика и подача (0..15)</label><input type="range" id="sub_c5" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">3. Комфорт и чистота (макс. 25 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Мощная вытяжка без запаха гари (0..15)</label><input type="range" id="sub_c6" min="0" max="15" value="13" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Чистота санузла (0..10)</label><input type="range" id="sub_c7" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>';
+      } else {
+        html += '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">1. Гастрономия и Сырье (макс. 35 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Свежесть исходного сырья (0..10)</label><input type="range" id="sub_r1" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Точность прожарки мяса/рыбы (0..8)</label><input type="range" id="sub_r2" min="0" max="8" value="7" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Баланс авторских соусов (0..7)</label><input type="range" id="sub_r3" min="0" max="7" value="6" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Температура горячего >65°C (0..5)</label><input type="range" id="sub_r4" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Питьевая вода и чистый лед (0..5)</label><input type="range" id="sub_r5" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">2. WOW-эффект и Подача (макс. 15 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Signature Dish органолептика (0..6)</label><input type="range" id="sub_r6" min="0" max="6" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Крафтовая посуда и сервировка (0..4)</label><input type="range" id="sub_r7" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Комплимент шефа / сторителлинг (0..5)</label><input type="range" id="sub_r8" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">3. Честность Цены и Порции (макс. 15 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Обоснованность наценки (0..5)</label><input type="range" id="sub_r9" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Честный выход мяса/рыбы (0..5)</label><input type="range" id="sub_r10" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Прозрачность счета без доплат (0..5)</label><input type="range" id="sub_r11" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">4. Сервис, Тайминг и Этикет (макс. 15 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Знание меню и аллергенов (0..5)</label><input type="range" id="sub_r12" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Тайминг курсов 12–15 мин (0..5)</label><input type="range" id="sub_r13" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Правило чистого стола и этикет (0..5)</label><input type="range" id="sub_r14" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">5. Среда, Свет и Мебель (макс. 10 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Устойчивость столов / стулья (0..4)</label><input type="range" id="sub_r15" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Мягкий свет и вентиляция (0..3)</label><input type="range" id="sub_r16" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Акустический комфорт (0..3)</label><input type="range" id="sub_r17" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: #18181B;">6. Санитария и Санузел (макс. 10 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Чистота приборов и бокалов (0..5)</label><input type="range" id="sub_r18" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Стерильность санузла (0..5)</label><input type="range" id="sub_r19" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>';
+      }
 
       container.innerHTML = html;
       recalcGranularScore();
