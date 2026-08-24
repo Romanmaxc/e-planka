@@ -910,7 +910,99 @@
         padding: 1.25rem !important;
       }
     }
+  
+    /* CUSTOM LUXURY PINS FOR PLANKA GUIDE MAP */
+    .planka-map-pin {
+      background: #18181B;
+      color: #FFFFFF;
+      border-radius: 9999px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+      position: relative;
+      user-select: none;
+    }
+    .planka-map-pin::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 7px solid #18181B;
+    }
+    .planka-map-pin.gold-pin {
+      border: 2px solid #D4AF37;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.5), 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+    .planka-map-pin.gold-pin::after {
+      border-top-color: #D4AF37;
+    }
+    .planka-map-pin.regular-pin {
+      border: 2px solid #EAE6DF;
+    }
+    .planka-map-pin:hover {
+      transform: scale(1.18);
+      z-index: 1000 !important;
+    }
+    .pin-score {
+      font-family: ui-monospace, monospace;
+      font-weight: 900;
+      font-size: 0.8125rem;
+      line-height: 1;
+    }
+    .pin-star {
+      font-size: 0.5rem;
+      color: #D4AF37;
+      margin-bottom: 1px;
+    }
+
+    /* LEAFLET POPUP LUXURY OVERRIDES */
+    .leaflet-popup-content-wrapper {
+      background: #FFFFFF !important;
+      border-radius: 0.65rem !important;
+      border: 1px solid #EAE6DF !important;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3) !important;
+      padding: 0 !important;
+      overflow: hidden;
+    }
+    .leaflet-popup-content {
+      margin: 0 !important;
+      width: 280px !important;
+      line-height: 1.5 !important;
+    }
+    .leaflet-popup-tip {
+      background: #FFFFFF !important;
+    }
+    .map-popup-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .map-popup-cover {
+      width: 100%;
+      height: 120px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .map-popup-body {
+      padding: 1rem 1.15rem;
+    }
+
   </style>
+  <!-- LEAFLET MAP ENGINE -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -1187,9 +1279,15 @@
         </div>
       </div>
 
-      <!-- INTERACTIVE MAP VIEW CONTAINER (FOR ALL VISITORS) -->
-      <div id="mapViewContainer" class="hidden" style="width: 100%; height: 560px; border-radius: 0.65rem; overflow: hidden; border: 1px solid #EAE6DF; margin-bottom: 2rem; background: #FAF8F5;">
-        <iframe id="cityMapIframe" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=""></iframe>
+      <!-- DYNAMIC INTERACTIVE LEAFLET MAP VIEW CONTAINER -->
+      <div id="mapViewContainer" class="hidden" style="position: relative; width: 100%; height: 580px; border-radius: 0.75rem; overflow: hidden; border: 1px solid #EAE6DF; margin-bottom: 2rem; background: #FAF8F5; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+        <div id="plankaLeafletMap" style="width: 100%; height: 100%; z-index: 1;"></div>
+        
+        <!-- Floating Map Counter & Quick Info -->
+        <div style="position: absolute; top: 1rem; right: 1rem; z-index: 10; background: rgba(24, 24, 27, 0.9); color: #FFFFFF; padding: 0.45rem 0.85rem; border-radius: 0.4rem; font-size: 0.6875rem; font-weight: 800; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: #D4AF37;"></span>
+          <span>На карте: <strong id="mapVisibleCount">10</strong> заведений</span>
+        </div>
       </div>
 
       <!-- CARDS GRID -->
@@ -1291,7 +1389,7 @@
         
         <div class="flex items-center gap-3">
           <div class="brand-mark" style="width: 1.85rem; height: 1.85rem; font-size: 0.95rem;">P</div>
-          <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 900; color: #FFF; font-size: 0.95rem; letter-spacing: 0.05em;">PLANKA GUIDE</span>
+          <span style="font-family: Playfair Display, Georgia, serif; font-weight: 900; color: #FFF; font-size: 0.95rem; letter-spacing: 0.05em;">PLANKA GUIDE</span>
           <span style="color: #3F3F46;">|</span>
           <span>Независимый ресторанный аудит</span>
         </div>
@@ -2089,6 +2187,7 @@
     function applyFilters() {
       renderSelection();
       renderVenues();
+      updateMapMarkers();
     }
 
     function toggleQualityFilter() {
@@ -2412,14 +2511,158 @@
       }
     }
 
-    function renderCityMap() {
+    
+    // LEAFLET INTERACTIVE MAP ENGINE FOR PLANKA GUIDE
+    var leafletMap = null;
+    var mapMarkerGroup = null;
+
+    var cityCoordinates = {
+      'all': [55.7512, 37.6184],
+      'Москва': [55.7558, 37.6173],
+      'СПб': [59.9343, 30.3351],
+      'Екатеринбург': [56.8389, 60.6057]
+    };
+
+    var cityZooms = {
+      'all': 11,
+      'Москва': 12,
+      'СПб': 12,
+      'Екатеринбург': 13
+    };
+
+    function initLeafletMap() {
+      if (leafletMap || typeof L === 'undefined') return;
+
+      var mapEl = document.getElementById('plankaLeafletMap');
+      if (!mapEl) return;
+
       var citySelect = document.getElementById('cityFilter');
       var city = citySelect ? citySelect.value : 'all';
-      var searchQuery = city === 'all' ? 'Рестораны Москва СПб Екатеринбург' : ('Рестораны ' + city);
-      var iframeUrl = 'https://yandex.ru/map-widget/v1/?text=' + encodeURIComponent(searchQuery) + '&z=11';
-      var iframe = document.getElementById('cityMapIframe');
-      if (iframe) iframe.setAttribute('src', iframeUrl);
+      var center = cityCoordinates[city] || [55.7512, 37.6184];
+      var zoom = cityZooms[city] || 11;
+
+      leafletMap = L.map('plankaLeafletMap', {
+        center: center,
+        zoom: zoom,
+        zoomControl: true,
+        scrollWheelZoom: false
+      });
+
+      // CartoDB Positron / OpenStreetMap Clean Light Tiles
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a> | PLANKA GUIDE',
+        maxZoom: 19,
+        subdomains: 'abcd'
+      }).addTo(leafletMap);
+
+      mapMarkerGroup = L.layerGroup().addTo(leafletMap);
+      updateMapMarkers();
     }
+
+    function updateMapMarkers() {
+      if (!leafletMap || !mapMarkerGroup) return;
+
+      mapMarkerGroup.clearLayers();
+
+      var citySelect = document.getElementById('cityFilter');
+      var city = citySelect ? citySelect.value : 'all';
+      var searchInput = document.getElementById('searchInput');
+      var search = searchInput ? (searchInput.value || '').toLowerCase().trim() : '';
+
+      var filtered = [];
+      for (var i = 0; i < venues.length; i++) {
+        var v = venues[i];
+        var isDraft = (v.status === 'draft');
+        if (isDraft && !isAdmin) continue;
+        if (currentDraftsOnlyFilter && !isDraft) continue;
+        if (currentFavoritesOnlyFilter && !isFavorite(v.id)) continue;
+
+        var matchesSearch = !search || 
+                            v.name.toLowerCase().indexOf(search) !== -1 || 
+                            v.format.toLowerCase().indexOf(search) !== -1 || 
+                            (v.signature_dish && v.signature_dish.toLowerCase().indexOf(search) !== -1) ||
+                            (v.chef && v.chef.toLowerCase().indexOf(search) !== -1) ||
+                            v.city.toLowerCase().indexOf(search) !== -1 ||
+                            (v.district && v.district.toLowerCase().indexOf(search) !== -1) ||
+                            (v.address && v.address.toLowerCase().indexOf(search) !== -1);
+        var matchesCity = (city === 'all') || (v.city === city);
+        var matchesFormat = (currentFormatFilter === 'all') || (v.format === currentFormatFilter);
+        var matchesPrice = (currentPriceFilter === 'all') || (v.price_tier === currentPriceFilter);
+        var matchesQuality = !currentQualityFilter || (v.total_score >= 90);
+
+        if (matchesSearch && matchesCity && matchesFormat && matchesPrice && matchesQuality) {
+          filtered.push(v);
+        }
+      }
+
+      var countEl = document.getElementById('mapVisibleCount');
+      if (countEl) countEl.innerText = filtered.length;
+
+      var bounds = [];
+
+      for (var j = 0; j < filtered.length; j++) {
+        var venue = filtered[j];
+        if (!venue.coords || !venue.coords.lat || !venue.coords.lng) continue;
+
+        var isQuality = (venue.total_score >= 90);
+        var pinClass = isQuality ? 'gold-pin' : 'regular-pin';
+
+        var customIcon = L.divIcon({
+          className: 'custom-leaflet-pin-wrapper',
+          html: '<div class="planka-map-pin ' + pinClass + '" title="' + venue.name + ' (' + venue.total_score + '/100)">' +
+                  (isQuality ? '<span class="pin-star">★</span>' : '') +
+                  '<span class="pin-score">' + venue.total_score + '</span>' +
+                '</div>',
+          iconSize: [44, 50],
+          iconAnchor: [22, 50],
+          popupAnchor: [0, -48]
+        });
+
+        var coverImg = (venue.photos && venue.photos.length > 0) ? venue.photos[0] : '';
+        var popupHtml = '<div class="map-popup-card">' +
+          '<div class="map-popup-cover" style="background-image: url(' + coverImg + ');">' +
+            '<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(24,24,27,0.85); color: #FFF; padding: 0.15rem 0.45rem; border-radius: 0.25rem; font-family: ui-monospace, monospace; font-size: 0.6875rem; font-weight: 900;">' + venue.total_score + '/100</div>' +
+          '</div>' +
+          '<div class="map-popup-body">' +
+            '<div style="font-size: 0.5625rem; font-family: ui-monospace, monospace; font-weight: 800; color: #71717A; text-transform: uppercase; margin-bottom: 0.15rem;">' + venue.format + (venue.price_tier ? ' • ' + venue.price_tier : '') + '</div>' +
+            '<strong style="font-family: Playfair Display, Georgia, serif; font-size: 1.05rem; color: #18181B; display: block; margin-bottom: 0.2rem;">' + venue.name + '</strong>' +
+            '<p style="font-size: 0.6875rem; color: #52525B; margin-bottom: 0.65rem;">' + venue.city + (venue.district ? ' (' + venue.district + ')' : '') + ', ' + (venue.address || '') + '</p>' +
+            '<div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #EAE6DF; padding-top: 0.65rem;">' +
+              '<strong style="font-size: 0.75rem; color: #18181B;">' + venue.avg_check.toLocaleString('ru-RU') + ' ₽</strong>' +
+              '<button type="button" onclick="openVenueModal(' + venue.id + ')" class="btn btn-dark" style="padding: 0.35rem 0.65rem; font-size: 0.625rem;">Досье гида ➔</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+        var marker = L.marker([venue.coords.lat, venue.coords.lng], { icon: customIcon }).bindPopup(popupHtml);
+        mapMarkerGroup.addLayer(marker);
+        bounds.push([venue.coords.lat, venue.coords.lng]);
+      }
+
+      if (bounds.length > 0 && currentViewMode === 'map') {
+        if (bounds.length === 1) {
+          leafletMap.setView(bounds[0], 14);
+        } else if (city !== 'all') {
+          leafletMap.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
+        } else {
+          var targetCenter = cityCoordinates[city] || [55.7512, 37.6184];
+          leafletMap.setView(targetCenter, cityZooms[city] || 11);
+        }
+      }
+    }
+
+    function renderCityMap() {
+      if (!leafletMap) {
+        initLeafletMap();
+      }
+      setTimeout(function() {
+        if (leafletMap) {
+          leafletMap.invalidateSize();
+          updateMapMarkers();
+        }
+      }, 100);
+    }
+
 
     // STOPWATCH TIMERS FOR INSPECTOR
     var timerIntervals = [null, null, null, null];
