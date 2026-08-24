@@ -1271,11 +1271,11 @@
         <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #71717A; display: block; margin-bottom: 0.5rem;">КУРАТОРСКИЕ ПОДБОРКИ И МАРШРУТЫ:</span>
         <div class="filter-pills" style="justify-content: flex-start;">
           <button onclick="setCollectionFilter('all', this)" type="button" class="filter-btn active collection-btn">Все заведения</button>
-          <button onclick="setCollectionFilter('breakfast', this)" type="button" class="filter-btn collection-btn">☕ Завтрак до 11:00</button>
-          <button onclick="setCollectionFilter('laptop', this)" type="button" class="filter-btn collection-btn">💻 Кофе & Ноутбук</button>
-          <button onclick="setCollectionFilter('bars', this)" type="button" class="filter-btn collection-btn">🍸 Вечерние бары</button>
-          <button onclick="setCollectionFilter('quality', this)" type="button" class="filter-btn collection-btn">🌟 Знак Качества (≥90)</button>
-          <button onclick="setCollectionFilter('ekb', this)" type="button" class="filter-btn collection-btn">📍 Центр Екатеринбурга</button>
+          <button onclick="setCollectionFilter('breakfast', this)" type="button" class="filter-btn collection-btn">Завтраки до 11:00</button>
+          <button onclick="setCollectionFilter('laptop', this)" type="button" class="filter-btn collection-btn">Кофе и работа</button>
+          <button onclick="setCollectionFilter('bars', this)" type="button" class="filter-btn collection-btn">Вечерние бары</button>
+          <button onclick="setCollectionFilter('quality', this)" type="button" class="filter-btn collection-btn">Знак Качества (≥90)</button>
+          <button onclick="setCollectionFilter('ekb', this)" type="button" class="filter-btn collection-btn">Центр Екатеринбурга</button>
         </div>
       </div>
 
@@ -1601,7 +1601,27 @@
           </div>
         </div>
 
-                <!-- RE-AUDIT TIMELINE & INSPECTION HISTORY -->
+                        <!-- 1-CLICK REVIEW EXPORTER FOR YANDEX & 2GIS (INSPECTOR TOOL) -->
+        <div id="modalReviewExporterBox" class="hidden" style="background: #18181B; color: #FFFFFF; border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;">
+          <div class="flex items-center justify-between">
+            <div>
+              <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; color: #C5A880; font-weight: 800;">ПУБЛИКАЦИЯ В КАРТЫ (1 КЛИК)</span>
+              <strong style="display: block; font-size: 0.875rem; color: #FFF; margin-top: 0.1rem;">Готовый структурированный отзыв</strong>
+            </div>
+            <span style="font-size: 0.625rem; color: #A1A1AA;">Для Яндекс Карт и 2ГИС</span>
+          </div>
+
+          <p style="font-size: 0.6875rem; color: #D4CEBE; line-height: 1.5;">
+            Нажмите кнопку ниже, чтобы скопировать сжатый профессиональный отзыв со всеми ключевыми плюсами, замечаниями и оценкой для быстрой вставки:
+          </p>
+
+          <div class="flex gap-2" style="flex-wrap: wrap;">
+            <button type="button" onclick="copyReviewForPlatform('yandex')" class="btn btn-gold" style="flex: 1; padding: 0.55rem; font-size: 0.6875rem;">📋 Скопировать для Яндекс Карт</button>
+            <button type="button" onclick="copyReviewForPlatform('2gis')" class="btn btn-light" style="flex: 1; padding: 0.55rem; font-size: 0.6875rem;">📋 Скопировать для 2ГИС</button>
+          </div>
+        </div>
+
+        <!-- RE-AUDIT TIMELINE & INSPECTION HISTORY -->
         <div id="modalAuditHistorySection" style="background: #FAF8F5; border: 1px solid #EAE6DF; border-radius: 0.5rem; padding: 1.35rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.75rem;">
             <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #71717A;">ИСТОРИЯ КОНТРОЛЬНЫХ ВИЗИТОВ</span>
@@ -1851,7 +1871,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v26');
+      var stored = localStorage.getItem('planka_guide_db_v29');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -1865,9 +1885,21 @@
       isAdmin = sessionStorage.getItem('planka_admin_logged') === 'true';
     } catch(e) {}
 
+    // Favorites (Wishlist)
+    var favorites = [];
+    try {
+      var favStored = localStorage.getItem('planka_favorites');
+      if (favStored) favorites = JSON.parse(favStored);
+    } catch(e) {}
+
     var currentFormatFilter = 'all';
     var currentPriceFilter = 'all';
     var currentQualityFilter = false;
+    var currentDraftsOnlyFilter = false;
+    var currentFavoritesOnlyFilter = false;
+    var currentCollectionFilter = 'all';
+    var currentViewMode = 'grid';
+
     var activeModalVenue = null;
     var currentEditingPhotos = [];
 
@@ -1879,551 +1911,80 @@
     var heroFeaturedIndex = 0;
     var heroTimer = null;
 
+    // Stopwatch Timers State
+    var timerIntervals = [null, null, null, null];
+    var timerSeconds = [0, 0, 0, 0];
+
+    // Leaflet Map State
+    var leafletMap = null;
+    var mapMarkerGroup = null;
+
+    var cityCoordinates = {
+      'all': [55.7512, 37.6184],
+      'Москва': [55.7558, 37.6173],
+      'СПб': [59.9343, 30.3351],
+      'Екатеринбург': [56.8389, 60.6057]
+    };
+
+    var cityZooms = {
+      'all': 11,
+      'Москва': 12,
+      'СПб': 12,
+      'Екатеринбург': 13
+    };
+
     function saveDB() {
       try {
-        localStorage.setItem('planka_guide_db_v26', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v29', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
       renderSelection();
       renderVenues();
-    }
-
-    function updateStats() {
-      var draftsCountEl = document.getElementById('draftsCountBadge');
-      var draftVenues = venues.filter(function(v) { return v.status === 'draft'; });
-      if (draftsCountEl) draftsCountEl.innerText = '(' + draftVenues.length + ')';
-      var totalEl = document.getElementById('statTotal');
-      if (totalEl) totalEl.innerText = venues.length;
-      if (venues.length > 0) {
-        var sum = 0;
-        var max = 0;
-        var qCount = 0;
-        for (var i = 0; i < venues.length; i++) {
-          sum += venues[i].total_score;
-          if (venues[i].total_score > max) max = venues[i].total_score;
-          if (venues[i].total_score >= 90) qCount++;
-        }
-        var avgEl = document.getElementById('statAvg');
-        var maxEl = document.getElementById('statMax');
-        var qEl = document.getElementById('statQuality');
-        if (avgEl) avgEl.innerText = (sum / venues.length).toFixed(1);
-        if (maxEl) maxEl.innerText = max;
-        if (qEl) qEl.innerText = qCount;
-      }
-    }
-
-    // Hero Slide Carousel (7-Second Smooth Sliding Track)
-    function renderHeroSlides() {
-      var track = document.getElementById('heroSliderTrack');
-      var dotsContainer = document.getElementById('heroDots');
-      if (!track) return;
-
-      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
-      if (topVenues.length === 0) topVenues = venues;
-      if (topVenues.length === 0) return;
-
-      var slidesHtml = '';
-      var dotsHtml = '';
-
-      for (var i = 0; i < topVenues.length; i++) {
-        var v = topVenues[i];
-        var imgUrl = (v.photos && v.photos.length > 0) ? v.photos[0] : '';
-        slidesHtml += '<div class="hero-slide" style="background-image: url(' + imgUrl + ');"></div>';
-        dotsHtml += '<div class="hero-dot ' + (i === (heroFeaturedIndex % topVenues.length) ? 'active' : '') + '" onclick="setHeroSlide(' + i + ')"></div>';
-      }
-
-      track.innerHTML = slidesHtml;
-      if (dotsContainer) dotsContainer.innerHTML = dotsHtml;
-      updateHeroSlidePosition();
-    }
-
-    function updateHeroSlidePosition() {
-      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
-      if (topVenues.length === 0) topVenues = venues;
-      if (topVenues.length === 0) return;
-
-      var track = document.getElementById('heroSliderTrack');
-      if (track) {
-        var pct = (heroFeaturedIndex % topVenues.length) * 100;
-        track.style.transform = 'translateX(-' + pct + '%)';
-      }
-
-      var current = topVenues[heroFeaturedIndex % topVenues.length];
-      var nameEl = document.getElementById('heroFeaturedName');
-      var metaEl = document.getElementById('heroFeaturedMeta');
-
-      if (nameEl) nameEl.innerText = current.name;
-      if (metaEl) metaEl.innerText = current.city + ' • Знак Качества ' + current.total_score + '/100';
-
-      var dots = document.querySelectorAll('.hero-dot');
-      for (var d = 0; d < dots.length; d++) {
-        if (d === (heroFeaturedIndex % topVenues.length)) dots[d].classList.add('active');
-        else dots[d].classList.remove('active');
-      }
-    }
-
-    function setHeroSlide(idx) {
-      heroFeaturedIndex = idx;
-      updateHeroSlidePosition();
-      startHeroTimer();
-    }
-
-    function prevHeroSlide() {
-      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
-      if (topVenues.length === 0) topVenues = venues;
-      heroFeaturedIndex = (heroFeaturedIndex - 1 + topVenues.length) % topVenues.length;
-      updateHeroSlidePosition();
-      startHeroTimer();
-    }
-
-    function nextHeroSlide() {
-      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
-      if (topVenues.length === 0) topVenues = venues;
-      heroFeaturedIndex = (heroFeaturedIndex + 1) % topVenues.length;
-      updateHeroSlidePosition();
-      startHeroTimer();
-    }
-
-    function openFeaturedHeroModal() {
-      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
-      if (topVenues.length === 0) topVenues = venues;
-      if (topVenues.length === 0) return;
-      var current = topVenues[heroFeaturedIndex % topVenues.length];
-      openVenueModal(current.id);
-    }
-
-    function startHeroTimer() {
-      if (heroTimer) clearInterval(heroTimer);
-      heroTimer = setInterval(function() {
-        var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
-        if (topVenues.length > 0) {
-          heroFeaturedIndex = (heroFeaturedIndex + 1) % topVenues.length;
-          updateHeroSlidePosition();
-        }
-      }, 7000);
-    }
-
-    // Render Selection Grid with City Filter Support
-    function renderSelection() {
-      var container = document.getElementById('selectionGrid');
-      if (!container) return;
-
-      var citySelect = document.getElementById('cityFilter');
-      var city = citySelect ? citySelect.value : 'all';
-
-      var topVenues = venues.filter(function(v) { 
-        var isPub = (v.status || 'published') === 'published';
-        var matchScore = (v.total_score >= 90);
-        var matchCity = (city === 'all') || (v.city === city);
-        var matchFormat = (currentFormatFilter === 'all') || (v.format === currentFormatFilter);
-        var matchPrice = (currentPriceFilter === 'all') || (v.price_tier === currentPriceFilter);
-        return isPub && matchScore && matchCity && matchFormat && matchPrice; 
-      });
-
-      if (topVenues.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; padding: 2.5rem 1.5rem; background: #FAF8F5; border-radius: 0.5rem; border: 1px solid #EAE6DF; text-align: center; color: #71717A; font-size: 0.8125rem;">В выбранной категории и локации пока нет заведений со Знаком Качества (≥90 б.). Инспекции продолжаются.</div>';
-        return;
-      }
-
-      var html = '';
-      for (var i = 0; i < topVenues.length; i++) {
-        var tv = topVenues[i];
-        var coverStyle = (tv.photos && tv.photos.length > 0) ? 
-                         'background-image: url(' + tv.photos[0] + ');' : 
-                         'background: linear-gradient(135deg, #18181B 0%, #27272A 100%);';
-
-        html += '<div onclick="openVenueModal(' + tv.id + ')" class="selection-card">' +
-          '<div class="card-cover" style="' + coverStyle + '">' +
-            '<div class="card-score-badge">' + tv.total_score + ' / 100</div>' +
-            '<div class="michelin-photo-btn" onclick="openPhotoLightboxDirect(' + tv.id + ', event)" title="Смотреть фото">' +
-              '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
-              '<span>' + (tv.photos ? tv.photos.length : 0) + '</span>' +
-            '</div>' +
-          '</div>' +
-          '<div style="padding: 1.25rem 1.4rem; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">' +
-            '<div>' +
-              '<div class="flex items-center justify-between" style="margin-bottom: 0.25rem;">' +
-                '<span style="font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 800; text-transform: uppercase; color: #71717A;">' + tv.format + (tv.price_tier ? ' • ' + tv.price_tier : '') + '</span>' +
-                '<span class="badge-gold">Знак Качества</span>' +
-              '</div>' +
-              '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: #18181B; margin: 0.15rem 0 0.25rem 0;">' + tv.name + '</h4>' +
-              '<p style="font-size: 0.75rem; color: #71717A; margin-bottom: 0.4rem;">' + tv.city + (tv.district ? ' (' + tv.district + ')' : '') + ', ' + (tv.address || '') + '</p>' +
-            '</div>' +
-            '<div class="flex items-center justify-between" style="border-top: 1px solid #EAE6DF; padding-top: 0.75rem; margin-top: 0.75rem; font-size: 0.75rem;">' +
-              '<strong style="color: #18181B;">' + tv.avg_check.toLocaleString('ru-RU') + ' ₽ <span style="font-weight: normal; color: #71717A;">/ чек</span></strong>' +
-              '<span style="color: #18181B; font-weight: 800;">Досье гида →</span>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-      }
-      container.innerHTML = html;
-    }
-
-    function renderVenues() {
-      var grid = document.getElementById('venuesGrid');
-      var noResults = document.getElementById('noResults');
-      if (!grid) return;
-
-      var searchInput = document.getElementById('searchInput');
-      var search = searchInput ? (searchInput.value || '').toLowerCase().trim() : '';
-      var citySelect = document.getElementById('cityFilter');
-      var city = citySelect ? citySelect.value : 'all';
-      var sortSelect = document.getElementById('sortSelect');
-      var sort = sortSelect ? sortSelect.value : 'score_desc';
-
-      var filtered = [];
-      for (var i = 0; i < venues.length; i++) {
-        var v = venues[i];
-        var isDraft = (v.status === 'draft');
-        if (isDraft && !isAdmin) continue;
-        if (currentDraftsOnlyFilter && !isDraft) continue;
-        if (currentFavoritesOnlyFilter && !isFavorite(v.id)) continue;
-        var matchesSearch = !search || 
-                            v.name.toLowerCase().indexOf(search) !== -1 || 
-                            v.format.toLowerCase().indexOf(search) !== -1 || 
-                            (v.signature_dish && v.signature_dish.toLowerCase().indexOf(search) !== -1) ||
-                            (v.chef && v.chef.toLowerCase().indexOf(search) !== -1) ||
-                            v.city.toLowerCase().indexOf(search) !== -1 ||
-                            (v.district && v.district.toLowerCase().indexOf(search) !== -1) ||
-                            (v.address && v.address.toLowerCase().indexOf(search) !== -1);
-        var matchesCity = (city === 'all') || (v.city === city);
-        var matchesFormat = (currentFormatFilter === 'all') || (v.format === currentFormatFilter);
-        var matchesPrice = (currentPriceFilter === 'all') || (v.price_tier === currentPriceFilter);
-        var matchesQuality = !currentQualityFilter || (v.total_score >= 90);
-        if (matchesSearch && matchesCity && matchesFormat && matchesPrice && matchesQuality) {
-          filtered.push(v);
-        }
-      }
-
-      if (sort === 'score_desc') filtered.sort(function(a, b) { return b.total_score - a.total_score; });
-      if (sort === 'score_asc') filtered.sort(function(a, b) { return a.total_score - b.total_score; });
-      if (sort === 'check_asc') filtered.sort(function(a, b) { return a.avg_check - b.avg_check; });
-      if (sort === 'check_desc') filtered.sort(function(a, b) { return b.avg_check - a.avg_check; });
-
-      var badgeEl = document.getElementById('resultsCountBadge');
-      if (badgeEl) badgeEl.innerText = filtered.length;
-
-      if (filtered.length === 0) {
-        grid.innerHTML = '';
-        if (noResults) noResults.classList.remove('hidden');
-        return;
-      }
-      if (noResults) noResults.classList.add('hidden');
-
-      var html = '';
-      for (var j = 0; j < filtered.length; j++) {
-        var item = filtered[j];
-        var isQuality = item.total_score >= 90;
-        
-        var tagsHtml = '';
-        var feats = item.features || [];
-        for (var k = 0; k < feats.length; k++) {
-          tagsHtml += '<span style="background: #F5F2EB; border: 1px solid #E2DDD5; color: #52525B; font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 0.25rem;">' + feats[k] + '</span> ';
-        }
-
-        var coverStyle = (item.photos && item.photos.length > 0) ? 
-                         'background-image: url(' + item.photos[0] + ');' : 
-                         'background: linear-gradient(135deg, #18181B 0%, #27272A 100%);';
-
-        var pCount = item.photos ? item.photos.length : 0;
-
-        html += '<div onclick="openVenueModal(' + item.id + ')" class="card">' +
-          '<div class="card-cover" style="' + coverStyle + '">' +
-            '<div class="card-score-badge">' + item.total_score + ' / 100</div>' +
-            '<div class="michelin-photo-btn" onclick="openPhotoLightboxDirect(' + item.id + ', event)" title="Смотреть фото">' +
-              '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
-              '<span>' + pCount + '</span>' +
-            '</div>' +
-          '</div>' +
-          '<div class="card-body">' +
-            '<div>' +
-              '<div class="flex items-center justify-between" style="margin-bottom: 0.35rem;">' +
-                '<span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #71717A;">' + item.format + (item.price_tier ? ' • ' + item.price_tier : '') + '</span>' +
-                (isQuality ? '<span class="badge-gold">Знак Качества</span>' : '<span class="badge-regular">' + item.grade + '</span>') +
-              '</div>' +
-              '<h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: #18181B; margin-bottom: 0.2rem;">' + item.name + '</h3>' +
-              '<p style="font-size: 0.75rem; color: #71717A; margin-bottom: 0.65rem;">' + item.city + (item.district ? ' (' + item.district + ')' : '') + ', ' + (item.address || 'Центральный район') + '</p>' +
-              '<div style="display: flex; flex-wrap: wrap; gap: 0.25rem;">' + tagsHtml + '</div>' +
-            '</div>' +
-            '<div class="flex items-center justify-between" style="border-top: 1px solid #EAE6DF; padding-top: 0.85rem; margin-top: 0.75rem; font-size: 0.75rem;">' +
-              '<strong style="color: #18181B; font-size: 0.8125rem;">' + item.avg_check.toLocaleString('ru-RU') + ' ₽ <span style="font-weight: normal; color: #71717A; font-size: 0.75rem;">/ чек</span></strong>' +
-              '<span style="font-weight: 800; color: #18181B;">Досье гида →</span>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-      }
-      grid.innerHTML = html;
-    }
-
-    function setFormatFilter(fmt, btn) {
-      currentFormatFilter = fmt;
-      var btns = document.querySelectorAll('.filter-btn:not(.price-filter-btn)');
-      for (var i = 0; i < btns.length; i++) {
-        btns[i].classList.remove('active');
-      }
-      if (btn) btn.classList.add('active');
-      applyFilters();
-    }
-
-    function setPriceFilter(tier, btn) {
-      currentPriceFilter = tier;
-      var btns = document.querySelectorAll('.price-filter-btn');
-      for (var i = 0; i < btns.length; i++) {
-        btns[i].classList.remove('active');
-      }
-      if (btn) btn.classList.add('active');
-      applyFilters();
-    }
-
-    function syncSearch(val) {
-      var s1 = document.getElementById('searchInput');
-      var s2 = document.getElementById('catalogSearchInput');
-      if (s1 && s1.value !== val) s1.value = val;
-      if (s2 && s2.value !== val) s2.value = val;
-      applyFilters();
-    }
-
-    function applyFilters() {
-      renderSelection();
-      renderVenues();
       updateMapMarkers();
     }
 
-    function toggleQualityFilter() {
-      currentQualityFilter = !currentQualityFilter;
-      var btn = document.getElementById('btnQualityFilter');
-      if (btn) {
-        if (currentQualityFilter) {
-          btn.classList.remove('btn-light');
-          btn.classList.add('btn-dark');
-        } else {
-          btn.classList.remove('btn-dark');
-          btn.classList.add('btn-light');
-        }
-      }
-      applyFilters();
-    }
-
-    function resetFilters() {
-      var sInp = document.getElementById('searchInput');
-      if (sInp) sInp.value = '';
-      var cInp = document.getElementById('catalogSearchInput');
-      if (cInp) cInp.value = '';
-      var cFlt = document.getElementById('cityFilter');
-      if (cFlt) cFlt.value = 'all';
-      var sSel = document.getElementById('sortSelect');
-      if (sSel) sSel.value = 'score_desc';
-      currentFormatFilter = 'all';
-      currentPriceFilter = 'all';
-      currentQualityFilter = false;
-
-      var btnQ = document.getElementById('btnQualityFilter');
-      if (btnQ) {
-        btnQ.classList.remove('btn-dark');
-        btnQ.classList.add('btn-light');
-      }
+    // Dynamic Live Metrics Bar per Selected City!
+    function updateStats() {
+      var totalEl = document.getElementById('statTotal');
+      var draftsCountEl = document.getElementById('draftsCountBadge');
+      var citySelect = document.getElementById('cityFilter');
+      var city = citySelect ? citySelect.value : 'all';
       
-      var btns = document.querySelectorAll('.filter-btn');
-      for (var i = 0; i < btns.length; i++) {
-        if (btns[i].innerText === 'Все категории' || btns[i].innerText === 'Все') btns[i].classList.add('active');
-        else btns[i].classList.remove('active');
-      }
-      applyFilters();
-    }
+      var publishedVenues = venues.filter(function(v) { 
+        var isPub = (v.status || 'published') === 'published';
+        var matchCity = (city === 'all') || (v.city === city);
+        return isPub && matchCity; 
+      });
 
-    // Modal Control Functions
-    function openModal(id) {
-      var m = document.getElementById(id);
-      if (m) m.classList.add('open');
-    }
-    function closeModal(id) {
-      var m = document.getElementById(id);
-      if (m) m.classList.remove('open');
-    }
+      var draftVenues = venues.filter(function(v) { return v.status === 'draft'; });
 
-    function openVenueModal(id) {
-      var target = null;
-      for (var i = 0; i < venues.length; i++) {
-        if (venues[i].id === id) { target = venues[i]; break; }
-      }
-      if (!target) return;
-      activeModalVenue = target;
+      if (totalEl) totalEl.innerText = publishedVenues.length;
+      if (draftsCountEl) draftsCountEl.innerText = '(' + draftVenues.length + ')';
 
-      document.getElementById('modalTitle').innerText = target.name;
-      document.getElementById('modalFormat').innerText = target.format;
-      document.getElementById('modalCity').innerText = target.city;
-      document.getElementById('modalDistrict').innerText = target.district || target.city;
-      document.getElementById('modalMapAddress').innerText = target.city + ', ' + (target.address || '');
-      document.getElementById('modalCheck').innerText = target.avg_check.toLocaleString('ru-RU') + ' ₽';
-      document.getElementById('modalSegment').innerText = target.segment;
-      document.getElementById('modalDate').innerText = target.date;
-      document.getElementById('modalGradeText').innerText = target.grade;
-      document.getElementById('modalDish').innerText = target.signature_dish;
-      document.getElementById('modalDishReview').innerText = '«' + target.dish_review + '»';
-      document.getElementById('modalScoreBadge').innerText = target.total_score + '/100';
+      var avgEl = document.getElementById('statAvg');
+      var maxEl = document.getElementById('statMax');
+      var qEl = document.getElementById('statQuality');
 
-      // Chef & Concept (Michelin Feature)
-      document.getElementById('modalChef').innerText = target.chef || 'Шеф-повар не указан';
-      document.getElementById('modalConcept').innerText = target.concept || 'Концептуальная кухня';
-      var bookBtn = document.getElementById('modalBookingBtn');
-      var phoneBtn = document.getElementById('modalPhoneBtn');
-      if (target.no_booking) {
-        if (bookBtn) bookBtn.style.display = 'none';
-        if (phoneBtn) phoneBtn.style.display = 'none';
-        document.getElementById('modalConcept').innerText = (target.concept || 'Концептуальная кухня') + ' • Заведение работает без предварительного бронирования (живая очередь).';
+      if (publishedVenues.length > 0) {
+        var sum = 0;
+        var max = 0;
+        var qCount = 0;
+        for (var i = 0; i < publishedVenues.length; i++) {
+          sum += publishedVenues[i].total_score;
+          if (publishedVenues[i].total_score > max) max = publishedVenues[i].total_score;
+          if (publishedVenues[i].total_score >= 90) qCount++;
+        }
+        if (avgEl) avgEl.innerText = (sum / publishedVenues.length).toFixed(1);
+        if (maxEl) maxEl.innerText = max;
+        if (qEl) qEl.innerText = qCount;
       } else {
-        if (bookBtn) {
-          if (target.booking_url) {
-            bookBtn.href = target.booking_url;
-            bookBtn.style.display = 'inline-flex';
-          } else {
-            bookBtn.style.display = 'none';
-          }
-        }
-        if (phoneBtn) {
-          if (target.phone) {
-            phoneBtn.href = 'tel:' + target.phone.replace(/[^0-9+]/g, '');
-            phoneBtn.innerText = target.phone;
-            phoneBtn.style.display = 'inline-flex';
-          } else {
-            phoneBtn.style.display = 'none';
-          }
-        }
+        if (avgEl) avgEl.innerText = '0.0';
+        if (maxEl) maxEl.innerText = '0';
+        if (qEl) qEl.innerText = '0';
       }
-
-      // Yandex Interactive Maps Embed
-      var searchQuery = encodeURIComponent(target.name + ' ' + target.city + ' ' + (target.address || ''));
-      var iframeUrl = 'https://yandex.ru/map-widget/v1/?text=' + searchQuery + '&z=16';
-      var directMapUrl = 'https://yandex.ru/maps/?text=' + searchQuery;
-      document.getElementById('yandexMapIframe').setAttribute('src', iframeUrl);
-      document.getElementById('btnYandexMapsRoute').setAttribute('href', directMapUrl);
-
-      var fullRevEl = document.getElementById('modalFullReview');
-      if (fullRevEl) {
-        fullRevEl.innerText = target.full_review || ("Контрольный аудит заведения " + target.name + ". Итоговый балл по 100-балльной шкале PLANKA GUIDE составил " + target.total_score + " баллов.");
-      }
-
-      // Photos Gallery
-      renderDossierTriptych();
-      renderDossierAuditHistory();
-      // gallery replaced by triptych
-
-      // Author Private Section
-      var authorSection = document.getElementById('modalAuthorPrivateSection');
-      var adminActions = document.getElementById('modalAdminActions');
-      var addPhotoBtn = document.getElementById('btnDossierAddPhoto');
-      if (isAdmin) {
-        if (adminActions) adminActions.classList.remove('hidden');
-        if (addPhotoBtn) addPhotoBtn.classList.remove('hidden');
-        if (authorSection) {
-          authorSection.classList.remove('hidden');
-          document.getElementById('modalPrivateNotes').innerText = target.private_notes || "Служебные заметки пока не заполнены. Нажмите 'Редактировать', чтобы внести инсайты.";
-        }
-      } else {
-        if (adminActions) adminActions.classList.add('hidden');
-        if (addPhotoBtn) addPhotoBtn.classList.add('hidden');
-        if (authorSection) authorSection.classList.add('hidden');
-      }
-
-      var pillars = [
-        { label: "1. Гастрономия и Сырье", val: target.scores.food, max: 35 },
-        { label: "2. WOW-эффект и Подача", val: target.scores.wow, max: 15 },
-        { label: "3. Честность Цены и Порции", val: target.scores.price, max: 15 },
-        { label: "4. Сервис, Тайминг и Этикет", val: target.scores.service, max: 15 },
-        { label: "5. Среда, Звук и Эргономика", val: target.scores.space, max: 10 },
-        { label: "6. Санитария, Чистота и Санузел", val: target.scores.sanitation, max: 10 }
-      ];
-
-      var barsHtml = '';
-      for (var p = 0; p < pillars.length; p++) {
-        var itemP = pillars[p];
-        var pct = Math.round((itemP.val / itemP.max) * 100);
-        barsHtml += '<div>' +
-          '<div class="flex justify-between" style="font-size: 0.6875rem; margin-bottom: 0.25rem;">' +
-            '<span style="font-weight: 700; color: #3F3F46;">' + itemP.label + '</span>' +
-            '<span class="font-mono" style="font-weight: 900; color: #18181B;">' + itemP.val + ' / ' + itemP.max + ' б.</span>' +
-          '</div>' +
-          '<div style="width: 100%; height: 0.4rem; background: #EAE6DF; border-radius: 9999px; overflow: hidden;">' +
-            '<div style="width: ' + pct + '%; height: 100%; background: #18181B; border-radius: 9999px;"></div>' +
-          '</div>' +
-        '</div>';
-      }
-      document.getElementById('modalScoresBars').innerHTML = barsHtml;
-
-      var prosHtml = '';
-      var pros = target.pros || [];
-      for (var pr = 0; pr < pros.length; pr++) {
-        prosHtml += '<li>' + pros[pr] + '</li>';
-      }
-      document.getElementById('modalPros').innerHTML = prosHtml;
-
-      var consHtml = '';
-      var cons = target.cons || [];
-      for (var cn = 0; cn < cons.length; cn++) {
-        consHtml += '<li>' + cons[cn] + '</li>';
-      }
-      document.getElementById('modalCons').innerHTML = consHtml;
-
-      openModal('venueModal');
+      updateFavoritesUI();
     }
-
-    // FULLSCREEN LIGHTBOX
-    
-    // Render Michelin Triptych Header in Dossier
-    function renderDossierTriptych() {
-      var grid = document.getElementById('modalTriptychGrid');
-      var countEl = document.getElementById('modalTriptychCount');
-      if (!grid || !activeModalVenue) return;
-
-      var photos = activeModalVenue.photos || [];
-      if (countEl) countEl.innerText = photos.length + ' фото';
-
-      var phtml = '';
-      if (photos.length > 0) {
-        var displayPhotos = photos.slice(0, 3);
-        while (displayPhotos.length < 3) {
-          displayPhotos.push(photos[0]);
-        }
-        for (var i = 0; i < 3; i++) {
-          phtml += '<img src="' + displayPhotos[i] + '" class="dossier-triptych-img" onclick="openPhotoLightboxDirect(activeModalVenue.id, event)" alt="Фото заведения">';
-        }
-      } else {
-        phtml = '<div style="grid-column: 1/-1; height: 100%; display: flex; align-items: center; justify-content: center; color: #A1A1AA; font-size: 0.8125rem;">Фотографии инспекции пока не добавлены</div>';
-      }
-      grid.innerHTML = phtml;
-    }
-
-    // CONTINUOUS HORIZONTAL PHOTO LIGHTBOX RIBBON
-    function openPhotoLightboxDirect(venueId, e) {
-      if (e) e.stopPropagation();
-      var target = null;
-      for (var i = 0; i < venues.length; i++) {
-        if (venues[i].id === venueId) { target = venues[i]; break; }
-      }
-      if (!target) return;
-      activeLightboxVenue = target;
-      currentLightboxIndex = 0;
-
-      document.getElementById('lightboxVenueTitle').innerText = target.name;
-      document.getElementById('lightboxVenueSubtitle').innerText = target.city + ' • ' + (target.signature_dish || 'Фирменное блюдо');
-
-      renderLightboxRibbon();
-      var lb = document.getElementById('photoLightbox');
-      if (lb) lb.classList.add('open');
-    }
-
-    
-    // FAVORITES (WISHLIST) ENGINE
-    var favorites = [];
-    try {
-      var favStored = localStorage.getItem('planka_favorites');
-      if (favStored) favorites = JSON.parse(favStored);
-    } catch(e) {}
-
-    var currentFavoritesOnlyFilter = false;
-    var currentCollectionFilter = 'all';
-    var currentViewMode = 'grid';
 
     function isFavorite(id) {
       return favorites.indexOf(id) !== -1;
@@ -2442,6 +2003,7 @@
       } catch(err) {}
       updateFavoritesUI();
       renderVenues();
+      updateMapMarkers();
     }
 
     function updateFavoritesUI() {
@@ -2464,7 +2026,6 @@
       applyFilters();
     }
 
-    // CURATED COLLECTIONS FILTER
     function setCollectionFilter(col, btn) {
       currentCollectionFilter = col;
       var btns = document.querySelectorAll('.collection-btn');
@@ -2473,15 +2034,21 @@
 
       if (col === 'breakfast') {
         currentFormatFilter = 'Кофейня';
+        currentQualityFilter = false;
       } else if (col === 'laptop') {
         currentFormatFilter = 'Кофейня';
+        currentQualityFilter = false;
       } else if (col === 'bars') {
         currentFormatFilter = 'Коктейльный бар';
+        currentQualityFilter = false;
       } else if (col === 'quality') {
+        currentFormatFilter = 'all';
         currentQualityFilter = true;
       } else if (col === 'ekb') {
         var cFlt = document.getElementById('cityFilter');
         if (cFlt) cFlt.value = 'Екатеринбург';
+        currentFormatFilter = 'all';
+        currentQualityFilter = false;
       } else {
         currentFormatFilter = 'all';
         currentQualityFilter = false;
@@ -2489,7 +2056,6 @@
       applyFilters();
     }
 
-    // VIEW SWITCHER (GRID vs MAP)
     function setViewMode(mode, btn) {
       currentViewMode = mode;
       var gridEl = document.getElementById('venuesGrid');
@@ -2511,25 +2077,6 @@
       }
     }
 
-    
-    // LEAFLET INTERACTIVE MAP ENGINE FOR PLANKA GUIDE
-    var leafletMap = null;
-    var mapMarkerGroup = null;
-
-    var cityCoordinates = {
-      'all': [55.7512, 37.6184],
-      'Москва': [55.7558, 37.6173],
-      'СПб': [59.9343, 30.3351],
-      'Екатеринбург': [56.8389, 60.6057]
-    };
-
-    var cityZooms = {
-      'all': 11,
-      'Москва': 12,
-      'СПб': 12,
-      'Екатеринбург': 13
-    };
-
     function initLeafletMap() {
       if (leafletMap || typeof L === 'undefined') return;
 
@@ -2548,7 +2095,6 @@
         scrollWheelZoom: false
       });
 
-      // CartoDB Positron / OpenStreetMap Clean Light Tiles
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://carto.com/">CARTO</a> | PLANKA GUIDE',
         maxZoom: 19,
@@ -2663,105 +2209,567 @@
       }, 100);
     }
 
-
-    // STOPWATCH TIMERS FOR INSPECTOR
-    var timerIntervals = [null, null, null, null];
-    var timerSeconds = [0, 0, 0, 0];
-
-    function toggleTimer(num) {
-      var idx = num - 1;
-      var btn = document.getElementById('timerBtn' + num);
-      if (timerIntervals[idx]) {
-        clearInterval(timerIntervals[idx]);
-        timerIntervals[idx] = null;
-        if (btn) btn.innerText = 'Старт';
-      } else {
-        timerIntervals[idx] = setInterval(function() {
-          timerSeconds[idx]++;
-          var m = Math.floor(timerSeconds[idx] / 60);
-          var s = timerSeconds[idx] % 60;
-          var disp = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-          var el = document.getElementById('timerDisplay' + num);
-          if (el) el.innerText = disp;
-        }, 1000);
-        if (btn) btn.innerText = 'Стоп';
-      }
-    }
-
-    function resetAllTimers() {
-      for (var i = 0; i < 4; i++) {
-        if (timerIntervals[i]) clearInterval(timerIntervals[i]);
-        timerIntervals[i] = null;
-        timerSeconds[i] = 0;
-        var el = document.getElementById('timerDisplay' + (i+1));
-        var btn = document.getElementById('timerBtn' + (i+1));
-        if (el) el.innerText = '00:00';
-        if (btn) btn.innerText = 'Старт';
-      }
-    }
-
-    function applyTimersToScore() {
-      // Automatic conversion of physical stopwatches to service points
-      var drinksSec = timerSeconds[0];
-      var hotSec = timerSeconds[1];
-      var pauseSec = timerSeconds[2];
-      var billSec = timerSeconds[3];
-
-      var points = 15;
-      if (drinksSec > 300) points -= 2; // > 5 min
-      if (hotSec > 1200) points -= 3; // > 20 min
-      if (pauseSec > 1000) points -= 2; // > 16 min
-      if (billSec > 240) points -= 2; // > 4 min
-
-      var sTimingEl = document.getElementById('sub_r13');
-      if (sTimingEl) sTimingEl.value = Math.max(1, Math.min(5, Math.round(points / 3)));
-      recalcGranularScore();
-      alert('Замеры времени сервиса (' + timerSeconds.map(function(s){ return Math.floor(s/60) + 'м'; }).join(', ') + ') успешно пересчитаны в баллы тайминга!');
-    }
-
-    // PERFECT HORIZONTAL RIBBON CENTERING (SCREEN 33 FIX)
-    function renderLightboxRibbon() {
-      if (!activeLightboxVenue) return;
-      var track = document.getElementById('lightboxRibbonTrack');
-      var counter = document.getElementById('lightboxCounter');
-      var progressFill = document.getElementById('lightboxProgressFill');
-      var photos = activeLightboxVenue.photos || [];
-
+    // Hero Slide Carousel
+    function renderHeroSlides() {
+      var track = document.getElementById('heroSliderTrack');
+      var dotsContainer = document.getElementById('heroDots');
       if (!track) return;
 
-      if (photos.length === 0) {
-        track.innerHTML = '<div style="color: #FFF; font-size: 0.875rem;">Фотографии пока не загружены</div>';
-        if (counter) counter.innerText = '0 / 0';
+      var topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published' && v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published'; });
+      if (topVenues.length === 0) return;
+
+      var slidesHtml = '';
+      var dotsHtml = '';
+
+      for (var i = 0; i < topVenues.length; i++) {
+        var v = topVenues[i];
+        var imgUrl = (v.photos && v.photos.length > 0) ? v.photos[0] : '';
+        slidesHtml += '<div class="hero-slide" style="background-image: url(' + imgUrl + ');"></div>';
+        dotsHtml += '<div class="hero-dot ' + (i === (heroFeaturedIndex % topVenues.length) ? 'active' : '') + '" onclick="setHeroSlide(' + i + ')"></div>';
+      }
+
+      track.innerHTML = slidesHtml;
+      if (dotsContainer) dotsContainer.innerHTML = dotsHtml;
+      updateHeroSlidePosition();
+    }
+
+    function updateHeroSlidePosition() {
+      var topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published' && v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published'; });
+      if (topVenues.length === 0) return;
+
+      var track = document.getElementById('heroSliderTrack');
+      if (track) {
+        var pct = (heroFeaturedIndex % topVenues.length) * 100;
+        track.style.transform = 'translateX(-' + pct + '%)';
+      }
+
+      var current = topVenues[heroFeaturedIndex % topVenues.length];
+      var nameEl = document.getElementById('heroFeaturedName');
+      var metaEl = document.getElementById('heroFeaturedMeta');
+
+      if (nameEl) nameEl.innerText = current.name;
+      if (metaEl) metaEl.innerText = current.city + ' • Знак Качества ' + current.total_score + '/100';
+
+      var dots = document.querySelectorAll('.hero-dot');
+      for (var d = 0; d < dots.length; d++) {
+        if (d === (heroFeaturedIndex % topVenues.length)) dots[d].classList.add('active');
+        else dots[d].classList.remove('active');
+      }
+    }
+
+    function setHeroSlide(idx) {
+      heroFeaturedIndex = idx;
+      updateHeroSlidePosition();
+      startHeroTimer();
+    }
+
+    function prevHeroSlide() {
+      var topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published' && v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published'; });
+      heroFeaturedIndex = (heroFeaturedIndex - 1 + topVenues.length) % topVenues.length;
+      updateHeroSlidePosition();
+      startHeroTimer();
+    }
+
+    function nextHeroSlide() {
+      var topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published' && v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published'; });
+      heroFeaturedIndex = (heroFeaturedIndex + 1) % topVenues.length;
+      updateHeroSlidePosition();
+      startHeroTimer();
+    }
+
+    function openFeaturedHeroModal() {
+      var topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published' && v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published'; });
+      if (topVenues.length === 0) return;
+      var current = topVenues[heroFeaturedIndex % topVenues.length];
+      openVenueModal(current.id);
+    }
+
+    function startHeroTimer() {
+      if (heroTimer) clearInterval(heroTimer);
+      heroTimer = setInterval(function() {
+        var topVenues = venues.filter(function(v) { return (v.status || 'published') === 'published' && v.total_score >= 90; });
+        if (topVenues.length > 0) {
+          heroFeaturedIndex = (heroFeaturedIndex + 1) % topVenues.length;
+          updateHeroSlidePosition();
+        }
+      }, 7000);
+    }
+
+    // Render Selection Grid
+    function renderSelection() {
+      var container = document.getElementById('selectionGrid');
+      if (!container) return;
+
+      var citySelect = document.getElementById('cityFilter');
+      var city = citySelect ? citySelect.value : 'all';
+
+      var topVenues = venues.filter(function(v) { 
+        var isPub = (v.status || 'published') === 'published';
+        var matchScore = (v.total_score >= 90);
+        var matchCity = (city === 'all') || (v.city === city);
+        var matchFormat = (currentFormatFilter === 'all') || (v.format === currentFormatFilter);
+        var matchPrice = (currentPriceFilter === 'all') || (v.price_tier === currentPriceFilter);
+        return isPub && matchScore && matchCity && matchFormat && matchPrice; 
+      });
+
+      if (topVenues.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; padding: 2.5rem 1.5rem; background: #FAF8F5; border-radius: 0.5rem; border: 1px solid #EAE6DF; text-align: center; color: #71717A; font-size: 0.8125rem;">В выбранной категории и локации пока нет заведений со Знаком Качества (≥90 б.). Инспекции продолжаются.</div>';
         return;
       }
 
       var html = '';
-      for (var i = 0; i < photos.length; i++) {
-        var isActive = (i === currentLightboxIndex);
-        html += '<div class="lightbox-ribbon-card ' + (isActive ? 'active' : '') + '" onclick="setLightboxIndex(' + i + ')">' +
-          '<img src="' + photos[i] + '" class="lightbox-ribbon-img" alt="Фото ' + (i + 1) + '">' +
+      for (var i = 0; i < topVenues.length; i++) {
+        var tv = topVenues[i];
+        var coverStyle = (tv.photos && tv.photos.length > 0) ? 
+                         'background-image: url(' + tv.photos[0] + ');' : 
+                         'background: linear-gradient(135deg, #18181B 0%, #27272A 100%);';
+
+        html += '<div onclick="openVenueModal(' + tv.id + ')" class="selection-card">' +
+          '<div class="card-cover" style="' + coverStyle + '">' +
+            '<div class="card-score-badge">' + tv.total_score + ' / 100</div>' +
+            '<button type="button" class="card-fav-btn ' + (isFavorite(tv.id) ? 'active' : '') + '" onclick="toggleFavorite(' + tv.id + ', event)" title="В избранное">' +
+              (isFavorite(tv.id) ? '♥' : '♡') +
+            '</button>' +
+            '<div class="michelin-photo-btn" onclick="openPhotoLightboxDirect(' + tv.id + ', event)" title="Смотреть фото">' +
+              '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
+              '<span>' + (tv.photos ? tv.photos.length : 0) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="padding: 0.4rem 1.4rem; background: #FAF8F5; border-bottom: 1px solid #EAE6DF; display: flex; align-items: center; justify-content: space-between; font-size: 0.625rem; color: #71717A; font-family: ui-monospace, monospace;">' +
+            '<span>Проверок: <strong>' + (tv.audit_count || 1) + '</strong></span>' +
+            ((tv.score_delta && tv.score_delta !== 0) ? '<span style="color: ' + (tv.score_delta > 0 ? '#15803D' : '#DC2626') + '; font-weight: 800;">Динамика: ' + (tv.score_delta > 0 ? '+' : '') + tv.score_delta + ' б.</span>' : '<span>Стабильный балл</span>') +
+          '</div>' +
+          '<div style="padding: 1.25rem 1.4rem; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">' +
+            '<div>' +
+              '<div class="flex items-center justify-between" style="margin-bottom: 0.25rem;">' +
+                '<span style="font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 800; text-transform: uppercase; color: #71717A;">' + tv.format + (tv.price_tier ? ' • ' + tv.price_tier : '') + '</span>' +
+                '<span class="badge-gold">Знак Качества</span>' +
+              '</div>' +
+              '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: #18181B; margin: 0.15rem 0 0.25rem 0;">' + tv.name + '</h4>' +
+              '<p style="font-size: 0.75rem; color: #71717A; margin-bottom: 0.4rem;">' + tv.city + (tv.district ? ' (' + tv.district + ')' : '') + ', ' + (tv.address || '') + '</p>' +
+            '</div>' +
+            '<div class="flex items-center justify-between" style="border-top: 1px solid #EAE6DF; padding-top: 0.75rem; margin-top: 0.75rem; font-size: 0.75rem;">' +
+              '<strong style="color: #18181B;">' + tv.avg_check.toLocaleString('ru-RU') + ' ₽ <span style="font-weight: normal; color: #71717A;">/ чек</span></strong>' +
+              '<span style="color: #18181B; font-weight: 800;">Досье гида →</span>' +
+            '</div>' +
+          '</div>' +
         '</div>';
       }
-      track.innerHTML = html;
+      container.innerHTML = html;
+    }
 
-      // Exact Center Transform Calculation
-      var cardWidthVw = window.innerWidth <= 768 ? 85 : 55;
-      var gapVw = 1.5;
-      var halfScreenVw = 50;
-      var halfCardVw = cardWidthVw / 2;
+    // Render Catalog Grid
+    function renderVenues() {
+      var grid = document.getElementById('venuesGrid');
+      var noResults = document.getElementById('noResults');
+      if (!grid) return;
+
+      var searchInput = document.getElementById('searchInput');
+      var search = searchInput ? (searchInput.value || '').toLowerCase().trim() : '';
+      var citySelect = document.getElementById('cityFilter');
+      var city = citySelect ? citySelect.value : 'all';
+      var sortSelect = document.getElementById('sortSelect');
+      var sort = sortSelect ? sortSelect.value : 'score_desc';
+
+      var filtered = [];
+      for (var i = 0; i < venues.length; i++) {
+        var v = venues[i];
+        var isDraft = (v.status === 'draft');
+        
+        if (isDraft && !isAdmin) continue;
+        if (currentDraftsOnlyFilter && !isDraft) continue;
+        if (currentFavoritesOnlyFilter && !isFavorite(v.id)) continue;
+
+        var matchesSearch = !search || 
+                            v.name.toLowerCase().indexOf(search) !== -1 || 
+                            v.format.toLowerCase().indexOf(search) !== -1 || 
+                            (v.signature_dish && v.signature_dish.toLowerCase().indexOf(search) !== -1) ||
+                            (v.chef && v.chef.toLowerCase().indexOf(search) !== -1) ||
+                            v.city.toLowerCase().indexOf(search) !== -1 ||
+                            (v.district && v.district.toLowerCase().indexOf(search) !== -1) ||
+                            (v.address && v.address.toLowerCase().indexOf(search) !== -1);
+        var matchesCity = (city === 'all') || (v.city === city);
+        var matchesFormat = (currentFormatFilter === 'all') || (v.format === currentFormatFilter);
+        var matchesPrice = (currentPriceFilter === 'all') || (v.price_tier === currentPriceFilter);
+        var matchesQuality = !currentQualityFilter || (v.total_score >= 90);
+        if (matchesSearch && matchesCity && matchesFormat && matchesPrice && matchesQuality) {
+          filtered.push(v);
+        }
+      }
+
+      if (sort === 'score_desc') filtered.sort(function(a, b) { return b.total_score - a.total_score; });
+      if (sort === 'score_asc') filtered.sort(function(a, b) { return a.total_score - b.total_score; });
+      if (sort === 'check_asc') filtered.sort(function(a, b) { return a.avg_check - b.avg_check; });
+      if (sort === 'check_desc') filtered.sort(function(a, b) { return b.avg_check - a.avg_check; });
+
+      var badgeEl = document.getElementById('resultsCountBadge');
+      if (badgeEl) badgeEl.innerText = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (noResults) noResults.classList.remove('hidden');
+        return;
+      }
+      if (noResults) noResults.classList.add('hidden');
+
+      var html = '';
+      for (var j = 0; j < filtered.length; j++) {
+        var item = filtered[j];
+        var isQuality = item.total_score >= 90;
+        var isItemDraft = (item.status === 'draft');
+        
+        var tagsHtml = '';
+        var feats = item.features || [];
+        for (var k = 0; k < feats.length; k++) {
+          tagsHtml += '<span style="background: #F5F2EB; border: 1px solid #E2DDD5; color: #52525B; font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 0.25rem;">' + feats[k] + '</span> ';
+        }
+
+        var coverStyle = (item.photos && item.photos.length > 0) ? 
+                         'background-image: url(' + item.photos[0] + ');' : 
+                         'background: linear-gradient(135deg, #18181B 0%, #27272A 100%);';
+
+        var pCount = item.photos ? item.photos.length : 0;
+
+        html += '<div onclick="openVenueModal(' + item.id + ')" class="card ' + (isItemDraft ? 'draft-card' : '') + '">' +
+          '<div class="card-cover" style="' + coverStyle + '">' +
+            (isItemDraft ? '<div class="draft-badge-overlay">ЧЕРНОВИК</div>' : '') +
+            '<div class="card-score-badge">' + item.total_score + ' / 100</div>' +
+            '<button type="button" class="card-fav-btn ' + (isFavorite(item.id) ? 'active' : '') + '" onclick="toggleFavorite(' + item.id + ', event)" title="В избранное">' +
+              (isFavorite(item.id) ? '♥' : '♡') +
+            '</button>' +
+            '<div class="michelin-photo-btn" onclick="openPhotoLightboxDirect(' + item.id + ', event)" title="Смотреть фото">' +
+              '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
+              '<span>' + pCount + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="padding: 0.4rem 1.4rem; background: #FAF8F5; border-bottom: 1px solid #EAE6DF; display: flex; align-items: center; justify-content: space-between; font-size: 0.625rem; color: #71717A; font-family: ui-monospace, monospace;">' +
+            '<span>Проверок: <strong>' + (item.audit_count || 1) + '</strong></span>' +
+            ((item.score_delta && item.score_delta !== 0) ? '<span style="color: ' + (item.score_delta > 0 ? '#15803D' : '#DC2626') + '; font-weight: 800;">Динамика: ' + (item.score_delta > 0 ? '+' : '') + item.score_delta + ' б.</span>' : '<span>Стабильный балл</span>') +
+          '</div>' +
+          '<div class="card-body">' +
+            '<div>' +
+              '<div class="flex items-center justify-between" style="margin-bottom: 0.35rem;">' +
+                '<span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #71717A;">' + item.format + (item.price_tier ? ' • ' + item.price_tier : '') + '</span>' +
+                (isItemDraft ? '<span class="badge-draft">Черновик</span>' : (isQuality ? '<span class="badge-gold">Знак Качества</span>' : '<span class="badge-regular">' + item.grade + '</span>')) +
+              '</div>' +
+              '<h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: #18181B; margin-bottom: 0.2rem;">' + item.name + '</h3>' +
+              '<p style="font-size: 0.75rem; color: #71717A; margin-bottom: 0.65rem;">' + item.city + (item.district ? ' (' + item.district + ')' : '') + ', ' + (item.address || 'Центральный район') + '</p>' +
+              '<div style="display: flex; flex-wrap: wrap; gap: 0.25rem;">' + tagsHtml + '</div>' +
+            '</div>' +
+            '<div class="flex items-center justify-between" style="border-top: 1px solid #EAE6DF; padding-top: 0.85rem; margin-top: 0.75rem; font-size: 0.75rem;">' +
+              '<strong style="color: #18181B; font-size: 0.8125rem;">' + item.avg_check.toLocaleString('ru-RU') + ' ₽ <span style="font-weight: normal; color: #71717A; font-size: 0.75rem;">/ чек</span></strong>' +
+              '<span style="font-weight: 800; color: #18181B;">Досье гида →</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    function setFormatFilter(fmt, btn) {
+      currentFormatFilter = fmt;
+      var btns = document.querySelectorAll('.filter-btn:not(.price-filter-btn):not(.collection-btn)');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.remove('active');
+      }
+      if (btn) btn.classList.add('active');
+      applyFilters();
+    }
+
+    function setPriceFilter(tier, btn) {
+      currentPriceFilter = tier;
+      var btns = document.querySelectorAll('.price-filter-btn');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.remove('active');
+      }
+      if (btn) btn.classList.add('active');
+      applyFilters();
+    }
+
+    function toggleDraftsFilter() {
+      currentDraftsOnlyFilter = !currentDraftsOnlyFilter;
+      var btn = document.getElementById('btnDraftsFilter');
+      if (btn) {
+        if (currentDraftsOnlyFilter) {
+          btn.style.background = '#18181B';
+          btn.style.color = '#FFFFFF';
+        } else {
+          btn.style.background = '#FEF3C7';
+          btn.style.color = '#92400E';
+        }
+      }
+      applyFilters();
+    }
+
+    function syncSearch(val) {
+      var s1 = document.getElementById('searchInput');
+      var s2 = document.getElementById('catalogSearchInput');
+      if (s1 && s1.value !== val) s1.value = val;
+      if (s2 && s2.value !== val) s2.value = val;
+      applyFilters();
+    }
+
+    function applyFilters() {
+      updateStats();
+      renderSelection();
+      renderVenues();
+      updateMapMarkers();
+    }
+
+    function toggleQualityFilter() {
+      currentQualityFilter = !currentQualityFilter;
+      var btn = document.getElementById('btnQualityFilter');
+      if (btn) {
+        if (currentQualityFilter) {
+          btn.classList.remove('btn-light');
+          btn.classList.add('btn-dark');
+        } else {
+          btn.classList.remove('btn-dark');
+          btn.classList.add('btn-light');
+        }
+      }
+      applyFilters();
+    }
+
+    function resetFilters() {
+      var sInp = document.getElementById('searchInput');
+      if (sInp) sInp.value = '';
+      var cInp = document.getElementById('catalogSearchInput');
+      if (cInp) cInp.value = '';
+      var cFlt = document.getElementById('cityFilter');
+      if (cFlt) cFlt.value = 'all';
+      var sSel = document.getElementById('sortSelect');
+      if (sSel) sSel.value = 'score_desc';
+      currentFormatFilter = 'all';
+      currentPriceFilter = 'all';
+      currentQualityFilter = false;
+      currentDraftsOnlyFilter = false;
+      currentFavoritesOnlyFilter = false;
+      currentCollectionFilter = 'all';
+
+      var btnQ = document.getElementById('btnQualityFilter');
+      if (btnQ) {
+        btnQ.classList.remove('btn-dark');
+        btnQ.classList.add('btn-light');
+      }
+      var btnF = document.getElementById('btnFavoritesFilter');
+      if (btnF) {
+        btnF.classList.remove('btn-dark');
+        btnF.classList.add('btn-light');
+      }
       
-      // Calculate offset so active card center aligns with 50vw
-      var shiftVw = (50 - (cardWidthVw / 2)) - (currentLightboxIndex * (cardWidthVw + gapVw));
-      track.style.transform = 'translateX(' + shiftVw + 'vw)';
+      var btns = document.querySelectorAll('.filter-btn');
+      for (var i = 0; i < btns.length; i++) {
+        if (btns[i].innerText === 'Все категории' || btns[i].innerText === 'Все' || btns[i].innerText === 'Все заведения') btns[i].classList.add('active');
+        else btns[i].classList.remove('active');
+      }
+      setViewMode('grid');
+      applyFilters();
+    }
 
-      if (counter) counter.innerText = (currentLightboxIndex + 1) + ' / ' + photos.length;
-      if (progressFill) {
-        var pct = ((currentLightboxIndex + 1) / photos.length) * 100;
-        progressFill.style.width = pct + '%';
+    function openModal(id) {
+      var m = document.getElementById(id);
+      if (m) m.classList.add('open');
+    }
+    function closeModal(id) {
+      var m = document.getElementById(id);
+      if (m) m.classList.remove('open');
+    }
+
+    // 1-Click Multi-Platform Review Exporter for Yandex & 2GIS
+    function copyReviewForPlatform(platform) {
+      if (!activeModalVenue) return;
+      var v = activeModalVenue;
+      
+      var isQuality = v.total_score >= 90;
+      var prosList = (v.pros && v.pros.length > 0) ? v.pros.map(function(p){ return '• ' + p; }).join('\n') : '• Качественная отдача горячего\n• Внимательный сервис';
+      var consList = (v.cons && v.cons.length > 0) ? v.cons.map(function(c){ return '• ' + c; }).join('\n') : '• Существенных замечаний не зафиксировано';
+
+      var text = '';
+      if (platform === 'yandex') {
+        text = 'Оценка PLANKA GUIDE: ' + v.total_score + '/100 (' + (isQuality ? 'Знак Качества' : v.grade) + ')\n' +
+               'Фирменное блюдо: ' + v.signature_dish + ' — ' + v.dish_review + '\n\n' +
+               'Сильные стороны:\n' + prosList + '\n\n' +
+               'Замечания инспекции:\n' + consList + '\n\n' +
+               'Средний чек: ' + v.avg_check.toLocaleString('ru-RU') + ' ₽ | Локация: ' + v.city + ', ' + (v.address || '') + '\n' +
+               'Независимый аудит качества planka-guide.ru';
+      } else {
+        text = '★ Ресторанный рейтинг PLANKA GUIDE: ' + v.total_score + ' из 100\n' +
+               'Формат: ' + v.format + ' | Средний чек: ' + v.avg_check.toLocaleString('ru-RU') + ' руб.\n\n' +
+               'Что понравилось:\n' + prosList + '\n\n' +
+               'На что обратить внимание:\n' + consList + '\n\n' +
+               'Вердикт: ' + (v.full_review || v.dish_review) + '\n' +
+               'Подробный протокол проверки: planka-guide.ru';
+      }
+
+      if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          alert('Отзыв для ' + (platform === 'yandex' ? 'Яндекс Карт' : '2ГИС') + ' скопирован в буфер обмена!');
+        });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        alert('Отзыв для ' + (platform === 'yandex' ? 'Яндекс Карт' : '2ГИС') + ' скопирован в буфер обмена!');
       }
     }
 
-    // RENDER AUDIT HISTORY IN DOSSIER
+    function openVenueModal(id) {
+      var target = null;
+      for (var i = 0; i < venues.length; i++) {
+        if (venues[i].id === id) { target = venues[i]; break; }
+      }
+      if (!target) return;
+      activeModalVenue = target;
+
+      document.getElementById('modalTitle').innerText = target.name;
+      document.getElementById('modalFormat').innerText = target.format;
+      document.getElementById('modalCity').innerText = target.city;
+      document.getElementById('modalDistrict').innerText = target.district || target.city;
+      document.getElementById('modalMapAddress').innerText = target.city + ', ' + (target.address || '');
+      document.getElementById('modalCheck').innerText = target.avg_check.toLocaleString('ru-RU') + ' ₽';
+      document.getElementById('modalSegment').innerText = target.segment;
+      document.getElementById('modalDate').innerText = target.date;
+      document.getElementById('modalGradeText').innerText = target.status === 'draft' ? 'Черновик инспектора' : target.grade;
+      document.getElementById('modalDish').innerText = target.signature_dish;
+      document.getElementById('modalDishReview').innerText = '«' + target.dish_review + '»';
+      document.getElementById('modalScoreBadge').innerText = target.total_score + '/100';
+
+      document.getElementById('modalChef').innerText = target.chef || 'Шеф-повар не указан';
+      document.getElementById('modalConcept').innerText = target.concept || 'Концептуальная кухня';
+      
+      var bookBtn = document.getElementById('modalBookingBtn');
+      var phoneBtn = document.getElementById('modalPhoneBtn');
+      var noBookingBadge = document.getElementById('modalNoBookingBadge');
+
+      if (target.no_booking) {
+        if (bookBtn) bookBtn.style.display = 'none';
+        if (phoneBtn) phoneBtn.style.display = 'none';
+        if (noBookingBadge) noBookingBadge.classList.remove('hidden');
+      } else {
+        if (noBookingBadge) noBookingBadge.classList.add('hidden');
+        if (bookBtn) {
+          if (target.booking_url) {
+            bookBtn.href = target.booking_url;
+            bookBtn.style.display = 'inline-flex';
+          } else {
+            bookBtn.style.display = 'none';
+          }
+        }
+        if (phoneBtn) {
+          if (target.phone) {
+            phoneBtn.href = 'tel:' + target.phone.replace(/[^0-9+]/g, '');
+            phoneBtn.innerText = target.phone;
+            phoneBtn.style.display = 'inline-flex';
+          } else {
+            phoneBtn.style.display = 'none';
+          }
+        }
+      }
+
+      var searchQuery = encodeURIComponent(target.name + ' ' + target.city + ' ' + (target.address || ''));
+      var iframeUrl = 'https://yandex.ru/map-widget/v1/?text=' + searchQuery + '&z=16';
+      var directMapUrl = 'https://yandex.ru/maps/?text=' + searchQuery;
+      document.getElementById('yandexMapIframe').setAttribute('src', iframeUrl);
+      document.getElementById('btnYandexMapsRoute').setAttribute('href', directMapUrl);
+
+      var fullRevEl = document.getElementById('modalFullReview');
+      if (fullRevEl) {
+        fullRevEl.innerText = target.full_review || ("Контрольный аудит заведения " + target.name + ". Итоговый балл по 100-балльной шкале PLANKA GUIDE составил " + target.total_score + " баллов.");
+      }
+
+      renderDossierTriptych();
+      renderDossierAuditHistory();
+
+      var authorSection = document.getElementById('modalAuthorPrivateSection');
+      var adminActions = document.getElementById('modalAdminActions');
+      var revBox = document.getElementById('modalReviewExporterBox');
+      if (isAdmin) {
+        if (revBox) revBox.classList.remove('hidden');
+        if (adminActions) adminActions.classList.remove('hidden');
+        if (authorSection) {
+          authorSection.classList.remove('hidden');
+          document.getElementById('modalPrivateNotes').innerText = target.private_notes || "Служебные заметки пока не заполнены. Нажмите 'Редактировать', чтобы внести инсайты.";
+        }
+      } else {
+        if (adminActions) adminActions.classList.add('hidden');
+        if (authorSection) authorSection.classList.add('hidden');
+        if (revBox) revBox.classList.add('hidden');
+      }
+
+      var pillars = [
+        { label: "1. Гастрономия и Сырье", val: target.scores.food, max: 35 },
+        { label: "2. WOW-эффект и Подача", val: target.scores.wow, max: 15 },
+        { label: "3. Честность Цены и Порции", val: target.scores.price, max: 15 },
+        { label: "4. Сервис, Тайминг и Этикет", val: target.scores.service, max: 15 },
+        { label: "5. Среда, Звук и Эргономика", val: target.scores.space, max: 10 },
+        { label: "6. Санитария, Чистота и Санузел", val: target.scores.sanitation, max: 10 }
+      ];
+
+      var barsHtml = '';
+      for (var p = 0; p < pillars.length; p++) {
+        var itemP = pillars[p];
+        var pct = Math.round((itemP.val / itemP.max) * 100);
+        barsHtml += '<div>' +
+          '<div class="flex justify-between" style="font-size: 0.6875rem; margin-bottom: 0.25rem;">' +
+            '<span style="font-weight: 700; color: #3F3F46;">' + itemP.label + '</span>' +
+            '<span class="font-mono" style="font-weight: 900; color: #18181B;">' + itemP.val + ' / ' + itemP.max + ' б.</span>' +
+          '</div>' +
+          '<div style="width: 100%; height: 0.4rem; background: #EAE6DF; border-radius: 9999px; overflow: hidden;">' +
+            '<div style="width: ' + pct + '%; height: 100%; background: #18181B; border-radius: 9999px;"></div>' +
+          '</div>' +
+        '</div>';
+      }
+      document.getElementById('modalScoresBars').innerHTML = barsHtml;
+
+      var prosHtml = '';
+      var pros = target.pros || [];
+      for (var pr = 0; pr < pros.length; pr++) {
+        prosHtml += '<li>' + pros[pr] + '</li>';
+      }
+      document.getElementById('modalPros').innerHTML = prosHtml;
+
+      var consHtml = '';
+      var cons = target.cons || [];
+      for (var cn = 0; cn < cons.length; cn++) {
+        consHtml += '<li>' + cons[cn] + '</li>';
+      }
+      document.getElementById('modalCons').innerHTML = consHtml;
+
+      openModal('venueModal');
+    }
+
+    function renderDossierTriptych() {
+      var grid = document.getElementById('modalTriptychGrid');
+      var countEl = document.getElementById('modalTriptychCount');
+      if (!grid || !activeModalVenue) return;
+
+      var photos = activeModalVenue.photos || [];
+      if (countEl) countEl.innerText = photos.length + ' фото';
+
+      var phtml = '';
+      if (photos.length > 0) {
+        var displayPhotos = photos.slice(0, 3);
+        while (displayPhotos.length < 3) {
+          displayPhotos.push(photos[0]);
+        }
+        for (var i = 0; i < 3; i++) {
+          phtml += '<img src="' + displayPhotos[i] + '" class="dossier-triptych-img" onclick="openPhotoLightboxDirect(activeModalVenue.id, event)" alt="Фото заведения">';
+        }
+      } else {
+        phtml = '<div style="grid-column: 1/-1; height: 100%; display: flex; align-items: center; justify-content: center; color: #A1A1AA; font-size: 0.8125rem;">Фотографии инспекции пока не добавлены</div>';
+      }
+      grid.innerHTML = phtml;
+    }
+
     function renderDossierAuditHistory() {
       var list = document.getElementById('modalAuditTimelineList');
       var badge = document.getElementById('modalAuditCountBadge');
@@ -2790,7 +2798,25 @@
       list.innerHTML = hhtml;
     }
 
-    function _old_ribbon() {
+    function openPhotoLightboxDirect(venueId, e) {
+      if (e) e.stopPropagation();
+      var target = null;
+      for (var i = 0; i < venues.length; i++) {
+        if (venues[i].id === venueId) { target = venues[i]; break; }
+      }
+      if (!target) return;
+      activeLightboxVenue = target;
+      currentLightboxIndex = 0;
+
+      document.getElementById('lightboxVenueTitle').innerText = target.name;
+      document.getElementById('lightboxVenueSubtitle').innerText = target.city + ' • ' + (target.signature_dish || 'Фирменное блюдо');
+
+      renderLightboxRibbon();
+      var lb = document.getElementById('photoLightbox');
+      if (lb) lb.classList.add('open');
+    }
+
+    function renderLightboxRibbon() {
       if (!activeLightboxVenue) return;
       var track = document.getElementById('lightboxRibbonTrack');
       var counter = document.getElementById('lightboxCounter');
@@ -2814,11 +2840,10 @@
       }
       track.innerHTML = html;
 
-      // Center the active photo card
-      var cardWidthPct = window.innerWidth <= 768 ? 85 : 55;
-      var gapPct = window.innerWidth <= 768 ? 4 : 2;
-      var offsetPct = currentLightboxIndex * (cardWidthPct + gapPct);
-      track.style.transform = 'translateX(-' + offsetPct + 'vw)';
+      var cardWidthVw = window.innerWidth <= 768 ? 85 : 55;
+      var gapVw = 1.5;
+      var shiftVw = (50 - (cardWidthVw / 2)) - (currentLightboxIndex * (cardWidthVw + gapVw));
+      track.style.transform = 'translateX(' + shiftVw + 'vw)';
 
       if (counter) counter.innerText = (currentLightboxIndex + 1) + ' / ' + photos.length;
       if (progressFill) {
@@ -2850,9 +2875,6 @@
       if (lb) lb.classList.remove('open');
     }
 
-
-
-
     function handleDossierDirectPhotoUpload(e) {
       var files = e.target.files;
       if (!files || files.length === 0 || !activeModalVenue) return;
@@ -2867,8 +2889,6 @@
           if (loadedCount === files.length) {
             saveDB();
             renderDossierTriptych();
-      renderDossierAuditHistory();
-      // gallery replaced by triptych
             alert('Фотографии успешно добавлены к заведению!');
           }
         };
@@ -2876,22 +2896,6 @@
       }
     }
 
-    function deletePhotoFromDossier(idx) {
-      if (!activeModalVenue || !activeModalVenue.photos) return;
-      if (confirm('Удалить эту фотографию?')) {
-        activeModalVenue.photos.splice(idx, 1);
-        saveDB();
-        renderDossierTriptych();
-      renderDossierAuditHistory();
-      // gallery replaced by triptych
-      }
-    }
-
-    function closeVenueModal() {
-      closeModal('venueModal');
-    }
-
-    // Secure Inspector Auth (Password: PlankaInspector2026!#)
     function openPinModal() {
       var pinInp = document.getElementById('pinInput');
       if (pinInp) pinInp.value = '';
@@ -2942,7 +2946,6 @@
       }
     }
 
-    // Legal Policy Modal
     function openLegalModal() {
       openModal('legalModal');
     }
@@ -2965,7 +2968,6 @@
       }
     }
 
-    // Sync Modal
     function openSyncModal() {
       openModal('syncModal');
     }
@@ -2977,11 +2979,33 @@
       var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(venues, null, 2));
       var dl = document.createElement('a');
       dl.setAttribute("href", dataStr);
-      dl.setAttribute("download", "planka_guide_database_" + new Date().toISOString().split('T')[0] + ".json");
+      dl.setAttribute("download", "venues.json");
       document.body.appendChild(dl);
       dl.click();
       dl.remove();
-      alert('База данных успешно выгружена!');
+      alert('Файл venues.json успешно выгружен! Загрузите его в репозиторий GitHub для обновления у всех пользователей.');
+    }
+
+    function importDatabaseJSON(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          var parsed = JSON.parse(evt.target.result);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            venues = parsed;
+            saveDB();
+            alert('База данных и черновики успешно импортированы (' + parsed.length + ' заведений)!');
+            closeSyncModal();
+          } else {
+            alert('Ошибка: неверный формат файла JSON.');
+          }
+        } catch(err) {
+          alert('Ошибка при чтении файла JSON: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
     }
 
     function syncFromGoogleSheetUrl() {
@@ -2989,7 +3013,56 @@
       closeSyncModal();
     }
 
-    // Photo Uploader for Form
+    function toggleTimer(num) {
+      var idx = num - 1;
+      var btn = document.getElementById('timerBtn' + num);
+      if (timerIntervals[idx]) {
+        clearInterval(timerIntervals[idx]);
+        timerIntervals[idx] = null;
+        if (btn) btn.innerText = 'Старт';
+      } else {
+        timerIntervals[idx] = setInterval(function() {
+          timerSeconds[idx]++;
+          var m = Math.floor(timerSeconds[idx] / 60);
+          var s = timerSeconds[idx] % 60;
+          var disp = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+          var el = document.getElementById('timerDisplay' + num);
+          if (el) el.innerText = disp;
+        }, 1000);
+        if (btn) btn.innerText = 'Стоп';
+      }
+    }
+
+    function resetAllTimers() {
+      for (var i = 0; i < 4; i++) {
+        if (timerIntervals[i]) clearInterval(timerIntervals[i]);
+        timerIntervals[i] = null;
+        timerSeconds[i] = 0;
+        var el = document.getElementById('timerDisplay' + (i+1));
+        var btn = document.getElementById('timerBtn' + (i+1));
+        if (el) el.innerText = '00:00';
+        if (btn) btn.innerText = 'Старт';
+      }
+    }
+
+    function applyTimersToScore() {
+      var drinksSec = timerSeconds[0];
+      var hotSec = timerSeconds[1];
+      var pauseSec = timerSeconds[2];
+      var billSec = timerSeconds[3];
+
+      var points = 15;
+      if (drinksSec > 300) points -= 2;
+      if (hotSec > 1200) points -= 3;
+      if (pauseSec > 1000) points -= 2;
+      if (billSec > 240) points -= 2;
+
+      var sTimingEl = document.getElementById('sub_r13');
+      if (sTimingEl) sTimingEl.value = Math.max(1, Math.min(5, Math.round(points / 3)));
+      recalcGranularScore();
+      alert('Замеры времени сервиса успешно пересчитаны в баллы тайминга!');
+    }
+
     function handlePhotoUpload(e) {
       var files = e.target.files;
       if (!files || files.length === 0) return;
@@ -3022,8 +3095,7 @@
       grid.innerHTML = html;
     }
 
-    // Granular Sub-criteria
-        function renderGranularChecklist() {
+    function renderGranularChecklist() {
       var fmtEl = document.getElementById('formFormat');
       var fmt = fmtEl ? fmtEl.value : 'Fine Dining';
       var container = document.getElementById('granularChecklistFields');
@@ -3232,7 +3304,7 @@
       if (calcScEl) calcScEl.innerText = total;
 
       var grade = "Выдающийся уровень";
-      if (total >= 90) grade = "Знак Качества PLANKA";
+      if (total >= 90) grade = "Знак Качества";
       else if (total >= 75) grade = "Рекомендовано";
       else if (total >= 60) grade = "Базовый уровень";
       else if (total >= 40) grade = "Посредственно";
@@ -3252,6 +3324,7 @@
       currentEditingPhotos = [];
       renderFormPhotoPreviews();
       renderGranularChecklist();
+      resetAllTimers();
       openModal('auditEditorModal');
     }
 
@@ -3274,6 +3347,7 @@
       document.getElementById('formPhone').value = v.phone || '';
       document.getElementById('formBookingUrl').value = v.booking_url || '';
       document.getElementById('formNoBooking').checked = !!v.no_booking;
+
       document.getElementById('formDish').value = v.signature_dish;
       document.getElementById('formDishReview').value = v.dish_review;
       document.getElementById('formFullReview').value = v.full_review || '';
@@ -3292,7 +3366,7 @@
 
     function deleteCurrentModalVenue() {
       if (!activeModalVenue) return;
-      if (confirm('Удалить заведение "' + activeModalVenue.name + '" из каталога PLANKA GUIDE?')) {
+      if (confirm('Удалить заведение "' + activeModalVenue.name + '"?')) {
         var nId = activeModalVenue.id;
         venues = venues.filter(function(x) { return x.id !== nId; });
         saveDB();
@@ -3303,24 +3377,6 @@
 
     function closeAuditEditorModal() {
       closeModal('auditEditorModal');
-    }
-
-    
-    var currentDraftsOnlyFilter = false;
-
-    function toggleDraftsFilter() {
-      currentDraftsOnlyFilter = !currentDraftsOnlyFilter;
-      var btn = document.getElementById('btnDraftsFilter');
-      if (btn) {
-        if (currentDraftsOnlyFilter) {
-          btn.style.background = '#18181B';
-          btn.style.color = '#FFFFFF';
-        } else {
-          btn.style.background = '#FEF3C7';
-          btn.style.color = '#92400E';
-        }
-      }
-      applyFilters();
     }
 
     function submitAuditForm(targetStatus) {
@@ -3377,6 +3433,8 @@
       var bSpace = Math.min(10, Math.round(total * 0.10));
       var bSanitation = Math.min(10, total - (bFood + bWow + bPrice + bService + bSpace));
 
+      var auditNote = fullRevText || ("Контрольная инспекция заведения: " + total + " баллов.");
+
       if (editId) {
         for (var i = 0; i < venues.length; i++) {
           if (venues[i].id == editId) {
@@ -3406,10 +3464,20 @@
             if (prosList.length > 0) venues[i].pros = prosList;
             if (consList.length > 0) venues[i].cons = consList;
             if (featList.length > 0) venues[i].features = featList;
+
+            if (!venues[i].history) venues[i].history = [];
+            venues[i].history.push({
+              date: new Date().toISOString().split('T')[0],
+              score: total,
+              notes: auditNote
+            });
+            venues[i].audit_count = venues[i].history.length;
+            venues[i].score_delta = venues[i].history[venues[i].history.length - 1].score - venues[i].history[0].score;
             break;
           }
         }
       } else {
+        var todayStr = new Date().toISOString().split('T')[0];
         var newObj = {
           id: Date.now(),
           name: nameVal,
@@ -3426,7 +3494,7 @@
           booking_url: bookUrlText,
           no_booking: noBookingVal,
           status: targetStatus,
-          date: new Date().toISOString().split('T')[0],
+          date: todayStr,
           scores: { food: bFood, wow: bWow, price: bPrice, service: bService, space: bSpace, sanitation: bSanitation },
           penalties: penalty,
           total_score: total,
@@ -3438,7 +3506,11 @@
           photos: currentEditingPhotos,
           pros: prosList.length > 0 ? prosList : ["Качественная отдача горячего", "Внимательный сервис"],
           cons: consList.length > 0 ? consList : ["Небольшие замечания по времени ожидания"],
-          features: featList.length > 0 ? featList : ["Свежий аудит", "Проверено лично"]
+          features: featList.length > 0 ? featList : ["Свежий аудит", "Проверено лично"],
+          history: [{ date: todayStr, score: total, notes: auditNote }],
+          audit_count: 1,
+          score_delta: 0,
+          coords: { lat: 55.7512, lng: 37.6184 }
         };
         venues.unshift(newObj);
       }
@@ -3464,7 +3536,7 @@
       }
     });
 
-    // Start
+    // Start Application
     checkCookieConsent();
     updateAdminUI();
     updateStats();
@@ -3472,6 +3544,7 @@
     renderSelection();
     renderVenues();
     startHeroTimer();
+
   </script>
 </body>
 </html>
