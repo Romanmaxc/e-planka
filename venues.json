@@ -68,7 +68,12 @@
     ],
     "audit_count": 2,
     "score_delta": 6,
-    "value_score": 5.0
+    "value_score": 5.0,
+    "vibe_tags": [
+      "Панорамный вид",
+      "Романтический ужин",
+      "Гастрономический сет"
+    ]
   },
   {
     "id": 2,
@@ -139,7 +144,12 @@
     ],
     "audit_count": 2,
     "score_delta": 5,
-    "value_score": 6.8
+    "value_score": 6.8,
+    "vibe_tags": [
+      "Культовый бар",
+      "Шумная компания",
+      "Авторские коктейли"
+    ]
   },
   {
     "id": 3,
@@ -210,7 +220,12 @@
     ],
     "audit_count": 2,
     "score_delta": 3,
-    "value_score": 5.3
+    "value_score": 5.3,
+    "vibe_tags": [
+      "Торжественный ужин",
+      "Исторический центр",
+      "Деловая встреча"
+    ]
   },
   {
     "id": 4,
@@ -281,7 +296,12 @@
     ],
     "audit_count": 2,
     "score_delta": 3,
-    "value_score": 7.0
+    "value_score": 7.0,
+    "vibe_tags": [
+      "Деловой завтрак",
+      "Встреча в центре",
+      "Спешелти кофе"
+    ]
   },
   {
     "id": 5,
@@ -346,7 +366,12 @@
     ],
     "audit_count": 1,
     "score_delta": 0,
-    "value_score": 8.1
+    "value_score": 8.1,
+    "vibe_tags": [
+      "Быстрый обед",
+      "Аутентичная Азия",
+      "Сытный рамен"
+    ]
   },
   {
     "id": 6,
@@ -411,7 +436,12 @@
     ],
     "audit_count": 1,
     "score_delta": 0,
-    "value_score": 9.2
+    "value_score": 9.2,
+    "vibe_tags": [
+      "Кофе и ноутбук",
+      "Свежая выпечка",
+      "Легкий бранч"
+    ]
   },
   {
     "id": 7,
@@ -481,7 +511,12 @@
     ],
     "audit_count": 2,
     "score_delta": 3,
-    "value_score": 8.6
+    "value_score": 8.6,
+    "vibe_tags": [
+      "Семейный обед",
+      "Быстрый перекус",
+      "Для компании"
+    ]
   },
   {
     "id": 8,
@@ -546,7 +581,12 @@
     ],
     "audit_count": 1,
     "score_delta": 0,
-    "value_score": 8.9
+    "value_score": 8.9,
+    "vibe_tags": [
+      "Сытный ланч",
+      "Русская кухня",
+      "Доступный чек"
+    ]
   },
   {
     "id": 9,
@@ -611,7 +651,12 @@
     ],
     "audit_count": 1,
     "score_delta": 0,
-    "value_score": 8.1
+    "value_score": 8.1,
+    "vibe_tags": [
+      "Ретро-эстетика",
+      "Вид на Красную площадь",
+      "Обед в ГУМе"
+    ]
   },
   {
     "id": 10,
@@ -676,6 +721,11 @@
     ],
     "audit_count": 1,
     "score_delta": 0,
-    "value_score": 5.0
+    "value_score": 5.0,
+    "vibe_tags": [
+      "Стритфуд",
+      "Молодежная встреча",
+      "Сочные бургеры"
+    ]
   }
 ]
