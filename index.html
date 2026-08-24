@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>PLANKA GUIDE — Независимый ресторанный гид и стандарт качества</title>
   
+  <!-- PWA MANIFEST & MOBILE APPS SUPPORT -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#18181B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PLANKA GUIDE">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%2318181B'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='280' fill='%23C5A880'%3EP%3C/text%3E%3C/svg%3E">
+
   <!-- GOOGLE LUXURY TYPOGRAPHY (PLAYFAIR DISPLAY, CORMORANT & INTER) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -397,6 +405,26 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
 
+    /* OFFLINE PWA STATUS BAR */
+    .offline-status-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      background: #8C6D37;
+      color: #FFFFFF;
+      font-size: 0.6875rem;
+      font-weight: 800;
+      text-align: center;
+      padding: 0.3rem 1rem;
+      z-index: 9999;
+      display: none;
+      letter-spacing: 0.05em;
+    }
+    .offline-status-bar.visible {
+      display: block !important;
+    }
+
     /* MICHELIN GUIDE STYLE MINIMAL CARDS (MODULAR GRID: 3 COLS DESKTOP, 2 TABLET, 1 MOBILE) */
     .grid-cards {
       display: grid;
@@ -486,7 +514,7 @@
       z-index: 10;
     }
 
-    /* TOP-LEFT LUXURY ACTION GROUP ON CARD (HEART + COMPARE ICONS) */
+    /* TOP-LEFT ACTION GROUP (HEART + COMPARE ICONS) */
     .card-top-left-group {
       position: absolute;
       top: 0.75rem;
@@ -1061,6 +1089,8 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
+  <!-- PWA Offline Status Banner -->
+  <div id="offlineStatusBar" class="offline-status-bar">⚡ Автономный режим инспектора (PWA) — все замеры и оценки сохраняются локально</div>
 
   <!-- HEADER -->
   <header>
@@ -1715,6 +1745,24 @@
             <div id="modalScoresBars" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
           </div>
 
+          
+          <!-- URBAN INTEGRATION & SPATIAL ERGONOMICS (URBAN & ARCHITECTURAL ANALYSIS) -->
+          <div style="border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.35rem; background: var(--bg-page); display: flex; flex-direction: column; gap: 0.75rem;">
+            <div class="flex items-center justify-between">
+              <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">УРБАНИСТИКА И ЭРГОНОМИКА ПРОСТРАНСТВА</span>
+              <span style="font-size: 0.625rem; color: var(--text-muted); font-family: ui-monospace, monospace; font-weight: 800;">СТАНДАРТ СРЕДЫ</span>
+            </div>
+            <div>
+              <strong style="font-size: 0.75rem; color: var(--text-main); display: block; margin-bottom: 0.2rem;">Диалог с городской средой и терраса:</strong>
+              <p id="modalUrbanNotes" style="font-size: 0.75rem; color: var(--text-body); line-height: 1.5;">Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.</p>
+            </div>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 0.65rem;">
+              <strong style="font-size: 0.75rem; color: var(--text-main); display: block; margin-bottom: 0.2rem;">Эргономика посадки и акустический комфорт:</strong>
+              <p id="modalErgonomicsNotes" style="font-size: 0.75rem; color: var(--text-body); line-height: 1.5;">Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.</p>
+            </div>
+          </div>
+
+
           <!-- Public Review -->
           <div style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem;">
             <h4 class="font-serif" style="font-size: 1.15rem; font-weight: 900; color: inherit; margin-bottom: 0.5rem;">Рецензия инспектора PLANKA GUIDE</h4>
@@ -2097,7 +2145,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v34');
+      var stored = localStorage.getItem('planka_guide_db_v35');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -2162,7 +2210,7 @@
 
     function saveDB() {
       try {
-        localStorage.setItem('planka_guide_db_v34', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v35', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
@@ -3183,6 +3231,8 @@
       setText('modalScoreBadge', target.total_score + '/100');
       setText('modalChef', target.chef || 'Шеф-повар не указан');
       setText('modalConcept', target.concept || 'Концептуальная кухня');
+      setText('modalUrbanNotes', target.urban_notes || 'Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.');
+      setText('modalErgonomicsNotes', target.ergonomics_notes || 'Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.');
 
       var vibePills = (target.vibe_tags || []).map(function(t){ return '<span class="vibe-tag-pill">' + t + '</span>'; }).join(' ');
       var vibeEl = document.getElementById('modalVibeTags');
@@ -3937,6 +3987,35 @@
         }
       }
     });
+
+    
+    // PWA SERVICE WORKER REGISTRATION
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('./sw.js').then(function(reg) {
+          console.log('PLANKA PWA ServiceWorker registered with scope:', reg.scope);
+        }).catch(function(err) {
+          console.log('ServiceWorker registration error:', err);
+        });
+      });
+    }
+
+    // Offline / Online Network Status
+    function updateOnlineStatus() {
+      var bar = document.getElementById('offlineStatusBar');
+      if (!bar) return;
+      if (!navigator.onLine) {
+        bar.classList.add('visible');
+      } else {
+        if (bar.classList.contains('visible')) {
+          bar.classList.remove('visible');
+          alert('🟢 Связь с интернетом восстановлена. Все данные синхронизированы!');
+        }
+      }
+    }
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    updateOnlineStatus();
 
     // Start Application
     checkTheme();
