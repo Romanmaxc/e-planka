@@ -767,6 +767,11 @@
   <!-- MICHELIN HERO WITH AUTO-CAROUSEL BACKGROUND -->
   <section class="michelin-hero">
     <div id="heroBgImage" class="michelin-hero-bg"></div>
+    <!-- Manual Hero Carousel Controls -->
+    <div style="position: absolute; right: 1.5rem; bottom: 2rem; z-index: 15; display: flex; align-items: center; gap: 0.5rem;">
+      <button onclick="prevHeroSlide()" type="button" style="background: rgba(0,0,0,0.5); color: #FFF; border: 1px solid rgba(255,255,255,0.25); width: 2.25rem; height: 2.25rem; border-radius: 9999px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; backdrop-filter: blur(4px);">‹</button>
+      <button onclick="nextHeroSlide()" type="button" style="background: rgba(0,0,0,0.5); color: #FFF; border: 1px solid rgba(255,255,255,0.25); width: 2.25rem; height: 2.25rem; border-radius: 9999px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; backdrop-filter: blur(4px);">›</button>
+    </div>
     <div class="container" style="width: 100%;">
       <div class="michelin-hero-content">
         <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 0.3rem 0.85rem; border-radius: 9999px; font-size: 0.6875rem; font-weight: 800; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.25rem; backdrop-filter: blur(4px);">
@@ -1678,7 +1683,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v19');
+      var stored = localStorage.getItem('planka_guide_db_v20');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -1699,13 +1704,14 @@
 
     function saveDB() {
       try {
-        localStorage.setItem('planka_guide_db_v19', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v20', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderSelection();
       renderVenues();
     updateHeroCarousel();
     startHeroTimer();
+    loadExternalDB();
     }
 
     function updateStats() {
@@ -1876,6 +1882,7 @@
       renderVenues();
     updateHeroCarousel();
     startHeroTimer();
+    loadExternalDB();
     }
 
     
@@ -1891,6 +1898,7 @@
       renderVenues();
     updateHeroCarousel();
     startHeroTimer();
+    loadExternalDB();
     }
 
     function toggleQualityFilter() {
@@ -1908,6 +1916,7 @@
       renderVenues();
     updateHeroCarousel();
     startHeroTimer();
+    loadExternalDB();
     }
 
     function resetFilters() {
@@ -1933,6 +1942,7 @@
       renderVenues();
     updateHeroCarousel();
     startHeroTimer();
+    loadExternalDB();
     }
 
     // Modal Control Functions (Tested V8 Logic)
@@ -2078,6 +2088,43 @@
       openVenueModal(current.id);
     }
 
+    
+    function prevHeroSlide() {
+      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues;
+      heroFeaturedIndex = (heroFeaturedIndex - 1 + topVenues.length) % topVenues.length;
+      updateHeroCarousel();
+      startHeroTimer();
+    loadExternalDB();
+    }
+
+    function nextHeroSlide() {
+      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues;
+      heroFeaturedIndex = (heroFeaturedIndex + 1) % topVenues.length;
+      updateHeroCarousel();
+      startHeroTimer();
+    loadExternalDB();
+    }
+
+    // External Database Loader (Tries to load venues.json if available on server)
+    function loadExternalDB() {
+      try {
+        fetch('venues.json')
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (Array.isArray(data) && data.length > 0) {
+              venues = data;
+              saveDB();
+              console.log('Loaded external database venues.json:', data.length, 'records');
+            }
+          })
+          .catch(function(e) {
+            console.log('Using local embedded storage fallback.');
+          });
+      } catch(e) {}
+    }
+
     function startHeroTimer() {
       if (heroTimer) clearInterval(heroTimer);
       heroTimer = setInterval(function() {
@@ -2086,7 +2133,7 @@
           heroFeaturedIndex = (heroFeaturedIndex + 1) % topVenues.length;
           updateHeroCarousel();
         }
-      }, 5000);
+      }, 7000);
     }
 
     function openModal(id) {
@@ -2273,6 +2320,7 @@
         renderVenues();
     updateHeroCarousel();
     startHeroTimer();
+    loadExternalDB();
         alert('Режим инспектора PLANKA GUIDE активирован! Вам доступны: детальные чек-листы, загрузка фото прямо в досье и закрытые бизнес-инсайты.');
       } else {
         var errEl = document.getElementById('pinError');
@@ -2287,6 +2335,7 @@
       renderVenues();
     updateHeroCarousel();
     startHeroTimer();
+    loadExternalDB();
       alert('Вы вышли из режима инспектора.');
     }
 
@@ -2699,6 +2748,7 @@
     renderVenues();
     updateHeroCarousel();
     startHeroTimer();
+    loadExternalDB();
   </script>
 </body>
 </html>
