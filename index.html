@@ -770,7 +770,7 @@
       </div>
 
       <!-- Live Floating Hero Card with Auto-Slide -->
-      <div id="heroFeaturedCard" class="hero-featured-box" onclick="openFeaturedHeroModal()">
+      <div id="heroFeaturedCard" class="hero-featured-box" style="margin-top: 1.5rem; position: relative; bottom: auto; left: auto;" onclick="openFeaturedHeroModal()">
         <span style="background: #18181B; color: #FFFFFF; font-weight: 900; padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-size: 0.6875rem;">ТОП ВЫБОР</span>
         <div>
           <strong id="heroFeaturedName" style="color: #FFFFFF; display: block; font-size: 0.875rem;">White Rabbit</strong>
@@ -925,6 +925,7 @@
           <!-- Admin Action Group -->
           <div id="adminActionGroup" class="hidden" style="align-items: center; gap: 0.5rem;">
             <button onclick="openNewAuditModal()" type="button" class="btn btn-dark">+ Новый аудит</button>
+            <button onclick="toggleDraftsFilter()" type="button" id="btnDraftsFilter" class="btn" style="background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A;">📁 Черновики <span id="draftsCountBadge">(0)</span></button>
             <button onclick="openSyncModal()" type="button" class="btn btn-light">Синхронизация</button>
           </div>
 
@@ -1392,7 +1393,25 @@
             <strong style="font-size: 0.75rem; text-transform: uppercase; color: #18181B; font-weight: 800;">Детальный чек-лист инспектора</strong>
             <span style="font-size: 0.6875rem; color: #71717A; font-weight: 800;">100-балльная шкала</span>
           </div>
-          <div id="granularChecklistFields" style="display: flex; flex-direction: column; gap: 0.85rem;"></div>
+          <div style="background: #FFFFFF; border: 1px solid #EAE6DF; border-radius: 0.5rem; padding: 1.15rem; display: flex; flex-direction: column; gap: 0.75rem;">
+          <strong style="font-size: 0.75rem; text-transform: uppercase; color: #18181B; font-weight: 800;">Бронирование и Контакты</strong>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+            <div>
+              <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Телефон заведения</label>
+              <input type="text" id="formPhone" placeholder="+7 (495) 000-00-00">
+            </div>
+            <div>
+              <label style="font-weight: 800; display: block; margin-bottom: 0.35rem;">Ссылка на онлайн-бронь</label>
+              <input type="text" id="formBookingUrl" placeholder="https://rest.ru/booking">
+            </div>
+          </div>
+          <label class="flex items-center gap-2" style="cursor: pointer;">
+            <input type="checkbox" id="formNoBooking">
+            <span style="font-weight: 700; color: #52525B;">Бронь столов не предусмотрена (живая очередь, столовая, фастфуд)</span>
+          </label>
+        </div>
+
+        <div id="granularChecklistFields" style="display: flex; flex-direction: column; gap: 0.85rem;"></div>
         </div>
 
         <!-- Red flags -->
@@ -1463,9 +1482,10 @@
           </div>
         </div>
 
-        <div class="flex gap-2">
+        <div class="flex gap-2" style="flex-wrap: wrap;">
           <button type="button" onclick="closeAuditEditorModal()" class="btn btn-light" style="flex: 1;">Отмена</button>
-          <button type="submit" class="btn btn-dark" style="flex: 2; padding: 0.85rem;">Сохранить в PLANKA GUIDE</button>
+          <button type="button" onclick="submitAuditForm('draft')" class="btn" style="background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; flex: 1.5; padding: 0.85rem;">📁 В черновики</button>
+          <button type="button" onclick="submitAuditForm('published')" class="btn btn-dark" style="flex: 2; padding: 0.85rem;">🌟 Опубликовать в гиде</button>
         </div>
 
       </form>
@@ -1521,7 +1541,9 @@
       "Valet-Parking",
       "Сомелье",
       "Панорамный вид"
-    ]
+    ],
+    "status": "published",
+    "no_booking": false
   },
   {
     "id": 2,
@@ -1569,7 +1591,9 @@
       "Speakeasy",
       "Джаз",
       "Бронь обязательна"
-    ]
+    ],
+    "status": "published",
+    "no_booking": false
   },
   {
     "id": 3,
@@ -1617,7 +1641,9 @@
       "Дворянский этикет",
       "Историческое меню",
       "Винная карта"
-    ]
+    ],
+    "status": "published",
+    "no_booking": false
   },
   {
     "id": 4,
@@ -1665,7 +1691,9 @@
       "Розетки",
       "Свежая выпечка",
       "Завтраки целый день"
-    ]
+    ],
+    "status": "published",
+    "no_booking": false
   },
   {
     "id": 5,
@@ -1712,7 +1740,9 @@
       "Крафтовая лапша",
       "Аутентично",
       "Быстрая отдача"
-    ]
+    ],
+    "status": "published",
+    "no_booking": false
   },
   {
     "id": 6,
@@ -1759,7 +1789,9 @@
       "Хлеб на закваске",
       "Кофе to-go",
       "Без маргарина"
-    ]
+    ],
+    "status": "published",
+    "no_booking": false
   },
   {
     "id": 7,
@@ -1806,7 +1838,9 @@
       "Заказ в приложении",
       "Детский уголок",
       "Готовность 15 мин"
-    ]
+    ],
+    "status": "published",
+    "no_booking": true
   },
   {
     "id": 8,
@@ -1853,7 +1887,9 @@
       "Выпечка при вас",
       "До 700 ₽",
       "Натуральный морс"
-    ]
+    ],
+    "status": "published",
+    "no_booking": true
   },
   {
     "id": 9,
@@ -1900,7 +1936,9 @@
       "В ГУМе",
       "До 600 ₽",
       "Сытные обеды"
-    ]
+    ],
+    "status": "published",
+    "no_booking": true
   },
   {
     "id": 10,
@@ -1947,13 +1985,15 @@
     "features": [
       "Перчатки",
       "Фастфуд"
-    ]
+    ],
+    "status": "published",
+    "no_booking": true
   }
 ];
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v22');
+      var stored = localStorage.getItem('planka_guide_db_v23');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -1983,7 +2023,7 @@
 
     function saveDB() {
       try {
-        localStorage.setItem('planka_guide_db_v22', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v23', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
@@ -1992,6 +2032,9 @@
     }
 
     function updateStats() {
+      var draftsCountEl = document.getElementById('draftsCountBadge');
+      var draftVenues = venues.filter(function(v) { return v.status === 'draft'; });
+      if (draftsCountEl) draftsCountEl.innerText = '(' + draftVenues.length + ')';
       var totalEl = document.getElementById('statTotal');
       if (totalEl) totalEl.innerText = venues.length;
       if (venues.length > 0) {
@@ -2110,26 +2153,24 @@
 
       var citySelect = document.getElementById('cityFilter');
       var city = citySelect ? citySelect.value : 'all';
+
       var topVenues = venues.filter(function(v) { 
+        var isPub = (v.status || 'published') === 'published';
+        var matchScore = (v.total_score >= 90);
         var matchCity = (city === 'all') || (v.city === city);
-        return (v.total_score >= 90) && matchCity; 
+        var matchFormat = (currentFormatFilter === 'all') || (v.format === currentFormatFilter);
+        var matchPrice = (currentPriceFilter === 'all') || (v.price_tier === currentPriceFilter);
+        return isPub && matchScore && matchCity && matchFormat && matchPrice; 
       });
 
       if (topVenues.length === 0) {
-        topVenues = venues.filter(function(v) { 
-          return (city === 'all') || (v.city === city);
-        }).sort(function(a,b){ return b.total_score - a.total_score; }).slice(0, 3);
-      }
-
-      if (topVenues.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; padding: 2rem; background: #FFFFFF; border-radius: 0.5rem; border: 1px solid #EAE6DF; text-align: center; color: #71717A; font-size: 0.8125rem;">В данной локации заведений пока нет</div>';
+        container.innerHTML = '<div style="grid-column: 1/-1; padding: 2.5rem 1.5rem; background: #FAF8F5; border-radius: 0.5rem; border: 1px solid #EAE6DF; text-align: center; color: #71717A; font-size: 0.8125rem;">В выбранной категории и локации пока нет заведений со Знаком Качества (≥90 б.). Инспекции продолжаются.</div>';
         return;
       }
 
       var html = '';
       for (var i = 0; i < topVenues.length; i++) {
         var tv = topVenues[i];
-        var isQuality = tv.total_score >= 90;
         var coverStyle = (tv.photos && tv.photos.length > 0) ? 
                          'background-image: url(' + tv.photos[0] + ');' : 
                          'background: linear-gradient(135deg, #18181B 0%, #27272A 100%);';
@@ -2146,7 +2187,7 @@
             '<div>' +
               '<div class="flex items-center justify-between" style="margin-bottom: 0.25rem;">' +
                 '<span style="font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 800; text-transform: uppercase; color: #71717A;">' + tv.format + (tv.price_tier ? ' • ' + tv.price_tier : '') + '</span>' +
-                (isQuality ? '<span class="badge-gold">Знак Качества</span>' : '<span class="badge-regular">' + tv.grade + '</span>') +
+                '<span class="badge-gold">Знак Качества</span>' +
               '</div>' +
               '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: #18181B; margin: 0.15rem 0 0.25rem 0;">' + tv.name + '</h4>' +
               '<p style="font-size: 0.75rem; color: #71717A; margin-bottom: 0.4rem;">' + tv.city + (tv.district ? ' (' + tv.district + ')' : '') + ', ' + (tv.address || '') + '</p>' +
@@ -2161,7 +2202,6 @@
       container.innerHTML = html;
     }
 
-    // Render Michelin Style Catalog Grid
     function renderVenues() {
       var grid = document.getElementById('venuesGrid');
       var noResults = document.getElementById('noResults');
@@ -2177,6 +2217,9 @@
       var filtered = [];
       for (var i = 0; i < venues.length; i++) {
         var v = venues[i];
+        var isDraft = (v.status === 'draft');
+        if (isDraft && !isAdmin) continue;
+        if (currentDraftsOnlyFilter && !isDraft) continue;
         var matchesSearch = !search || 
                             v.name.toLowerCase().indexOf(search) !== -1 || 
                             v.format.toLowerCase().indexOf(search) !== -1 || 
@@ -2364,19 +2407,29 @@
       document.getElementById('modalChef').innerText = target.chef || 'Шеф-повар не указан';
       document.getElementById('modalConcept').innerText = target.concept || 'Концептуальная кухня';
       var bookBtn = document.getElementById('modalBookingBtn');
-      if (target.booking_url) {
-        bookBtn.href = target.booking_url;
-        bookBtn.style.display = 'inline-flex';
-      } else {
-        bookBtn.style.display = 'none';
-      }
       var phoneBtn = document.getElementById('modalPhoneBtn');
-      if (target.phone) {
-        phoneBtn.href = 'tel:' + target.phone.replace(/[^0-9+]/g, '');
-        phoneBtn.innerText = target.phone;
-        phoneBtn.style.display = 'inline-flex';
+      if (target.no_booking) {
+        if (bookBtn) bookBtn.style.display = 'none';
+        if (phoneBtn) phoneBtn.style.display = 'none';
+        document.getElementById('modalConcept').innerText = (target.concept || 'Концептуальная кухня') + ' • Заведение работает без предварительного бронирования (живая очередь).';
       } else {
-        phoneBtn.style.display = 'none';
+        if (bookBtn) {
+          if (target.booking_url) {
+            bookBtn.href = target.booking_url;
+            bookBtn.style.display = 'inline-flex';
+          } else {
+            bookBtn.style.display = 'none';
+          }
+        }
+        if (phoneBtn) {
+          if (target.phone) {
+            phoneBtn.href = 'tel:' + target.phone.replace(/[^0-9+]/g, '');
+            phoneBtn.innerText = target.phone;
+            phoneBtn.style.display = 'inline-flex';
+          } else {
+            phoneBtn.style.display = 'none';
+          }
+        }
       }
 
       // Yandex Interactive Maps Embed
@@ -2809,6 +2862,9 @@
       document.getElementById('formCheck').value = v.avg_check;
       document.getElementById('formSegment').value = v.segment;
       document.getElementById('formChef').value = v.chef || '';
+      document.getElementById('formPhone').value = v.phone || '';
+      document.getElementById('formBookingUrl').value = v.booking_url || '';
+      document.getElementById('formNoBooking').checked = !!v.no_booking;
       document.getElementById('formDish').value = v.signature_dish;
       document.getElementById('formDishReview').value = v.dish_review;
       document.getElementById('formFullReview').value = v.full_review || '';
@@ -2840,8 +2896,34 @@
       closeModal('auditEditorModal');
     }
 
-    function handleSaveAudit(e) {
-      e.preventDefault();
+    
+    var currentDraftsOnlyFilter = false;
+
+    function toggleDraftsFilter() {
+      currentDraftsOnlyFilter = !currentDraftsOnlyFilter;
+      var btn = document.getElementById('btnDraftsFilter');
+      if (btn) {
+        if (currentDraftsOnlyFilter) {
+          btn.style.background = '#18181B';
+          btn.style.color = '#FFFFFF';
+        } else {
+          btn.style.background = '#FEF3C7';
+          btn.style.color = '#92400E';
+        }
+      }
+      applyFilters();
+    }
+
+    function submitAuditForm(targetStatus) {
+      var nameVal = document.getElementById('formName').value.trim();
+      var cityVal = document.getElementById('formCity').value.trim();
+      var dishVal = document.getElementById('formDish').value.trim();
+
+      if (!nameVal || !cityVal || !dishVal) {
+        alert('Пожалуйста, заполните обязательные поля: Название, Город и Фирменное блюдо.');
+        return;
+      }
+
       var editId = document.getElementById('editVenueId').value;
       
       var inputs = document.querySelectorAll('#granularChecklistFields input[type="range"]');
@@ -2871,6 +2953,13 @@
       var addrText = document.getElementById('formAddress').value;
       var distText = document.getElementById('formDistrict').value;
       var chefText = document.getElementById('formChef').value;
+      var phoneEl = document.getElementById('formPhone');
+      var bookEl = document.getElementById('formBookingUrl');
+      var noBookEl = document.getElementById('formNoBooking');
+
+      var phoneText = phoneEl ? phoneEl.value : '';
+      var bookUrlText = bookEl ? bookEl.value : '';
+      var noBookingVal = noBookEl ? noBookEl.checked : false;
 
       var bFood = Math.min(35, Math.round(total * 0.35));
       var bWow = Math.min(15, Math.round(total * 0.15));
@@ -2882,16 +2971,21 @@
       if (editId) {
         for (var i = 0; i < venues.length; i++) {
           if (venues[i].id == editId) {
-            venues[i].name = document.getElementById('formName').value;
+            venues[i].name = nameVal;
             venues[i].format = document.getElementById('formFormat').value;
-            venues[i].city = document.getElementById('formCity').value;
+            venues[i].city = cityVal;
             venues[i].district = distText;
             venues[i].address = addrText;
             venues[i].avg_check = checkVal;
             venues[i].price_tier = priceTier;
             venues[i].segment = document.getElementById('formSegment').value;
             venues[i].chef = chefText;
-            venues[i].signature_dish = document.getElementById('formDish').value;
+            venues[i].phone = phoneText;
+            venues[i].booking_url = bookUrlText;
+            venues[i].no_booking = noBookingVal;
+            venues[i].status = targetStatus;
+
+            venues[i].signature_dish = dishVal;
             venues[i].dish_review = document.getElementById('formDishReview').value;
             venues[i].full_review = fullRevText;
             venues[i].private_notes = privNotes;
@@ -2909,24 +3003,28 @@
       } else {
         var newObj = {
           id: Date.now(),
-          name: document.getElementById('formName').value,
+          name: nameVal,
           format: document.getElementById('formFormat').value,
-          city: document.getElementById('formCity').value,
+          city: cityVal,
           district: distText || "Центральный район",
           address: addrText || "Центральный район",
           avg_check: checkVal,
           price_tier: priceTier,
           segment: document.getElementById('formSegment').value,
           chef: chefText || "Шеф-повар",
-          concept: "Авторская кухня и локальные продукты",
+          concept: "Авторская концепция и локальные продукты",
+          phone: phoneText,
+          booking_url: bookUrlText,
+          no_booking: noBookingVal,
+          status: targetStatus,
           date: new Date().toISOString().split('T')[0],
           scores: { food: bFood, wow: bWow, price: bPrice, service: bService, space: bSpace, sanitation: bSanitation },
           penalties: penalty,
           total_score: total,
           grade: grade,
-          signature_dish: document.getElementById('formDish').value || "Фирменное блюдо",
+          signature_dish: dishVal,
           dish_review: document.getElementById('formDishReview').value || "Выверенный баланс вкуса и аккуратная подача.",
-          full_review: fullRevText || ("Контрольный аудит заведения " + document.getElementById('formName').value + ". Общий балл составил " + total + "/100."),
+          full_review: fullRevText || ("Контрольный аудит заведения " + nameVal + ". Общий балл составил " + total + "/100."),
           private_notes: privNotes || "",
           photos: currentEditingPhotos,
           pros: prosList.length > 0 ? prosList : ["Качественная отдача горячего", "Внимательный сервис"],
@@ -2938,7 +3036,11 @@
 
       saveDB();
       closeAuditEditorModal();
-      alert('Аудит "' + document.getElementById('formName').value + '" успешно сохранен!');
+      if (targetStatus === 'draft') {
+        alert('Аудит сохранен в ЧЕРНОВИКИ. Он доступен только вам в режиме инспектора и не виден обычным посетителям сайта.');
+      } else {
+        alert('Аудит "' + nameVal + '" успешно ОПУБЛИКОВАН в гиде PLANKA GUIDE!');
+      }
     }
 
     // Escape listener
