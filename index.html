@@ -513,6 +513,204 @@
       font-family: ui-monospace, monospace;
     }
 
+  
+    /* MICHELIN HERO */
+    .michelin-hero {
+      position: relative;
+      background: #111113;
+      color: #FFFFFF;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid #EAE6DF;
+    }
+    .michelin-hero-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.8s ease-in-out;
+      opacity: 0.85;
+    }
+    .michelin-hero-bg::before {
+      content: ;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #111113 0%, rgba(17,17,19,0.8) 35%, rgba(17,17,19,0.1) 100%);
+    }
+    .michelin-hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 620px;
+      padding: 3.5rem 0;
+    }
+    .hero-featured-box {
+      position: absolute;
+      bottom: 2rem;
+      left: 1.5rem;
+      z-index: 10;
+      background: rgba(24, 24, 27, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.65rem 1rem;
+      border-radius: 0.4rem;
+      backdrop-filter: blur(6px);
+      font-size: 0.75rem;
+      color: #D4CEBE;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .hero-featured-box:hover {
+      border-color: #FFFFFF;
+    }
+
+    /* TRANSLUCENT PHOTO BUTTON */
+    .michelin-photo-btn {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(0, 0, 0, 0.55);
+      color: #FFFFFF;
+      padding: 0.35rem 0.55rem;
+      border-radius: 0.35rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      z-index: 5;
+    }
+    .michelin-photo-btn:hover {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    /* FULLSCREEN LIGHTBOX */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #111113;
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+    }
+    .lightbox-modal.open {
+      display: flex !important;
+    }
+    .lightbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #FFFFFF;
+      padding-bottom: 1rem;
+    }
+    .lightbox-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .lightbox-main-img {
+      max-width: 90%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 0.35rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    }
+    .lightbox-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      border: none;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+      backdrop-filter: blur(4px);
+    }
+    .lightbox-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #A1A1AA;
+      font-size: 0.8125rem;
+      padding-top: 1rem;
+      font-family: ui-monospace, monospace;
+    }
+
+    /* MOBILE & VERTICAL RESPONSIVENESS */
+    @media (max-width: 768px) {
+      .header-inner {
+        height: auto;
+        padding: 0.85rem 0;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      .header-inner > div {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .michelin-hero {
+        min-height: auto;
+        padding: 2rem 0 3.5rem 0;
+      }
+      .michelin-hero-bg {
+        width: 100%;
+        opacity: 0.4;
+      }
+      .michelin-hero-content {
+        padding: 1rem 0;
+      }
+      .hero-featured-box {
+        position: static;
+        margin-top: 1.5rem;
+      }
+      .grid-cards, .selection-grid {
+        grid-template-columns: 1fr;
+      }
+      div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+      div[style*="grid-template-columns: repeat(4, 1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .modal-box {
+        max-width: 95vw !important;
+        padding: 1.25rem !important;
+      }
+    }
+
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -537,7 +735,7 @@
           <!-- City Dropdown -->
           <div style="position: relative; width: 145px;">
             <select id="cityFilter" onchange="applyFilters()">
-              <option value="all" selected>📍 Все локации</option>
+              <option value="all" selected>Все локации</option>
               <option value="Москва">Москва</option>
               <option value="СПб">Санкт-Петербург</option>
               <option value="Екатеринбург">Екатеринбург</option>
@@ -555,8 +753,8 @@
           </div>
 
           <!-- Inspector Mode Active Badge (Shown ONLY when logged in) -->
-          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.5rem; background: #18181B; color: #D4AF37; padding: 0.35rem 0.85rem; border-radius: 0.35rem; font-size: 0.75rem; font-weight: 800; border: 1px solid #3F3F46;">
-            <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: #D4AF37;"></span>
+          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.5rem; background: #FFFFFF; color: #18181B; padding: 0.35rem 0.85rem; border-radius: 0.35rem; font-size: 0.75rem; font-weight: 800; border: 1.5px solid #18181B;">
+            <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: #18181B;"></span>
             <span>Режим инспектора</span>
             <button onclick="logoutAdmin()" type="button" title="Выйти" style="background: none; border: none; cursor: pointer; color: #D4AF37; font-weight: 900; margin-left: 0.25rem;">✕</button>
           </div>
@@ -566,53 +764,34 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section style="background: #FFFFFF; border-bottom: 1px solid #EAE6DF; padding: 4rem 0 3.5rem 0;">
-    <div class="container text-center" style="max-width: 900px;">
-      
-      <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #FAF8F5; border: 1px solid #E2DDD5; padding: 0.3rem 1rem; border-radius: 9999px; font-size: 0.6875rem; font-weight: 800; color: #18181B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem;">
-        <span style="width: 0.4rem; height: 0.4rem; border-radius: 9999px; background: #18181B;"></span>
-        <span>Стандарт независимого аудита • Без рекламы и предвзятости</span>
+  <!-- MICHELIN HERO WITH AUTO-CAROUSEL BACKGROUND -->
+  <section class="michelin-hero">
+    <div id="heroBgImage" class="michelin-hero-bg"></div>
+    <div class="container" style="width: 100%;">
+      <div class="michelin-hero-content">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 0.3rem 0.85rem; border-radius: 9999px; font-size: 0.6875rem; font-weight: 800; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.25rem; backdrop-filter: blur(4px);">
+          <span>Стандарт независимого аудита • Без рекламы</span>
+        </div>
+        <h1 class="font-serif" style="font-size: 2.75rem; font-weight: 900; letter-spacing: -0.01em; line-height: 1.15; color: #FFFFFF; margin-bottom: 1rem;">
+          Откройте рестораны, отмеченные знаком PLANKA GUIDE
+        </h1>
+        <p style="font-size: 0.9375rem; color: #D4CEBE; max-width: 520px; margin-bottom: 1.75rem; line-height: 1.6;">
+          Независимые инспекции по 100-балльной шкале: физические замеры параметров сервиса, чистота кухни, качество сырья и честность чека.
+        </p>
+        <div style="display: flex; gap: 0.5rem; max-width: 520px;">
+          <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Поиск по заведению, блюду, улице..." style="background: #FFFFFF; color: #18181B; border: none; padding: 0.85rem 1.15rem; border-radius: 0.35rem; font-size: 0.8125rem;">
+          <button onclick="applyFilters()" type="button" class="btn" style="background: #FFFFFF; color: #18181B; border-radius: 0.35rem; padding: 0.85rem 1.35rem;">
+            Найти
+          </button>
+        </div>
       </div>
-
-      <h1 class="font-serif" style="font-size: 3.15rem; font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; color: #18181B; margin-bottom: 1.25rem;">
-        Честный гид по городской гастрономии.
-      </h1>
-
-      <p style="font-size: 1rem; color: #52525B; max-width: 680px; margin: 0 auto 2rem auto; line-height: 1.65;">
-        Инспекторы PLANKA GUIDE оценивают заведения по строгой 100-балльной системе: от качества и свежести сырья до устойчивости столов, честности граммовок, скрытых доплат и чистоты санузлов.
-      </p>
-
-      <!-- Search Input Box -->
-      <div style="max-width: 600px; margin: 0 auto 1.75rem auto; display: flex; gap: 0.5rem;">
-        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Поиск по заведению, фирменному блюду, улице, шефу..." style="padding: 0.85rem 1.25rem; border-radius: 0.4rem; font-size: 0.8125rem;">
-        <button onclick="applyFilters()" type="button" class="btn btn-dark" style="padding: 0.85rem 1.5rem; border-radius: 0.4rem;">
-          Найти
-        </button>
+      <div id="heroFeaturedCard" class="hero-featured-box" onclick="openFeaturedHeroModal()">
+        <span style="background: #FFFFFF; color: #18181B; font-weight: 900; padding: 0.15rem 0.45rem; border-radius: 0.25rem; font-size: 0.6875rem;">ТОП ВЫБОР</span>
+        <div>
+          <strong id="heroFeaturedName" style="color: #FFFFFF; display: block; font-size: 0.8125rem;">White Rabbit</strong>
+          <span id="heroFeaturedMeta" style="font-size: 0.6875rem;">Москва • Знак Качества 96/100</span>
+        </div>
       </div>
-
-      <!-- Format Filter Pills -->
-      <div class="filter-pills">
-        <button onclick="setFormatFilter('all', this)" type="button" class="filter-btn active">
-          Все категории
-        </button>
-        <button onclick="setFormatFilter('Fine Dining', this)" type="button" class="filter-btn">
-          Рестораны & Бистро
-        </button>
-        <button onclick="setFormatFilter('Кофейня', this)" type="button" class="filter-btn">
-          Спешелти-кофейни
-        </button>
-        <button onclick="setFormatFilter('Коктейльный бар', this)" type="button" class="filter-btn">
-          Коктейльные бары
-        </button>
-        <button onclick="setFormatFilter('Столовая', this)" type="button" class="filter-btn">
-          Fast Casual & Столовые
-        </button>
-        <button onclick="setFormatFilter('Пекарня', this)" type="button" class="filter-btn">
-          Ремесленные пекарни
-        </button>
-      </div>
-
     </div>
   </section>
 
@@ -844,13 +1023,31 @@
     </div>
   </div>
 
+    <!-- FULLSCREEN PHOTO LIGHTBOX -->
+  <div id="photoLightbox" class="lightbox-modal">
+    <div class="lightbox-header">
+      <div>
+        <h3 class="font-serif" id="lightboxVenueTitle" style="font-size: 1.25rem; font-weight: 900; color: #FFFFFF;">White Rabbit</h3>
+        <span id="lightboxVenueSubtitle" style="font-size: 0.75rem; color: #A1A1AA;">Фотогалерея инспекции</span>
+      </div>
+      <button onclick="closePhotoLightbox()" type="button" style="background: rgba(255,255,255,0.1); border: none; color: #FFF; width: 2.5rem; height: 2.5rem; border-radius: 9999px; font-size: 1.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+    </div>
+    <div class="lightbox-body">
+      <button class="lightbox-nav-btn lightbox-prev" onclick="prevLightboxPhoto()">‹</button>
+      <img id="lightboxCurrentImg" class="lightbox-main-img" src="" alt="Фото инспекции">
+      <button class="lightbox-nav-btn lightbox-next" onclick="nextLightboxPhoto()">›</button>
+    </div>
+    <div class="lightbox-footer">
+      <span id="lightboxCounter">1 / 1</span>
+    </div>
+  </div>
   <!-- FOOTER -->
   <footer style="background: #18181B; color: #A1A1AA; padding: 3.5rem 0; font-size: 0.75rem; border-top: 1px solid #27272A;">
     <div class="container">
       <div class="flex items-center justify-between" style="flex-wrap: wrap; gap: 1.5rem;">
         
         <div class="flex items-center gap-3">
-          <div style="width: 1.85rem; height: 1.85rem; background: #27272A; color: #D4AF37; border-radius: 0.35rem; display: flex; align-items: center; justify-content: center; font-family: Georgia, serif; font-weight: 900; font-size: 0.95rem; border: 1px solid #3F3F46;">P</div>
+          <div class="brand-mark" style="width: 1.85rem; height: 1.85rem; font-size: 0.95rem;">P</div>
           <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 900; color: #FFF; font-size: 0.95rem; letter-spacing: 0.05em;">PLANKA GUIDE</span>
           <span style="color: #3F3F46;">|</span>
           <span>Независимый ресторанный аудит</span>
@@ -859,7 +1056,7 @@
         <div class="flex items-center gap-6">
           <button onclick="openLegalModal()" type="button" style="background: none; border: none; color: #A1A1AA; cursor: pointer; font-size: 0.75rem;">Политика и Правовой статус</button>
           <!-- Discreet Inspector Login Link -->
-          <button onclick="openPinModal()" type="button" style="background: none; border: none; color: #71717A; cursor: pointer; font-size: 0.75rem; text-decoration: underline;" title="Вход инспектора">🔒 Авторизация инспектора</button>
+          <button onclick="openPinModal()" type="button" style="background: none; border: none; color: #71717A; cursor: pointer; font-size: 0.75rem; text-decoration: underline;" title="Вход инспектора">Авторизация инспектора</button>
         </div>
 
         <div>
@@ -919,7 +1116,7 @@
   <!-- MODAL: SECURE INSPECTOR AUTH -->
   <div id="pinModal" class="modal-overlay" onclick="closePinModal()">
     <div class="modal-box text-center" style="max-width: 380px; padding: 2.25rem;" onclick="event.stopPropagation()">
-      <div style="width: 3.25rem; height: 3.25rem; background: #F5F2EB; border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; font-size: 1.35rem;">🔒</div>
+      <div class="brand-mark" style="margin: 0 auto 1.25rem auto; width: 3rem; height: 3rem; font-size: 1.35rem;">P</div>
       <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: #18181B; margin-bottom: 0.25rem;">Авторизация инспектора</h3>
       <p style="font-size: 0.75rem; color: #71717A; margin-bottom: 1.35rem;">Введите мастер-пароль для доступа к чек-листам и закрытой панели</p>
       
@@ -1477,7 +1674,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v17');
+      var stored = localStorage.getItem('planka_guide_db_v18');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -1498,11 +1695,13 @@
 
     function saveDB() {
       try {
-        localStorage.setItem('planka_guide_db_v17', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v18', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderSelection();
       renderVenues();
+    updateHeroCarousel();
+    startHeroTimer();
     }
 
     function updateStats() {
@@ -1671,10 +1870,14 @@
       }
       if (btn) btn.classList.add('active');
       renderVenues();
+    updateHeroCarousel();
+    startHeroTimer();
     }
 
     function applyFilters() {
       renderVenues();
+    updateHeroCarousel();
+    startHeroTimer();
     }
 
     function toggleQualityFilter() {
@@ -1690,6 +1893,8 @@
         }
       }
       renderVenues();
+    updateHeroCarousel();
+    startHeroTimer();
     }
 
     function resetFilters() {
@@ -1713,6 +1918,8 @@
         else btns[i].classList.remove('active');
       }
       renderVenues();
+    updateHeroCarousel();
+    startHeroTimer();
     }
 
     // Modal Control Functions (Tested V8 Logic)
@@ -1770,6 +1977,103 @@
     function closePhotoLightbox() {
       var lb = document.getElementById('photoLightbox');
       if (lb) lb.classList.remove('open');
+    }
+
+    
+    var activeLightboxVenue = null;
+    var currentLightboxIndex = 0;
+    var heroFeaturedIndex = 0;
+    var heroTimer = null;
+
+    function openPhotoLightboxDirect(venueId, e) {
+      if (e) e.stopPropagation();
+      var target = null;
+      for (var i = 0; i < venues.length; i++) {
+        if (venues[i].id === venueId) { target = venues[i]; break; }
+      }
+      if (!target) return;
+      activeLightboxVenue = target;
+      currentLightboxIndex = 0;
+
+      document.getElementById('lightboxVenueTitle').innerText = target.name;
+      document.getElementById('lightboxVenueSubtitle').innerText = target.city + ' • ' + (target.signature_dish || 'Фирменное блюдо');
+
+      renderLightboxView();
+      var lb = document.getElementById('photoLightbox');
+      if (lb) lb.classList.add('open');
+    }
+
+    function renderLightboxView() {
+      if (!activeLightboxVenue) return;
+      var photos = activeLightboxVenue.photos || [];
+      var mainImg = document.getElementById('lightboxCurrentImg');
+      var counter = document.getElementById('lightboxCounter');
+
+      if (photos.length === 0) {
+        mainImg.setAttribute('src', '');
+        mainImg.style.display = 'none';
+        counter.innerText = 'Фотографии пока не загружены';
+      } else {
+        mainImg.style.display = 'block';
+        mainImg.setAttribute('src', photos[currentLightboxIndex]);
+        counter.innerText = (currentLightboxIndex + 1) + ' / ' + photos.length;
+      }
+    }
+
+    function prevLightboxPhoto() {
+      if (!activeLightboxVenue || !activeLightboxVenue.photos || activeLightboxVenue.photos.length === 0) return;
+      currentLightboxIndex = (currentLightboxIndex - 1 + activeLightboxVenue.photos.length) % activeLightboxVenue.photos.length;
+      renderLightboxView();
+    }
+
+    function nextLightboxPhoto() {
+      if (!activeLightboxVenue || !activeLightboxVenue.photos || activeLightboxVenue.photos.length === 0) return;
+      currentLightboxIndex = (currentLightboxIndex + 1) % activeLightboxVenue.photos.length;
+      renderLightboxView();
+    }
+
+    function closePhotoLightbox() {
+      var lb = document.getElementById('photoLightbox');
+      if (lb) lb.classList.remove('open');
+    }
+
+    function updateHeroCarousel() {
+      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues;
+      if (topVenues.length === 0) return;
+
+      var current = topVenues[heroFeaturedIndex % topVenues.length];
+      var bgEl = document.getElementById('heroBgImage');
+      var nameEl = document.getElementById('heroFeaturedName');
+      var metaEl = document.getElementById('heroFeaturedMeta');
+
+      if (current.photos && current.photos.length > 0) {
+        bgEl.style.backgroundImage = 'url(' + current.photos[0] + ')';
+      } else {
+        bgEl.style.background = 'linear-gradient(135deg, #18181B 0%, #27272A 100%)';
+      }
+
+      if (nameEl) nameEl.innerText = current.name;
+      if (metaEl) metaEl.innerText = current.city + ' • Знак Качества ' + current.total_score + '/100';
+    }
+
+    function openFeaturedHeroModal() {
+      var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
+      if (topVenues.length === 0) topVenues = venues;
+      if (topVenues.length === 0) return;
+      var current = topVenues[heroFeaturedIndex % topVenues.length];
+      openVenueModal(current.id);
+    }
+
+    function startHeroTimer() {
+      if (heroTimer) clearInterval(heroTimer);
+      heroTimer = setInterval(function() {
+        var topVenues = venues.filter(function(v) { return v.total_score >= 90; });
+        if (topVenues.length > 0) {
+          heroFeaturedIndex = (heroFeaturedIndex + 1) % topVenues.length;
+          updateHeroCarousel();
+        }
+      }, 5000);
     }
 
     function openModal(id) {
@@ -1954,6 +2258,8 @@
         closePinModal();
         updateAdminUI();
         renderVenues();
+    updateHeroCarousel();
+    startHeroTimer();
         alert('Режим инспектора PLANKA GUIDE активирован! Вам доступны: детальные чек-листы, загрузка фото прямо в досье и закрытые бизнес-инсайты.');
       } else {
         var errEl = document.getElementById('pinError');
@@ -1966,6 +2272,8 @@
       try { sessionStorage.removeItem('planka_admin_logged'); } catch(err) {}
       updateAdminUI();
       renderVenues();
+    updateHeroCarousel();
+    startHeroTimer();
       alert('Вы вышли из режима инспектора.');
     }
 
@@ -2376,6 +2684,8 @@
     updateStats();
     renderSelection();
     renderVenues();
+    updateHeroCarousel();
+    startHeroTimer();
   </script>
 </body>
 </html>
