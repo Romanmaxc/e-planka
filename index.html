@@ -6,13 +6,9 @@
   <title>PLANKA GUIDE — Независимый ресторанный гид и стандарт качества</title>
   
   <!-- SECURITY META HEADERS & CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; media-src 'self' https: data: blob:; connect-src 'self' https: data: blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data: blob:; media-src 'self' https: data: blob:; connect-src 'self' https: data: blob:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-
-  <!-- EXACT BRAND FAVICON (WHITE BOX WITH BLACK BORDER & CENTERED SERIF 'P') -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='28' y='28' width='456' height='456' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='330' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
-  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='28' y='28' width='456' height='456' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='330' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
 
   <!-- ANTI-CLICKJACKING FRAME-BUSTING DEFENSE -->
   <style id="antiClickjack">body{display:none !important;}</style>
@@ -27,20 +23,24 @@
     }
   </script>
 
+  <!-- EXACT BRAND FAVICON (WHITE RECTANGLE WITH THIN BLACK BORDER & SERIF 'P') -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='24' y='24' width='464' height='464' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-weight='900' font-size='320' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='24' y='24' width='464' height='464' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-weight='900' font-size='320' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
+
   <!-- PWA MANIFEST & MOBILE APPS SUPPORT -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#18181B">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PLANKA GUIDE">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='28' y='28' width='456' height='456' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='330' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%2318181B'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='280' fill='%23C5A880'%3EP%3C/text%3E%3C/svg%3E">
 
   <!-- GOOGLE LUXURY TYPOGRAPHY -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&display=swap" rel="stylesheet">
 
-  <!-- LEAFLET MAP ENGINE -->
+  <!-- LEAFLET MAP ENGINE WITH SRI HASHES -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
 
@@ -115,7 +115,7 @@
     }
 
     .container {
-      max-width: 1340px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 1.5rem;
       width: 100%;
@@ -136,22 +136,24 @@
     }
     
     .desktop-header-bar {
-      height: 4.75rem;
+      height: 4.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
       width: 100%;
+      flex-wrap: nowrap;
     }
 
     .desktop-nav-group {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.15rem;
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      flex-shrink: 0;
     }
     .desktop-nav-group a {
       color: inherit;
@@ -167,15 +169,38 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      flex-wrap: nowrap;
       flex-shrink: 0;
+      flex-wrap: nowrap;
+    }
+
+    /* Dedicated Inspector Sub-Header Bar (Prevents Header Overflow) */
+    .inspector-sub-header {
+      background: #18181B;
+      color: #FFFFFF;
+      border-bottom: 1.5px solid var(--gold-border);
+      padding: 0.5rem 0;
+      font-size: 0.75rem;
+      animation: modalFadeIn 0.2s ease;
+    }
+    .inspector-sub-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .inspector-toolbar-btns {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .mobile-header-wrapper {
       display: none;
       flex-direction: column;
-      gap: 0.65rem;
-      padding: 0.75rem 0;
+      gap: 0.5rem;
+      padding: 0.65rem 0;
       width: 100%;
     }
 
@@ -192,17 +217,17 @@
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.65rem;
       cursor: pointer;
       text-decoration: none;
       flex-shrink: 0;
     }
     .brand-mark {
-      width: 2.25rem;
-      height: 2.25rem;
-      background: var(--bg-surface);
-      color: var(--text-main);
-      border: 1.75px solid var(--text-main);
+      width: 2.15rem;
+      height: 2.15rem;
+      background: #FFFFFF;
+      color: #18181B;
+      border: 1.75px solid #18181B;
       border-radius: 0.35rem;
       display: flex;
       align-items: center;
@@ -212,6 +237,11 @@
       font-size: 1.15rem;
       letter-spacing: -0.02em;
     }
+    body.dark-theme .brand-mark {
+      background: #18181B;
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
     .brand-title-wrap {
       display: flex;
       flex-direction: column;
@@ -219,7 +249,7 @@
     .brand-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 900;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--text-main);
@@ -230,7 +260,7 @@
       font-family: ui-monospace, monospace;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       color: var(--text-muted);
       margin-top: 0.15rem;
     }
@@ -529,7 +559,7 @@
       color: #FFFFFF;
     }
 
-    /* CLEAN LEAFLET MAP */
+    /* CLEAN LEAFLET MAP & REMOVAL OF DEFAULT POLITICAL/FLAG ATTRIBUTION */
     .leaflet-control-attribution a[href*="leafletjs"] {
       display: none !important;
     }
@@ -698,7 +728,6 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      display: block;
     }
     .card:hover .card-cover-media {
       transform: scale(1.06);
@@ -1264,6 +1293,25 @@
     .gap-4 { gap: 1rem; }
     .text-center { text-align: center; }
 
+    /* STOPWATCH TIMER STYLES */
+    .stopwatch-box {
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .stopwatch-display {
+      font-family: ui-monospace, monospace;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--text-main);
+      letter-spacing: 0.05em;
+    }
+
     @media (max-width: 860px) {
       .hero-title {
         font-size: 1.65rem !important;
@@ -1304,7 +1352,8 @@
 </head>
 <body class="min-h-screen flex flex-col">
   <div id="offlineStatusBar" class="offline-status-bar">⚡ Автономный режим — гид доступен без интернета</div>
-<!-- HEADER -->
+
+  <!-- HEADER -->
   <header>
     <div class="container">
       
@@ -1328,9 +1377,9 @@
           <button onclick="openLegalModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.75rem; font-size: 0.6875rem;">Регламент</button>
         </div>
 
-        <!-- Right Action Controls -->
+        <!-- Right Action Controls (Clean Cluster without Overcrowding) -->
         <div class="desktop-actions-group">
-          <div style="width: 140px;">
+          <div style="width: 135px;">
             <select id="cityFilter" onchange="applyFilters()">
               <option value="all" selected>Все локации</option>
               <option value="Москва">Москва</option>
@@ -1339,23 +1388,21 @@
             </select>
           </div>
 
-          <button onclick="openCompareModal()" type="button" id="btnHeaderCompare" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сравнение заведений">
-            <span>⚖ Сравнить</span> <span id="headerCompareBadge" class="font-mono" style="font-weight: 800; color: var(--gold-deep);">(0)</span>
+          <button onclick="openCompareModal()" type="button" id="btnHeaderCompare" class="btn btn-light" style="padding: 0.45rem 0.65rem; font-size: 0.75rem;" title="Сравнение заведений">
+            <span>⚖</span> <span id="headerCompareBadge" class="font-mono" style="font-weight: 800; color: var(--gold-deep);">(0)</span>
           </button>
 
-          <button onclick="installPWAApp()" type="button" id="btnInstallAppDesktop" class="btn btn-light hidden" style="padding: 0.45rem 0.75rem; font-size: 0.6875rem;" title="Установить приложение">
-            📲 Установить
+          <button onclick="installPWAApp()" type="button" id="btnInstallAppDesktop" class="btn btn-light hidden" style="padding: 0.45rem 0.65rem; font-size: 0.6875rem;" title="Установить приложение">
+            📲
           </button>
 
-          <button onclick="toggleTheme()" type="button" id="btnThemeToggleDesktop" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сменить тему">
+          <button onclick="toggleTheme()" type="button" id="btnThemeToggleDesktop" class="btn btn-light" style="padding: 0.45rem 0.65rem; font-size: 0.75rem;" title="Сменить тему">
             <span id="themeIcon">🌙</span>
           </button>
 
-          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.4rem;">
-            <button onclick="openSuggestionsInboxModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">
-              <span>📨 Заявки</span> <span id="adminSugCountBadge" class="font-mono">(0)</span>
-            </button>
-            <div style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg-surface); color: var(--text-main); padding: 0.35rem 0.65rem; border-radius: 0.35rem; font-size: 0.75rem; font-weight: 800; border: 1.5px solid var(--text-main);">
+          <!-- Inspector Mode Badge -->
+          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.35rem;">
+            <div style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg-surface); color: var(--text-main); padding: 0.35rem 0.65rem; border-radius: 0.35rem; font-size: 0.6875rem; font-weight: 800; border: 1.5px solid var(--text-main);">
               <span style="width: 0.45rem; height: 0.45rem; border-radius: 9999px; background: var(--text-main);"></span>
               <span>Инспектор</span>
               <button onclick="logoutAdmin()" type="button" title="Выйти" style="background: none; border: none; cursor: pointer; color: inherit; font-weight: 900; margin-left: 0.2rem;">✕</button>
@@ -1364,7 +1411,7 @@
         </div>
       </div>
 
-      <!-- MOBILE HEADER (2 CLEAN ROWS) -->
+      <!-- MOBILE HEADER -->
       <div class="mobile-header-wrapper">
         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
           <div class="brand-logo" onclick="resetFilters()">
@@ -1403,6 +1450,9 @@
             <button onclick="openSuggestionsInboxModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.55rem; font-size: 0.625rem;">
               📨 Заявки <span id="adminSugCountBadgeMobile">(0)</span>
             </button>
+            <button onclick="openInspectorManualModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.55rem; font-size: 0.625rem;">
+              📘 Пособие
+            </button>
           </div>
 
           <div style="display: flex; align-items: center; gap: 0.85rem; font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding-left: 0.35rem; flex-shrink: 0;">
@@ -1414,6 +1464,29 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- DEDICATED INSPECTOR SUB-HEADER TOOLBAR (APPEARS WHEN LOGGED IN AS INSPECTOR) -->
+    <div id="adminSubHeader" class="inspector-sub-header hidden">
+      <div class="container">
+        <div class="inspector-sub-header-inner">
+          <div class="flex items-center gap-2">
+            <span style="font-family: ui-monospace, monospace; font-size: 0.6875rem; font-weight: 900; background: var(--gold-deep); color: #FFF; padding: 0.15rem 0.45rem; border-radius: 0.2rem;">INSPECTOR DESK</span>
+            <span style="color: #D4CEBE; font-size: 0.75rem;">Панель управления тайного аудита</span>
+          </div>
+
+          <div class="inspector-toolbar-btns">
+            <button onclick="openInspectorManualModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">📘 Руководство инспектора</button>
+            <button onclick="openStopwatchModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem; background: #27272A; color: #FFF; border-color: #3F3F46;">⏱ Секундомер таймингов</button>
+            <button onclick="openNewAuditModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem; background: #27272A; color: #FFF; border-color: #3F3F46;">+ Новый аудит</button>
+            <button onclick="openSuggestionsInboxModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem; background: #27272A; color: #FFF; border-color: #3F3F46;">
+              📨 Заявки <span id="adminSugCountBadgeDesk" class="font-mono">(0)</span>
+            </button>
+            <button onclick="toggleDraftsFilter()" type="button" id="btnDraftsFilter" class="btn btn-draft" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">📁 Черновики <span id="draftsCountBadge">(0)</span></button>
+            <button onclick="openSyncModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem; background: #27272A; color: #FFF; border-color: #3F3F46;">Синхронизация</button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -1430,7 +1503,7 @@
           Откройте рестораны, отмеченные знаком PLANKA GUIDE
         </h1>
         <p class="hero-desc">
-          Независимые инспекции по 100-балльной шкале: замеры параметров сервиса, чистота кухни, качество сырья, урбанистика и честность чека.
+          Независимые инспекции по 100-балльной шкале: физические замеры параметров сервиса, чистота кухни, качество сырья, урбанистика и честность чека.
         </p>
         
         <div class="hero-search-wrap">
@@ -1595,13 +1668,6 @@
 
           <button onclick="toggleFavoritesFilter()" type="button" id="btnFavoritesFilter" class="btn btn-light" style="padding: 0.55rem 0.85rem; font-size: 0.75rem;">♡ Избранное <span id="favoritesCountBadge">(0)</span></button>
 
-          <div id="adminActionGroup" class="hidden" style="align-items: center; gap: 0.5rem;">
-            <button onclick="openInspectorManualModal()" type="button" class="btn btn-gold">📘 Руководство инспектора</button>
-            <button onclick="openNewAuditModal()" type="button" class="btn btn-dark">+ Новый аудит</button>
-            <button onclick="toggleDraftsFilter()" type="button" id="btnDraftsFilter" class="btn btn-draft">📁 Черновики <span id="draftsCountBadge">(0)</span></button>
-            <button onclick="openSyncModal()" type="button" class="btn btn-light">Синхронизация</button>
-          </div>
-
           <button onclick="toggleQualityFilter()" type="button" id="btnQualityFilter" class="btn btn-light">
             <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: var(--text-main); margin-right: 0.35rem;"></span>
             <span>Знак Качества (≥90)</span>
@@ -1664,7 +1730,75 @@
     </div>
   </main>
 
-  <!-- METHODOLOGY SECTION WITH ELEGANT CONTOUR SVG ICONS (1.5px STROKE) -->
+  <!-- MODAL: LIVE AUDIT STOPWATCH (INSPECTOR TIMERS) -->
+  <div id="stopwatchModal" class="modal-overlay" onclick="closeStopwatchModal()">
+    <div class="modal-box" style="max-width: 560px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.85rem; margin-bottom: 1.25rem;">
+        <div>
+          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">ХРОНОМЕТРАЖ ИНСПЕКЦИИ</span>
+          <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: inherit; margin-top: 0.15rem;">Секундомер таймингов тайного гостя</h3>
+        </div>
+        <button onclick="closeStopwatchModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+        <!-- Timer 1: Meet & Menu -->
+        <div class="stopwatch-box">
+          <div>
+            <strong style="font-size: 0.8125rem; display: block; color: var(--text-main);">1. Встреча и подача меню (Т1)</strong>
+            <span style="font-size: 0.6875rem; color: var(--text-muted);">Норматив: до 45 сек с порога</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="timerDisplay1" class="stopwatch-display">00:00</span>
+            <button type="button" onclick="toggleTimer(1)" id="timerBtn1" class="btn btn-dark" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;">Старт</button>
+            <button type="button" onclick="resetTimer(1)" class="btn btn-light" style="padding: 0.4rem 0.5rem; font-size: 0.6875rem;">✕</button>
+          </div>
+        </div>
+
+        <!-- Timer 2: Drinks -->
+        <div class="stopwatch-box">
+          <div>
+            <strong style="font-size: 0.8125rem; display: block; color: var(--text-main);">2. Отдача напитков / воды (Т2)</strong>
+            <span style="font-size: 0.6875rem; color: var(--text-muted);">Норматив: 3–5 минут от заказа</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="timerDisplay2" class="stopwatch-display">00:00</span>
+            <button type="button" onclick="toggleTimer(2)" id="timerBtn2" class="btn btn-dark" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;">Старт</button>
+            <button type="button" onclick="resetTimer(2)" class="btn btn-light" style="padding: 0.4rem 0.5rem; font-size: 0.6875rem;">✕</button>
+          </div>
+        </div>
+
+        <!-- Timer 3: Hot Food -->
+        <div class="stopwatch-box">
+          <div>
+            <strong style="font-size: 0.8125rem; display: block; color: var(--text-main);">3. Отдача горячего блюда (Т3)</strong>
+            <span style="font-size: 0.6875rem; color: var(--text-muted);">Норматив: 12–15 минут</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="timerDisplay3" class="stopwatch-display">00:00</span>
+            <button type="button" onclick="toggleTimer(3)" id="timerBtn3" class="btn btn-dark" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;">Старт</button>
+            <button type="button" onclick="resetTimer(3)" class="btn btn-light" style="padding: 0.4rem 0.5rem; font-size: 0.6875rem;">✕</button>
+          </div>
+        </div>
+
+        <!-- Timer 4: Bill & Receipt -->
+        <div class="stopwatch-box">
+          <div>
+            <strong style="font-size: 0.8125rem; display: block; color: var(--text-main);">4. Расчет и фискальный чек (Т4)</strong>
+            <span style="font-size: 0.6875rem; color: var(--text-muted);">Норматив: до 3 минут от просьбы</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="timerDisplay4" class="stopwatch-display">00:00</span>
+            <button type="button" onclick="toggleTimer(4)" id="timerBtn4" class="btn btn-dark" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;">Старт</button>
+            <button type="button" onclick="resetTimer(4)" class="btn btn-light" style="padding: 0.4rem 0.5rem; font-size: 0.6875rem;">✕</button>
+          </div>
+        </div>
+
+        <button onclick="closeStopwatchModal()" type="button" class="btn btn-dark" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem;">Зафиксировать замеры в протоколе</button>
+      </div>
+    </div>
+  </div>
+<!-- METHODOLOGY SECTION WITH ELEGANT CONTOUR SVG ICONS (1.5px STROKE) -->
   <section id="methodology" style="background: var(--bg-surface); border-top: 1px solid var(--border-color); padding: 4.5rem 0;">
     <div class="container" style="max-width: 1040px;">
       
@@ -1834,85 +1968,38 @@
 
   
   
-  <!-- MODAL: INSPECTOR GRADING MANUAL & POINT CALIBRATION RULES -->
+  
+  <!-- MODAL: RICH INSPECTOR MANUAL & CATEGORY-SPECIFIC SCORING CRITERIA -->
   <div id="inspectorManualModal" class="modal-overlay" onclick="closeInspectorManualModal()">
-    <div class="modal-box" style="max-width: 840px; padding: 2.25rem;" onclick="event.stopPropagation()">
-      <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.35rem;">
+    <div class="modal-box" style="max-width: 900px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.25rem;">
         <div>
-          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">РЕГЛАМЕНТ АУДИТА И ШКАЛА ОЦЕНКИ</span>
-          <h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: inherit; margin-top: 0.15rem;">Методическое пособие инспектора PLANKA GUIDE</h3>
+          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ И РЕГЛАМЕНТ АУДИТА</span>
+          <h3 class="font-serif" style="font-size: 1.45rem; font-weight: 900; color: inherit; margin-top: 0.15rem;">Методическое руководство инспектора PLANKA GUIDE</h3>
         </div>
         <button onclick="closeInspectorManualModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2.25rem; height: 2.25rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
       </div>
 
-      <div style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65; display: flex; flex-direction: column; gap: 1.5rem; max-height: 70vh; overflow-y: auto; padding-right: 0.5rem;">
-        
-        <div style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">
-          <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.35rem;">🎯 Главный принцип инспекции</strong>
-          Инспектор оценивает заведение инкогнито в роли рядового гостя. Оценка строится на объективных физических замерах (тайминг, температура, органолептика) и субъективном восприятии комфорта, без агрессивных заявлений или конфликта интересов.
-        </div>
+      <!-- Format Switcher inside Manual -->
+      <div class="filter-pills" style="justify-content: flex-start; margin-bottom: 1.25rem;">
+        <button onclick="setManualCategory('finedining', this)" type="button" class="filter-btn active manual-tab-btn">🍷 Рестораны & Fine Dining</button>
+        <button onclick="setManualCategory('coffee', this)" type="button" class="filter-btn manual-tab-btn">☕ Спешелти-кофейни</button>
+        <button onclick="setManualCategory('bar', this)" type="button" class="filter-btn manual-tab-btn">🍸 Коктейльные бары</button>
+        <button onclick="setManualCategory('bakery', this)" type="button" class="filter-btn manual-tab-btn">🥐 Ремесленные пекарни</button>
+        <button onclick="setManualCategory('canteen', this)" type="button" class="filter-btn manual-tab-btn">🍲 Fast Casual & Столовые</button>
+      </div>
 
-        <!-- Pillar 1 -->
-        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
-          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Сырье и гастрономия (макс. 35 баллов)</strong>
-          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
-            <li><strong>30–35 б. (Выдающийся уровень):</strong> Свежайшее сырье высшей категории (фермерское мясо, дикая рыба, 100% арабика спешелти, сливочное масло 82.5%), безупречная прожарка, чистая температура подачи.</li>
-            <li><strong>22–29 б. (Хороший стандарт):</strong> Качественные коммерческие ингредиенты, стабильная термическая обработка, незначительные нюансы баланса соли/кислоты.</li>
-            <li><strong>15–21 б. (Базовый уровень):</strong> Ощутимое использование полуфабрикатов или масс-маркет сырья без гастрономической глубины.</li>
-          </ul>
-        </div>
+      <!-- Dynamic Content Area -->
+      <div id="manualContentBody" style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65; max-height: 68vh; overflow-y: auto; padding-right: 0.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+      </div>
 
-        <!-- Pillar 2 -->
-        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
-          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Мастерство кухни и WOW-эффект (макс. 15 баллов)</strong>
-          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
-            <li><strong>13–15 б.:</strong> Яркая авторская подача фирменного блюда, запоминающийся контраст текстур (хруст, нежность, соус), гармоничная сервировочная посуда.</li>
-            <li><strong>9–12 б.:</strong> Аккуратная ресторанная подача без ярко выраженной концептуальной новизны.</li>
-          </ul>
-        </div>
-
-        <!-- Pillar 3 -->
-        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
-          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">3. Честность цены и выход порций (макс. 15 баллов)</strong>
-          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
-            <li><strong>13–15 б.:</strong> Справедливая наценка в своем сегменте, честный заявленный вес блюд, бесплатная вода гостю, прозрачный чек без скрытых доплат.</li>
-            <li><strong>8–12 б.:</strong> Наценка выше средней по рынку, платная вода в премиальном сегменте.</li>
-          </ul>
-        </div>
-
-        <!-- Pillar 4 -->
-        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
-          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">4. Сервис, тайминг и этикет (макс. 15 баллов)</strong>
-          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
-            <li><strong>13–15 б.:</strong> Встреча у входа за 30 сек, подача напитка за 3-5 мин, синхронная отдача горячего за 12–15 мин, знание составов блюд и вин, своевременная уборка посуды.</li>
-            <li><strong>8–12 б.:</strong> Задержка горячего свыше 20 минут, невнимательность официанта при расчете.</li>
-          </ul>
-        </div>
-
-        <!-- Pillar 5 -->
-        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
-          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">5. Среда, урбанистика и акустика (макс. 10 баллов)</strong>
-          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
-            <li><strong>9–10 б.:</strong> Безбарьерный вход, диалог с улицей/террасой, дистанция между столами от 1.2 м, теплый направленный свет, акустический комфорт (можно говорить вполголоса).</li>
-            <li><strong>5–8 б.:</strong> Тесная посадка, шумный эхо-фон, шатающиеся столы, недостаток розеток.</li>
-          </ul>
-        </div>
-
-        <!-- Pillar 6 -->
-        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
-          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">6. Санитария и чистота (макс. 10 баллов)</strong>
-          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
-            <li><strong>9–10 б.:</strong> Стерильное стекло без разводов, идеальный порядок открытой кухни, безупречная чистота и оснащение санузлов в часы пик.</li>
-            <li><strong>5–8 б.:</strong> Пыль на декоративных элементах, переполненные урны в санузле.</li>
-          </ul>
-        </div>
-
-        <button onclick="closeInspectorManualModal()" type="button" class="btn btn-dark" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem;">Понятно, закрыть руководство</button>
+      <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 1rem;" class="flex justify-between items-center">
+        <button onclick="openStopwatchModal()" type="button" class="btn btn-gold" style="font-size: 0.75rem;">⏱ Открыть секундомер таймингов</button>
+        <button onclick="closeInspectorManualModal()" type="button" class="btn btn-dark">Закрыть руководство</button>
       </div>
     </div>
   </div>
-
-  <!-- MODAL: LEGAL POLICY (AIRTIGHT CONSTITUTIONAL & REGULATORY SHIELD) -->
+<!-- MODAL: LEGAL POLICY (AIRTIGHT CONSTITUTIONAL & REGULATORY SHIELD) -->
   <div id="legalModal" class="modal-overlay" onclick="closeLegalModal()">
     <div class="modal-box" style="max-width: 720px; padding: 2.25rem;" onclick="event.stopPropagation()">
       <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.25rem;">
@@ -4286,7 +4373,26 @@
       alert('Вы вышли из режима инспектора.');
     }
 
+    
     function updateAdminUI() {
+      var indD = document.getElementById('adminIndicator');
+      var indM = document.getElementById('adminIndicatorMobile');
+      var subHeader = document.getElementById('adminSubHeader');
+      var badgeDesk = document.getElementById('adminSugCountBadgeDesk');
+      if (badgeDesk) badgeDesk.innerText = '(' + guestSuggestions.length + ')';
+      
+      if (isAdmin) {
+        if (indD) indD.classList.remove('hidden');
+        if (indM) indM.classList.remove('hidden');
+        if (subHeader) subHeader.classList.remove('hidden');
+      } else {
+        if (indD) indD.classList.add('hidden');
+        if (indM) indM.classList.add('hidden');
+        if (subHeader) subHeader.classList.add('hidden');
+      }
+    }
+
+    function old_updateAdminUI() {
       var ind = document.getElementById('adminIndicator');
       var grp = document.getElementById('adminActionGroup');
       if (isAdmin) {
@@ -5289,6 +5395,206 @@
       activeTimerIntervals = {};
       activeTimerSeconds = {};
       renderInspectorTimers();
+    }
+
+    
+    // LIVE STOPWATCH ENGINE (4 INSPECTION TIMERS)
+    var timerIntervals = [null, null, null, null];
+    var timerSeconds = [0, 0, 0, 0];
+    var timerRunning = [false, false, false, false];
+
+    function openStopwatchModal() {
+      openModal('stopwatchModal');
+    }
+    function closeStopwatchModal() {
+      closeModal('stopwatchModal');
+    }
+
+    function toggleTimer(slot) {
+      var idx = slot - 1;
+      var btn = document.getElementById('timerBtn' + slot);
+      if (timerRunning[idx]) {
+        clearInterval(timerIntervals[idx]);
+        timerRunning[idx] = false;
+        if (btn) {
+          btn.innerText = 'Старт';
+          btn.classList.remove('btn-gold');
+          btn.classList.add('btn-dark');
+        }
+      } else {
+        timerRunning[idx] = true;
+        if (btn) {
+          btn.innerText = 'Стоп';
+          btn.classList.remove('btn-dark');
+          btn.classList.add('btn-gold');
+        }
+        timerIntervals[idx] = setInterval(function() {
+          timerSeconds[idx]++;
+          updateTimerDisplay(slot);
+        }, 1000);
+      }
+    }
+
+    function resetTimer(slot) {
+      var idx = slot - 1;
+      clearInterval(timerIntervals[idx]);
+      timerRunning[idx] = false;
+      timerSeconds[idx] = 0;
+      var btn = document.getElementById('timerBtn' + slot);
+      if (btn) {
+        btn.innerText = 'Старт';
+        btn.classList.remove('btn-gold');
+        btn.classList.add('btn-dark');
+      }
+      updateTimerDisplay(slot);
+    }
+
+    function updateTimerDisplay(slot) {
+      var idx = slot - 1;
+      var sec = timerSeconds[idx];
+      var m = Math.floor(sec / 60);
+      var s = sec % 60;
+      var str = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+      var el = document.getElementById('timerDisplay' + slot);
+      if (el) el.innerText = str;
+    }
+
+    // INTERACTIVE INSPECTOR MANUAL CATEGORY SWITCHER & RICH CONTENT
+    var currentManualCategory = 'finedining';
+
+    function openInspectorManualModal() {
+      renderManualContent();
+      openModal('inspectorManualModal');
+    }
+    function closeInspectorManualModal() {
+      closeModal('inspectorManualModal');
+    }
+
+    function setManualCategory(cat, btn) {
+      currentManualCategory = cat;
+      var btns = document.querySelectorAll('.manual-tab-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      if (btn) btn.classList.add('active');
+      renderManualContent();
+    }
+
+    function renderManualContent() {
+      var container = document.getElementById('manualContentBody');
+      if (!container) return;
+
+      var cat = currentManualCategory;
+      var html = '';
+
+      var photoGuidelinesSvg = '<div style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
+        '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.75rem;">📸 Регламент фото- и микровидеофиксации</strong>' +
+        '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">' +
+          '<div style="border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.85rem; background: var(--bg-surface);">' +
+            '<div style="font-weight: 800; font-size: 0.75rem; color: var(--gold-deep); margin-bottom: 0.25rem;">1. Фасад & Входная группа</div>' +
+            '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5;">Съемка под углом 30-45° с тротуара. Фиксация сопряжения с улицей, пандусов и вывески. Без съемки лиц прохожих крупным планом.</p>' +
+          '</div>' +
+          '<div style="border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.85rem; background: var(--bg-surface);">' +
+            '<div style="font-weight: 800; font-size: 0.75rem; color: var(--gold-deep); margin-bottom: 0.25rem;">2. Главное блюдо (Микро-видео)</div>' +
+            '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5;">Ракурс 45°, естественный рассеянный свет. Зацикленное видео 8-12 сек без звука: фокус на глянце соуса, паре и текстуре среза.</p>' +
+          '</div>' +
+          '<div style="border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.85rem; background: var(--bg-surface);">' +
+            '<div style="font-weight: 800; font-size: 0.75rem; color: var(--gold-deep); margin-bottom: 0.25rem;">3. Закрытый чек и санузел</div>' +
+            '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5;">Четкое фото фискального чека со временем заказа и суммами. Скрытая фиксация чистоты раковин и кухни для служебного архива.</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+      if (cat === 'coffee') {
+        html = photoGuidelinesSvg +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Кофейное сырье и Молоко (макс. 35 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>30–35 б.:</strong> 100% арабика класса Specialty свежей обжарки (до 4 недель), молоко 3.2% или качественная безлактозная альтернатива, чистая водоподготовка, температура подачи 60–65°C.</li>' +
+              '<li><strong>22–29 б.:</strong> Коммерческая арабика хорошего качества, незначительный перегрев молока (выше 70°C).</li>' +
+              '<li><strong>Менее 20 б.:</strong> Темная маслянистая обжарка с горечью, дешевое растительное молоко, следы накипи.</li>' +
+            '</ul>' +
+          '</div>' +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. WOW-эффект и Латте-арт (макс. 15 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>13–15 б.:</strong> Четкий контрастный рисунок латте-арт, правильная толстостенная керамика (Loveramics), авторский сезонный напиток с натуральным кордиалом.</li>' +
+            '</ul>' +
+          '</div>' +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">3. Сервис и Пространство (макс. 25 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>Скорость отдачи:</strong> капучино / фильтр до 3–4 минут.</li>' +
+              '<li><strong>Урбанистика:</strong> наличие розеток у столов, устойчивость мебели, бесплатная питьевая вода гостю.</li>' +
+            '</ul>' +
+          '</div>';
+      } else if (cat === 'bar') {
+        html = photoGuidelinesSvg +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Барное сырье, Лед и Кордиалы (макс. 35 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>30–35 б.:</strong> Премиальная база алкоголя, прозрачный монолитный лед без воздушных пузырей, свежевыжатые цитрусовые соки, натуральные кордиалы и биттеры собственного производства.</li>' +
+              '<li><strong>22–29 б.:</strong> Стандартный лед из кубикового льдогенератора, покупные сиропы без авторской доработки.</li>' +
+            '</ul>' +
+          '</div>' +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Харизма и Тайминг барменов (макс. 30 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>Тайминг:</strong> подача первого напитка и стакана воды до 4–5 минут.</li>' +
+              '<li><strong>Этикет:</strong> эрудиция по истории коктейлей, чистая барная станция, отсутствие суеты.</li>' +
+            '</ul>' +
+          '</div>';
+      } else if (cat === 'bakery') {
+        html = photoGuidelinesSvg +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Мука, Масло и Слоистость (макс. 35 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>30–35 б.:</strong> 100% сливочное масло 82.5% (без маргарина), мука высшего сорта, живые закваски долгого брожения, сотни тонких хрустящих слоев в круассане.</li>' +
+            '</ul>' +
+          '</div>' +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Чистота витрин и Скорость кассы (макс. 30 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li>Стерильные стеклянные витрины, использование щипцов для выпечки, крафтовая эко-упаковка.</li>' +
+            '</ul>' +
+          '</div>';
+      } else if (cat === 'canteen') {
+        html = photoGuidelinesSvg +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Свежесть раздачи и Температура (макс. 35 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>30–35 б.:</strong> Первые блюда от 75°C, горячее от 65°C, свежие салаты без заветривания, качественное свежее масло для жарки.</li>' +
+            '</ul>' +
+          '</div>' +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Скорость очереди и Санитария (макс. 30 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li>Прохождение раздачи до 3-4 минут, абсолютно сухие чистые подносы, стерильные приборы.</li>' +
+            '</ul>' +
+          '</div>';
+      } else {
+        // Fine Dining
+        html = photoGuidelinesSvg +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Гастрономия и Сырье (макс. 35 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>30–35 б. (Выдающийся уровень):</strong> Премиальное фермерское сырье, дикая рыба, выдержанное мясо, точнейшая прожарка, гармоничный авторский соус.</li>' +
+              '<li><strong>22–29 б. (Хороший уровень):</strong> Качественные коммерческие ингредиенты, стабильная термическая обработка.</li>' +
+            '</ul>' +
+          '</div>' +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Сервис, Тайминг и Этикет (макс. 15 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>13–15 б.:</strong> Встреча у входа за 30 сек, подача напитка за 3-5 мин, синхронная отдача горячего за 12–15 мин, знание составов блюд и вин.</li>' +
+            '</ul>' +
+          '</div>' +
+          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
+            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">3. Урбанистика и Акустика зала (макс. 10 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<li><strong>9–10 б.:</strong> Безбарьерный вход, дистанция между столами от 1.2 м, теплый направленный свет, акустический комфорт (можно говорить вполголоса).</li>' +
+            '</ul>' +
+          '</div>';
+      }
+
+      container.innerHTML = html;
     }
 
     // Start Application
