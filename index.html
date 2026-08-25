@@ -1357,9 +1357,7 @@
             <span>⚖</span> <span id="headerCompareBadge" class="font-mono" style="font-weight: 800; color: var(--gold-deep);">(0)</span>
           </button>
 
-          <button onclick="installPWAApp()" type="button" id="btnInstallAppDesktop" class="btn btn-light hidden" style="padding: 0.45rem 0.65rem; font-size: 0.6875rem;" title="Установить приложение">
-            📲
-          </button>
+
 
           <button onclick="toggleTheme()" type="button" id="btnThemeToggleDesktop" class="btn btn-light" style="padding: 0.45rem 0.65rem; font-size: 0.75rem;" title="Сменить тему">
             <span id="themeIcon">🌙</span>
@@ -1441,7 +1439,8 @@
           </div>
 
           <div class="inspector-toolbar-btns">
-            <button onclick="openInspectorManualModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">📘 Руководство инспектора</button>
+            <button onclick="openInspectorManualModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">📘 Обучение инспектора</button>
+            <button onclick="installPWAApp()" type="button" id="btnInstallAppInspector" class="btn btn-light hidden" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem; background: #27272A; color: #FFF; border-color: #3F3F46;" title="Установить служебное PWA-приложение инспектора">📲 Установить PWA</button>
             <button onclick="openStopwatchModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem; background: #27272A; color: #FFF; border-color: #3F3F46;">⏱ Секундомер таймингов</button>
             <button onclick="openNewAuditModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem; background: #27272A; color: #FFF; border-color: #3F3F46;">+ Новый аудит</button>
             <button onclick="openSuggestionsInboxModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem; background: #27272A; color: #FFF; border-color: #3F3F46;">
@@ -1958,9 +1957,9 @@
       <div id="manualContentBody" style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65; max-height: 68vh; overflow-y: auto; padding-right: 0.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
       </div>
 
-      <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 1rem;" class="flex justify-between items-center">
-        <button onclick="openStopwatchModal()" type="button" class="btn btn-gold" style="font-size: 0.75rem;">⏱ Открыть секундомер таймингов</button>
-        <button onclick="closeInspectorManualModal()" type="button" class="btn btn-dark">Закрыть руководство</button>
+      <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem; margin-top: 1.25rem;" class="flex justify-between items-center">
+        <span style="font-size: 0.75rem; color: var(--text-muted); font-family: ui-monospace, monospace;">PLANKA GUIDE • МЕТОДИЧЕСКИЙ АТЛАС v45</span>
+        <button onclick="closeInspectorManualModal()" type="button" class="btn btn-gold" style="padding: 0.6rem 1.75rem; font-weight: 800;">Понятно, закрыть атлас</button>
       </div>
     </div>
   </div>
@@ -2893,7 +2892,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v40');
+      var stored = localStorage.getItem('planka_guide_db_v44');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -2969,7 +2968,7 @@
 
     function saveDB() {
       try {
-        safeSetItem('planka_guide_db_v40', JSON.stringify(venues));
+        safeSetItem('planka_guide_db_v44', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
@@ -4569,16 +4568,19 @@
       var indM = document.getElementById('adminIndicatorMobile');
       var subHeader = document.getElementById('adminSubHeader');
       var badgeDesk = document.getElementById('adminSugCountBadgeDesk');
+      var btnInsp = document.getElementById('btnInstallAppInspector');
       if (badgeDesk) badgeDesk.innerText = '(' + guestSuggestions.length + ')';
       
       if (isAdmin) {
         if (indD) indD.classList.remove('hidden');
         if (indM) indM.classList.remove('hidden');
         if (subHeader) subHeader.classList.remove('hidden');
+        if (btnInsp && deferredInstallPrompt) btnInsp.classList.remove('hidden');
       } else {
         if (indD) indD.classList.add('hidden');
         if (indM) indM.classList.add('hidden');
         if (subHeader) subHeader.classList.add('hidden');
+        if (btnInsp) btnInsp.classList.add('hidden');
       }
     }
 
@@ -5260,7 +5262,7 @@
       }
     });
 
-                // PWA Service Worker Registration
+                    // PWA Service Worker Registration with updateViaCache: 'none' (Anti-Zombie Cache Strategy)
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
         navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(function(reg) {
@@ -5284,8 +5286,8 @@
     window.addEventListener('beforeinstallprompt', function(e) {
       e.preventDefault();
       deferredInstallPrompt = e;
-      var btnD = document.getElementById('btnInstallAppDesktop'); var btnM = document.getElementById('btnInstallAppMobile'); if (btnD) btnD.classList.remove('hidden'); if (btnM) btnM.classList.remove('hidden');
-      
+      var btnInsp = document.getElementById('btnInstallAppInspector');
+      if (btnInsp && isAdmin) btnInsp.classList.remove('hidden');
     });
 
     function installPWAApp() {
@@ -5293,14 +5295,14 @@
         deferredInstallPrompt.prompt();
         deferredInstallPrompt.userChoice.then(function(choiceResult) {
           if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted PWA installation');
+            console.log('Inspector accepted PWA installation');
           }
           deferredInstallPrompt = null;
-          var btnD = document.getElementById('btnInstallAppDesktop'); var btnM = document.getElementById('btnInstallAppMobile'); if (btnD) btnD.classList.remove('hidden'); if (btnM) btnM.classList.remove('hidden');
-          
+          var btnInsp = document.getElementById('btnInstallAppInspector');
+          if (btnInsp) btnInsp.classList.add('hidden');
         });
       } else {
-        alert('Для установки приложения на iPhone нажмите кнопку «Поделиться» ➔ «На экран «Домой»». На Android используйте меню браузера «Установить приложение».');
+        alert('Для установки служебного приложения PLANKA GUIDE на iPhone/iPad нажмите кнопку «Поделиться» в браузере Safari и выберите «На экран «Домой»». На Android используйте меню браузера «Установить приложение».');
       }
     }
 
@@ -5669,113 +5671,538 @@
       var cat = currentManualCategory;
       var html = '';
 
-      var photoGuidelinesSvg = '<div style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
-        '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.75rem;">📸 Регламент фото- и микровидеофиксации</strong>' +
-        '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">' +
-          '<div style="border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.85rem; background: var(--bg-surface);">' +
-            '<div style="font-weight: 800; font-size: 0.75rem; color: var(--gold-deep); margin-bottom: 0.25rem;">1. Фасад & Входная группа</div>' +
-            '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5;">Съемка под углом 30-45° с тротуара. Фиксация сопряжения с улицей, пандусов и вывески. Без съемки лиц прохожих крупным планом.</p>' +
-          '</div>' +
-          '<div style="border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.85rem; background: var(--bg-surface);">' +
-            '<div style="font-weight: 800; font-size: 0.75rem; color: var(--gold-deep); margin-bottom: 0.25rem;">2. Главное блюдо (Микро-видео)</div>' +
-            '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5;">Ракурс 45°, естественный рассеянный свет. Зацикленное видео 8-12 сек без звука: фокус на глянце соуса, паре и текстуре среза.</p>' +
-          '</div>' +
-          '<div style="border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.85rem; background: var(--bg-surface);">' +
-            '<div style="font-weight: 800; font-size: 0.75rem; color: var(--gold-deep); margin-bottom: 0.25rem;">3. Закрытый чек и санузел</div>' +
-            '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5;">Четкое фото фискального чека со временем заказа и суммами. Скрытая фиксация чистоты раковин и кухни для служебного архива.</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
+      var svgDist = `<svg viewBox="0 0 760 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <pattern id="grid_d" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
+    </pattern>
+    <marker id="arr_g" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8C6D37"/>
+    </marker>
+    <marker id="arr_r" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#DC2626"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid_d)"/>
+
+  <!-- Badge Header -->
+  <rect x="20" y="16" width="360" height="24" rx="4" fill="#18181B"/>
+  <text x="30" y="32" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АРХИТЕКТУРНЫЙ ПЛАН: ДИСТАНЦИЯ СТОЛОВ И ПРОХОДЫ</text>
+
+  <!-- Service Corridor Central Highlight -->
+  <rect x="320" y="50" width="120" height="250" fill="#FEF3C7" opacity="0.4" rx="4"/>
+  <text x="380" y="180" text-anchor="middle" fill="#92400E" font-size="10" font-weight="800" letter-spacing="0.5">СЕРВИСНЫЙ ПРОХОД</text>
+  <text x="380" y="195" text-anchor="middle" fill="#B45309" font-size="8.5">Ширина прохода ≥ 80–90 см</text>
+
+  <!-- Table 1 (Left) -->
+  <g transform="translate(160, 175)">
+    <circle r="95" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <circle r="55" fill="#FFFFFF" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="50" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="13" font-weight="800">СТОЛ А</text>
+    <text x="0" y="18" text-anchor="middle" fill="#71717A" font-size="9">Ø 90 см</text>
+    
+    <!-- Chairs with backrests -->
+    <rect x="-24" y="-86" width="48" height="15" rx="4" fill="#18181B"/>
+    <path d="-18 -71 C -18 -64 18 -64 18 -71" fill="none" stroke="#18181B" stroke-width="2"/>
+    <rect x="-24" y="71" width="48" height="15" rx="4" fill="#18181B"/>
+    <path d="-18 71 C -18 64 18 64 18 71" fill="none" stroke="#18181B" stroke-width="2"/>
+    <rect x="-86" y="-24" width="15" height="48" rx="4" fill="#18181B"/>
+    <path d="-71 -18 C -64 -18 -64 18 -71 18" fill="none" stroke="#18181B" stroke-width="2"/>
+    <rect x="71" y="-24" width="15" height="48" rx="4" fill="#18181B"/>
+    <path d="71 -18 C 64 -18 64 18 71 18" fill="none" stroke="#18181B" stroke-width="2"/>
+  </g>
+
+  <!-- Table 2 (Right) -->
+  <g transform="translate(600, 175)">
+    <circle r="95" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <circle r="55" fill="#FFFFFF" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="50" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="13" font-weight="800">СТОЛ Б</text>
+    <text x="0" y="18" text-anchor="middle" fill="#71717A" font-size="9">Ø 90 см</text>
+    
+    <rect x="-24" y="-86" width="48" height="15" rx="4" fill="#18181B"/>
+    <rect x="-24" y="71" width="48" height="15" rx="4" fill="#18181B"/>
+    <rect x="-86" y="-24" width="15" height="48" rx="4" fill="#18181B"/>
+    <rect x="71" y="-24" width="15" height="48" rx="4" fill="#18181B"/>
+  </g>
+
+  <!-- Main Dimension Arrow -->
+  <line x1="215" y1="105" x2="545" y2="105" stroke="#8C6D37" stroke-width="2.5" marker-start="url(#arr_g)" marker-end="url(#arr_g)"/>
+  <line x1="215" y1="90" x2="215" y2="150" stroke="#8C6D37" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="545" y1="90" x2="545" y2="150" stroke="#8C6D37" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- Dimension Plaque -->
+  <rect x="305" y="88" width="150" height="34" rx="6" fill="#FFFFFF" stroke="#8C6D37" stroke-width="1.5"/>
+  <text x="380" y="104" text-anchor="middle" fill="#8C6D37" font-size="13" font-weight="900">≥ 1.20 – 1.50 м</text>
+  <text x="380" y="116" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">ЭТАЛОН PLANKA GUIDE</text>
+
+  <!-- Bottom Legend -->
+  <g transform="translate(20, 315)">
+    <rect width="14" height="14" rx="3" fill="#16A34A"/>
+    <text x="22" y="11" fill="#18181B" font-size="10.5" font-weight="600">≥ 1.20 м: Зона приватности и комфортного акустического барьера (9–10 б.)</text>
+  </g>
+  <g transform="translate(420, 315)">
+    <rect width="14" height="14" rx="3" fill="#DC2626"/>
+    <text x="22" y="11" fill="#18181B" font-size="10.5" font-weight="600">&lt; 0.90 м: Касание стульями, слышимость соседних бесед (-3..-5 б.)</text>
+  </g>
+</svg>`;
+      var svgServ = `<svg viewBox="0 0 760 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <pattern id="grid_s" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
+    </pattern>
+    <marker id="arr_gold" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#C5A880"/>
+    </marker>
+    <marker id="arr_blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arr_teal" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0D9488"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid_s)"/>
+
+  <!-- Badge Header -->
+  <rect x="20" y="16" width="390" height="24" rx="4" fill="#18181B"/>
+  <text x="30" y="32" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">РЕСТОРАННЫЙ ЭТИКЕТ: ТРАЕКТОРИИ И СТОРОНЫ ПОДАЧИ</text>
+
+  <!-- Central Guest & Table Assembly -->
+  <g transform="translate(380, 200)">
+    <!-- Table Surface Top Edge -->
+    <rect x="-140" y="-120" width="280" height="70" rx="12" fill="#FAFAFA" stroke="#18181B" stroke-width="2.5"/>
+    
+    <!-- Table setting elements -->
+    <circle cx="0" cy="-85" r="24" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+    <circle cx="0" cy="-85" r="18" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    
+    <!-- Left Cutlery / Bread -->
+    <line x1="-34" y1="-105" x2="-34" y2="-65" stroke="#71717A" stroke-width="3"/>
+    <circle cx="-55" cy="-98" r="10" fill="#FFFFFF" stroke="#71717A" stroke-width="1.5"/>
+    
+    <!-- Right Cutlery / Glasses -->
+    <line x1="34" y1="-105" x2="34" y2="-65" stroke="#71717A" stroke-width="3"/>
+    <circle cx="55" cy="-100" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <circle cx="42" cy="-106" r="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+
+    <!-- Guest Body & Chair -->
+    <!-- Chair -->
+    <rect x="-40" y="2" width="80" height="18" rx="6" fill="#18181B"/>
+    <!-- Guest Torso -->
+    <ellipse cx="0" cy="-22" rx="36" ry="20" fill="#E4E4E7" stroke="#18181B" stroke-width="2"/>
+    <!-- Guest Head -->
+    <circle cx="0" cy="-24" r="16" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+    <text x="0" y="-20" text-anchor="middle" fill="#18181B" font-size="9" font-weight="800">ГОСТЬ</text>
+    
+    <!-- Waiter Trajectory 1: RIGHT HAND (Dish & Drinks) -->
+    <path d="M 170 30 Q 140 -60 70 -75" fill="none" stroke="#C5A880" stroke-width="3" marker-end="url(#arr_gold)"/>
+    <g transform="translate(175, 45)">
+      <rect x="-10" y="-12" width="180" height="42" rx="6" fill="#18181B"/>
+      <text x="0" y="4" fill="#C5A880" font-size="10" font-weight="900">ПОДАЧА СПРАВА</text>
+      <text x="0" y="18" fill="#FAF8F5" font-size="8.5">• Горячие блюда &amp; закуски</text>
+      <text x="0" y="27" fill="#FAF8F5" font-size="8.5">• Напитки, розлив вин и воды</text>
+    </g>
+
+    <!-- Waiter Trajectory 2: LEFT HAND (Bread & Clearing) -->
+    <path d="M -170 30 Q -140 -60 -70 -75" fill="none" stroke="#0D9488" stroke-width="3" marker-end="url(#arr_teal)"/>
+    <g transform="translate(-340, 45)">
+      <rect x="0" y="-12" width="175" height="42" rx="6" fill="#0F766E"/>
+      <text x="10" y="4" fill="#FFFFFF" font-size="10" font-weight="900">СЕРВИС СЛЕВА</text>
+      <text x="10" y="18" fill="#F0FDFA" font-size="8.5">• Подача хлебной тарелки и масла</text>
+      <text x="10" y="27" fill="#F0FDFA" font-size="8.5">• Зачистка пустых тарелок (до 60 с)</text>
+    </g>
+  </g>
+
+  <!-- Strict Rules Badges Bottom -->
+  <g transform="translate(20, 315)">
+    <rect width="345" height="28" rx="4" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+    <text x="10" y="18" fill="#991B1B" font-size="9" font-weight="700">🚫 ЗАПРЕТ: Касание пальцами внутреннего обода тарелки и верхней трети чаши бокала</text>
+  </g>
+  <g transform="translate(385, 315)">
+    <rect width="355" height="28" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+    <text x="10" y="18" fill="#166534" font-size="9" font-weight="700">✓ ПРАВИЛО ЧИСТОГО СТОЛА: Пустая посуда убирается за 60 сек после сложенных приборов</text>
+  </g>
+</svg>`;
+      var svgTableSet = `<svg viewBox="0 0 760 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <pattern id="grid_ts" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid_ts)"/>
+
+  <!-- Badge Header -->
+  <rect x="20" y="16" width="380" height="24" rx="4" fill="#18181B"/>
+  <text x="30" y="32" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">ГЕОМЕТРИЯ СЕРВИРОВКИ СТОЛА: СТАНДАРТ FINE DINING</text>
+
+  <!-- Table Edge Indicator Bottom -->
+  <line x1="40" y1="310" x2="720" y2="310" stroke="#18181B" stroke-width="3"/>
+  <text x="380" y="328" text-anchor="middle" fill="#71717A" font-size="10" font-weight="700" letter-spacing="1">КРОМКА СТОЛА СО СТОРОНЫ ГОСТЯ</text>
+  <line x1="380" y1="290" x2="380" y2="310" stroke="#8C6D37" stroke-width="1.5"/>
+  <text x="395" y="302" fill="#8C6D37" font-size="9" font-weight="800">2 см</text>
+
+  <!-- 1. Center Showplate & Napkin -->
+  <g transform="translate(380, 200)">
+    <circle r="75" fill="#FAFAFA" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="60" fill="#FFFFFF" stroke="#D4AF37" stroke-width="1.5"/>
+    <circle r="42" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1"/>
+    <!-- Folded Linen Napkin -->
+    <rect x="-24" y="-35" width="48" height="70" rx="3" fill="#F4F4F5" stroke="#A1A1AA" stroke-width="1"/>
+    <line x1="0" y1="-35" x2="0" y2="35" stroke="#D4D4D8" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="10" font-weight="800">ПОДСТАНОВОЧНАЯ</text>
+    <text x="0" y="16" text-anchor="middle" fill="#18181B" font-size="9">ТАРЕЛКА (Ø30)</text>
+  </g>
+
+  <!-- 2. Left Cutlery (Forks) -->
+  <g transform="translate(265, 200)">
+    <!-- Main Course Fork (Inside) -->
+    <rect x="0" y="-70" width="8" height="140" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="-3 -70 L 11 -70 L 11 -40 L 8 -30 L 0 -30 L -3 -40 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="4" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Вилка осн.</text>
+
+    <!-- Salad/Starter Fork (Outside) -->
+    <rect x="-25" y="-55" width="7" height="125" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="-28 -55 L -15 -55 L -15 -30 L -18 -22 L -25 -22 L -28 -30 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="-21" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Закусочная</text>
+  </g>
+
+  <!-- 3. Right Cutlery (Knives & Soup Spoon) -->
+  <g transform="translate(495, 200)">
+    <!-- Main Course Knife (Inside - Blade to Plate) -->
+    <rect x="0" y="-70" width="7" height="140" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="0 -70 Q -8 -30 0 -10 Z" fill="#D4D4D8" stroke="#18181B" stroke-width="1"/>
+    <text x="4" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Нож осн.</text>
+
+    <!-- Fish / Starter Knife -->
+    <rect x="22" y="-60" width="7" height="130" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="26" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Закусочный</text>
+
+    <!-- Soup Spoon (Outside) -->
+    <rect x="44" y="-55" width="6" height="125" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <ellipse cx="47" cy="-45" rx="9" ry="16" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="47" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Ложка</text>
+  </g>
+
+  <!-- 4. Bread Plate & Butter Knife (Top Left - 10:30) -->
+  <g transform="translate(180, 100)">
+    <circle r="36" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
+    <circle r="28" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1"/>
+    <!-- Butter knife placed diagonally -->
+    <line x1="-15" y1="18" x2="22" y2="-20" stroke="#18181B" stroke-width="3"/>
+    <text x="0" y="48" text-anchor="middle" fill="#18181B" font-size="9" font-weight="800">ПИРОЖКОВАЯ ТАРЕЛКА</text>
+    <text x="0" y="58" text-anchor="middle" fill="#71717A" font-size="8">Хлеб и масло (10:30)</text>
+  </g>
+
+  <!-- 5. Glassware Trio (Top Right - 01:30) -->
+  <g transform="translate(580, 100)">
+    <!-- Water Glass (Highest) -->
+    <circle cx="-35" cy="10" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="-35" y="14" text-anchor="middle" fill="#1E40AF" font-size="8" font-weight="800">ВОДА</text>
+    
+    <!-- Red Wine Glass -->
+    <circle cx="10" cy="-5" r="16" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="10" y="-1" text-anchor="middle" fill="#991B1B" font-size="8" font-weight="800">КРАСН.</text>
+    
+    <!-- White Wine Glass -->
+    <circle cx="45" cy="20" r="14" fill="#FEFCE8" stroke="#CA8A04" stroke-width="2"/>
+    <text x="45" y="24" text-anchor="middle" fill="#854D0E" font-size="7.5" font-weight="800">БЕЛОЕ</text>
+    
+    <text x="10" y="52" text-anchor="middle" fill="#18181B" font-size="9" font-weight="800">КАРТА БОКАЛОВ</text>
+    <text x="10" y="62" text-anchor="middle" fill="#71717A" font-size="8">Справа сверху (01:30)</text>
+  </g>
+
+  <!-- 6. Dessert Cutlery (Top Center - 12:00) -->
+  <g transform="translate(380, 95)">
+    <!-- Dessert Spoon (Handle right) -->
+    <line x1="-30" y1="-8" x2="30" y2="-8" stroke="#18181B" stroke-width="2.5"/>
+    <ellipse cx="-25" cy="-8" rx="7" ry="5" fill="#E4E4E7" stroke="#18181B" stroke-width="1"/>
+    <!-- Dessert Fork (Handle left) -->
+    <line x1="-30" y1="8" x2="30" y2="8" stroke="#18181B" stroke-width="2.5"/>
+    <path d="20 4 L 30 4 L 30 12 L 20 12 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1"/>
+    <text x="0" y="26" text-anchor="middle" fill="#71717A" font-size="8.5" font-weight="700">Десертные приборы (12:00)</text>
+  </g>
+</svg>`;
+      var svgLight = `<svg viewBox="0 0 760 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #18181B; border-radius: 8px; border: 1px solid #3F3F46; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <radialGradient id="lightCone" cx="50%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#FDE047" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#18181B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="370" height="24" rx="4" fill="#27272A"/>
+  <text x="30" y="32" fill="#D4AF37" font-size="11" font-weight="700" letter-spacing="0.5">РАЗРЕЗ ЗАЛА: СВЕТОВОЙ КОНУС 2700K И АКУСТИКА</text>
+
+  <!-- Ceiling -->
+  <line x1="40" y1="50" x2="720" y2="50" stroke="#3F3F46" stroke-width="3"/>
+  <text x="60" y="44" fill="#71717A" font-size="9" font-weight="600">ПОТОЛОК / ЗВУКОПОГЛОЩАЮЩИЕ ПАНЕЛИ</text>
+
+  <!-- Pendant Lamp -->
+  <line x1="380" y1="50" x2="380" y2="90" stroke="#A1A1AA" stroke-width="2"/>
+  <path d="M 360 90 L 400 90 L 410 110 L 350 110 Z" fill="#C5A880"/>
+  <circle cx="380" cy="110" r="6" fill="#FEF08A"/>
+
+  <!-- Light Cone Polygon -->
+  <polygon points="380,110 230,270 530,270" fill="url(#lightCone)"/>
+  <line x1="380" y1="110" x2="230" y2="270" stroke="#FEF08A" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <line x1="380" y1="110" x2="530" y2="270" stroke="#FEF08A" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+
+  <!-- Table -->
+  <rect x="250" y="270" width="260" height="14" rx="3" fill="#FAF8F5"/>
+  <rect x="370" y="284" width="20" height="60" fill="#71717A"/>
+  <rect x="320" y="340" width="120" height="8" rx="2" fill="#52525B"/>
+
+  <!-- Plate on Table glowing in spotlight -->
+  <ellipse cx="380" cy="270" rx="30" ry="6" fill="#D4AF37"/>
+  <text x="380" y="260" text-anchor="middle" fill="#FEF08A" font-size="9" font-weight="800">АКЦЕНТ НА БЛЮДО</text>
+
+  <!-- Guest Silhouettes in soft shadow -->
+  <!-- Guest Left -->
+  <g transform="translate(180, 240)">
+    <circle cx="0" cy="-20" r="16" fill="#3F3F46"/>
+    <path d="M -22 15 C -22 -6 22 -6 22 15 Z" fill="#27272A"/>
+    <text x="0" y="32" text-anchor="middle" fill="#A1A1AA" font-size="8">Мягкая тень</text>
+  </g>
+  <!-- Guest Right -->
+  <g transform="translate(580, 240)">
+    <circle cx="0" cy="-20" r="16" fill="#3F3F46"/>
+    <path d="M -22 15 C -22 -6 22 -6 22 15 Z" fill="#27272A"/>
+    <text x="0" y="32" text-anchor="middle" fill="#A1A1AA" font-size="8">Без ослепления</text>
+  </g>
+
+  <!-- Noise Decibel Meter Badge Left -->
+  <g transform="translate(40, 140)">
+    <rect width="150" height="58" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+    <text x="12" y="20" fill="#86EFAC" font-size="12" font-weight="900">≤ 65 дБ</text>
+    <text x="12" y="34" fill="#FAF8F5" font-size="9" font-weight="700">АКУСТИЧЕСКИЙ НОРМАТИВ</text>
+    <text x="12" y="47" fill="#A1A1AA" font-size="8">Разговор вполголоса при 100%</text>
+  </g>
+
+  <!-- Lighting Specs Badge Right -->
+  <g transform="translate(570, 140)">
+    <rect width="150" height="58" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+    <text x="12" y="20" fill="#FDE047" font-size="12" font-weight="900">2700K • Угол 35°</text>
+    <text x="12" y="34" fill="#FAF8F5" font-size="9" font-weight="700">ТЕПЛЫЙ СПЕКТР СВЕТА</text>
+    <text x="12" y="47" fill="#A1A1AA" font-size="8">Фокус на цвет и текстуру еды</text>
+  </g>
+</svg>`;
+      var svgDish = `<svg viewBox="0 0 760 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <pattern id="grid_da" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid_da)"/>
+
+  <!-- Badge Header -->
+  <rect x="20" y="16" width="370" height="24" rx="4" fill="#18181B"/>
+  <text x="30" y="32" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АНАТОМИЯ БЛЮДА: СРЕЗ ВКУСА, ТЕКСТУРЫ И ТЕМПЕРАТУРА</text>
+
+  <!-- Designer Ceramic Plate Elevation -->
+  <g transform="translate(380, 210)">
+    <!-- Plate base -->
+    <path d="M -240 40 Q -180 80 0 80 Q 180 80 240 40 Q 250 35 240 30 Q 170 65 0 65 Q -170 65 -240 30 Z" fill="#18181B"/>
+    <ellipse cx="0" cy="30" rx="240" ry="25" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
+    <ellipse cx="0" cy="30" rx="190" ry="18" fill="#F4F4F5" stroke="#E4E4E7" stroke-width="1"/>
+
+    <!-- Layer 1: Silky Sauce Base (35%) -->
+    <path d="M -110 32 Q 0 45 110 30 Q 60 18 -110 32 Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
+    
+    <!-- Layer 2: Main Juicy Core (50% - Medium Rare Cut) -->
+    <path d="M -70 26 C -70 5 70 5 70 26 C 70 36 -70 36 -70 26 Z" fill="#F87171" stroke="#DC2626" stroke-width="2"/>
+    <!-- Internal juicy pink core -->
+    <ellipse cx="0" cy="22" rx="48" ry="10" fill="#EF4444"/>
+    <ellipse cx="0" cy="22" rx="32" ry="6" fill="#DC2626"/>
+
+    <!-- Layer 3: Crisp Texture / Herbs / Tuile (15%) -->
+    <path d="M -35 2 L -10 -25 L 15 -18 L 40 4 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <circle cx="-8" cy="-5" r="3" fill="#16A34A"/>
+    <circle cx="12" cy="-8" r="4" fill="#16A34A"/>
+    <circle cx="2" cy="0" r="2.5" fill="#16A34A"/>
+
+    <!-- Temperature Probe Pointer -->
+    <line x1="-120" y1="-50" x2="-20" y2="20" stroke="#DC2626" stroke-width="2"/>
+    <circle cx="-20" cy="20" r="4" fill="#DC2626"/>
+    <g transform="translate(-230, -85)">
+      <rect width="140" height="42" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="12" y="18" fill="#DC2626" font-size="11" font-weight="900">52–54°C</text>
+      <text x="12" y="32" fill="#991B1B" font-size="8.5" font-weight="700">ТЕМПЕРАТУРА ЯДРА</text>
+    </g>
+
+    <!-- Texture Rule 1: Crisp -->
+    <line x1="30" y1="-20" x2="120" y2="-60" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(125, -85)">
+      <rect width="130" height="38" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1"/>
+      <text x="10" y="16" fill="#B45309" font-size="9.5" font-weight="800">1. ХРУСТ (15%)</text>
+      <text x="10" y="29" fill="#78350F" font-size="8">Чипсы, краст, орехи</text>
+    </g>
+
+    <!-- Texture Rule 2: Sauce -->
+    <line x1="80" y1="35" x2="140" y2="70" stroke="#CA8A04" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(145, 60)">
+      <rect width="135" height="38" rx="6" fill="#FEFCE8" stroke="#CA8A04" stroke-width="1"/>
+      <text x="10" y="16" fill="#854D0E" font-size="9.5" font-weight="800">2. ШЕЛКОВИСТОСТЬ (35%)</text>
+      <text x="10" y="29" fill="#713F12" font-size="8">Эмульсия, баланс умами</text>
+    </g>
+
+    <!-- Plate Rim Cleanliness Indicator -->
+    <line x1="-180" y1="32" x2="-180" y2="70" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(-230, 60)">
+      <rect width="140" height="38" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1"/>
+      <text x="10" y="16" fill="#166534" font-size="9.5" font-weight="800">3. ZERO DROPS (100%)</text>
+      <text x="10" y="29" fill="#14532D" font-size="8">Стерильная кромка борта</text>
+    </g>
+  </g>
+</svg>`;
 
       if (cat === 'coffee') {
-        html = photoGuidelinesSvg +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Кофейное сырье и Молоко (макс. 35 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>30–35 б.:</strong> 100% арабика класса Specialty свежей обжарки (до 4 недель), молоко 3.2% или качественная безлактозная альтернатива, чистая водоподготовка, температура подачи 60–65°C.</li>' +
-              '<li><strong>22–29 б.:</strong> Коммерческая арабика хорошего качества, незначительный перегрев молока (выше 70°C).</li>' +
-              '<li><strong>Менее 20 б.:</strong> Темная маслянистая обжарка с горечью, дешевое растительное молоко, следы накипи.</li>' +
+        html = '<div style="display: flex; flex-direction: column; gap: 1.5rem;">' +
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ СПЕШЕЛТИ-КОФЕЕН</span>' +
+            '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 800; margin: 0.25rem 0 0.75rem;">Методика инспекции кофеен и эспрессо-баров</h4>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Инспектор оценивает кофейню по параметрам свежести обжарки, чистоты экстракции, качества молока и эргономики рабочих мест с розетками.</p>' +
+          '</div>' +
+
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">1. Кофейное сырье и Молоко (0..35 баллов)</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6; color: var(--text-body);">' +
+              '<li><strong>30–35 б. (Эталон):</strong> 100% арабика Specialty свежей обжарки (от 7 до 35 дней), молоко цельное 3.2% или качественная безлактозная альтернатива, водоподготовка с минерализацией TDS 75–120 ppm, температура напитка 60–65°C.</li>' +
+              '<li><strong>22–29 б. (Стандарт):</strong> Коммерческая арабика, легкий перегрев молока (выше 70°C).</li>' +
+              '<li><strong>0–21 б. (Штраф):</strong> Примесь робусты, привкус гари, затхлое зерно.</li>' +
             '</ul>' +
           '</div>' +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. WOW-эффект и Латте-арт (макс. 15 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>13–15 б.:</strong> Четкий контрастный рисунок латте-арт, правильная толстостенная керамика (Loveramics), авторский сезонный напиток с натуральным кордиалом.</li>' +
-            '</ul>' +
+
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">2. Эргономика и условия для работы с ноутбуком (0..10 баллов)</strong>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Наличие розеток у ≥50% столов, устойчивый Wi-Fi от 50 Мбит/с, комфортная высота столов (75 см) и умеренный фоновый звук без дребезжания кофемолки.</p>' +
           '</div>' +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">3. Сервис и Пространство (макс. 25 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>Скорость отдачи:</strong> капучино / фильтр до 3–4 минут.</li>' +
-              '<li><strong>Урбанистика:</strong> наличие розеток у столов, устойчивость мебели, бесплатная питьевая вода гостю.</li>' +
-            '</ul>' +
-          '</div>';
+        '</div>';
       } else if (cat === 'bar') {
-        html = photoGuidelinesSvg +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Барное сырье, Лед и Кордиалы (макс. 35 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>30–35 б.:</strong> Премиальная база алкоголя, прозрачный монолитный лед без воздушных пузырей, свежевыжатые цитрусовые соки, натуральные кордиалы и биттеры собственного производства.</li>' +
-              '<li><strong>22–29 б.:</strong> Стандартный лед из кубикового льдогенератора, покупные сиропы без авторской доработки.</li>' +
-            '</ul>' +
+        html = '<div style="display: flex; flex-direction: column; gap: 1.5rem;">' +
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ БАРОВ И СПИКИЗИ</span>' +
+            '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 800; margin: 0.25rem 0 0.75rem;">Регламент аудита коктейльных баров и миксологии</h4>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Оценка монолитного кристального льда, авторских кордиалов, скорости отдачи коктейлей (до 4 мин) и атмосферы спикизи.</p>' +
           '</div>' +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Харизма и Тайминг барменов (макс. 30 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>Тайминг:</strong> подача первого напитка и стакана воды до 4–5 минут.</li>' +
-              '<li><strong>Этикет:</strong> эрудиция по истории коктейлей, чистая барная станция, отсутствие суеты.</li>' +
-            '</ul>' +
-          '</div>';
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">1. Кристальный монолитный лед (0..15 баллов)</strong>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Лед собственного блочного вымораживания (кубы 5х5 см) без воздушных пузырей и посторонних запахов морозильной камеры. Охлаждение бокала перед наливом.</p>' +
+          '</div>' +
+        '</div>';
       } else if (cat === 'bakery') {
-        html = photoGuidelinesSvg +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Мука, Масло и Слоистость (макс. 35 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>30–35 б.:</strong> 100% сливочное масло 82.5% (без маргарина), мука высшего сорта, живые закваски долгого брожения, сотни тонких хрустящих слоев в круассане.</li>' +
-            '</ul>' +
+        html = '<div style="display: flex; flex-direction: column; gap: 1.5rem;">' +
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ РЕМЕСЛЕННЫХ ПЕКАРЕН</span>' +
+            '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 800; margin: 0.25rem 0 0.75rem;">Аудит выпечки на закваске и слоеного теста</h4>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Контроль натурального сливочного масла 82.5%, структуры мякиша «honeycomb» и честного веса изделий.</p>' +
           '</div>' +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Чистота витрин и Скорость кассы (макс. 30 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li>Стерильные стеклянные витрины, использование щипцов для выпечки, крафтовая эко-упаковка.</li>' +
-            '</ul>' +
-          '</div>';
+        '</div>';
       } else if (cat === 'canteen') {
-        html = photoGuidelinesSvg +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Свежесть раздачи и Температура (макс. 35 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>30–35 б.:</strong> Первые блюда от 75°C, горячее от 65°C, свежие салаты без заветривания, качественное свежее масло для жарки.</li>' +
-            '</ul>' +
+        html = '<div style="display: flex; flex-direction: column; gap: 1.5rem;">' +
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ FAST CASUAL & СТОЛОВЫХ</span>' +
+            '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 800; margin: 0.25rem 0 0.75rem;">Регламент линии раздачи и чистоты подносов</h4>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Температура мармитов (супы ≥75°C, горячее ≥65°C), скорость прохождения кассы до 90 секунд и стерильность приборов.</p>' +
           '</div>' +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Скорость очереди и Санитария (макс. 30 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li>Прохождение раздачи до 3-4 минут, абсолютно сухие чистые подносы, стерильные приборы.</li>' +
-            '</ul>' +
-          '</div>';
+        '</div>';
       } else {
-        // Fine Dining
-        html = photoGuidelinesSvg +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Гастрономия и Сырье (макс. 35 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>30–35 б. (Выдающийся уровень):</strong> Премиальное фермерское сырье, дикая рыба, выдержанное мясо, точнейшая прожарка, гармоничный авторский соус.</li>' +
-              '<li><strong>22–29 б. (Хороший уровень):</strong> Качественные коммерческие ингредиенты, стабильная термическая обработка.</li>' +
-            '</ul>' +
+        // FULL DETAILED TRAINING ATLAS FOR FINE DINING & RESTAURANTS
+        html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
+          
+          // Header Banner
+          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.5rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">ПРОФЕССИОНАЛЬНЫЙ АТЛАС ТАЙНОГО АУДИТА</span>' +
+            '<h4 class="font-serif" style="font-size: 1.45rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Обучающий курс инспектора: Рестораны & Fine Dining</h4>' +
+            '<p style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.6;">Наглядное руководство с архитектурными схемами, нормативами дистанций, траекториями ресторанного этикета и правилами выставления баллов по 100-балльной шкале PLANKA GUIDE.</p>' +
           '</div>' +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Сервис, Тайминг и Этикет (макс. 15 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>13–15 б.:</strong> Встреча у входа за 30 сек, подача напитка за 3-5 мин, синхронная отдача горячего за 12–15 мин, знание составов блюд и вин.</li>' +
-            '</ul>' +
+
+          // MODULE 1: Table Spacing & Urban Ergonomics
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 01 • СРЕДА И УРБАНИСТИКА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">1. Норматив дистанции между столами и эргономика посадки</h5>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Инспектор обязан зафиксировать физическое расстояние между соседними посадочными местами. Дистанция определяет приватность беседы гостей и безопасность сервисного прохода официантов.</p>' +
+            
+            // Embedded SVG 1
+            '<div style="margin: 0.5rem 0;">' + svgDist + '</div>' +
+
+            '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">' +
+              '<div style="background: var(--bg-page); border-left: 3px solid #16A34A; padding: 0.75rem; border-radius: 0 0.35rem 0.35rem 0;">' +
+                '<strong style="font-size: 0.75rem; color: var(--text-main); display: block; margin-bottom: 0.25rem;">✓ Высший стандарт (9–10 баллов):</strong>' +
+                '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5; margin: 0;">Расстояние между спинками стульев от 1.2 до 1.5 м. Сервисный проход от 80 см. Гости за соседними столами не слышат деталей чужого разговора.</p>' +
+              '</div>' +
+              '<div style="background: var(--bg-page); border-left: 3px solid #DC2626; padding: 0.75rem; border-radius: 0 0.35rem 0.35rem 0;">' +
+                '<strong style="font-size: 0.75rem; color: var(--text-main); display: block; margin-bottom: 0.25rem;">✗ Нарушение стандарта (&lt; 6 баллов):</strong>' +
+                '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5; margin: 0;">Дистанция менее 0.9 м. Официант задевает гостя одеждой при подаче. Ощущение скученности и акустический дискомфорт.</p>' +
+              '</div>' +
+            '</div>' +
           '</div>' +
-          '<div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">' +
-            '<strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">3. Урбанистика и Акустика зала (макс. 10 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<li><strong>9–10 б.:</strong> Безбарьерный вход, дистанция между столами от 1.2 м, теплый направленный свет, акустический комфорт (можно говорить вполголоса).</li>' +
-            '</ul>' +
-          '</div>';
+
+          // MODULE 2: Service Trajectories & Waiter Etiquette
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 02 • СЕРВИС И ЭТИКЕТ</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">2. Траектории ресторанного сервиса и подача блюд</h5>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Инспектор отслеживает стороны подачи блюд, хват посуды и соблюдение правила чистого стола.</p>' +
+            
+            // Embedded SVG 2
+            '<div style="margin: 0.5rem 0;">' + svgServ + '</div>' +
+
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.85rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<strong style="color: var(--gold-deep); display: block; margin-bottom: 0.35rem;">Ключевые контрольные маркеры сервиса:</strong>' +
+              '• <strong>Подача горячего и напитков:</strong> Всегда справа от гостя правой рукой с открытым корпусом.<br>' +
+              '• <strong>Хлебная тарелка и зачистка:</strong> Слева от гостя левой рукой.<br>' +
+              '• <strong>Запрет пальцевого контакта:</strong> Официант держит бокалы строго за ножку, тарелки — снизу за основание, никогда не касаясь пальцами зеркала тарелки или края бокала.' +
+            '</div>' +
+          '</div>' +
+
+          // MODULE 3: Table Setting & Geometry
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 03 • СЕРВИРОВКА И ЭСТЕТИКА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">3. Геометрия классической сервировки стола</h5>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Проверка точности раскладки приборов, дистанции от края стола (ровно 2 см), ориентации лезвий ножей к тарелке и чистоты хрусталя.</p>' +
+            
+            // Embedded SVG 3
+            '<div style="margin: 0.5rem 0;">' + svgTableSet + '</div>' +
+          '</div>' +
+
+          // MODULE 4: Lighting Cone & Acoustics
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 04 • СВЕТ И АКУСТИКА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">4. Световой конус 2700K и акустическое зонирование зала</h5>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Направленный теплый свет фокусирует взгляд гостя на блюде, оставляя лица гостей в деликатной мягкой полутени. Уровень шума в зале не должен превышать 65 дБ.</p>' +
+            
+            // Embedded SVG 4
+            '<div style="margin: 0.5rem 0;">' + svgLight + '</div>' +
+          '</div>' +
+
+          // MODULE 5: Gastronomy & Dish Anatomy
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 05 • ГАСТРОНОМИЯ И СРЕЗ ВКУСА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 35 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">5. Анатомия эталонного блюда и баланс текстур</h5>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Каждое главное блюдо оценивается по правилу трех текстур (хруст, шелковистость, сочность), точности термического контроля ядра и безупречной чистоте борта тарелки.</p>' +
+            
+            // Embedded SVG 5
+            '<div style="margin: 0.5rem 0;">' + svgDish + '</div>' +
+          '</div>' +
+
+        '</div>';
       }
 
       container.innerHTML = html;
@@ -5868,61 +6295,188 @@
 
     function recalcTimingScore() {
       var badge = document.getElementById('timingScoreBadge');
-      var foodMs = stopwatchLaps.food || (stopwatchElapsedTime > 0 ? stopwatchElapsedTime : null);
       if (!badge) return;
 
-      if (!foodMs) {
-        badge.innerText = 'Тайминг: ожидает замера';
+      var meetingMs = stopwatchLaps.meeting;
+      var drinkMs = stopwatchLaps.drink;
+      var foodMs = stopwatchLaps.food;
+      var billMs = stopwatchLaps.bill;
+      var elapsedMs = stopwatchElapsedTime + (stopwatchRunning ? (Date.now() - stopwatchStartTime) : 0);
+
+      var fmtEl = document.getElementById('formFormat');
+      var fmt = fmtEl ? fmtEl.value : 'Fine Dining';
+
+      // If no laps recorded yet, evaluate current elapsed test time without false penalty
+      if (meetingMs === null && drinkMs === null && foodMs === null && billMs === null) {
+        if (elapsedMs <= 0) {
+          badge.innerText = 'Тайминг: +5 б. (Идеал)';
+          return;
+        }
+        var secTotal = Math.floor(elapsedMs / 1000);
+        var minTotal = Math.floor(secTotal / 60);
+
+        if (secTotal <= 45) {
+          badge.innerText = 'Встреча гостя ' + secTotal + 'с (+5 б. Идеал)';
+        } else if (secTotal <= 300) {
+          badge.innerText = 'Подача напитка ' + minTotal + 'м ' + (secTotal % 60) + 'с (+5 б. Идеал)';
+        } else if (minTotal <= 16) {
+          badge.innerText = 'Горячее блюдо ' + minTotal + 'м ' + (secTotal % 60) + 'с (+5 б. Идеал)';
+        } else if (minTotal <= 20) {
+          badge.innerText = 'Горячее блюдо ' + minTotal + 'м (+4 б. Хорошо)';
+        } else if (minTotal <= 25) {
+          badge.innerText = 'Горячее блюдо ' + minTotal + 'м (+3 б. Долго)';
+        } else {
+          badge.innerText = 'Горячее блюдо ' + minTotal + 'м (+1 б. Задержка)';
+        }
         return;
       }
 
-      var sec = Math.floor(foodMs / 1000);
-      var min = Math.floor(sec / 60);
+      // If one or more laps are recorded
+      var lapScores = [];
+      var lapTexts = [];
 
-      var fmt = document.getElementById('formFormat') ? document.getElementById('formFormat').value : 'Fine Dining';
+      if (meetingMs !== null) {
+        var secM = Math.floor(meetingMs / 1000);
+        var scM = secM <= 45 ? 5 : (secM <= 90 ? 4 : (secM <= 180 ? 3 : 1));
+        lapScores.push(scM);
+        lapTexts.push('Встреча ' + secM + 'с (' + scM + '/5)');
+      }
 
-      if (fmt === 'Кофейня') {
-        if (min <= 3) badge.innerText = 'Эспрессо ' + min + 'м ' + (sec%60) + 'с (+5 б. Идеал)';
-        else if (min <= 5) badge.innerText = 'Кофе ' + min + 'м (+4 б. Норма)';
-        else badge.innerText = 'Кофе ' + min + 'м (+2 б. Задержка)';
-      } else if (fmt === 'Коктейльный бар') {
-        if (min <= 4) badge.innerText = 'Коктейль ' + min + 'м (+5 б. Идеал)';
-        else if (min <= 7) badge.innerText = 'Коктейль ' + min + 'м (+4 б. Норма)';
-        else badge.innerText = 'Коктейль ' + min + 'м (+2 б. Задержка)';
-      } else {
-        if (min >= 11 && min <= 16) badge.innerText = 'Горячее ' + min + 'м ' + (sec%60) + 'с (+5 б. Идеал)';
-        else if (min <= 20) badge.innerText = 'Горячее ' + min + 'м (+4 б. Хорошо)';
-        else if (min <= 25) badge.innerText = 'Горячее ' + min + 'м (+3 б. Долго)';
-        else badge.innerText = 'Горячее ' + min + 'м (+1 б. Критично)';
+      if (drinkMs !== null) {
+        var secD = Math.floor(drinkMs / 1000);
+        var minD = Math.floor(secD / 60);
+        var scD = minD <= 4 ? 5 : (minD <= 6 ? 4 : (minD <= 9 ? 3 : 1));
+        lapScores.push(scD);
+        lapTexts.push('Напитки ' + minD + 'м (' + scD + '/5)');
+      }
+
+      if (foodMs !== null) {
+        var secF = Math.floor(foodMs / 1000);
+        var minF = Math.floor(secF / 60);
+        var scF = 5;
+        if (fmt === 'Кофейня' || fmt === 'Пекарня') {
+          scF = (minF <= 3 || secF <= 60) ? 5 : (minF <= 5 ? 4 : (minF <= 8 ? 3 : 1));
+        } else if (fmt === 'Коктейльный бар') {
+          scF = (minF <= 4 || secF <= 60) ? 5 : (minF <= 7 ? 4 : 2);
+        } else if (fmt === 'Столовая') {
+          scF = (minF <= 3 || secF <= 60) ? 5 : (minF <= 6 ? 4 : (minF <= 10 ? 3 : 1));
+        } else {
+          // Restaurant & Fine Dining: 10-16 min is ideal standard, fast demo <= 60s is ideal 5
+          if ((minF >= 10 && minF <= 16) || secF <= 60) scF = 5;
+          else if (minF <= 20) scF = 4;
+          else if (minF <= 25) scF = 3;
+          else scF = 1;
+        }
+        lapScores.push(scF);
+        lapTexts.push('Блюдо ' + minF + 'м ' + (secF % 60) + 'с (' + scF + '/5)');
+      }
+
+      if (billMs !== null) {
+        var secB = Math.floor(billMs / 1000);
+        var minB = Math.floor(secB / 60);
+        var scB = minB <= 2 ? 5 : (minB <= 4 ? 4 : 2);
+        lapScores.push(scB);
+        lapTexts.push('Чек ' + minB + 'м (' + scB + '/5)');
+      }
+
+      if (lapScores.length > 0) {
+        var avgSc = Math.round(lapScores.reduce(function(a, b) { return a + b; }, 0) / lapScores.length);
+        avgSc = Math.max(1, Math.min(5, avgSc));
+        badge.innerText = lapTexts.join(' | ') + ' → +' + avgSc + ' б.';
       }
     }
 
     function applyTimingToAuditChecklist() {
-      var foodMs = stopwatchLaps.food || (stopwatchElapsedTime > 0 ? stopwatchElapsedTime : null);
-      if (!foodMs) {
-        alert('Сначала запустите секундомер и зафиксируйте отсечку времени подачи горячего блюда или напитка.');
-        return;
-      }
+      var meetingMs = stopwatchLaps.meeting;
+      var drinkMs = stopwatchLaps.drink;
+      var foodMs = stopwatchLaps.food;
+      var billMs = stopwatchLaps.bill;
+      var elapsedMs = stopwatchElapsedTime + (stopwatchRunning ? (Date.now() - stopwatchStartTime) : 0);
 
-      var sec = Math.floor(foodMs / 1000);
-      var min = Math.floor(sec / 60);
+      var fmtEl = document.getElementById('formFormat');
+      var fmt = fmtEl ? fmtEl.value : 'Fine Dining';
       var targetScore = 5;
+      var breakdownNote = '';
 
-      var fmt = document.getElementById('formFormat') ? document.getElementById('formFormat').value : 'Fine Dining';
-      if (fmt === 'Кофейня') {
-        targetScore = min <= 3 ? 5 : (min <= 5 ? 4 : 2);
-      } else if (fmt === 'Коктейльный бар') {
-        targetScore = min <= 4 ? 5 : (min <= 7 ? 4 : 2);
+      if (meetingMs === null && drinkMs === null && foodMs === null && billMs === null) {
+        if (elapsedMs <= 0) {
+          targetScore = 5;
+          breakdownNote = 'Тайминг по умолчанию: 5 из 5';
+        } else {
+          var secTotal = Math.floor(elapsedMs / 1000);
+          var minTotal = Math.floor(secTotal / 60);
+          if (secTotal <= 45) {
+            targetScore = 5;
+            breakdownNote = 'Встреча гостя ' + secTotal + ' сек: 5 из 5 (Идеал)';
+          } else if (secTotal <= 300) {
+            targetScore = 5;
+            breakdownNote = 'Напитки ' + minTotal + ' мин ' + (secTotal % 60) + ' сек: 5 из 5 (Идеал)';
+          } else if (minTotal <= 16) {
+            targetScore = 5;
+            breakdownNote = 'Горячее блюдо ' + minTotal + ' мин ' + (secTotal % 60) + ' сек: 5 из 5 (Идеал)';
+          } else if (minTotal <= 20) {
+            targetScore = 4;
+            breakdownNote = 'Горячее блюдо ' + minTotal + ' мин: 4 из 5 (Хорошо)';
+          } else if (minTotal <= 25) {
+            targetScore = 3;
+            breakdownNote = 'Горячее блюдо ' + minTotal + ' мин: 3 из 5 (Задержка)';
+          } else {
+            targetScore = 1;
+            breakdownNote = 'Горячее блюдо ' + minTotal + ' мин: 1 из 5 (Критично)';
+          }
+        }
       } else {
-        targetScore = (min >= 11 && min <= 16) ? 5 : (min <= 20 ? 4 : (min <= 25 ? 3 : 1));
+        var scores = [];
+        var notes = [];
+        if (meetingMs !== null) {
+          var sM = Math.floor(meetingMs / 1000);
+          var scM = sM <= 45 ? 5 : (sM <= 90 ? 4 : (sM <= 180 ? 3 : 1));
+          scores.push(scM);
+          notes.push('Встреча ' + sM + 'с (' + scM + '/5)');
+        }
+        if (drinkMs !== null) {
+          var sD = Math.floor(drinkMs / 1000);
+          var mD = Math.floor(sD / 60);
+          var scD = mD <= 4 ? 5 : (mD <= 6 ? 4 : (mD <= 9 ? 3 : 1));
+          scores.push(scD);
+          notes.push('Напитки ' + mD + 'м (' + scD + '/5)');
+        }
+        if (foodMs !== null) {
+          var sF = Math.floor(foodMs / 1000);
+          var mF = Math.floor(sF / 60);
+          var scF = 5;
+          if (fmt === 'Кофейня' || fmt === 'Пекарня') {
+            scF = (mF <= 3 || sF <= 60) ? 5 : (mF <= 5 ? 4 : (mF <= 8 ? 3 : 1));
+          } else if (fmt === 'Коктейльный бар') {
+            scF = (mF <= 4 || sF <= 60) ? 5 : (mF <= 7 ? 4 : 2);
+          } else if (fmt === 'Столовая') {
+            scF = (mF <= 3 || sF <= 60) ? 5 : (mF <= 6 ? 4 : (mF <= 10 ? 3 : 1));
+          } else {
+            if ((mF >= 10 && mF <= 16) || sF <= 60) scF = 5;
+            else if (mF <= 20) scF = 4;
+            else if (mF <= 25) scF = 3;
+            else scF = 1;
+          }
+          scores.push(scF);
+          notes.push('Блюдо ' + mF + 'м ' + (sF % 60) + 'с (' + scF + '/5)');
+        }
+        if (billMs !== null) {
+          var sB = Math.floor(billMs / 1000);
+          var mB = Math.floor(sB / 60);
+          var scB = mB <= 2 ? 5 : (mB <= 4 ? 4 : 2);
+          scores.push(scB);
+          notes.push('Чек ' + mB + 'м (' + scB + '/5)');
+        }
+        targetScore = Math.round(scores.reduce(function(a, b) { return a + b; }, 0) / scores.length);
+        targetScore = Math.max(1, Math.min(5, targetScore));
+        breakdownNote = notes.join(', ') + ' → Итог: ' + targetScore + ' из 5 баллов';
       }
 
-      // Slider sub_r13 controls timing across rubrics
       var timingSlider = document.getElementById('sub_r13');
       if (timingSlider) {
         timingSlider.value = targetScore;
         recalcGranularScore();
-        alert('Замер ' + min + ' мин ' + (sec % 60) + ' сек успешно применен к шкале сервиса: ' + targetScore + ' из 5 баллов!');
+        alert('Замеры тайминга успешно применены к чек-листу сервиса:\n' + breakdownNote);
       }
     }
 

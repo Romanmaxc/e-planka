@@ -1,4 +1,4 @@
-const CACHE_NAME = 'planka-guide-v42-cache';
+const CACHE_NAME = 'planka-guide-v45-cache';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -13,7 +13,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(STATIC_ASSETS).catch((err) => {
-        console.warn('SW cache pre-fetch notice:', err);
+        console.warn('SW cache notice:', err);
       });
     })
   );
@@ -26,7 +26,6 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log('SW purging stale cache:', key);
             return caches.delete(key);
           }
         })
@@ -37,12 +36,10 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Only process GET requests
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
 
-  // For dynamic map tiles: network-first with cache fallback
   if (url.hostname.includes('tile') || url.hostname.includes('cartocdn')) {
     event.respondWith(
       fetch(event.request)
@@ -58,7 +55,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Stale-While-Revalidate strategy for static assets and HTML
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request)
@@ -71,11 +67,8 @@ self.addEventListener('fetch', (event) => {
           }
           return networkResponse;
         })
-        .catch((err) => {
-          console.warn('SW network fetch offline fallback:', err);
-        });
+        .catch(() => cachedResponse);
 
-      // Return cached immediately if available, otherwise wait for network
       return cachedResponse || fetchPromise;
     })
   );
