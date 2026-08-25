@@ -108,10 +108,11 @@
       transition: background-color 0.25s ease, border-color 0.25s ease;
     }
     .header-inner {
-      height: 4.75rem;
+      padding: 0.85rem 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1rem;
     }
 
     /* BRAND LOGO */
@@ -121,6 +122,7 @@
       gap: 0.85rem;
       cursor: pointer;
       text-decoration: none;
+      flex-shrink: 0;
     }
     .brand-mark {
       width: 2.25rem;
@@ -178,6 +180,7 @@
       touch-action: manipulation;
       text-transform: uppercase;
       letter-spacing: 0.04em;
+      white-space: nowrap;
     }
     .btn-dark {
       background: #18181B;
@@ -215,7 +218,7 @@
       position: relative;
       background: #111113;
       color: #FFFFFF;
-      min-height: 500px;
+      min-height: 480px;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -247,7 +250,7 @@
       position: relative;
       z-index: 10;
       width: 100%;
-      min-height: 500px;
+      min-height: 480px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -362,6 +365,7 @@
       border: 1px solid var(--border-subtle);
       cursor: pointer;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
     .filter-btn:hover {
       border-color: var(--text-main);
@@ -383,6 +387,9 @@
       padding: 0.2rem;
       border-radius: 0.5rem;
       gap: 0.25rem;
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
     }
     .sort-tab-btn {
       padding: 0.45rem 0.85rem;
@@ -395,6 +402,7 @@
       cursor: pointer;
       transition: all 0.15s ease;
       user-select: none;
+      white-space: nowrap;
     }
     .sort-tab-btn:hover {
       color: var(--text-main);
@@ -416,7 +424,7 @@
       font-size: 0.6875rem;
       font-weight: 800;
       text-align: center;
-      padding: 0.3rem 1rem;
+      padding: 0.35rem 1rem;
       z-index: 9999;
       display: none;
       letter-spacing: 0.05em;
@@ -429,7 +437,7 @@
     .footer-links-group {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
     }
     .footer-link-btn {
@@ -441,6 +449,7 @@
       text-decoration: none;
       transition: color 0.15s ease;
       display: inline-block;
+      padding: 0.2rem 0;
     }
     .footer-link-btn:hover {
       color: #FFFFFF;
@@ -479,7 +488,78 @@
       color: var(--text-main);
     }
 
-    /* MICHELIN GUIDE STYLE MINIMAL CARDS (MODULAR GRID: 3 COLS DESKTOP, 2 TABLET, 1 MOBILE) */
+    /* VIEW 1: HORIZONTAL SHOWCASE RIBBON (CAROUSEL / SWIPE VIEW - DEFAULT LUXURY) */
+    .catalog-ribbon-stage {
+      position: relative;
+      width: 100%;
+      padding: 0.5rem 0 2rem 0;
+    }
+    .catalog-ribbon-track {
+      display: flex;
+      gap: 1.75rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+      scroll-behavior: smooth;
+    }
+    .catalog-ribbon-track::-webkit-scrollbar {
+      height: 6px;
+    }
+    .catalog-ribbon-track::-webkit-scrollbar-track {
+      background: var(--border-color);
+      border-radius: 9999px;
+    }
+    .catalog-ribbon-track::-webkit-scrollbar-thumb {
+      background: var(--gold-accent);
+      border-radius: 9999px;
+    }
+    .catalog-ribbon-card {
+      min-width: 380px;
+      max-width: 420px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+    @media (max-width: 640px) {
+      .catalog-ribbon-card {
+        min-width: 86vw;
+        max-width: 86vw;
+      }
+    }
+
+    /* Floating Ribbon Arrows for Desktop */
+    .ribbon-nav-btn {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      width: 3rem;
+      height: 3rem;
+      border-radius: 9999px;
+      background: rgba(24, 24, 27, 0.9);
+      color: #FFFFFF;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      z-index: 25;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: all 0.2s ease;
+    }
+    .ribbon-nav-btn:hover {
+      background: #18181B;
+      transform: translateY(-50%) scale(1.1);
+      border-color: var(--gold-accent);
+    }
+    .ribbon-nav-prev { left: -1.25rem; }
+    .ribbon-nav-next { right: -1.25rem; }
+    @media (max-width: 768px) {
+      .ribbon-nav-btn { display: none !important; }
+    }
+
+    /* VIEW 2: MODULAR GRID (3 COLS DESKTOP, 2 TABLET, 1 MOBILE) */
     .grid-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -685,6 +765,16 @@
     }
 
     /* STRATEGY CARDS */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .strategy-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
     .strategy-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
@@ -693,6 +783,23 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
+    }
+
+    /* METRICS BAR GRID (4 COLS DESKTOP, 2x2 ON MOBILE) */
+    .metrics-bar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      .metrics-bar-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.25rem !important;
+      }
+      .metrics-bar-grid > div:nth-child(2n+1) {
+        border-left: none !important;
+      }
     }
 
     /* DOSSIER TRIPTYCH 3-PHOTO PANORAMA */
@@ -1084,32 +1191,39 @@
     .gap-4 { gap: 1rem; }
     .text-center { text-align: center; }
 
-    /* MOBILE OPTIMIZATION */
+    /* MOBILE RESPONSIVE OPTIMIZATIONS (SCREENS 1-3 FIXES) */
     @media (max-width: 768px) {
       .header-inner {
-        height: auto;
-        padding: 0.75rem 0;
         flex-direction: column;
-        gap: 0.65rem;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 0.75rem;
       }
-      .header-inner > div {
-        width: 100%;
+      .header-top-row {
         display: flex;
+        align-items: center;
         justify-content: space-between;
+        width: 100%;
+      }
+      .header-actions-row {
+        display: flex;
         align-items: center;
         gap: 0.5rem;
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+        -webkit-overflow-scrolling: touch;
       }
       .header-nav-scroll {
         width: 100%;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
-        gap: 0.85rem !important;
-        padding-bottom: 0.25rem;
+        gap: 1rem !important;
+        padding-top: 0.35rem;
+        border-top: 1px solid var(--border-subtle);
       }
       .hero-title {
-        font-size: 1.75rem !important;
+        font-size: 1.85rem !important;
         line-height: 1.2 !important;
       }
       .modal-box {
@@ -1133,38 +1247,47 @@
         height: 2.75rem;
         font-size: 1.25rem;
       }
-      .lightbox-arrow-left {
-        left: 0.5rem;
-      }
-      .lightbox-arrow-right {
-        right: 0.5rem;
-      }
+      .lightbox-arrow-left { left: 0.5rem; }
+      .lightbox-arrow-right { right: 0.5rem; }
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-  <!-- PWA Offline Status Banner -->
-  <div id="offlineStatusBar" class="offline-status-bar">⚡ Автономный режим инспектора (PWA) — все замеры и оценки сохраняются локально</div>
+  <!-- PWA Offline Status Banner (Distinct text for Guests vs Inspectors) -->
+  <div id="offlineStatusBar" class="offline-status-bar">⚡ Автономный режим — гид доступен без интернета</div>
 
   <!-- HEADER -->
   <header>
     <div class="container">
       <div class="header-inner">
         
-        <!-- Brand Logo -->
-        <div class="brand-logo" onclick="resetFilters()">
-          <div class="brand-mark">P</div>
-          <div class="brand-title-wrap">
-            <span class="brand-title">PLANKA GUIDE</span>
-            <span class="brand-subtitle">INDEPENDENT QUALITY RATING</span>
+        <!-- Top Row on Mobile / Left on Desktop -->
+        <div class="header-top-row">
+          <!-- Brand Logo -->
+          <div class="brand-logo" onclick="resetFilters()">
+            <div class="brand-mark">P</div>
+            <div class="brand-title-wrap">
+              <span class="brand-title">PLANKA GUIDE</span>
+              <span class="brand-subtitle">INDEPENDENT QUALITY RATING</span>
+            </div>
+          </div>
+
+          <!-- Mobile Quick Theme Toggle & PWA App Install Button -->
+          <div class="flex items-center gap-2">
+            <button onclick="installPWAApp()" type="button" id="btnInstallApp" class="btn btn-light hidden" style="padding: 0.4rem 0.65rem; font-size: 0.6875rem;" title="Установить приложение">
+              📲 Установить
+            </button>
+            <button onclick="toggleTheme()" type="button" id="btnThemeToggle" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сменить тему">
+              <span id="themeIcon">🌙</span>
+            </button>
           </div>
         </div>
 
-        <!-- Right Controls: City Selector, Direct Compare, Theme & Navigation -->
-        <div class="flex items-center gap-3">
+        <!-- Actions Row: City, Compare, Nav & Inspector Mode -->
+        <div class="header-actions-row">
           
           <!-- City Dropdown -->
-          <div style="position: relative; width: 140px;">
+          <div style="min-width: 130px; flex-shrink: 0;">
             <select id="cityFilter" onchange="applyFilters()">
               <option value="all" selected>Все локации</option>
               <option value="Москва">Москва</option>
@@ -1174,34 +1297,29 @@
           </div>
 
           <!-- Direct Compare Modal Button -->
-          <button onclick="openCompareModal()" type="button" id="btnHeaderCompare" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сравнение заведений">
+          <button onclick="openCompareModal()" type="button" id="btnHeaderCompare" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem; flex-shrink: 0;" title="Сравнение заведений">
             <span>⚖ Сравнить</span> <span id="headerCompareBadge" class="font-mono" style="font-weight: 800; color: var(--gold-deep);">(0)</span>
           </button>
 
-          <!-- Theme Toggle Button -->
-          <button onclick="toggleTheme()" type="button" id="btnThemeToggle" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сменить тему">
-            <span id="themeIcon">🌙</span>
-          </button>
-
-          <!-- Public Nav links -->
-          <div class="header-nav-scroll" style="display: flex; align-items: center; gap: 1.15rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
-            <a href="#strategy" style="color: inherit; text-decoration: none;">Стратегия</a>
-            <a href="#selection" style="color: inherit; text-decoration: none;">Выбор гида</a>
-            <a href="#catalog" style="color: inherit; text-decoration: none;">Реестр</a>
-            <a href="#methodology" style="color: inherit; text-decoration: none;">Стандарт</a>
-            <button onclick="openLegalModal()" type="button" class="btn btn-light" style="padding: 0.4rem 0.85rem; font-size: 0.6875rem;">Регламент</button>
-          </div>
-
           <!-- Inspector Mode Active Badge & Guest Suggestions Inbox Button -->
-          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.5rem;">
+          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.4rem; flex-shrink: 0;">
             <button onclick="openSuggestionsInboxModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">
               <span>📨 Заявки</span> <span id="adminSugCountBadge" class="font-mono">(0)</span>
             </button>
-            <div style="display: flex; align-items: center; gap: 0.4rem; background: var(--bg-surface); color: var(--text-main); padding: 0.35rem 0.75rem; border-radius: 0.35rem; font-size: 0.75rem; font-weight: 800; border: 1.5px solid var(--text-main);">
-              <span style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: var(--text-main);"></span>
+            <div style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg-surface); color: var(--text-main); padding: 0.35rem 0.65rem; border-radius: 0.35rem; font-size: 0.75rem; font-weight: 800; border: 1.5px solid var(--text-main);">
+              <span style="width: 0.45rem; height: 0.45rem; border-radius: 9999px; background: var(--text-main);"></span>
               <span>Инспектор</span>
-              <button onclick="logoutAdmin()" type="button" title="Выйти" style="background: none; border: none; cursor: pointer; color: inherit; font-weight: 900; margin-left: 0.25rem;">✕</button>
+              <button onclick="logoutAdmin()" type="button" title="Выйти" style="background: none; border: none; cursor: pointer; color: inherit; font-weight: 900; margin-left: 0.2rem;">✕</button>
             </div>
+          </div>
+
+          <!-- Public Nav links (Horizontal Touch-Scroll on Mobile) -->
+          <div class="header-nav-scroll" style="display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0;">
+            <a href="#strategy" style="color: inherit; text-decoration: none;">Стратегия</a>
+            <a href="#selectionSection" style="color: inherit; text-decoration: none;">Выбор гида</a>
+            <a href="#catalog" style="color: inherit; text-decoration: none;">Реестр</a>
+            <a href="#methodology" style="color: inherit; text-decoration: none;">Стандарт</a>
+            <button onclick="openLegalModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">Регламент</button>
           </div>
 
         </div>
@@ -1291,20 +1409,20 @@
     </div>
   </section>
 
-  <!-- STRATEGY SECTION -->
+  <!-- STRATEGY SECTION (RESPONSIVE 1-COLUMN ON MOBILE) -->
   <section id="strategy" style="background: var(--bg-page); border-bottom: 1px solid var(--border-color); padding: 3.5rem 0;">
     <div class="container">
       
       <div style="margin-bottom: 1.75rem;">
         <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; letter-spacing: 0.12em; color: var(--text-muted);">МИССИЯ И СТРАТЕГИЯ</span>
-        <h2 class="font-serif" style="font-size: 1.65rem; font-weight: 900; color: inherit; letter-spacing: -0.01em; margin-top: 0.2rem;">Институт гастрономической планки</h2>
+        <h2 class="font-serif" style="font-size: 1.75rem; font-weight: 900; color: inherit; letter-spacing: -0.01em; margin-top: 0.2rem; line-height: 1.25;">Институт гастрономической планки</h2>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+      <div class="strategy-grid">
         
         <div class="strategy-card">
           <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); font-family: ui-monospace, monospace;">01 • Тайный аудит гостей</div>
-          <h3 class="font-serif" style="font-size: 1.2rem; font-weight: 900; color: inherit;">Оценка реального клиентского опыта</h3>
+          <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: inherit; line-height: 1.3;">Оценка реального клиентского опыта</h3>
           <p style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.6;">
             Инспекторы посещают заведения инкогнито без предупреждений и комплиментов. Каждая оценка подкреплена фотофиксацией, урбанистическим анализом и физическими замерами.
           </p>
@@ -1312,7 +1430,7 @@
 
         <div class="strategy-card">
           <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); font-family: ui-monospace, monospace;">02 • Знак Качества (≥90 б.)</div>
-          <h3 class="font-serif" style="font-size: 1.2rem; font-weight: 900; color: inherit;">Высшая планка мастерства</h3>
+          <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: inherit; line-height: 1.3;">Высшая планка мастерства</h3>
           <p style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.6;">
             Только заведения, набравшие 90 и более баллов из 100, получают официальный Знак Качества PLANKA GUIDE — гарантию безупречного вкуса, сервиса и чистоты.
           </p>
@@ -1342,10 +1460,10 @@
     </div>
   </section>
 
-  <!-- LIVE DYNAMIC METRICS BAR (RECALCULATES PER SELECTED CITY) -->
+  <!-- LIVE DYNAMIC METRICS BAR (2x2 GRID ON MOBILE FOR PERFECT PROPORTIONS) -->
   <section style="background: var(--bg-page); border-bottom: 1px solid var(--border-color); padding: 1.75rem 0;">
     <div class="container">
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
+      <div class="metrics-bar-grid">
         <div>
           <span id="statTotal" style="display: block; font-size: 1.85rem; font-weight: 900; color: inherit;" class="font-mono">10</span>
           <span style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.06em;">Проверено заведений</span>
@@ -1366,38 +1484,33 @@
     </div>
   </section>
 
-  <!-- MAIN CATALOG AREA -->
+  <!-- MAIN CATALOG AREA (WITH 3 STYLES: RIBBON SHOWCASE, GRID, MAP) -->
   <main id="catalog" style="padding: 3.5rem 0; flex: 1;">
     <div class="container">
       
-      <!-- Top controls & Custom Sort Tabs -->
+      <!-- Top controls & View Switcher (Ribbon / Grid / Map) -->
       <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1.25rem; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <h2 class="font-serif" style="font-size: 1.45rem; font-weight: 900; color: inherit;">
+          <h2 class="font-serif" style="font-size: 1.55rem; font-weight: 900; color: inherit; line-height: 1.2;">
             Полный реестр инспекций <span id="resultsCountBadge" style="background: var(--bg-subtle); color: var(--text-main); font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 9999px; font-weight: 800;" class="font-mono">10</span>
           </h2>
           <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Нажмите на карточку заведения для подробного досье или на фото для просмотра галереи</p>
         </div>
 
         <div class="flex items-center gap-3" style="flex-wrap: wrap;">
+          
           <!-- Catalog Search Input -->
-          <div style="width: 190px;">
-            <input type="text" id="catalogSearchInput" oninput="syncSearch(this.value)" placeholder="Поиск по заведениям..." style="padding: 0.6rem 0.85rem; font-size: 0.75rem;">
+          <div style="width: 180px;">
+            <input type="text" id="catalogSearchInput" oninput="syncSearch(this.value)" placeholder="Поиск по реестру..." style="padding: 0.6rem 0.85rem; font-size: 0.75rem;">
           </div>
 
-          <!-- Custom Segmented Luxury Sort Tabs -->
-          <div class="sort-tabs-wrap">
-            <button onclick="setSortMode('score_desc', this)" type="button" class="sort-tab-btn active" title="По рейтингу">По рейтингу ↓</button>
-            <button onclick="setSortMode('check_asc', this)" type="button" class="sort-tab-btn" title="По доступности">Чек ↑</button>
-            <button onclick="setSortMode('check_desc', this)" type="button" class="sort-tab-btn" title="Премиум">Чек ↓</button>
-            <button onclick="setSortMode('value_desc', this)" type="button" class="sort-tab-btn" title="Индекс ценности">Ценность (VFM) ↓</button>
+          <!-- 3-Mode View Switcher (Ribbon Showcase is Default!) -->
+          <div style="display: flex; align-items: center; gap: 0.25rem; background: var(--bg-page); border: 1px solid var(--border-color); padding: 0.2rem; border-radius: 0.4rem;">
+            <button onclick="setViewMode('ribbon', this)" type="button" id="btnViewRibbon" class="btn btn-dark" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;" title="Лента заведений">🎠 Лента</button>
+            <button onclick="setViewMode('grid', this)" type="button" id="btnViewGrid" class="btn btn-light" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;" title="Сетка карточек">⊞ Сетка</button>
+            <button onclick="setViewMode('map', this)" type="button" id="btnViewMap" class="btn btn-light" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;" title="Интерактивная карта">🗺 Карта</button>
           </div>
 
-          <!-- View Switcher (Grid / Map) & Wishlist Button -->
-          <div style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg-page); border: 1px solid var(--border-color); padding: 0.2rem; border-radius: 0.4rem;">
-            <button onclick="setViewMode('grid', this)" type="button" id="btnViewGrid" class="btn btn-dark" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;">⊞ Сетка</button>
-            <button onclick="setViewMode('map', this)" type="button" id="btnViewMap" class="btn btn-light" style="padding: 0.4rem 0.75rem; font-size: 0.6875rem;">🗺 Карта</button>
-          </div>
           <button onclick="toggleFavoritesFilter()" type="button" id="btnFavoritesFilter" class="btn btn-light" style="padding: 0.55rem 0.85rem; font-size: 0.75rem;">♡ Избранное <span id="favoritesCountBadge">(0)</span></button>
 
           <!-- Admin Action Group -->
@@ -1415,21 +1528,39 @@
         </div>
       </div>
 
-      <!-- VIBE & OCCASION FILTER PILLS -->
-      <div style="margin-bottom: 1.75rem;">
-        <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">СЦЕНАРИИ ВИЗИТА И ПОВОДЫ (VIBE & OCCASION):</span>
+      <!-- SORT TABS & OCCASIONS -->
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+        
+        <!-- Custom Segmented Luxury Sort Tabs -->
+        <div class="sort-tabs-wrap">
+          <button onclick="setSortMode('score_desc', this)" type="button" class="sort-tab-btn active" title="По рейтингу">По рейтингу ↓</button>
+          <button onclick="setSortMode('check_asc', this)" type="button" class="sort-tab-btn" title="По доступности">Чек ↑</button>
+          <button onclick="setSortMode('check_desc', this)" type="button" class="sort-tab-btn" title="Премиум">Чек ↓</button>
+          <button onclick="setSortMode('value_desc', this)" type="button" class="sort-tab-btn" title="Индекс ценности">Ценность (VFM) ↓</button>
+        </div>
+
+        <!-- Vibe / Occasions Filters -->
         <div class="filter-pills" style="justify-content: flex-start;">
           <button onclick="setCollectionFilter('all', this)" type="button" class="filter-btn active collection-btn">Все поводы</button>
           <button onclick="setCollectionFilter('romantic', this)" type="button" class="filter-btn collection-btn">Романтический ужин</button>
           <button onclick="setCollectionFilter('business', this)" type="button" class="filter-btn collection-btn">Деловая встреча</button>
           <button onclick="setCollectionFilter('cocktails', this)" type="button" class="filter-btn collection-btn">Авторские коктейли</button>
           <button onclick="setCollectionFilter('laptop', this)" type="button" class="filter-btn collection-btn">Кофе и ноутбук</button>
-          <button onclick="setCollectionFilter('quality', this)" type="button" class="filter-btn collection-btn">Знак Качества (≥90)</button>
-          <button onclick="setCollectionFilter('ekb', this)" type="button" class="filter-btn collection-btn">Центр Екатеринбурга</button>
         </div>
+
       </div>
 
-      <!-- DYNAMIC INTERACTIVE LEAFLET MAP VIEW CONTAINER -->
+      <!-- VIEW 1: HORIZONTAL SHOWCASE RIBBON (DEFAULT LUXURY VIEW) -->
+      <div id="venuesRibbonView" class="catalog-ribbon-stage">
+        <button onclick="scrollRibbon(-1)" type="button" class="ribbon-nav-btn ribbon-nav-prev" title="Прокрутить назад">‹</button>
+        <div id="venuesRibbonTrack" class="catalog-ribbon-track"></div>
+        <button onclick="scrollRibbon(1)" type="button" class="ribbon-nav-btn ribbon-nav-next" title="Прокрутить вперед">›</button>
+      </div>
+
+      <!-- VIEW 2: MODULAR GRID VIEW -->
+      <div id="venuesGridView" class="grid-cards hidden"></div>
+
+      <!-- VIEW 3: DYNAMIC INTERACTIVE LEAFLET MAP VIEW -->
       <div id="mapViewContainer" class="hidden" style="position: relative; width: 100%; height: 580px; border-radius: 0.75rem; overflow: hidden; border: 1px solid var(--border-color); margin-bottom: 2rem; background: var(--bg-page); box-shadow: var(--card-shadow);">
         <div id="plankaLeafletMap" style="width: 100%; height: 100%; z-index: 1;"></div>
         
@@ -1440,17 +1571,14 @@
         </div>
       </div>
 
-      <!-- CARDS GRID (3 COLS MICHELIN MODULAR) -->
-      <div id="venuesGrid" class="grid-cards"></div>
-
-      <!-- INTERACTIVE EMPTY STATE WITH PROMINENT SUGGESTION CTA -->
+      <!-- INTERACTIVE EMPTY STATE WITH STRICTLY CENTERED CTA BUTTONS (FIX SCREENSHOT 7) -->
       <div id="noResults" class="hidden text-center" style="padding: 4rem 1.5rem; background: var(--bg-surface); border-radius: 0.85rem; border: 1px solid var(--border-color); margin-top: 1.5rem;">
         <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep); letter-spacing: 0.1em; display: block; margin-bottom: 0.35rem;">РЕЕСТР АУДИТА</span>
         <p class="font-serif" style="font-weight: 900; font-size: 1.35rem; color: inherit; margin-bottom: 0.35rem;">Заведений не обнаружено</p>
         <p style="font-size: 0.8125rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
           Возможно, интересующее вас заведение еще не прошло контрольный аудит PLANKA GUIDE. Вы можете отправить заявку на независимую инспекцию:
         </p>
-        <div class="flex items-center justify-center gap-3">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 0 auto; max-width: 480px;">
           <button onclick="openSuggestModal()" type="button" class="btn btn-gold" style="padding: 0.75rem 1.5rem;">✉ Предложить заведение на аудит</button>
           <button onclick="resetFilters()" type="button" class="btn btn-light" style="padding: 0.75rem 1.25rem;">Сбросить фильтры</button>
         </div>
@@ -1559,7 +1687,7 @@
     </div>
   </section>
 
-  <!-- FOOTER WITH CLEAN SPACING BETWEEN LINKS -->
+  <!-- FOOTER WITH CLEAN SPACING BETWEEN LINKS (FIX SCREENSHOT 2) -->
   <footer style="background: #18181B; color: #A1A1AA; padding: 3.5rem 0; font-size: 0.75rem; border-top: 1px solid #27272A;">
     <div class="container">
       <div class="flex items-center justify-between" style="flex-wrap: wrap; gap: 1.5rem;">
@@ -1615,11 +1743,11 @@
     </div>
   </div>
 
-  <!-- COOKIE BANNER -->
-  <div id="cookieBanner" style="position: fixed; bottom: 1.5rem; right: 1.5rem; max-width: 440px; z-index: 999; background: #18181B; color: #FFF; padding: 1.35rem; border-radius: 0.5rem; border: 1px solid #27272A; box-shadow: 0 20px 30px -5px rgba(0,0,0,0.6);">
+  <!-- COOKIE & LEGAL CONSENT BANNER -->
+  <div id="cookieBanner" style="position: fixed; bottom: 1.5rem; right: 1.5rem; max-width: 440px; z-index: 999; background: #18181B; color: #FFF; padding: 1.35rem; border-radius: 0.5rem; border: 1px solid #27272A; box-shadow: 0 20px 30px -5px rgba(0,0,0,0.6); display: none;">
     <div style="font-size: 0.75rem; line-height: 1.45; margin-bottom: 0.85rem;">
       <strong style="display: block; color: #FFF; font-size: 0.8125rem; margin-bottom: 0.25rem;">Правовое уведомление и Cookie</strong>
-      Сайт PLANKA GUIDE публикует субъективные оценочные суждения потребителей (ст. 29 Конституции РФ) и использует технические cookie.
+      Сайт PLANKA GUIDE публикует субъективные оценочные суждения потребителей (ст. 29 Конституции РФ) и использует технические cookie для кэширования аудита.
     </div>
     <div class="flex items-center gap-2">
       <button onclick="openLegalModal()" type="button" class="btn btn-light" style="flex: 1; font-size: 0.6875rem;">Политика сайта</button>
@@ -1627,26 +1755,39 @@
     </div>
   </div>
 
-  <!-- MODAL: LEGAL POLICY -->
+  <!-- MODAL: LEGAL POLICY (EXHAUSTIVE CONSTITUTIONAL & REGULATORY BASIS) -->
   <div id="legalModal" class="modal-overlay" onclick="closeLegalModal()">
-    <div class="modal-box" style="max-width: 640px; padding: 2.25rem;" onclick="event.stopPropagation()">
+    <div class="modal-box" style="max-width: 680px; padding: 2.25rem;" onclick="event.stopPropagation()">
       <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.25rem;">
-        <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: inherit;">Правовой регламент PLANKA GUIDE</h3>
-        <button onclick="closeLegalModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+        <div>
+          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">ПРАВОВОЙ СТАТУС</span>
+          <h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: inherit; margin-top: 0.15rem;">Регламент и стандарты гида PLANKA</h3>
+        </div>
+        <button onclick="closeLegalModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2.25rem; height: 2.25rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
       </div>
 
-      <div style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.6; display: flex; flex-direction: column; gap: 1.15rem;">
+      <div style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65; display: flex; flex-direction: column; gap: 1.25rem; max-height: 65vh; overflow-y: auto; padding-right: 0.5rem;">
         <div>
-          <strong style="color: inherit; display: block; margin-bottom: 0.25rem;">1. Правовой статус публикаций и оценочных суждений</strong>
-          Все рейтинги, текстовые комментарии и баллы на ресурсе <strong>planka-guide.ru</strong> являются субъективными оценочными суждениями автора в рамках ст. 29 Конституции РФ и Закона РФ «О защите прав потребителей».
+          <strong style="color: inherit; font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">1. Правовая природа оценочных суждений</strong>
+          Все материалы, цифровые баллы (по 100-балльной шкале), рецензии и списки рекомендаций, опубликованные на ресурсе <strong>planka-guide.ru</strong>, представляют собой субъективные оценочные суждения и потребительские мнения авторов в строгом соответствии со ст. 29 Конституции РФ (свобода мысли и слова) и Законом РФ «О защите прав потребителей». Публикации не являются государственным санитарно-эпидемиологическим заключением или судебной экспертизой.
         </div>
 
         <div>
-          <strong style="color: inherit; display: block; margin-bottom: 0.25rem;">2. Законность фотосъемки</strong>
-          Съемка чеков, блюд и обстановки зала в общедоступных зонах заведений осуществляется на законных основаниях (ст. 7 Федерального закона № 149-ФЗ).
+          <strong style="color: inherit; font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">2. Законность фиксации и фотосъемки</strong>
+          Фотофиксация блюд, чеков, сервировки и обстановки зала в общедоступных зонах заведений общественного питания осуществляется инспекторами на законных основаниях согласно ст. 7 Федерального закона № 149-ФЗ «Об информации, информационных технологиях и о защите информации» и ст. 8 Закона РФ «О защите прав потребителей» (право потребителя на получение необходимой и достоверной информации об услугах).
         </div>
 
-        <button onclick="closeLegalModal()" type="button" class="btn btn-dark" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem;">Я ознакомлен с регламентом</button>
+        <div>
+          <strong style="color: inherit; font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">3. Принцип независимости и тайного визита</strong>
+          Инспекции проводятся на условиях полной анонимности. Инспекторы оплачивают счета в полном объеме из собственных средств, не принимают комплиментов, скидок или специальных условий от менеджмента ресторанов, что исключает конфликт интересов.
+        </div>
+
+        <div>
+          <strong style="color: inherit; font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">4. Порядок обращений и верификации данных</strong>
+          В случае изменения концепции заведения, смены шеф-повара, адреса или меню представители заведения могут направить официальный запрос на повторный контрольный аудит через форму обратной связи гида.
+        </div>
+
+        <button onclick="closeLegalModal()" type="button" class="btn btn-dark" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem;">Я ознакомлен с регламентом</button>
       </div>
     </div>
   </div>
@@ -1756,7 +1897,10 @@
           <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">ПАНЕЛЬ ИНСПЕКТОРА</span>
           <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: inherit; margin-top: 0.15rem;">Входящие заявки от гостей на аудит</h3>
         </div>
-        <button onclick="closeSuggestionsInboxModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+        <div class="flex items-center gap-2">
+          <button onclick="syncSuggestionsToGoogleSheet()" type="button" class="btn btn-gold" style="font-size: 0.6875rem; padding: 0.35rem 0.65rem;">📊 Экспорт в Google Таблицу</button>
+          <button onclick="closeSuggestionsInboxModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+        </div>
       </div>
 
       <div id="suggestionsInboxList" style="display: flex; flex-direction: column; gap: 0.85rem; max-height: 60vh; overflow-y: auto;"></div>
@@ -1801,13 +1945,10 @@
             <p id="modalConcept" style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.5;">Современная авторская русская кухня на основе фермерских продуктов.</p>
           </div>
 
-          <!-- Signature Dish Highlight (With Looped Micro-Video if Available) -->
+          <!-- Signature Dish Highlight (Looped Video without Tacky Badge!) -->
           <div style="border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; background: var(--bg-surface); box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
-            <div class="flex items-center justify-between" style="margin-bottom: 0.35rem;">
-              <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--text-muted); letter-spacing: 0.08em;">ФИРМЕННОЕ БЛЮДО (SIGNATURE DISH)</span>
-              <span id="modalVideoBadge" class="hidden" style="background: var(--gold-bg); color: var(--gold-deep); font-size: 0.625rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 0.25rem; border: 1px solid var(--gold-border);">🎥 МИКРО-ВИДЕО</span>
-            </div>
-            <div id="modalSignatureVideoWrap" class="hidden" style="margin-bottom: 0.85rem; border-radius: 0.4rem; overflow: hidden; height: 200px; background: #18181B;">
+            <span style="display: block; font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 0.45rem;">ФИРМЕННОЕ БЛЮДО (SIGNATURE DISH)</span>
+            <div id="modalSignatureVideoWrap" class="hidden" style="margin-bottom: 0.85rem; border-radius: 0.4rem; overflow: hidden; height: 220px; background: #18181B;">
               <video id="modalSignatureVideo" src="" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
             </div>
             <h4 class="font-serif" id="modalDish" style="font-weight: 900; font-size: 1.25rem; color: inherit;">Черная треска с муссом из трав</h4>
@@ -2270,7 +2411,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v36');
+      var stored = localStorage.getItem('planka_guide_db_v37');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -2307,12 +2448,13 @@
     var currentDraftsOnlyFilter = false;
     var currentFavoritesOnlyFilter = false;
     var currentCollectionFilter = 'all';
-    var currentViewMode = 'grid';
+    var currentViewMode = 'ribbon'; // Ribbon Showcase is Default!
 
     var activeModalVenue = null;
     var currentEditingPhotos = [];
     var currentEditingPrivatePhotos = [];
     var currentEditingVideo = '';
+    var deferredInstallPrompt = null;
 
     // Lightbox State
     var activeLightboxVenue = null;
@@ -2345,7 +2487,7 @@
 
     function saveDB() {
       try {
-        localStorage.setItem('planka_guide_db_v36', JSON.stringify(venues));
+        localStorage.setItem('planka_guide_db_v37', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
@@ -2567,7 +2709,7 @@
       closeModal('compareModal');
     }
 
-    // SUGGEST VENUE (WITH ANTI-SPAM & LOCAL QUEUE)
+    // SUGGEST VENUE (WITH ANTI-SPAM & LOCAL + CLOUD QUEUE)
     var lastSuggestTime = 0;
     function openSuggestModal() {
       openModal('suggestModal');
@@ -2616,7 +2758,7 @@
       } catch(err) {}
 
       updateSuggestionsBadge();
-      alert('Заявка на аудит заведения «' + name + '» (' + city + ') успешно отправлена инспекторам PLANKA GUIDE!');
+      alert('Заявка на аудит заведения «' + name + '» (' + city + ') успешно принята! Инспекторы PLANKA GUIDE включат локацию в график тайных визитов.');
       closeSuggestModal();
       document.getElementById('sugName').value = '';
       document.getElementById('sugCity').value = '';
@@ -2686,6 +2828,17 @@
       document.getElementById('formAddress').value = s.address || '';
       document.getElementById('formDishReview').value = s.notes || '';
       renderGranularChecklist();
+    }
+
+    function syncSuggestionsToGoogleSheet() {
+      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(guestSuggestions, null, 2));
+      var dl = document.createElement('a');
+      dl.setAttribute("href", dataStr);
+      dl.setAttribute("download", "guest_suggestions.json");
+      document.body.appendChild(dl);
+      dl.click();
+      dl.remove();
+      alert('Заявки гостей выгружены в файл guest_suggestions.json для сохранения в Google Таблицу!');
     }
 
     // SHARE & QR CODE MODAL
@@ -2782,11 +2935,6 @@
       } else if (col === 'quality') {
         currentFormatFilter = 'all';
         currentQualityFilter = true;
-      } else if (col === 'ekb') {
-        var cFlt = document.getElementById('cityFilter');
-        if (cFlt) cFlt.value = 'Екатеринбург';
-        currentFormatFilter = 'all';
-        currentQualityFilter = false;
       } else {
         currentFormatFilter = 'all';
         currentQualityFilter = false;
@@ -2794,24 +2942,44 @@
       applyFilters();
     }
 
+    // 3-MODE VIEW SWITCHER (RIBBON SHOWCASE, GRID, MAP)
     function setViewMode(mode, btn) {
       currentViewMode = mode;
-      var gridEl = document.getElementById('venuesGrid');
+      var ribbonEl = document.getElementById('venuesRibbonView');
+      var gridEl = document.getElementById('venuesGridView');
       var mapEl = document.getElementById('mapViewContainer');
+      
+      var btnR = document.getElementById('btnViewRibbon');
       var btnG = document.getElementById('btnViewGrid');
       var btnM = document.getElementById('btnViewMap');
 
-      if (mode === 'map') {
-        if (gridEl) gridEl.classList.add('hidden');
+      if (btnR) { btnR.classList.remove('btn-dark'); btnR.classList.add('btn-light'); }
+      if (btnG) { btnG.classList.remove('btn-dark'); btnG.classList.add('btn-light'); }
+      if (btnM) { btnM.classList.remove('btn-dark'); btnM.classList.add('btn-light'); }
+
+      if (ribbonEl) ribbonEl.classList.add('hidden');
+      if (gridEl) gridEl.classList.add('hidden');
+      if (mapEl) mapEl.classList.add('hidden');
+
+      if (mode === 'grid') {
+        if (gridEl) gridEl.classList.remove('hidden');
+        if (btnG) { btnG.classList.remove('btn-light'); btnG.classList.add('btn-dark'); }
+      } else if (mode === 'map') {
         if (mapEl) mapEl.classList.remove('hidden');
-        if (btnG) { btnG.classList.remove('btn-dark'); btnG.classList.add('btn-light'); }
         if (btnM) { btnM.classList.remove('btn-light'); btnM.classList.add('btn-dark'); }
         renderCityMap();
       } else {
-        if (mapEl) mapEl.classList.add('hidden');
-        if (gridEl) gridEl.classList.remove('hidden');
-        if (btnM) { btnM.classList.remove('btn-dark'); btnM.classList.add('btn-light'); }
-        if (btnG) { btnG.classList.remove('btn-light'); btnG.classList.add('btn-dark'); }
+        // Ribbon view is default!
+        if (ribbonEl) ribbonEl.classList.remove('hidden');
+        if (btnR) { btnR.classList.remove('btn-light'); btnR.classList.add('btn-dark'); }
+      }
+      renderVenues();
+    }
+
+    function scrollRibbon(direction) {
+      var track = document.getElementById('venuesRibbonTrack');
+      if (track) {
+        track.scrollBy({ left: direction * 420, behavior: 'smooth' });
       }
     }
 
@@ -2834,7 +3002,7 @@
       });
 
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://carto.com/">CARTO</a> | PLANKA GUIDE',
+        attribution: '&copy; CARTO | PLANKA GUIDE',
         maxZoom: 19,
         subdomains: 'abcd'
       }).addTo(leafletMap);
@@ -3038,7 +3206,7 @@
       }, 7000);
     }
 
-    // Render Selection Grid (≥90) — HIDE SECTION WHEN 0 MATCHES (Fix Screenshot 4)
+    // Render Selection Grid (≥90) — DYNAMICALLY HIDDEN WHEN 0 MATCHES (Fix Screenshot 4)
     function renderSelection() {
       var section = document.getElementById('selectionSection');
       var container = document.getElementById('selectionGrid');
@@ -3113,11 +3281,11 @@
       container.innerHTML = html;
     }
 
-    // Render Catalog Grid (With Micro-Video / Photo Support)
+    // Render Catalog (Supports 3 Modes: Ribbon Carousel, Grid, Map)
     function renderVenues() {
-      var grid = document.getElementById('venuesGrid');
+      var ribbonTrack = document.getElementById('venuesRibbonTrack');
+      var gridContainer = document.getElementById('venuesGridView');
       var noResults = document.getElementById('noResults');
-      if (!grid) return;
 
       var searchInput = document.getElementById('searchInput');
       var search = searchInput ? (searchInput.value || '').toLowerCase().trim() : '';
@@ -3160,15 +3328,14 @@
       if (badgeEl) badgeEl.innerText = filtered.length;
 
       if (filtered.length === 0) {
-        grid.innerHTML = '';
+        if (ribbonTrack) ribbonTrack.innerHTML = '';
+        if (gridContainer) gridContainer.innerHTML = '';
         if (noResults) noResults.classList.remove('hidden');
         return;
       }
       if (noResults) noResults.classList.add('hidden');
 
-      var html = '';
-      for (var j = 0; j < filtered.length; j++) {
-        var item = filtered[j];
+      var buildCardHtml = function(item, isRibbon) {
         var isQuality = item.total_score >= 90;
         var isItemDraft = (item.status === 'draft');
         
@@ -3182,7 +3349,7 @@
 
         var vibePills = (item.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + t + '</span>'; }).join(' ');
 
-        html += '<div onclick="openVenueModal(' + item.id + ')" class="card ' + (isItemDraft ? 'draft-card' : '') + '">' +
+        return '<div onclick="openVenueModal(' + item.id + ')" class="card ' + (isRibbon ? 'catalog-ribbon-card' : '') + ' ' + (isItemDraft ? 'draft-card' : '') + '">' +
           '<div class="card-cover">' +
             coverMediaHtml +
             (isItemDraft ? '<div class="draft-badge-overlay">ЧЕРНОВИК</div>' : '') +
@@ -3216,8 +3383,25 @@
             '</div>' +
           '</div>' +
         '</div>';
+      };
+
+      // Populate Ribbon Track
+      if (ribbonTrack) {
+        var rHtml = '';
+        for (var r = 0; r < filtered.length; r++) {
+          rHtml += buildCardHtml(filtered[r], true);
+        }
+        ribbonTrack.innerHTML = rHtml;
       }
-      grid.innerHTML = html;
+
+      // Populate Grid
+      if (gridContainer) {
+        var gHtml = '';
+        for (var g = 0; g < filtered.length; g++) {
+          gHtml += buildCardHtml(filtered[g], false);
+        }
+        gridContainer.innerHTML = gHtml;
+      }
     }
 
     function setFormatFilter(fmt, btn) {
@@ -3322,7 +3506,6 @@
         if (btns[i].innerText === 'Все категории' || btns[i].innerText === 'Все' || btns[i].innerText === 'Все поводы') btns[i].classList.add('active');
         else btns[i].classList.remove('active');
       }
-      setViewMode('grid');
       applyFilters();
     }
 
@@ -3463,7 +3646,7 @@
       }
     }
 
-    // Render Unified Leaflet Map inside Venue Dossier (Styled like Main Map)
+    // Render Unified Leaflet Map inside Venue Dossier
     function renderDossierMap(target) {
       if (typeof L === 'undefined') return;
       var mapContainer = document.getElementById('dossierLeafletMap');
@@ -3540,17 +3723,14 @@
       var vibeEl = document.getElementById('modalVibeTags');
       if (vibeEl) vibeEl.innerHTML = vibePills;
 
-      // Video in Dossier
+      // Video in Dossier (Without tacky badge - Clean luxury display)
       var vWrap = document.getElementById('modalSignatureVideoWrap');
       var vPlayer = document.getElementById('modalSignatureVideo');
-      var vBadge = document.getElementById('modalVideoBadge');
       if (target.video) {
         if (vPlayer) vPlayer.src = target.video;
         if (vWrap) vWrap.classList.remove('hidden');
-        if (vBadge) vBadge.classList.remove('hidden');
       } else {
         if (vWrap) vWrap.classList.add('hidden');
-        if (vBadge) vBadge.classList.add('hidden');
       }
 
       var certBtn = document.getElementById('btnModalCertificate');
@@ -3888,6 +4068,7 @@
         try { sessionStorage.setItem('planka_admin_logged', 'true'); } catch(err) {}
         closePinModal();
         updateAdminUI();
+        updateOnlineStatus();
         renderVenues();
         alert('Режим инспектора PLANKA GUIDE активирован!');
       } else {
@@ -3900,6 +4081,7 @@
       isAdmin = false;
       try { sessionStorage.removeItem('planka_admin_logged'); } catch(err) {}
       updateAdminUI();
+      updateOnlineStatus();
       renderVenues();
       alert('Вы вышли из режима инспектора.');
     }
@@ -4080,7 +4262,7 @@
       grid.innerHTML = html;
     }
 
-    // CATEGORY-SPECIFIC GRANULAR CHECKLIST (DYNAMIC RUBRIC ENGINE)
+    // CATEGORY-CALIBRATED GRANULAR CHECKLIST (DYNAMIC RUBRIC ENGINE)
     function renderGranularChecklist() {
       var fmtEl = document.getElementById('formFormat');
       var fmt = fmtEl ? fmtEl.value : 'Fine Dining';
@@ -4106,9 +4288,9 @@
         '<div>' +
           '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">2. WOW-эффект и Латте-арт (макс. 15 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-            '<div><label style="font-size:0.6875rem;">Авторский напиток (0..6)</label><input type="range" id="sub_r6" min="0" max="6" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Авторский кофе / раф (0..6)</label><input type="range" id="sub_r6" min="0" max="6" value="5" oninput="recalcGranularScore()"></div>' +
             '<div><label style="font-size:0.6875rem;">Латте-арт и посуда Loveramics (0..4)</label><input type="range" id="sub_r7" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Фирменный десерт к кофе (0..5)</label><input type="range" id="sub_r8" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Свежий десерт к кофе (0..5)</label><input type="range" id="sub_r8" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
           '</div>' +
         '</div>' +
         '<div>' +
@@ -4142,58 +4324,108 @@
             '<div><label style="font-size:0.6875rem;">Стерильность санузла и столов (0..5)</label><input type="range" id="sub_r19" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
           '</div>' +
         '</div>';
-      } else if (fmt === 'Коктейльный бар') {
+      } else if (fmt === 'Пекарня') {
         html = '<div>' +
-          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">1. Барное сырье и Кордиалы (макс. 35 б.):</span>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">1. Мука, Масло и Сырье (макс. 35 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-            '<div><label style="font-size:0.6875rem;">Качество алкогольной базы (0..10)</label><input type="range" id="sub_r1" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Монолитный прозрачный лед (0..8)</label><input type="range" id="sub_r2" min="0" max="8" value="8" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Свежесть цитрусов и биттеров (0..7)</label><input type="range" id="sub_r3" min="0" max="7" value="7" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Температура подачи коктейля (0..5)</label><input type="range" id="sub_r4" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Вода гостю без ограничений (0..5)</label><input type="range" id="sub_r5" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Мука высшего сорта и закваски (0..10)</label><input type="range" id="sub_r1" min="0" max="10" value="9" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Сливочное масло 82.5% без трансжиров (0..8)</label><input type="range" id="sub_r2" min="0" max="8" value="8" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Натуральные начинки и ягоды (0..7)</label><input type="range" id="sub_r3" min="0" max="7" value="6" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Качество кофе и чая (0..5)</label><input type="range" id="sub_r4" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Свежесть утренней выпечки (0..5)</label><input type="range" id="sub_r5" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
           '</div>' +
         '</div>' +
         '<div>' +
-          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">2. WOW-подача и Концепт (макс. 15 б.):</span>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">2. WOW-эффект и Слоистость (макс. 15 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-            '<div><label style="font-size:0.6875rem;">Фирменный коктейль (0..6)</label><input type="range" id="sub_r6" min="0" max="6" value="6" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Эстетика стекла и посуды (0..4)</label><input type="range" id="sub_r7" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Барный комплимент / аперитив (0..5)</label><input type="range" id="sub_r8" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Фирменный круассан / бриошь (0..6)</label><input type="range" id="sub_r6" min="0" max="6" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Хруст корочки и воздушный мякиш (0..4)</label><input type="range" id="sub_r7" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Сезонные ремесленные новинки (0..5)</label><input type="range" id="sub_r8" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
           '</div>' +
         '</div>' +
         '<div>' +
-          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">3. Честность цены коктейля (макс. 15 б.):</span>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">3. Честность цены и Вес (макс. 15 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-            '<div><label style="font-size:0.6875rem;">Обоснованность наценки на напиток (0..5)</label><input type="range" id="sub_r9" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Честный налив алкоголя (0..5)</label><input type="range" id="sub_r10" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Прозрачность счета (0..5)</label><input type="range" id="sub_r11" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Обоснованность цены выпечки (0..5)</label><input type="range" id="sub_r9" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Честный вес буханки/десерта (0..5)</label><input type="range" id="sub_r10" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Прозрачный ценник и состав (0..5)</label><input type="range" id="sub_r11" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
           '</div>' +
         '</div>' +
         '<div>' +
-          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">4. Харизма и Скорость барменов (макс. 15 б.):</span>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">4. Сервис и Упаковка (макс. 15 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-            '<div><label style="font-size:0.6875rem;">Знание миксологии и контакт (0..5)</label><input type="range" id="sub_r12" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Тайминг первого напитка до 5 мин (0..5)</label><input type="range" id="sub_r13" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Барный этикет и чистота стойки (0..5)</label><input type="range" id="sub_r14" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Знание составов и выпечки (0..5)</label><input type="range" id="sub_r12" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Скорость отдачи и крафт-упаковка (0..5)</label><input type="range" id="sub_r13" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Доброжелательность кассира (0..5)</label><input type="range" id="sub_r14" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
           '</div>' +
         '</div>' +
         '<div>' +
-          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">5. Среда, Полумрак и Звук (макс. 10 б.):</span>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">5. Урбанистика и Аромат (макс. 10 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-            '<div><label style="font-size:0.6875rem;">Удобство посадки у стойки (0..4)</label><input type="range" id="sub_r15" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Диалог с улицей / вывеска (0..3)</label><input type="range" id="sub_r16" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
-            '<div><label style="font-size:0.6875rem;">Свет и музыкальный баланс (0..3)</label><input type="range" id="sub_r17" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Уютные столики для перекуса (0..4)</label><input type="range" id="sub_r15" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Диалог с пешеходной улицей (0..3)</label><input type="range" id="sub_r16" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Аромат выпечки без гари (0..3)</label><input type="range" id="sub_r17" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
           '</div>' +
         '</div>' +
         '<div>' +
-          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">6. Санитария станции (макс. 10 б.):</span>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">6. Санитария витрин (макс. 10 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
-            '<div><label style="font-size:0.6875rem;">Чистота шейкеров и льдогенератора (0..5)</label><input type="range" id="sub_r18" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Чистота витрин и щипцов (0..5)</label><input type="range" id="sub_r18" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
             '<div><label style="font-size:0.6875rem;">Стерильность санузла (0..5)</label><input type="range" id="sub_r19" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
           '</div>' +
         '</div>';
+      } else if (fmt === 'Столовая') {
+        html = '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">1. Свежесть раздачи и Блюда (макс. 35 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Свежесть продуктов на раздаче (0..10)</label><input type="range" id="sub_r1" min="0" max="10" value="8" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Температура первых и вторых блюд (0..8)</label><input type="range" id="sub_r2" min="0" max="8" value="7" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Разнообразие гарниров и салатов (0..7)</label><input type="range" id="sub_r3" min="0" max="7" value="6" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Свежий хлеб и домашний морс (0..5)</label><input type="range" id="sub_r4" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Качество масла для жарки (0..5)</label><input type="range" id="sub_r5" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">2. WOW-эффект и Выкладка (макс. 15 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Фирменное блюдо столовой (0..6)</label><input type="range" id="sub_r6" min="0" max="6" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Аппетитная выкладка на мармитах (0..4)</label><input type="range" id="sub_r7" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Домашняя выпечка / компот (0..5)</label><input type="range" id="sub_r8" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">3. Честность цены обеда (макс. 15 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Доступность комплексного ланча (0..5)</label><input type="range" id="sub_r9" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Честный вес котлет и супов (0..5)</label><input type="range" id="sub_r10" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Чек без скрытых доплат за хлеб/соус (0..5)</label><input type="range" id="sub_r11" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">4. Скорость раздачи и Касса (макс. 15 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Скорость движения очереди (0..5)</label><input type="range" id="sub_r12" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Вежливость персонала на раздаче (0..5)</label><input type="range" id="sub_r13" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Оперативная уборка столов (0..5)</label><input type="range" id="sub_r14" min="0" max="5" value="4" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">5. Среда, Подносы и Зал (макс. 10 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Удобная навигация и линия подносов (0..4)</label><input type="range" id="sub_r15" min="0" max="4" value="4" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Устойчивость столов и посадка (0..3)</label><input type="range" id="sub_r16" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Вентиляция без запаха кухни (0..3)</label><input type="range" id="sub_r17" min="0" max="3" value="3" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">6. Стерильность подносов и зала (макс. 10 б.):</span>' +
+          '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
+            '<div><label style="font-size:0.6875rem;">Чистота подносов и приборов (0..5)</label><input type="range" id="sub_r18" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+            '<div><label style="font-size:0.6875rem;">Стерильность санузла и линии (0..5)</label><input type="range" id="sub_r19" min="0" max="5" value="5" oninput="recalcGranularScore()"></div>' +
+          '</div>' +
+        '</div>';
       } else {
-        // Standard Fine Dining / Restaurant Rubric with Urban & Spatial Ergonomics
+        // Standard Fine Dining & Restaurant
         html = '<div>' +
           '<span style="font-weight: 800; display: block; margin-bottom: 0.25rem; color: inherit;">1. Гастрономия и Сырье (макс. 35 б.):</span>' +
           '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">' +
@@ -4523,7 +4755,7 @@
       }
     });
 
-    // PWA Service Worker Registration
+    // PWA Service Worker & Install Prompt Handler
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
         navigator.serviceWorker.register('./sw.js').then(function(reg) {
@@ -4534,11 +4766,39 @@
       });
     }
 
-    // Offline status tracking
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      var btn = document.getElementById('btnInstallApp');
+      if (btn) btn.classList.remove('hidden');
+    });
+
+    function installPWAApp() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then(function(choiceResult) {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted PWA installation');
+          }
+          deferredInstallPrompt = null;
+          var btn = document.getElementById('btnInstallApp');
+          if (btn) btn.classList.add('hidden');
+        });
+      } else {
+        alert('Для установки приложения на iPhone нажмите кнопку «Поделиться» ➔ «На экран «Домой»». На Android используйте меню браузера «Установить приложение».');
+      }
+    }
+
+    // Distinct Offline status tracking (Guest vs Inspector)
     function updateOnlineStatus() {
       var bar = document.getElementById('offlineStatusBar');
       if (!bar) return;
       if (!navigator.onLine) {
+        if (isAdmin) {
+          bar.innerText = '⚡ Режим инспектора (Офлайн) — замеры и оценки сохраняются локально';
+        } else {
+          bar.innerText = '⚡ Автономный режим — гид доступен без интернета';
+        }
         bar.classList.add('visible');
       } else {
         if (bar.classList.contains('visible')) {
