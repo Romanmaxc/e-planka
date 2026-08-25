@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>PLANKA GUIDE — Независимый ресторанный гид и стандарт качества</title>
   
+  <!-- FAVICON ICONS (BROWSER TAB FIX) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%2318181B'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='280' fill='%23C5A880'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%2318181B'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='280' fill='%23C5A880'%3EP%3C/text%3E%3C/svg%3E">
+
   <!-- PWA MANIFEST & MOBILE APPS SUPPORT -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#18181B">
@@ -96,7 +100,7 @@
       padding: 0 1.5rem;
     }
 
-    /* HEADER */
+    /* HEADER: FLAWLESS HORIZONTAL LAYOUT ON DESKTOP & CLEAN TWO-ROW ON MOBILE */
     header {
       position: sticky;
       top: 0;
@@ -107,19 +111,62 @@
       backdrop-filter: blur(8px);
       transition: background-color 0.25s ease, border-color 0.25s ease;
     }
-    .header-inner {
-      padding: 0.85rem 0;
+    
+    .desktop-header-bar {
+      height: 4.75rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .desktop-nav-group {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .desktop-nav-group a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .desktop-nav-group a:hover {
+      color: var(--gold-deep);
+    }
+
+    .desktop-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .mobile-header-wrapper {
+      display: none;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding: 0.75rem 0;
+      width: 100%;
+    }
+
+    @media (max-width: 860px) {
+      .desktop-header-bar {
+        display: none !important;
+      }
+      .mobile-header-wrapper {
+        display: flex !important;
+      }
     }
 
     /* BRAND LOGO */
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 0.75rem;
       cursor: pointer;
       text-decoration: none;
       flex-shrink: 0;
@@ -433,7 +480,7 @@
       display: block !important;
     }
 
-    /* FOOTER SPACING FIX */
+    /* FOOTER LINKS FIX */
     .footer-links-group {
       display: flex;
       align-items: center;
@@ -455,7 +502,7 @@
       color: #FFFFFF;
     }
 
-    /* MAP POPUP CARD STYLING WITH UNIFIED POSITRON/CARTOGRAPHY & VISIBLE PHOTO */
+    /* MAP POPUP CARD STYLING */
     .leaflet-popup-content-wrapper {
       padding: 0 !important;
       border-radius: 0.65rem !important;
@@ -488,7 +535,7 @@
       color: var(--text-main);
     }
 
-    /* VIEW 1: HORIZONTAL SHOWCASE RIBBON (CAROUSEL / SWIPE VIEW - DEFAULT LUXURY) */
+    /* VIEW 1: HORIZONTAL SHOWCASE RIBBON (DEFAULT LUXURY VIEW) */
     .catalog-ribbon-stage {
       position: relative;
       width: 100%;
@@ -527,7 +574,6 @@
       }
     }
 
-    /* Floating Ribbon Arrows for Desktop */
     .ribbon-nav-btn {
       position: absolute;
       top: 45%;
@@ -559,7 +605,7 @@
       .ribbon-nav-btn { display: none !important; }
     }
 
-    /* VIEW 2: MODULAR GRID (3 COLS DESKTOP, 2 TABLET, 1 MOBILE) */
+    /* VIEW 2: MODULAR GRID */
     .grid-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -997,12 +1043,8 @@
       background: rgba(24, 24, 27, 1);
       transform: translateY(-50%) scale(1.1);
     }
-    .lightbox-arrow-left {
-      left: 1.5rem;
-    }
-    .lightbox-arrow-right {
-      right: 1.5rem;
-    }
+    .lightbox-arrow-left { left: 1.5rem; }
+    .lightbox-arrow-right { right: 1.5rem; }
 
     .lightbox-footer-ribbon {
       padding: 0.75rem 2rem 0 2rem;
@@ -1191,37 +1233,8 @@
     .gap-4 { gap: 1rem; }
     .text-center { text-align: center; }
 
-    /* MOBILE RESPONSIVE OPTIMIZATIONS (SCREENS 1-3 FIXES) */
-    @media (max-width: 768px) {
-      .header-inner {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
-      }
-      .header-top-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-      }
-      .header-actions-row {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        width: 100%;
-        overflow-x: auto;
-        padding-bottom: 0.25rem;
-        -webkit-overflow-scrolling: touch;
-      }
-      .header-nav-scroll {
-        width: 100%;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        gap: 1rem !important;
-        padding-top: 0.35rem;
-        border-top: 1px solid var(--border-subtle);
-      }
+    /* MOBILE RESPONSIVE OPTIMIZATIONS (FIX SCREENS 1-3) */
+    @media (max-width: 860px) {
       .hero-title {
         font-size: 1.85rem !important;
         line-height: 1.2 !important;
@@ -1259,35 +1272,31 @@
   <!-- HEADER -->
   <header>
     <div class="container">
-      <div class="header-inner">
-        
-        <!-- Top Row on Mobile / Left on Desktop -->
-        <div class="header-top-row">
-          <!-- Brand Logo -->
-          <div class="brand-logo" onclick="resetFilters()">
-            <div class="brand-mark">P</div>
-            <div class="brand-title-wrap">
-              <span class="brand-title">PLANKA GUIDE</span>
-              <span class="brand-subtitle">INDEPENDENT QUALITY RATING</span>
-            </div>
-          </div>
-
-          <!-- Mobile Quick Theme Toggle & PWA App Install Button -->
-          <div class="flex items-center gap-2">
-            <button onclick="installPWAApp()" type="button" id="btnInstallApp" class="btn btn-light hidden" style="padding: 0.4rem 0.65rem; font-size: 0.6875rem;" title="Установить приложение">
-              📲 Установить
-            </button>
-            <button onclick="toggleTheme()" type="button" id="btnThemeToggle" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сменить тему">
-              <span id="themeIcon">🌙</span>
-            </button>
+      
+      <!-- DESKTOP HEADER (CLEAN HORIZONTAL SINGLE BAR) -->
+      <div class="desktop-header-bar">
+        <!-- Logo on Left -->
+        <div class="brand-logo" onclick="resetFilters()">
+          <div class="brand-mark">P</div>
+          <div class="brand-title-wrap">
+            <span class="brand-title">PLANKA GUIDE</span>
+            <span class="brand-subtitle">INDEPENDENT QUALITY RATING</span>
           </div>
         </div>
 
-        <!-- Actions Row: City, Compare, Nav & Inspector Mode -->
-        <div class="header-actions-row">
-          
+        <!-- Center Nav Links -->
+        <div class="desktop-nav-group">
+          <a href="#strategy">Стратегия</a>
+          <a href="#selectionSection">Выбор гида</a>
+          <a href="#catalog">Реестр</a>
+          <a href="#methodology">Стандарт</a>
+          <button onclick="openLegalModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.75rem; font-size: 0.6875rem;">Регламент</button>
+        </div>
+
+        <!-- Right Action Controls -->
+        <div class="desktop-actions-group">
           <!-- City Dropdown -->
-          <div style="min-width: 130px; flex-shrink: 0;">
+          <div style="width: 140px;">
             <select id="cityFilter" onchange="applyFilters()">
               <option value="all" selected>Все локации</option>
               <option value="Москва">Москва</option>
@@ -1297,12 +1306,22 @@
           </div>
 
           <!-- Direct Compare Modal Button -->
-          <button onclick="openCompareModal()" type="button" id="btnHeaderCompare" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem; flex-shrink: 0;" title="Сравнение заведений">
+          <button onclick="openCompareModal()" type="button" id="btnHeaderCompare" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сравнение заведений">
             <span>⚖ Сравнить</span> <span id="headerCompareBadge" class="font-mono" style="font-weight: 800; color: var(--gold-deep);">(0)</span>
           </button>
 
+          <!-- PWA App Install Button -->
+          <button onclick="installPWAApp()" type="button" id="btnInstallAppDesktop" class="btn btn-light hidden" style="padding: 0.45rem 0.75rem; font-size: 0.6875rem;" title="Установить приложение">
+            📲 Установить
+          </button>
+
+          <!-- Theme Toggle Button -->
+          <button onclick="toggleTheme()" type="button" id="btnThemeToggleDesktop" class="btn btn-light" style="padding: 0.45rem 0.75rem; font-size: 0.75rem;" title="Сменить тему">
+            <span id="themeIcon">🌙</span>
+          </button>
+
           <!-- Inspector Mode Active Badge & Guest Suggestions Inbox Button -->
-          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.4rem; flex-shrink: 0;">
+          <div id="adminIndicator" class="hidden" style="align-items: center; gap: 0.4rem;">
             <button onclick="openSuggestionsInboxModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">
               <span>📨 Заявки</span> <span id="adminSugCountBadge" class="font-mono">(0)</span>
             </button>
@@ -1312,18 +1331,61 @@
               <button onclick="logoutAdmin()" type="button" title="Выйти" style="background: none; border: none; cursor: pointer; color: inherit; font-weight: 900; margin-left: 0.2rem;">✕</button>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- Public Nav links (Horizontal Touch-Scroll on Mobile) -->
-          <div class="header-nav-scroll" style="display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0;">
+      <!-- MOBILE HEADER (2 CLEAN ROWS) -->
+      <div class="mobile-header-wrapper">
+        <!-- Row 1: Logo on Left, Theme & PWA on Right -->
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+          <div class="brand-logo" onclick="resetFilters()">
+            <div class="brand-mark">P</div>
+            <div class="brand-title-wrap">
+              <span class="brand-title">PLANKA GUIDE</span>
+              <span class="brand-subtitle">QUALITY RATING</span>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <button onclick="installPWAApp()" type="button" id="btnInstallAppMobile" class="btn btn-light hidden" style="padding: 0.35rem 0.55rem; font-size: 0.625rem;">
+              📲 Установить
+            </button>
+            <button onclick="toggleTheme()" type="button" id="btnThemeToggleMobile" class="btn btn-light" style="padding: 0.4rem 0.65rem; font-size: 0.75rem;">
+              <span id="themeIconMobile">🌙</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Row 2: City Dropdown, Compare, Inspector Badge & Nav Links Scroll -->
+        <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%; overflow-x: auto; padding-bottom: 0.2rem; -webkit-overflow-scrolling: touch;">
+          <div style="min-width: 125px; flex-shrink: 0;">
+            <select id="cityFilterMobile" onchange="syncCityMobile(this.value)">
+              <option value="all" selected>Все локации</option>
+              <option value="Москва">Москва</option>
+              <option value="СПб">Санкт-Петербург</option>
+              <option value="Екатеринбург">Екатеринбург</option>
+            </select>
+          </div>
+
+          <button onclick="openCompareModal()" type="button" class="btn btn-light" style="padding: 0.45rem 0.65rem; font-size: 0.6875rem; flex-shrink: 0;">
+            <span>⚖ Сравнить</span> <span id="headerCompareBadgeMobile" class="font-mono" style="font-weight: 800; color: var(--gold-deep);">(0)</span>
+          </button>
+
+          <div id="adminIndicatorMobile" class="hidden" style="align-items: center; gap: 0.35rem; flex-shrink: 0;">
+            <button onclick="openSuggestionsInboxModal()" type="button" class="btn btn-gold" style="padding: 0.35rem 0.55rem; font-size: 0.625rem;">
+              📨 Заявки <span id="adminSugCountBadgeMobile">(0)</span>
+            </button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.85rem; font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding-left: 0.35rem; flex-shrink: 0;">
             <a href="#strategy" style="color: inherit; text-decoration: none;">Стратегия</a>
             <a href="#selectionSection" style="color: inherit; text-decoration: none;">Выбор гида</a>
             <a href="#catalog" style="color: inherit; text-decoration: none;">Реестр</a>
             <a href="#methodology" style="color: inherit; text-decoration: none;">Стандарт</a>
-            <button onclick="openLegalModal()" type="button" class="btn btn-light" style="padding: 0.35rem 0.65rem; font-size: 0.6875rem;">Регламент</button>
           </div>
-
         </div>
       </div>
+
     </div>
   </header>
 
@@ -2852,7 +2914,7 @@
       document.getElementById('shareVenueTitle').innerText = v.name;
       document.getElementById('shareVenueDesc').innerText = v.city + ' • Знак Качества ' + v.total_score + '/100';
 
-      var shareUrl = window.location.origin + window.location.pathname + '#venue-' + v.id;
+      var shareUrl = window.location.origin + window.location.pathname + '?venue=' + v.id + '#venue-' + v.id;
       var qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(shareUrl);
       var qrImg = document.getElementById('shareQrImage');
       if (qrImg) qrImg.setAttribute('src', qrApiUrl);
@@ -2866,7 +2928,7 @@
 
     function copyShareUrl() {
       if (!activeModalVenue) return;
-      var shareUrl = window.location.origin + window.location.pathname + '#venue-' + activeModalVenue.id;
+      var shareUrl = window.location.origin + window.location.pathname + '?venue=' + activeModalVenue.id + '#venue-' + activeModalVenue.id;
       if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(shareUrl).then(function() {
           alert('Ссылка на заведение скопирована в буфер обмена!');
@@ -2878,7 +2940,7 @@
 
     function shareViaTelegram() {
       if (!activeModalVenue) return;
-      var shareUrl = window.location.origin + window.location.pathname + '#venue-' + activeModalVenue.id;
+      var shareUrl = window.location.origin + window.location.pathname + '?venue=' + activeModalVenue.id + '#venue-' + activeModalVenue.id;
       var text = 'Ресторанный аудит PLANKA GUIDE: ' + activeModalVenue.name + ' (' + activeModalVenue.total_score + '/100 б.)';
       window.open('https://t.me/share/url?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent(text), '_blank');
     }
@@ -3606,46 +3668,6 @@
     }
 
     // 1-Click Multi-Platform Review Exporter for Yandex & 2GIS
-    function copyReviewForPlatform(platform) {
-      if (!activeModalVenue) return;
-      var v = activeModalVenue;
-      
-      var isQuality = v.total_score >= 90;
-      var prosList = (v.pros && v.pros.length > 0) ? v.pros.map(function(p){ return '• ' + p; }).join('\n') : '• Качественная отдача горячего\n• Внимательный сервис';
-      var consList = (v.cons && v.cons.length > 0) ? v.cons.map(function(c){ return '• ' + c; }).join('\n') : '• Существенных замечаний не зафиксировано';
-
-      var text = '';
-      if (platform === 'yandex') {
-        text = 'Оценка PLANKA GUIDE: ' + v.total_score + '/100 (' + (isQuality ? 'Знак Качества' : v.grade) + ')\n' +
-               'Фирменное блюдо: ' + v.signature_dish + ' — ' + v.dish_review + '\n\n' +
-               'Сильные стороны:\n' + prosList + '\n\n' +
-               'Замечания инспекции:\n' + consList + '\n\n' +
-               'Средний чек: ' + v.avg_check.toLocaleString('ru-RU') + ' ₽ | Локация: ' + v.city + ', ' + (v.address || '') + '\n' +
-               'Независимый аудит качества planka-guide.ru';
-      } else {
-        text = '★ Ресторанный рейтинг PLANKA GUIDE: ' + v.total_score + ' из 100\n' +
-               'Формат: ' + v.format + ' | Средний чек: ' + v.avg_check.toLocaleString('ru-RU') + ' руб.\n\n' +
-               'Что понравилось:\n' + prosList + '\n\n' +
-               'На что обратить внимание:\n' + consList + '\n\n' +
-               'Вердикт: ' + (v.full_review || v.dish_review) + '\n' +
-               'Подробный протокол проверки: planka-guide.ru';
-      }
-
-      if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(function() {
-          alert('Отзыв для ' + (platform === 'yandex' ? 'Яндекс Карт' : '2ГИС') + ' скопирован в буфер обмена!');
-        });
-      } else {
-        var ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        ta.remove();
-        alert('Отзыв для ' + (platform === 'yandex' ? 'Яндекс Карт' : '2ГИС') + ' скопирован в буфер обмена!');
-      }
-    }
-
     // Render Unified Leaflet Map inside Venue Dossier
     function renderDossierMap(target) {
       if (typeof L === 'undefined') return;
@@ -4769,7 +4791,7 @@
     window.addEventListener('beforeinstallprompt', function(e) {
       e.preventDefault();
       deferredInstallPrompt = e;
-      var btn = document.getElementById('btnInstallApp');
+      var btnD = document.getElementById('btnInstallAppDesktop'); var btnM = document.getElementById('btnInstallAppMobile'); if (btnD) btnD.classList.remove('hidden'); if (btnM) btnM.classList.remove('hidden');
       if (btn) btn.classList.remove('hidden');
     });
 
@@ -4781,7 +4803,7 @@
             console.log('User accepted PWA installation');
           }
           deferredInstallPrompt = null;
-          var btn = document.getElementById('btnInstallApp');
+          var btnD = document.getElementById('btnInstallAppDesktop'); var btnM = document.getElementById('btnInstallAppMobile'); if (btnD) btnD.classList.remove('hidden'); if (btnM) btnM.classList.remove('hidden');
           if (btn) btn.classList.add('hidden');
         });
       } else {
@@ -4810,6 +4832,91 @@
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
     updateOnlineStatus();
+
+    
+    // SYNC MOBILE & DESKTOP THEME / CITY CONTROLS
+    function syncCityMobile(val) {
+      var dCity = document.getElementById('cityFilter');
+      if (dCity) dCity.value = val;
+      applyFilters();
+    }
+
+    // ENRICHED REVIEW COPY WITH FULL VENUE REQUISITES & DIRECT LINK (FOR YANDEX & 2GIS)
+    function copyReviewForPlatform(platform) {
+      if (!activeModalVenue) return;
+      var v = activeModalVenue;
+      
+      var isQuality = v.total_score >= 90;
+      var prosList = (v.pros && v.pros.length > 0) ? v.pros.map(function(p){ return '• ' + p; }).join('\n') : '• Качественная отдача горячего\n• Внимательный сервис';
+      var consList = (v.cons && v.cons.length > 0) ? v.cons.map(function(c){ return '• ' + c; }).join('\n') : '• Существенных замечаний не зафиксировано';
+      var directDossierLink = window.location.origin + window.location.pathname + '?venue=' + v.id + '#venue-' + v.id;
+
+      var text = '';
+      if (platform === 'yandex') {
+        text = '★ РЕСТОРАННЫЙ АУДИТ PLANKA GUIDE: ' + v.name + '\n' +
+               'Локация: ' + v.city + (v.district ? ' (' + v.district + ')' : '') + ', ' + (v.address || '') + '\n' +
+               'Формат: ' + v.format + ' (' + (v.price_tier || '₽₽') + ') | Средний чек: ' + v.avg_check.toLocaleString('ru-RU') + ' ₽\n' +
+               'Шеф-повар: ' + (v.chef || 'Не указан') + '\n\n' +
+               'Итоговый балл: ' + v.total_score + ' / 100 (' + (isQuality ? 'Знак Качества PLANKA GUIDE' : v.grade) + ')\n' +
+               'Фирменное блюдо: ' + v.signature_dish + ' — «' + (v.dish_review || '') + '»\n\n' +
+               'Сильные стороны:\n' + prosList + '\n\n' +
+               'Замечания инспекции:\n' + consList + '\n\n' +
+               'Оценки по стандарту:\n' +
+               '• Гастрономия: ' + (v.scores ? v.scores.food : 30) + '/35 б.\n' +
+               '• Сервис: ' + (v.scores ? v.scores.service : 14) + '/15 б.\n' +
+               '• Честность цены: ' + (v.scores ? v.scores.price : 14) + '/15 б.\n' +
+               '• Урбанистика: ' + (v.scores ? v.scores.space : 9) + '/10 б.\n' +
+               '• Санитария: ' + (v.scores ? v.scores.sanitation : 9) + '/10 б.\n\n' +
+               'Подробный протокол аудита: ' + directDossierLink;
+      } else {
+        text = '★ Ресторанный рейтинг PLANKA GUIDE: ' + v.name + ' (' + v.total_score + ' из 100 б.)\n' +
+               'Адрес: ' + v.city + ', ' + (v.address || '') + ' | Чек: ' + v.avg_check.toLocaleString('ru-RU') + ' руб.\n' +
+               'Фирменное блюдо: ' + v.signature_dish + '\n\n' +
+               'Что понравилось:\n' + prosList + '\n\n' +
+               'На что обратить внимание:\n' + consList + '\n\n' +
+               'Вердикт аудита: ' + (v.full_review || v.dish_review) + '\n\n' +
+               'Ссылка на досье: ' + directDossierLink;
+      }
+
+      if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          alert('Отзыв с полными реквизитами для ' + (platform === 'yandex' ? 'Яндекс Карт' : '2ГИС') + ' скопирован в буфер обмена!');
+        });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        if (document.execCommand) document.execCommand('copy');
+        ta.remove();
+        alert('Отзыв с полными реквизитами для ' + (platform === 'yandex' ? 'Яндекс Карт' : '2ГИС') + ' скопирован в буфер обмена!');
+      }
+    }
+
+    // DIRECT URL ROUTING (OPENS SPECIFIC VENUE DOSSIER ON PAGE LOAD)
+    function handleUrlRouting() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var vParam = params.get('venue');
+        if (vParam) {
+          var vId = parseInt(vParam);
+          if (!isNaN(vId)) {
+            setTimeout(function() { openVenueModal(vId); }, 250);
+            return;
+          }
+        }
+        var hash = window.location.hash;
+        if (hash && hash.indexOf('venue-') !== -1) {
+          var hId = parseInt(hash.replace('#venue-', ''));
+          if (!isNaN(hId)) {
+            setTimeout(function() { openVenueModal(hId); }, 250);
+          }
+        }
+      } catch(e) {}
+    }
+
+    // Hook deep-linking to load
+    window.addEventListener('DOMContentLoaded', handleUrlRouting);
 
     // Start Application
     checkTheme();
