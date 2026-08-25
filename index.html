@@ -2,16 +2,17 @@
 <html lang="ru" dir="ltr">
 <head>
   <meta charset="UTF-8">
-    <!-- SECURITY META HEADERS & CSP -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PLANKA GUIDE — Независимый ресторанный гид и стандарт качества</title>
+  
+  <!-- SECURITY META HEADERS & CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data: blob:; media-src 'self' https: data: blob:; connect-src 'self' https: data: blob:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>PLANKA GUIDE — Независимый ресторанный гид и стандарт качества</title>
-  
-  <!-- FAVICON ICONS -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%2318181B'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='280' fill='%23C5A880'%3EP%3C/text%3E%3C/svg%3E">
-  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%2318181B'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='280' fill='%23C5A880'%3EP%3C/text%3E%3C/svg%3E">
+
+  <!-- EXACT BRAND FAVICON (MATCHING WHITE BOX WITH BLACK BORDER & SERIF 'P') -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='24' y='24' width='464' height='464' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-weight='900' font-size='320' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='24' y='24' width='464' height='464' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-weight='900' font-size='320' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
 
   <!-- PWA MANIFEST & MOBILE APPS SUPPORT -->
   <link rel="manifest" href="manifest.json">
@@ -19,9 +20,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PLANKA GUIDE">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%2318181B'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, serif' font-weight='900' font-size='280' fill='%23C5A880'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='24' y='24' width='464' height='464' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-weight='900' font-size='320' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
 
-  <!-- GOOGLE LUXURY TYPOGRAPHY (PLAYFAIR DISPLAY, CORMORANT & INTER) -->
+  <!-- GOOGLE LUXURY TYPOGRAPHY -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&display=swap" rel="stylesheet">
@@ -31,7 +32,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <style>
-    /* CSS VARIABLES: DUAL LUXURY PALETTE (WARM LINEN & DEEP OBSIDIAN) */
+    /* CSS VARIABLES: DUAL LUXURY PALETTE */
     :root {
       --bg-page: #FAF8F5;
       --bg-surface: #FFFFFF;
@@ -75,7 +76,11 @@
       -webkit-tap-highlight-color: transparent;
     }
     
-    html {
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden !important;
+      position: relative;
+      width: 100%;
       scroll-behavior: smooth;
       direction: ltr;
       text-align: left;
@@ -87,7 +92,6 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
@@ -102,6 +106,8 @@
       max-width: 1240px;
       margin: 0 auto;
       padding: 0 1.5rem;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* HEADER */
@@ -114,6 +120,7 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
       backdrop-filter: blur(8px);
       transition: background-color 0.25s ease, border-color 0.25s ease;
+      width: 100%;
     }
     
     .desktop-header-bar {
@@ -274,6 +281,7 @@
       align-items: center;
       overflow: hidden;
       border-bottom: 1px solid var(--border-color);
+      width: 100%;
     }
     .hero-slider-track {
       position: absolute;
@@ -506,7 +514,20 @@
       color: #FFFFFF;
     }
 
-    /* MAP POPUP CARD */
+    /* CLEAN LEAFLET MAP & REMOVAL OF DEFAULT POLITICAL/FLAG ATTRIBUTION */
+    .leaflet-control-attribution a[href*="leafletjs"] {
+      display: none !important;
+    }
+    .leaflet-attribution-flag {
+      display: none !important;
+    }
+    .leaflet-control-attribution {
+      background: rgba(255, 255, 255, 0.85) !important;
+      color: #71717A !important;
+      font-size: 0.625rem !important;
+      padding: 0.15rem 0.45rem !important;
+      border-radius: 0.25rem !important;
+    }
     .leaflet-popup-content-wrapper {
       padding: 0 !important;
       border-radius: 0.65rem !important;
@@ -573,8 +594,8 @@
     }
     @media (max-width: 640px) {
       .catalog-ribbon-card {
-        min-width: 86vw;
-        max-width: 86vw;
+        min-width: 82vw;
+        max-width: 82vw;
       }
     }
 
@@ -840,7 +861,7 @@
     @media (max-width: 640px) {
       .metrics-bar-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 1.25rem !important;
+        gap: 0.75rem !important;
       }
       .metrics-bar-grid > div:nth-child(2n+1) {
         border-left: none !important;
@@ -901,6 +922,7 @@
       padding: 1.25rem;
       overflow-y: auto;
       animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
     }
     .modal-overlay.open {
       display: flex !important;
@@ -924,6 +946,7 @@
       text-align: left;
       color: var(--text-main);
       animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
     }
 
     .lightbox-modal {
@@ -939,6 +962,7 @@
       padding: 1rem 0;
       backdrop-filter: blur(12px);
       user-select: none;
+      box-sizing: border-box;
     }
     .lightbox-modal.open {
       display: flex !important;
@@ -1224,18 +1248,26 @@
     .gap-4 { gap: 1rem; }
     .text-center { text-align: center; }
 
+    /* MOBILE OPTIMIZATIONS (FIX HORIZONTAL BOUNCE, COMPACT FONTS & PROPORTIONAL MODAL) */
     @media (max-width: 860px) {
       .hero-title {
-        font-size: 1.85rem !important;
+        font-size: 1.65rem !important;
         line-height: 1.2 !important;
+      }
+      .hero-desc {
+        font-size: 0.8125rem !important;
+        line-height: 1.5 !important;
       }
       .modal-box {
         max-width: 95vw !important;
         padding: 1.25rem !important;
+        margin: 0 !important;
+        overflow-x: hidden !important;
       }
       .dossier-triptych-grid {
         grid-template-columns: 1fr;
-        height: 200px;
+        height: 180px;
+        width: 100% !important;
       }
       .dossier-triptych-img:not(:first-child) {
         display: none;
@@ -1256,10 +1288,8 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-  <!-- PWA Offline Status Banner -->
   <div id="offlineStatusBar" class="offline-status-bar">⚡ Автономный режим — гид доступен без интернета</div>
-
-  <!-- HEADER -->
+<!-- HEADER -->
   <header>
     <div class="container">
       
@@ -1551,6 +1581,7 @@
           <button onclick="toggleFavoritesFilter()" type="button" id="btnFavoritesFilter" class="btn btn-light" style="padding: 0.55rem 0.85rem; font-size: 0.75rem;">♡ Избранное <span id="favoritesCountBadge">(0)</span></button>
 
           <div id="adminActionGroup" class="hidden" style="align-items: center; gap: 0.5rem;">
+            <button onclick="openInspectorManualModal()" type="button" class="btn btn-gold">📘 Руководство инспектора</button>
             <button onclick="openNewAuditModal()" type="button" class="btn btn-dark">+ Новый аудит</button>
             <button onclick="toggleDraftsFilter()" type="button" id="btnDraftsFilter" class="btn btn-draft">📁 Черновики <span id="draftsCountBadge">(0)</span></button>
             <button onclick="openSyncModal()" type="button" class="btn btn-light">Синхронизация</button>
@@ -1787,6 +1818,85 @@
   </div>
 
   
+  
+  <!-- MODAL: INSPECTOR GRADING MANUAL & POINT CALIBRATION RULES -->
+  <div id="inspectorManualModal" class="modal-overlay" onclick="closeInspectorManualModal()">
+    <div class="modal-box" style="max-width: 840px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.35rem;">
+        <div>
+          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">РЕГЛАМЕНТ АУДИТА И ШКАЛА ОЦЕНКИ</span>
+          <h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; color: inherit; margin-top: 0.15rem;">Методическое пособие инспектора PLANKA GUIDE</h3>
+        </div>
+        <button onclick="closeInspectorManualModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2.25rem; height: 2.25rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+      </div>
+
+      <div style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65; display: flex; flex-direction: column; gap: 1.5rem; max-height: 70vh; overflow-y: auto; padding-right: 0.5rem;">
+        
+        <div style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">
+          <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.35rem;">🎯 Главный принцип инспекции</strong>
+          Инспектор оценивает заведение инкогнито в роли рядового гостя. Оценка строится на объективных физических замерах (тайминг, температура, органолептика) и субъективном восприятии комфорта, без агрессивных заявлений или конфликта интересов.
+        </div>
+
+        <!-- Pillar 1 -->
+        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
+          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">1. Сырье и гастрономия (макс. 35 баллов)</strong>
+          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
+            <li><strong>30–35 б. (Выдающийся уровень):</strong> Свежайшее сырье высшей категории (фермерское мясо, дикая рыба, 100% арабика спешелти, сливочное масло 82.5%), безупречная прожарка, чистая температура подачи.</li>
+            <li><strong>22–29 б. (Хороший стандарт):</strong> Качественные коммерческие ингредиенты, стабильная термическая обработка, незначительные нюансы баланса соли/кислоты.</li>
+            <li><strong>15–21 б. (Базовый уровень):</strong> Ощутимое использование полуфабрикатов или масс-маркет сырья без гастрономической глубины.</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
+          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">2. Мастерство кухни и WOW-эффект (макс. 15 баллов)</strong>
+          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
+            <li><strong>13–15 б.:</strong> Яркая авторская подача фирменного блюда, запоминающийся контраст текстур (хруст, нежность, соус), гармоничная сервировочная посуда.</li>
+            <li><strong>9–12 б.:</strong> Аккуратная ресторанная подача без ярко выраженной концептуальной новизны.</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
+          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">3. Честность цены и выход порций (макс. 15 баллов)</strong>
+          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
+            <li><strong>13–15 б.:</strong> Справедливая наценка в своем сегменте, честный заявленный вес блюд, бесплатная вода гостю, прозрачный чек без скрытых доплат.</li>
+            <li><strong>8–12 б.:</strong> Наценка выше средней по рынку, платная вода в премиальном сегменте.</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
+          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">4. Сервис, тайминг и этикет (макс. 15 баллов)</strong>
+          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
+            <li><strong>13–15 б.:</strong> Встреча у входа за 30 сек, подача напитка за 3-5 мин, синхронная отдача горячего за 12–15 мин, знание составов блюд и вин, своевременная уборка посуды.</li>
+            <li><strong>8–12 б.:</strong> Задержка горячего свыше 20 минут, невнимательность официанта при расчете.</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 5 -->
+        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
+          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">5. Среда, урбанистика и акустика (макс. 10 баллов)</strong>
+          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
+            <li><strong>9–10 б.:</strong> Безбарьерный вход, диалог с улицей/террасой, дистанция между столами от 1.2 м, теплый направленный свет, акустический комфорт (можно говорить вполголоса).</li>
+            <li><strong>5–8 б.:</strong> Тесная посадка, шумный эхо-фон, шатающиеся столы, недостаток розеток.</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 6 -->
+        <div style="border-left: 3px solid var(--gold-deep); padding-left: 1rem;">
+          <strong style="color: var(--text-main); font-size: 0.9375rem; display: block; margin-bottom: 0.25rem;">6. Санитария и чистота (макс. 10 баллов)</strong>
+          <ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6;">
+            <li><strong>9–10 б.:</strong> Стерильное стекло без разводов, идеальный порядок открытой кухни, безупречная чистота и оснащение санузлов в часы пик.</li>
+            <li><strong>5–8 б.:</strong> Пыль на декоративных элементах, переполненные урны в санузле.</li>
+          </ul>
+        </div>
+
+        <button onclick="closeInspectorManualModal()" type="button" class="btn btn-dark" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem;">Понятно, закрыть руководство</button>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: LEGAL POLICY (AIRTIGHT CONSTITUTIONAL & REGULATORY SHIELD) -->
   <div id="legalModal" class="modal-overlay" onclick="closeLegalModal()">
     <div class="modal-box" style="max-width: 720px; padding: 2.25rem;" onclick="event.stopPropagation()">
@@ -3082,7 +3192,7 @@
       });
 
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; CARTO | PLANKA GUIDE',
+        attribution: '&copy; CARTO | PLANKA GUIDE', prefix: false,
         maxZoom: 19,
         subdomains: 'abcd'
       }).addTo(leafletMap);
@@ -3706,7 +3816,7 @@
       });
 
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; CARTO | PLANKA GUIDE',
+        attribution: '&copy; CARTO | PLANKA GUIDE', prefix: false,
         maxZoom: 19,
         subdomains: 'abcd'
       }).addTo(dossierMapInstance);
@@ -4578,6 +4688,14 @@
       if (calcGrEl) calcGrEl.innerText = grade;
     }
 
+    
+    function openInspectorManualModal() {
+      openModal('inspectorManualModal');
+    }
+    function closeInspectorManualModal() {
+      closeModal('inspectorManualModal');
+    }
+
     function openNewAuditModal() {
       var editIdEl = document.getElementById('editVenueId');
       if (editIdEl) editIdEl.value = '';
@@ -4900,40 +5018,30 @@
       var v = activeModalVenue;
       
       var isQuality = v.total_score >= 90;
-      var prosList = (v.pros && v.pros.length > 0) ? v.pros.map(function(p){ return '• ' + p; }).join('\n') : '• Качественная отдача горячего\n• Внимательный сервис';
-      var consList = (v.cons && v.cons.length > 0) ? v.cons.map(function(c){ return '• ' + c; }).join('\n') : '• Существенных замечаний не зафиксировано';
+      var prosList = (v.pros && v.pros.length > 0) ? v.pros.map(function(p){ return '• ' + escapeHTML(p); }).join('\n') : '• Высокое качество сырья и выверенная подача\n• Внимательный профессиональный сервис';
       var directDossierLink = window.location.origin + window.location.pathname + '?venue=' + v.id + '#venue-' + v.id;
 
-      var text = '';
-      if (platform === 'yandex') {
-        text = '★ РЕСТОРАННЫЙ АУДИТ PLANKA GUIDE: ' + v.name + '\n' +
-               'Локация: ' + v.city + (v.district ? ' (' + v.district + ')' : '') + ', ' + (v.address || '') + '\n' +
-               'Формат: ' + v.format + ' (' + (v.price_tier || '₽₽') + ') | Средний чек: ' + v.avg_check.toLocaleString('ru-RU') + ' ₽\n' +
-               'Шеф-повар: ' + (v.chef || 'Не указан') + '\n\n' +
-               'Итоговый балл: ' + v.total_score + ' / 100 (' + (isQuality ? 'Знак Качества PLANKA GUIDE' : v.grade) + ')\n' +
-               'Фирменное блюдо: ' + v.signature_dish + ' — «' + (v.dish_review || '') + '»\n\n' +
-               'Сильные стороны:\n' + prosList + '\n\n' +
-               'Нюансы визита и рекомендации:\n' + consList + '\n\n' +
-               'Оценки по стандарту (субъективное мнение инспекторов):\n' +
-               '• Гастрономия: ' + (v.scores ? v.scores.food : 30) + '/35 б.\n' +
-               '• Сервис: ' + (v.scores ? v.scores.service : 14) + '/15 б.\n' +
-               '• Честность цены: ' + (v.scores ? v.scores.price : 14) + '/15 б.\n' +
-               '• Урбанистика: ' + (v.scores ? v.scores.space : 9) + '/10 б.\n' +
-               '• Санитария: ' + (v.scores ? v.scores.sanitation : 9) + '/10 б.\n\n' +
-               'Подробный протокол аудита: ' + directDossierLink;
-      } else {
-        text = '★ Ресторанный рейтинг PLANKA GUIDE: ' + v.name + ' (' + v.total_score + ' из 100 б.)\n' +
-               'Адрес: ' + v.city + ', ' + (v.address || '') + ' | Чек: ' + v.avg_check.toLocaleString('ru-RU') + ' руб.\n' +
-               'Фирменное блюдо: ' + v.signature_dish + '\n\n' +
-               'Что понравилось:\n' + prosList + '\n\n' +
-               'На что обратить внимание:\n' + consList + '\n\n' +
-               'Вердикт аудита: ' + (v.full_review || v.dish_review) + '\n\n' +
-               'Ссылка на досье: ' + directDossierLink;
-      }
+      var text = '★★★★★ РЕСТОРАННЫЙ АУДИТ PLANKA GUIDE — ' + (isQuality ? 'ЗНАК КАЧЕСТВА' : 'РЕКОМЕНДОВАНО') + '\n\n' +
+        'Тайная инспекция независимого гастрономического гида PLANKA GUIDE посетила заведение «' + v.name + '» (' + v.city + (v.address ? ', ' + v.address : '') + '). Мы провели полный аудит по 100-балльной системе и официально подтверждаем высокий уровень кухни и сервиса!\n\n' +
+        '🏆 ИТОГОВАЯ ОЦЕНКА ГИДА: ' + v.total_score + ' из 100 б. (' + (isQuality ? 'Знак Качества PLANKA GUIDE' : v.grade) + ')\n' +
+        '💰 Средний чек: ' + v.avg_check.toLocaleString('ru-RU') + ' ₽ (' + (v.price_tier || '₽₽') + ') | Шеф-повар: ' + (v.chef || 'Не указан') + '\n\n' +
+        '📊 РЕЗУЛЬТАТЫ ЗАМЕРОВ ПО 6 КРИТЕРИЯМ СТАНДАРТА:\n' +
+        '• 🥇 Гастрономия и сырье: ' + (v.scores ? v.scores.food : 30) + ' / 35 б.\n' +
+        '• 👨‍🍳 Мастерство кухни и WOW-подача: ' + (v.scores ? v.scores.wow : 14) + ' / 15 б.\n' +
+        '• 💵 Честность цены и выход: ' + (v.scores ? v.scores.price : 14) + ' / 15 б.\n' +
+        '• ⏱ Сервис, тайминг и этикет: ' + (v.scores ? v.scores.service : 14) + ' / 15 б.\n' +
+        '• 🏛 Среда, урбанистика и акустика: ' + (v.scores ? v.scores.space : 9) + ' / 10 б.\n' +
+        '• 🧼 Санитария открытой кухни и зала: ' + (v.scores ? v.scores.sanitation : 9) + ' / 10 б.\n\n' +
+        '🍽 ФИРМЕННОЕ БЛЮДО: ' + v.signature_dish + '\n' +
+        'Вкусовой вердикт: «' + (v.dish_review || '') + '»\n\n' +
+        '✨ ЧТО ОСОБЕННО ПОНРАВИЛОСЬ ИНСПЕКТОРАМ:\n' + prosList + '\n\n' +
+        '💡 НАШ ВЕРДИКТ: ' + (v.full_review || v.dish_review) + '\n\n' +
+        '🔎 Ознакомиться с подробным протоколом проверки, фотофиксацией кухни и рейтингом других заведений можно в официальном гиде:\n' +
+        '👉 ' + directDossierLink;
 
       if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function() {
-          alert('Отзыв с полными реквизитами для ' + (platform === 'yandex' ? 'Яндекс Карт' : '2ГИС') + ' скопирован в буфер обмена!');
+          alert('Отзыв со ссылкой на досье заведения скопирован в буфер обмена!');
         });
       } else {
         var ta = document.createElement('textarea');
@@ -4942,11 +5050,9 @@
         ta.select();
         if (document.execCommand) document.execCommand('copy');
         ta.remove();
-        alert('Отзыв с полными реквизитами для ' + (platform === 'yandex' ? 'Яндекс Карт' : '2ГИС') + ' скопирован в буфер обмена!');
+        alert('Отзыв со ссылкой на досье заведения скопирован в буфер обмена!');
       }
     }
-
-    // DIRECT URL ROUTING (OPENS SPECIFIC VENUE DOSSIER ON PAGE LOAD)
     function handleUrlRouting() {
       try {
         var params = new URLSearchParams(window.location.search);
