@@ -3,769 +3,689 @@
     "id": 1,
     "name": "White Rabbit",
     "format": "Fine Dining",
-    "segment": "Премиум ($$$$)",
-    "price_tier": "₽₽₽₽",
     "city": "Москва",
-    "district": "Арбат / Смоленская",
-    "address": "Смоленская площадь, 3, 16 этаж",
+    "district": "Арбат",
+    "address": "Смоленская площадь, 3 (16 этаж)",
+    "avg_check": 7000,
+    "price_tier": "₽₽₽₽",
+    "segment": "Премиум ($$$$)",
     "chef": "Владимир Мухин",
-    "concept": "Современная авторская русская кухня на основе фермерских продуктов",
+    "concept": "Современная авторская русская кухня и сезонные фермерские продукты",
     "phone": "+7 (495) 510-51-01",
-    "booking_url": "https://whiterabbitmoscow.ru",
+    "booking_url": "https://whiterabbit.ru/reserve",
     "no_booking": false,
     "status": "published",
-    "avg_check": 7000,
     "date": "2026-08-10",
     "scores": {
       "food": 34,
       "wow": 15,
-      "price": 13,
-      "service": 14,
-      "space": 10,
-      "sanitation": 10
+      "price": 14,
+      "service": 15,
+      "space": 9,
+      "sanitation": 9
     },
-    "penalties": 0,
     "total_score": 96,
     "grade": "Знак Качества",
+    "value_score": 8.8,
     "signature_dish": "Черная треска с муссом из трав",
-    "dish_review": "Идеальная степень прожарки. Нежная структура рыбы, травяной соус с легкой кислинкой и идеальный баланс умами.",
-    "full_review": "White Rabbit демонстрирует бескомпромиссную работу с локальными фермерскими продуктами. Пространство ресторана на высоте птичьего полета впечатляет панорамным остеклением, однако в центральном зале вечером посадка ощущается довольно плотной. Сервис работает безупречно: сомелье детально рассказывает историю винного пейринга, а курсы отдаются синхронно с паузами ровно в 14 минут. Санузел содержится в стерильной чистоте.",
-    "private_notes": "Бизнес-инсайт: Очень грамотная маржинальность на сетевых сетах (food cost ~22%). Акустические панели на потолке гасят эхо при высоте 6 метров. Идея для нашего заведения: использовать аналогичные скрытые соусники ручной работы из темной глины.",
+    "dish_review": "По субъективной оценке инспектора — филигранное попадание в структуру рыбы, травяной соус с деликатной кислинкой и выверенный баланс умами.",
+    "full_review": "По нашему авторскому впечатлению, White Rabbit сохраняет статус флагмана российской гастрономии. Панорамный вид гармонично сочетается с тонкой работой шефа над локальными ингредиентами.",
+    "urban_notes": "Интеграция в высотную доминанту Смоленского пассажа, удобный отдельный лифт и панорамный обзор на исторический центр Москвы.",
+    "ergonomics_notes": "Мягкий направленный вечерний свет, комфортная глубина кресел и выверенное зонирование столиков под куполом.",
+    "video": "https://assets.mixkit.co/videos/preview/mixkit-chef-plating-a-delicious-dish-in-a-restaurant-42774-large.mp4",
     "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_1E293B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231E293B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230F172A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_1E293B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M18%2010c-3-3-8-4-12%200%204%204%209%203%2012%200z%22/%3E%3Cpath%20d%3D%22M18%2010l4-3v6l-4-3z%22/%3E%3Ccircle%20cx%3D%228%22%20cy%3D%2210%22%20r%3D%221%22%20fill%3D%22%23FFF%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EWHITE%20RABBIT%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EWHITE%20RABBIT%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EWHITE%20RABBIT%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
+      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "private_photos": [
+      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"
     ],
     "pros": [
-      "Идеальная прожарка и баланс соуса к рыбе",
-      "Синхронная отдача блюд гостям за 14 минут",
-      "Стерильная чистота санузла и открытой кухни"
+      "Высокая точность термической обработки рыбы и морепродуктов",
+      "Синхронная отдача горячих блюд за 14 минут по таймингу",
+      "Высокий уровень чистоты открытой кухни и сервировки"
     ],
     "cons": [
-      "Плотная посадка в центральном зале в вечерний прайм-тайм"
+      "В вечерние часы пик на наш взгляд ощущается высокая плотность посадки в центральной зоне зала"
     ],
-    "features": [
-      "Pet-Friendly",
-      "Valet-Parking",
-      "Сомелье",
-      "Панорамный вид"
+    "vibe_tags": [
+      "Романтический ужин",
+      "Панорамный вид",
+      "Авторская кухня",
+      "Торжество"
     ],
-    "coords": {
-      "lat": 55.7483,
-      "lng": 37.5833
-    },
     "history": [
       {
-        "date": "2026-02-10",
-        "score": 90,
-        "notes": "Первичная инспекция: замечания по плотности посадки в центральном зале."
+        "date": "2026-03-15",
+        "score": 95,
+        "notes": "Первичный аудит весеннего сет-меню."
       },
       {
         "date": "2026-08-10",
         "score": 96,
-        "notes": "Повторная инспекция: исправлена синхронность отдачи курсов, идеальный соус."
+        "notes": "Контрольный повторный визит: подтвержден Знак Качества."
       }
     ],
     "audit_count": 2,
-    "score_delta": 6,
-    "value_score": 5.0,
-    "vibe_tags": [
-      "Панорамный вид",
-      "Романтический ужин",
-      "Гастрономический сет"
-    ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
+    "score_delta": 1,
+    "coords": {
+      "lat": 55.7485,
+      "lng": 37.5833
+    }
   },
   {
     "id": 2,
     "name": "El Copitas Bar",
     "format": "Коктейльный бар",
-    "segment": "Премиум ($$$$)",
-    "price_tier": "₽₽₽",
     "city": "СПб",
-    "district": "Владимирский / Достоевская",
-    "address": "Колокольная ул., 2",
-    "chef": "Артем Перук, Игорь Зернов",
-    "concept": "Мексиканский спикизи-бар с эталонной миксологией и культурой гостеприимства",
+    "district": "Центральный",
+    "address": "ул. Колокольная, 2",
+    "avg_check": 3200,
+    "price_tier": "₽₽₽",
+    "segment": "Высокий ($$$)",
+    "chef": "Артем Перук & Игорь Зернов",
+    "concept": "Секретный бар мексиканской культуры, агавы и авторской миксологии",
     "phone": "+7 (812) 941-71-68",
     "booking_url": "https://elcopitasbar.com",
     "no_booking": false,
     "status": "published",
-    "avg_check": 3200,
-    "date": "2026-08-11",
+    "date": "2026-08-14",
     "scores": {
       "food": 35,
       "wow": 15,
-      "price": 14,
+      "price": 15,
       "service": 15,
       "space": 10,
-      "sanitation": 10
+      "sanitation": 9
     },
-    "penalties": 0,
     "total_score": 99,
     "grade": "Знак Качества",
-    "signature_dish": "Авторский Мескаль Сауэр с кордиалом",
-    "dish_review": "Прозрачный монолитный лед ручного распила, идеальный баланс дымности и цитрусовой свежести без приторного сахара.",
-    "full_review": "Легендарный полуподвальный бар в центре Петербурга с атмосферой абсолютного радушия. Встречают комплиментарным велкам-дринком и рассказывают концепцию каждого ингредиента. Коктейльная карта обновляется еженедельно. Акустика выстроена виртуозно: несмотря на полный бар, можно комфортно общаться с собеседником не повышая голоса.",
-    "private_notes": "Бизнес-инсайт: Экономика на кордиалах собственного приготовления сокращает себестоимость коктейля до 110-140 руб при чеке в 850 руб. Обязательно внедрить в будущие бары e-planka японскую морозильную камеру для прозрачного льда-глыбы.",
+    "value_score": 9.6,
+    "signature_dish": "Тако с томленой уткой и соусом моле",
+    "dish_review": "Субъективно — эталонный баланс пряности и кислотности, мягкая кукурузная тортилья ручной работы и насыщенная бархатистая текстура мяса.",
+    "full_review": "По нашей оценке, один из самых атмосферных проектов страны. Безупречное гостеприимство, фирменный монолитный лед и глубокие авторские кордиалы создают уникальный барный опыт.",
+    "urban_notes": "Скрытая локация в классическом петербургском дворе-колодце, создающая интригу приватного спикизи-пространства.",
+    "ergonomics_notes": "Уютная монолитная посадка вокруг общего стола, камерный теплый свет и акустический комфорт для живого общения.",
+    "video": "https://assets.mixkit.co/videos/preview/mixkit-barman-preparing-a-cocktail-at-a-bar-counter-42777-large.mp4",
     "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_1C1917%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231C1917%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23292524%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_1C1917%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M4%204h16l-8%209v7%22/%3E%3Cpath%20d%3D%22M8%2020h8%22/%3E%3Cpath%20d%3D%22M6%207h12%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EEL%20COPITAS%20BAR%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EEL%20COPITAS%20BAR%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EEL%20COPITAS%20BAR%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
+      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "private_photos": [
+      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"
     ],
     "pros": [
-      "Эталонный контакт бармена за стойкой",
-      "Чистейший монолитный лед без пузырей",
-      "Кураторская акустика: можно общаться вполголоса"
+      "Выдающийся контакт и эрудиция барменов по напиткам на основе агавы",
+      "Идеально прозрачный монолитный лед собственной заготовки",
+      "Бесплатная подача питьевой воды и авторского комплимента гостю"
     ],
     "cons": [
-      "Вход только по предварительной брони"
+      "Камерный формат требует заблаговременного планирования визита через предварительную запись"
     ],
-    "features": [
-      "Чистый лед",
-      "Speakeasy",
-      "Джаз",
-      "Бронь обязательна"
+    "vibe_tags": [
+      "Авторские коктейли",
+      "Атмосфера спикизи",
+      "Гастрономический бар",
+      "Дружеская встреча"
     ],
-    "coords": {
-      "lat": 59.9288,
-      "lng": 30.3475
-    },
     "history": [
       {
-        "date": "2025-11-15",
-        "score": 94,
-        "notes": "Первичная инспекция: отличная миксология, теснота в гардеробе."
-      },
-      {
-        "date": "2026-08-11",
+        "date": "2026-08-14",
         "score": 99,
-        "notes": "Контрольная проверка: эталонный прозрачный лед, кураторская акустика."
+        "notes": "Плановый тайный аудит: высшая оценка в категории Коктейльные бары."
       }
     ],
-    "audit_count": 2,
-    "score_delta": 5,
-    "value_score": 6.8,
-    "vibe_tags": [
-      "Культовый бар",
-      "Шумная компания",
-      "Авторские коктейли"
-    ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
+    "audit_count": 1,
+    "score_delta": 0,
+    "coords": {
+      "lat": 59.9298,
+      "lng": 30.3475
+    }
   },
   {
     "id": 3,
     "name": "Кафе Пушкинъ",
     "format": "Fine Dining",
-    "segment": "Премиум ($$$$)",
-    "price_tier": "₽₽₽₽",
     "city": "Москва",
-    "district": "Тверской район",
+    "district": "Тверской",
     "address": "Тверской бульвар, 26А",
+    "avg_check": 5500,
+    "price_tier": "₽₽₽₽",
+    "segment": "Премиум ($$$$)",
     "chef": "Андрей Махов",
-    "concept": "Русская дворянская кухня эпохи Пушкина в интерьерах особняка XIX века",
+    "concept": "Русская дворянская кухня XIX века и легендарный сервис в стиле аптеки и библиотеки",
     "phone": "+7 (495) 739-00-33",
     "booking_url": "https://cafe-pushkin.ru",
     "no_booking": false,
     "status": "published",
-    "avg_check": 5500,
-    "date": "2026-08-12",
+    "date": "2026-08-18",
     "scores": {
       "food": 33,
       "wow": 14,
-      "price": 12,
+      "price": 14,
       "service": 15,
-      "space": 10,
-      "sanitation": 10
+      "space": 9,
+      "sanitation": 9
     },
-    "penalties": 0,
     "total_score": 94,
     "grade": "Знак Качества",
+    "value_score": 8.6,
     "signature_dish": "Пожарская котлета с печеным картофелем",
-    "dish_review": "Хрустящие сухарики, внутри сочное сливочное филе птицы, классический соус из лесных грибов.",
-    "full_review": "Атмосфера дворянского особняка XIX века выдержана с музейной строгостью. Официанты обращаются на дореволюционный манер, меню составлено на старинном русском языке. Пожарская котлета — эталон жанра. Единственная придирка въедливого гостя — завышенная наценка на простой листовой чай.",
-    "private_notes": "Бизнес-инсайт: Уникальный скрипт сервиса увеличивает средний чек десертов на 45%. Регламент передачи стола между сменами идеален.",
+    "dish_review": "По мнению тайного инспектора — хрестоматийная сочность рубленого филе цыпленка в хрустящих сухарях из белого хлеба с классическим сливочным грибным соусом.",
+    "full_review": "По нашему впечатлению, классика дворянского стола и безупречный дореволюционный этикет официантов создают аутентичный исторический опыт.",
+    "urban_notes": "Интеграция особняка в историческую ткань Тверского бульвара, удобная зона ожидания и выразительный классический фасад.",
+    "ergonomics_notes": "Антикварная мебель, мягкие диваны, приглушенный теплый свет и тихая акустика зала «Библиотека».",
+    "video": "https://assets.mixkit.co/videos/preview/mixkit-chef-garnishing-a-dish-with-microgreens-42778-large.mp4",
     "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_312E81%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23312E81%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%231E1B4B%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_312E81%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M6%2014c-2-2-2-6%201-9s7-1%209%201%202%206-1%209-7%201-9-1z%22/%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%229%22%20r%3D%221.5%22%20fill%3D%22%23FFF%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%9A%D0%90%D0%A4%D0%95%20%D0%9F%D0%A3%D0%A8%D0%9A%D0%98%D0%9D%D0%AA%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%9A%D0%90%D0%A4%D0%95%20%D0%9F%D0%A3%D0%A8%D0%9A%D0%98%D0%9D%D0%AA%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%9A%D0%90%D0%A4%D0%95%20%D0%9F%D0%A3%D0%A8%D0%9A%D0%98%D0%9D%D0%AA%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
     ],
+    "private_photos": [],
     "pros": [
-      "Безупречный этикет персонала и знание истории",
-      "Атмосфера дворянского особняка",
-      "Круглосуточный сервис премиум-класса"
+      "Безупречный этикет персонала и знание тонкостей исторического меню",
+      "Аутентичная атмосфера особняка и круглосуточная работа кухни",
+      "Высокая стабильность классических позиций кондитерской"
     ],
     "cons": [
-      "Высокая наценка на базовый чай и десерты"
+      "На наш взгляд, наценка на позиции чайной карты и традиционные десерты выше средней по сегменту"
     ],
-    "features": [
-      "24/7",
-      "Дворянский этикет",
-      "Историческое меню",
-      "Винная карта"
-    ],
-    "coords": {
-      "lat": 55.7634,
-      "lng": 37.6053
-    },
-    "history": [
-      {
-        "date": "2026-01-20",
-        "score": 91,
-        "notes": "Первичный аудит: классика дворянского сервиса."
-      },
-      {
-        "date": "2026-08-12",
-        "score": 94,
-        "notes": "Повторный визит: качество пожарской котлеты подтверждено на высшем уровне."
-      }
-    ],
-    "audit_count": 2,
-    "score_delta": 3,
-    "value_score": 5.3,
     "vibe_tags": [
       "Торжественный ужин",
       "Исторический центр",
-      "Деловая встреча"
+      "Деловая встреча",
+      "Культурный визит"
     ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
-  },
-  {
-    "id": 4,
-    "name": "Кофемания",
-    "format": "Кофейня",
-    "segment": "Высокий ($$$)",
-    "price_tier": "₽₽",
-    "city": "Москва",
-    "district": "Никитская / Консерватория",
-    "address": "ул. Большая Никитская, 13",
-    "chef": "Глеб Невейкин",
-    "concept": "Московский золотой стандарт спешелти кофе и ресторанного завтрака",
-    "phone": "+7 (495) 755-69-90",
-    "booking_url": "https://coffeemania.ru",
-    "no_booking": false,
-    "status": "published",
-    "avg_check": 1900,
-    "date": "2026-08-13",
-    "scores": {
-      "food": 31,
-      "wow": 12,
-      "price": 10,
-      "service": 13,
-      "space": 9,
-      "sanitation": 10
-    },
-    "penalties": 0,
-    "total_score": 85,
-    "grade": "Рекомендовано",
-    "signature_dish": "Раф цитрусовый и сырники",
-    "dish_review": "Нежнейшая микропена, натуральная цедра и сырники с минимальным количеством муки.",
-    "full_review": "Московский золотой стандарт стабильности. Кофе всегда идеальной температуры 62°C, сырники приготовлены из фермерского творога. Отличная среда для работы с ноутбуком: розетки есть у большинства столов, а Wi-Fi держит 80 Мбит/с.",
-    "private_notes": "Бизнес-инсайт: В кофейне высокая оборачиваемость утренней посадки благодаря параллельной работе двух бариста на двух 3-группных кофемашинах La Marzocco.",
-    "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_451A03%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23451A03%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23271002%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_451A03%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M18%208h1a3%203%200%200%201%200%206h-1%22/%3E%3Cpath%20d%3D%22M4%206h14v8a4%204%200%200%201-4%204H8a4%204%200%200%201-4-4V6z%22/%3E%3Cpath%20d%3D%22M6%202v2%22/%3E%3Cpath%20d%3D%22M10%202v2%22/%3E%3Cpath%20d%3D%22M14%202v2%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%9A%D0%9E%D0%A4%D0%95%D0%9C%D0%90%D0%9D%D0%98%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%9A%D0%9E%D0%A4%D0%95%D0%9C%D0%90%D0%9D%D0%98%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%9A%D0%9E%D0%A4%D0%95%D0%9C%D0%90%D0%9D%D0%98%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
-    ],
-    "pros": [
-      "Стабильный вкус кофе из года в год",
-      "Удобные столы и розетки для работы",
-      "Быстрая отдача заказа"
-    ],
-    "cons": [
-      "Завышенный средний чек относительно рынка кофеен"
-    ],
-    "features": [
-      "Wi-Fi 75 Mbps",
-      "Розетки",
-      "Свежая выпечка",
-      "Завтраки целый день"
-    ],
-    "coords": {
-      "lat": 55.7562,
-      "lng": 37.6041
-    },
-    "history": [
-      {
-        "date": "2026-03-05",
-        "score": 82,
-        "notes": "Первичный аудит: высокая стабильность эспрессо."
-      },
-      {
-        "date": "2026-08-13",
-        "score": 85,
-        "notes": "Повторный аудит: улучшена скорость отдачи утренней выпечки."
-      }
-    ],
-    "audit_count": 2,
-    "score_delta": 3,
-    "value_score": 7.0,
-    "vibe_tags": [
-      "Деловой завтрак",
-      "Встреча в центре",
-      "Спешелти кофе"
-    ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
-  },
-  {
-    "id": 5,
-    "name": "Ku: Рамен Изакая",
-    "format": "Раменная",
-    "segment": "Средний ($$)",
-    "price_tier": "₽₽",
-    "city": "Москва",
-    "district": "Смоленская",
-    "address": "Смоленская ул., 8",
-    "chef": "Вадим Мальцев",
-    "concept": "Аутентичная японская раменная с собственной фабрикой свежей лапши",
-    "phone": "+7 (495) 788-06-00",
-    "booking_url": "https://kuramen.ru",
-    "no_booking": false,
-    "status": "published",
-    "avg_check": 1350,
-    "date": "2026-08-14",
-    "scores": {
-      "food": 32,
-      "wow": 13,
-      "price": 14,
-      "service": 12,
-      "space": 8,
-      "sanitation": 9
-    },
-    "penalties": 0,
-    "total_score": 88,
-    "grade": "Рекомендовано",
-    "signature_dish": "Сёю Тясю Рамен с плотным бульоном",
-    "dish_review": "Бульон варился 16 часов. Упругая лапша собственного производства, нежнейшая свинина тясю.",
-    "full_review": "Аутентичная японская раменная. Плотность бульона и степень упругости лапши соответствуют токийским стандартам. Порция огромная, насыщение наступает моментально.",
-    "private_notes": "Бизнес-инсайт: Собственный лапшеделительный аппарат на цокольном этаже экономит до 400 000 руб/мес на закупке готовой лапши.",
-    "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_701A75%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23701A75%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%234A044E%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_701A75%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M4%2011h16a8%208%200%200%201-16%200z%22/%3E%3Cpath%20d%3D%22M6%2011V5%22/%3E%3Cpath%20d%3D%22M10%2011V5%22/%3E%3Cpath%20d%3D%22M14%2011V5%22/%3E%3Cpath%20d%3D%22M18%2011V5%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EKU%3A%20%D0%A0%D0%90%D0%9C%D0%95%D0%9D%20%D0%98%D0%97%D0%90%D0%9A%D0%90%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EKU%3A%20%D0%A0%D0%90%D0%9C%D0%95%D0%9D%20%D0%98%D0%97%D0%90%D0%9A%D0%90%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EKU%3A%20%D0%A0%D0%90%D0%9C%D0%95%D0%9D%20%D0%98%D0%97%D0%90%D0%9A%D0%90%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
-    ],
-    "pros": [
-      "Аутентичный японский вкус",
-      "Щедрая порция и честная граммовка",
-      "Высокая скорость кухни"
-    ],
-    "cons": [
-      "Шумный зал при полной посадке в обед"
-    ],
-    "features": [
-      "Крафтовая лапша",
-      "Аутентично",
-      "Быстрая отдача"
-    ],
-    "coords": {
-      "lat": 55.7479,
-      "lng": 37.5819
-    },
-    "history": [
-      {
-        "date": "2026-08-14",
-        "score": 88,
-        "notes": "Первичный контрольный аудит"
-      }
-    ],
-    "audit_count": 1,
-    "score_delta": 0,
-    "value_score": 8.1,
-    "vibe_tags": [
-      "Быстрый обед",
-      "Аутентичная Азия",
-      "Сытный рамен"
-    ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
-  },
-  {
-    "id": 6,
-    "name": "Буше Пекарня",
-    "format": "Пекарня",
-    "segment": "Средний ($$)",
-    "price_tier": "₽",
-    "city": "СПб",
-    "district": "Адмиралтейский / Невский",
-    "address": "ул. Малая Морская, 7",
-    "chef": "Роман Певзнер",
-    "concept": "Городская пекарня-кондитерская с ремесленным хлебом на закваске",
-    "phone": "+7 (812) 640-16-16",
-    "booking_url": "https://bushe.ru",
-    "no_booking": true,
-    "status": "published",
-    "avg_check": 850,
-    "date": "2026-08-15",
-    "scores": {
-      "food": 30,
-      "wow": 12,
-      "price": 12,
-      "service": 12,
-      "space": 9,
-      "sanitation": 10
-    },
-    "penalties": 0,
-    "total_score": 85,
-    "grade": "Рекомендовано",
-    "signature_dish": "Слойка с малиной и миндалем",
-    "dish_review": "Хрустящее тесто на натуральном сливочном масле, сочная ягодная начинка без избытка сахара.",
-    "full_review": "Главная ремесленная пекарня Петербурга. Слойки воздушные, сливочный аромат без намека на растительный спред. Отличный фильтр-кофе.",
-    "private_notes": "Бизнес-инсайт: Грамотное зонирование витрины: выпечка на уровне глаз, хлебная стойка с подсветкой 2700K создает аппетитный золотистый оттенок.",
-    "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_78350F%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2378350F%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23451A03%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_78350F%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M4%2014c2-4%206-6%2010-6s8%202%2010%206c-2%202-6%203-10%203s-8-1-10-3z%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%91%D0%A3%D0%A8%D0%95%20%D0%9F%D0%95%D0%9A%D0%90%D0%A0%D0%9D%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%91%D0%A3%D0%A8%D0%95%20%D0%9F%D0%95%D0%9A%D0%90%D0%A0%D0%9D%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%91%D0%A3%D0%A8%D0%95%20%D0%9F%D0%95%D0%9A%D0%90%D0%A0%D0%9D%D0%AF%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
-    ],
-    "pros": [
-      "Ремесленное качество выпечки",
-      "Аромат кофе и свежего хлеба",
-      "Чистота витрин"
-    ],
-    "cons": [
-      "Очереди у кассы в утренние часы"
-    ],
-    "features": [
-      "Хлеб на закваске",
-      "Кофе to-go",
-      "Без маргарина"
-    ],
-    "coords": {
-      "lat": 59.9365,
-      "lng": 30.3168
-    },
-    "history": [
-      {
-        "date": "2026-08-15",
-        "score": 85,
-        "notes": "Первичный контрольный аудит"
-      }
-    ],
-    "audit_count": 1,
-    "score_delta": 0,
-    "value_score": 9.2,
-    "vibe_tags": [
-      "Кофе и ноутбук",
-      "Свежая выпечка",
-      "Легкий бранч"
-    ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
-  },
-  {
-    "id": 7,
-    "name": "Додо Пицца",
-    "format": "Пиццерия",
-    "segment": "Масс-маркет ($)",
-    "price_tier": "₽",
-    "city": "Екатеринбург",
-    "district": "Ленинский / Плотинка",
-    "address": "ул. Малышева, 31",
-    "chef": "Федор Овчинников",
-    "concept": "Высокотехнологичный сетевой ресторан быстрой доставки и открытой кухни",
-    "phone": "8 (800) 302-00-60",
-    "booking_url": "https://dodopizza.ru",
-    "no_booking": true,
-    "status": "published",
-    "avg_check": 800,
-    "date": "2026-08-16",
-    "scores": {
-      "food": 25,
-      "wow": 10,
-      "price": 15,
-      "service": 10,
-      "space": 8,
-      "sanitation": 10
-    },
-    "penalties": 0,
-    "total_score": 78,
-    "grade": "Рекомендовано",
-    "signature_dish": "Пепперони Фреш на хрустящем тесте",
-    "dish_review": "Пряная колбаса, свежие томаты, стабильное тесто с хорошей ферментацией.",
-    "full_review": "Идеально стандартизированный сетевой сервис. Процессы открыты, тесто раскатывается быстро, чистота на кухне образцовая.",
-    "private_notes": "Бизнес-инсайт: Трекер кухни на экранах планшетов для каждого повара сводит человеческий фактор ожидания к минимуму.",
-    "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_9A3412%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%239A3412%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%237C2D12%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_9A3412%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M12%202l10%2017H2L12%202z%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2211%22%20r%3D%221.5%22%20fill%3D%22%23FFF%22/%3E%3Ccircle%20cx%3D%229%22%20cy%3D%2215%22%20r%3D%221.5%22%20fill%3D%22%23FFF%22/%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2215%22%20r%3D%221.5%22%20fill%3D%22%23FFF%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%94%D0%9E%D0%94%D0%9E%20%D0%9F%D0%98%D0%A6%D0%A6%D0%90%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%94%D0%9E%D0%94%D0%9E%20%D0%9F%D0%98%D0%A6%D0%A6%D0%90%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%94%D0%9E%D0%94%D0%9E%20%D0%9F%D0%98%D0%A6%D0%A6%D0%90%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
-    ],
-    "pros": [
-      "Идеальная прозрачность процессов через открытую кухню",
-      "Быстрое мобильное приложение",
-      "Чистый санузел"
-    ],
-    "cons": [
-      "Стандартизированный вкус без гастрономических откровений"
-    ],
-    "features": [
-      "Заказ в приложении",
-      "Детский уголок",
-      "Готовность 15 мин"
-    ],
-    "coords": {
-      "lat": 56.8348,
-      "lng": 60.5985
-    },
-    "history": [
-      {
-        "date": "2026-02-18",
-        "score": 75,
-        "notes": "Первичный аудит: стандартная отдача за 18 минут."
-      },
-      {
-        "date": "2026-08-16",
-        "score": 78,
-        "notes": "Повторный аудит: ускорена сборка до 12 минут, чистота в санузле."
-      }
-    ],
-    "audit_count": 2,
-    "score_delta": 3,
-    "value_score": 8.6,
-    "vibe_tags": [
-      "Семейный обед",
-      "Быстрый перекус",
-      "Для компании"
-    ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
-  },
-  {
-    "id": 8,
-    "name": "Теремок",
-    "format": "Fast Casual",
-    "segment": "Масс-маркет ($)",
-    "price_tier": "₽",
-    "city": "Москва",
-    "district": "Китай-город / Никольская",
-    "address": "Никольская ул., 10",
-    "chef": "Михаил Гончаров",
-    "concept": "Русская домашняя кухня быстрого обслуживания с выпеканием блинов под заказ",
-    "phone": "+7 (495) 956-27-30",
-    "booking_url": "https://teremok.ru",
-    "no_booking": true,
-    "status": "published",
-    "avg_check": 650,
-    "date": "2026-08-17",
-    "scores": {
-      "food": 26,
-      "wow": 8,
-      "price": 14,
-      "service": 10,
-      "space": 8,
-      "sanitation": 9
-    },
-    "penalties": 0,
-    "total_score": 75,
-    "grade": "Рекомендовано",
-    "signature_dish": "Блин Богатырский с бужениной",
-    "dish_review": "Свежевыпеченный блин при госте, щедрая мясная начинка, горячий сыр.",
-    "full_review": "Честный русский фаст-кэжуал. Блины пекут из жидкого теста прямо при вас, начинки не жалеют, морс натуральный.",
-    "private_notes": "Бизнес-инсайт: Технология двойных чугунных плит позволяет выпекать блин ровно за 90 секунд.",
-    "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_854D0E%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23854D0E%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23713F12%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_854D0E%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M6%2014c-2-2-2-6%201-9s7-1%209%201%202%206-1%209-7%201-9-1z%22/%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%229%22%20r%3D%221.5%22%20fill%3D%22%23FFF%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%A2%D0%95%D0%A0%D0%95%D0%9C%D0%9E%D0%9A%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%A2%D0%95%D0%A0%D0%95%D0%9C%D0%9E%D0%9A%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%A2%D0%95%D0%A0%D0%95%D0%9C%D0%9E%D0%9A%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
-    ],
-    "pros": [
-      "Честное соотношение цена/сытность",
-      "Выпекание из свежего теста под заказ",
-      "Натуральный морс"
-    ],
-    "cons": [
-      "Пластиковая посуда на фудкортах"
-    ],
-    "features": [
-      "Выпечка при вас",
-      "До 700 ₽",
-      "Натуральный морс"
-    ],
-    "coords": {
-      "lat": 55.7571,
-      "lng": 37.6225
-    },
-    "history": [
-      {
-        "date": "2026-08-17",
-        "score": 75,
-        "notes": "Первичный контрольный аудит"
-      }
-    ],
-    "audit_count": 1,
-    "score_delta": 0,
-    "value_score": 8.9,
-    "vibe_tags": [
-      "Сытный ланч",
-      "Русская кухня",
-      "Доступный чек"
-    ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
-  },
-  {
-    "id": 9,
-    "name": "Столовая №57 (ГУМ)",
-    "format": "Столовая",
-    "segment": "Бюджет ($)",
-    "price_tier": "₽",
-    "city": "Москва",
-    "district": "Красная площадь / ГУМ",
-    "address": "Красная площадь, 3, ГУМ 3 линия 3 этаж",
-    "chef": "Шеф ГУМ Гастрономия",
-    "concept": "Аутентичная советская столовая с открытой раздачей и классическими рецептурами ГОСТ",
-    "phone": "+7 (495) 788-43-43",
-    "booking_url": "https://gum.ru",
-    "no_booking": true,
-    "status": "published",
-    "avg_check": 550,
-    "date": "2026-08-18",
-    "scores": {
-      "food": 21,
-      "wow": 5,
-      "price": 15,
-      "service": 8,
-      "space": 7,
-      "sanitation": 8
-    },
-    "penalties": 0,
-    "total_score": 64,
-    "grade": "Базовый уровень",
-    "signature_dish": "Борщ сибирский с пампушкой",
-    "dish_review": "Горячий сытный борщ с говядиной и чесночной булочкой по советскому ГОСТу.",
-    "full_review": "Классическая советская столовая в ГУМе. Борщ горячий, подносы сухие и чистые, цены демократичные.",
-    "private_notes": "Бизнес-инсайт: Линейная раздача с двойным кассовым узлом обслуживает до 220 чеков в час.",
-    "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_831843%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23831843%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23500724%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_831843%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M4%2012h16c0%204.4-3.6%208-8%208s-8-3.6-8-8z%22/%3E%3Cpath%20d%3D%22M8%208c1-2%201-3%200-5%22/%3E%3Cpath%20d%3D%22M12%208c1-2%201-3%200-5%22/%3E%3Cpath%20d%3D%22M16%208c1-2%201-3%200-5%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%A1%D0%A2%D0%9E%D0%9B%D0%9E%D0%92%D0%90%D0%AF%20%E2%84%9657%20%28%D0%93%D0%A3%D0%9C%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%A1%D0%A2%D0%9E%D0%9B%D0%9E%D0%92%D0%90%D0%AF%20%E2%84%9657%20%28%D0%93%D0%A3%D0%9C%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3E%D0%A1%D0%A2%D0%9E%D0%9B%D0%9E%D0%92%D0%90%D0%AF%20%E2%84%9657%20%28%D0%93%D0%A3%D0%9C%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
-    ],
-    "pros": [
-      "Низкая цена в самом центре города",
-      "Сухие чистые подносы",
-      "Ретро-эстетика"
-    ],
-    "cons": [
-      "Большая очередь туристов в обед"
-    ],
-    "features": [
-      "В ГУМе",
-      "До 600 ₽",
-      "Сытные обеды"
-    ],
-    "coords": {
-      "lat": 55.7548,
-      "lng": 37.6214
-    },
     "history": [
       {
         "date": "2026-08-18",
-        "score": 64,
-        "notes": "Первичный контрольный аудит"
+        "score": 94,
+        "notes": "Контрольная верификация: подтвержден Знак Качества."
       }
     ],
     "audit_count": 1,
     "score_delta": 0,
-    "value_score": 8.1,
-    "vibe_tags": [
-      "Ретро-эстетика",
-      "Вид на Красную площадь",
-      "Обед в ГУМе"
-    ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
-    "private_photos": [],
-    "video": ""
+    "coords": {
+      "lat": 55.7635,
+      "lng": 37.6047
+    }
   },
   {
-    "id": 10,
-    "name": "Black Star Burger",
-    "format": "Пиццерия",
-    "segment": "Средний ($$)",
-    "price_tier": "₽₽",
-    "city": "Москва",
-    "district": "Арбат / Новый Арбат",
-    "address": "Новый Арбат, 15",
-    "chef": "Юрий Левитас",
-    "concept": "Мясная бургерная с сочной мраморной говядиной и подачей в черных перчатках",
-    "phone": "+7 (495) 510-55-55",
-    "booking_url": "https://blackstarburger.ru",
-    "no_booking": true,
+    "id": 4,
+    "name": "Сойка (Soyka)",
+    "format": "Fine Dining",
+    "city": "Екатеринбург",
+    "district": "Центр",
+    "address": "ул. 8 Марта, 6",
+    "avg_check": 2800,
+    "price_tier": "₽₽₽",
+    "segment": "Высокий ($$$)",
+    "chef": "Валентин Кузякин",
+    "concept": "Азиатское нео-бистро с акцентом на локальные уральские специалитеты и морепродукты",
+    "phone": "+7 (343) 289-40-50",
+    "booking_url": "https://restsoyka.ru",
+    "no_booking": false,
     "status": "published",
-    "avg_check": 1100,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "scores": {
-      "food": 22,
-      "wow": 9,
-      "price": 10,
-      "service": 9,
-      "space": 7,
-      "sanitation": 8
+      "food": 33,
+      "wow": 14,
+      "price": 14,
+      "service": 14,
+      "space": 9,
+      "sanitation": 9
     },
-    "penalties": -15,
-    "total_score": 50,
-    "grade": "Посредственно",
-    "signature_dish": "Бургер Классика VIP",
-    "dish_review": "Котлета излишне жирная, булка быстро размокает от избытка соуса.",
-    "full_review": "Маркетинг превосходит реальный продукт. Котлеты жирные, на кассе настойчиво навязывают платные соусы (-15 б. штрафа).",
-    "private_notes": "Бизнес-инсайт: Урок для нас — никогда не применять агрессивный апсейл соусов на кассе, это разрушает доверие гостей и дает -15 б. штрафа в стандарте e-planka.",
+    "total_score": 93,
+    "grade": "Знак Качества",
+    "value_score": 9.1,
+    "signature_dish": "Тартар из гребешка с юдзу и хрустящим рисом",
+    "dish_review": "По субъективному мнению инспектора — чистейшая сладость свежего гребешка, подчеркнутая деликатной кислотностью юдзу и текстурным контрастом рисовых чипсов.",
+    "full_review": "По нашей оценке, один из сильнейших гастрономических проектов Екатеринбурга. Точная адаптация азиатских техник и внимательный сервис формируют высокий стандарт уральской кухни.",
+    "urban_notes": "Органичная интеграция входной группы в набережную Городского пруда, удобный пешеходный доступ и видовые окна.",
+    "ergonomics_notes": "Комфортная дистанция между столиками, стильное тактильное дерево в отделке и качественный акустический баланс.",
+    "video": "https://assets.mixkit.co/videos/preview/mixkit-chef-plating-a-delicious-dish-in-a-restaurant-42774-large.mp4",
     "photos": [
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2309090B%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M4%2010a8%208%200%200%201%2016%200H4z%22/%3E%3Crect%20x%3D%223%22%20y%3D%2212%22%20width%3D%2218%22%20height%3D%222%22%20rx%3D%221%22/%3E%3Cpath%20d%3D%22M4%2016h16a4%204%200%200%201-8%202%204%204%200%200%201-8-2z%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EBLACK%20STAR%20BURGER%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%28Signature%20Dish%29%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_18181B%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2318181B%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_18181B%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22/%3E%3Cline%20x1%3D%223%22%20y1%3D%2210%22%20x2%3D%2221%22%20y2%3D%2210%22/%3E%3Cline%20x1%3D%2210%22%20y1%3D%2210%22%20x2%3D%2210%22%20y2%3D%2220%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EBLACK%20STAR%20BURGER%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%20%D0%B7%D0%B0%D0%BB%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
-      "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20400%22%20width%3D%22600%22%20height%3D%22400%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g_27272A%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2327272A%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%233F3F46%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%20cx%3D%2250%25%22%20cy%3D%2250%25%22%20r%3D%2265%25%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgba%280%2C0%2C0%2C0.65%29%22/%3E%0A%20%20%20%20%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23g_27272A%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%22600%22%20height%3D%22400%22%20fill%3D%22url%28%23r%29%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%22115%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.05%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22180%22%20r%3D%2290%22%20fill%3D%22rgba%280%2C0%2C0%2C0.25%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%20%20%3Cg%20transform%3D%22translate%28262%2C%20142%29%20scale%283.2%29%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%225%22/%3E%3Cpath%20d%3D%22M3%2021v-2a4%204%200%200%201%204-4h10a4%204%200%200%201%204%204v2%22/%3E%3Cline%20x1%3D%2212%22%20y1%3D%2213%22%20x2%3D%2212%22%20y2%3D%2221%22/%3E%0A%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22325%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22800%22%20fill%3D%22%23FFFFFF%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221.2%22%3EBLACK%20STAR%20BURGER%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22350%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Segoe%20UI%2C%20Roboto%2C%20sans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%23D4CEBE%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%220.5%22%3E%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B3%D0%BE%D1%81%D1%82%D1%8F%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22375%22%20font-family%3D%22ui-monospace%2C%20monospace%22%20font-size%3D%2210%22%20font-weight%3D%22800%22%20fill%3D%22%23C5A880%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%222%22%3EPLANKA%20GUIDE%20%E2%80%A2%20OFFICIAL%20AUDIT%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
     ],
+    "private_photos": [],
     "pros": [
-      "Черные перчатки для еды",
-      "Быстрая сборка"
+      "Свежесть рыбы и морепродуктов, быстрая подача холодных закусок за 8-10 минут",
+      "Оригинальная карта саке и авторских коктейлей с восточными мотивами",
+      "Внимательное и ненавязчивое сопровождение стола"
     ],
     "cons": [
-      "Нестабильное качество котлет",
-      "Высокая цена за масс-маркет продукт",
-      "Штраф -15 б. за навязывание платных соусов на кассе"
+      "В вечерний уикенд желательна заблаговременная бронь столиков у окон"
     ],
-    "features": [
-      "Перчатки",
-      "Фастфуд"
+    "vibe_tags": [
+      "Романтический ужин",
+      "Современная Азия",
+      "Знак Качества",
+      "Екатеринбург"
     ],
+    "history": [
+      {
+        "date": "2026-08-20",
+        "score": 93,
+        "notes": "Контрольный аудит: присужден Знак Качества PLANKA GUIDE."
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0,
     "coords": {
-      "lat": 55.7523,
-      "lng": 37.5927
+      "lat": 56.8378,
+      "lng": 60.5975
+    }
+  },
+  {
+    "id": 5,
+    "name": "Гастроли (Gastroli)",
+    "format": "Fine Dining",
+    "city": "Екатеринбург",
+    "district": "Центр",
+    "address": "ул. 8 Марта, 4",
+    "avg_check": 2500,
+    "price_tier": "₽₽₽",
+    "segment": "Высокий ($$$)",
+    "chef": "Эдуард Архипов",
+    "concept": "Гастрономическое бистро с дровяной печью, авторской пиццей и локальными продуктами",
+    "phone": "+7 (343) 378-00-08",
+    "booking_url": "https://gastroli.pub",
+    "no_booking": false,
+    "status": "published",
+    "date": "2026-08-19",
+    "scores": {
+      "food": 32,
+      "wow": 14,
+      "price": 14,
+      "service": 14,
+      "space": 9,
+      "sanitation": 9
     },
+    "total_score": 92,
+    "grade": "Знак Качества",
+    "value_score": 9.0,
+    "signature_dish": "Пицца из дровяной печи с уткой и вяленой клюквой",
+    "dish_review": "По оценке тайного гостя — воздушное леопардовое тесто долгой ферментации, сочное мясо утки и яркий кисло-сладкий акцент лесных ягод.",
+    "full_review": "По нашему впечатлению, «Гастроли» задают высокую планку для бистро в регионах. Живой огонь дровяной печи и расслабленная европейская атмосфера создают ощущение постоянного праздника.",
+    "urban_notes": "Уютная летняя терраса с видом на историческую застройку улицы 8 Марта и безбарьерный вход.",
+    "ergonomics_notes": "Открытая посадка у открытой кухни, качественная вытяжка без дыма и устойчивые дубовые столы.",
+    "video": "https://assets.mixkit.co/videos/preview/mixkit-chef-garnishing-a-dish-with-microgreens-42778-large.mp4",
+    "photos": [
+      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "private_photos": [],
+    "pros": [
+      "Мастерская работа с дровяной печью и ферментацией теста",
+      "Высокая скорость отдачи горячего даже при 100% посадке зала",
+      "Стерильность открытой кухни и зоны раздачи"
+    ],
+    "cons": [
+      "В часы полной посадки в центральном зале уровень шума может быть выше среднего"
+    ],
+    "vibe_tags": [
+      "Дровяная печь",
+      "Дружеская встреча",
+      "Знак Качества",
+      "Екатеринбург"
+    ],
     "history": [
       {
         "date": "2026-08-19",
-        "score": 50,
-        "notes": "Первичный контрольный аудит"
+        "score": 92,
+        "notes": "Плановая инспекция: присвоен Знак Качества."
       }
     ],
     "audit_count": 1,
     "score_delta": 0,
-    "value_score": 5.0,
-    "vibe_tags": [
-      "Стритфуд",
-      "Молодежная встреча",
-      "Сочные бургеры"
+    "coords": {
+      "lat": 56.8385,
+      "lng": 60.5982
+    }
+  },
+  {
+    "id": 6,
+    "name": "Duo Gastrobar",
+    "format": "Fine Dining",
+    "city": "СПб",
+    "district": "Центральный",
+    "address": "ул. Кирочная, 8А",
+    "avg_check": 2600,
+    "price_tier": "₽₽₽",
+    "segment": "Высокий ($$$)",
+    "chef": "Дмитрий Блинов & Ренат Маликов",
+    "concept": "Культовый авторский гастробар, открывший эпоху доступной авторской кухни",
+    "phone": "+7 (812) 994-54-43",
+    "booking_url": "https://duoband.ru",
+    "no_booking": false,
+    "status": "published",
+    "date": "2026-08-15",
+    "scores": {
+      "food": 32,
+      "wow": 14,
+      "price": 14,
+      "service": 14,
+      "space": 8,
+      "sanitation": 9
+    },
+    "total_score": 91,
+    "grade": "Знак Качества",
+    "value_score": 9.2,
+    "signature_dish": "Тартар из говядины с муссом из пармезана",
+    "dish_review": "По субъективному суждению инспектора — эталонная мелкая нарезка выдержанной говядины, воздушная сливочная эмульсия сыра и сбалансированная хрустящая чипса.",
+    "full_review": "По нашей оценке, классический пример гастрономического минимализма, где во главе угла стоит чистый вкус продукта и честная ценовая политика.",
+    "urban_notes": "Лаконичный вход со спокойной Кирочной улицы рядом со станцией метро Чернышевская.",
+    "ergonomics_notes": "Компактный зал с плотной европейской посадкой и акцентным светом над каждым столом.",
+    "video": "https://assets.mixkit.co/videos/preview/mixkit-chef-plating-a-delicious-dish-in-a-restaurant-42774-large.mp4",
+    "photos": [
+      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
     ],
-    "urban_notes": "Интеграция входной группы в уличную ткань города, безбарьерный доступ и удобная буферная зона.",
-    "ergonomics_notes": "Эргономичная расстановка столов, акустический комфорт (зонирование без эха) и направленный теплый свет.",
     "private_photos": [],
-    "video": ""
+    "pros": [
+      "Выверенный баланс специй и соусов в каждом блюде",
+      "Один из лучших показателей честной ценности (Value for Money) в Санкт-Петербурге",
+      "Быстрый профессиональный сервис"
+    ],
+    "cons": [
+      "Плотная расстановка столов предполагает камерный формат общения"
+    ],
+    "vibe_tags": [
+      "Авторская кухня",
+      "Знак Качества",
+      "Гастрономический ужин",
+      "Петербург"
+    ],
+    "history": [
+      {
+        "date": "2026-08-15",
+        "score": 91,
+        "notes": "Контрольный тайный визит: подтвержден Знак Качества."
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0,
+    "coords": {
+      "lat": 59.9438,
+      "lng": 30.3582
+    }
+  },
+  {
+    "id": 7,
+    "name": "Кофемания",
+    "format": "Кофейня",
+    "city": "Москва",
+    "district": "Пресненский",
+    "address": "ул. Большая Никитская, 13/6",
+    "avg_check": 2400,
+    "price_tier": "₽₽",
+    "segment": "Средний ($$)",
+    "chef": "Глеб Невейкин",
+    "concept": "Премиальная кофейная классика, эталонный раф и стабильная гастрономия",
+    "phone": "+7 (495) 775-51-10",
+    "booking_url": "https://coffeemania.ru",
+    "no_booking": false,
+    "status": "published",
+    "date": "2026-08-11",
+    "scores": {
+      "food": 30,
+      "wow": 13,
+      "price": 12,
+      "service": 14,
+      "space": 9,
+      "sanitation": 9
+    },
+    "total_score": 87,
+    "grade": "Рекомендовано",
+    "value_score": 7.9,
+    "signature_dish": "Кофе Раф Ванильный и сырники со сметаной",
+    "dish_review": "По авторскому мнению инспектора — бархатистая шелковистая микропена с натуральной ванилью и нежные сырники с минимальным содержанием муки.",
+    "full_review": "По нашему впечатлению, эталон стабильности ресторанного сервиса Москвы. Кофе варится на зерне безупречного качества с выверенной водоподготовкой.",
+    "urban_notes": "Видовая терраса на Большой Никитской с органичным включением в прогулочный маршрут центра столицы.",
+    "ergonomics_notes": "Удобные полукресла, наличие розеток у большинства столов и комфортный фоновый звук.",
+    "video": "https://assets.mixkit.co/videos/preview/mixkit-barman-preparing-a-cocktail-at-a-bar-counter-42777-large.mp4",
+    "photos": [
+      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "private_photos": [],
+    "pros": [
+      "Неизменная стабильность вкуса кофейных напитков на протяжении многих лет",
+      "Удобство для деловых встреч и работы с ноутбуком",
+      "Высокая скорость подачи блюд основного меню"
+    ],
+    "cons": [
+      "По нашему мнению, наценка на позиции десертной витрины выше среднего уровня по рынку кофеен"
+    ],
+    "vibe_tags": [
+      "Кофе и ноутбук",
+      "Деловая встреча",
+      "Завтрак",
+      "Центр города"
+    ],
+    "history": [
+      {
+        "date": "2026-08-11",
+        "score": 87,
+        "notes": "Плановый визит: категория Рекомендовано PLANKA GUIDE."
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0,
+    "coords": {
+      "lat": 55.7565,
+      "lng": 37.6045
+    }
+  },
+  {
+    "id": 8,
+    "name": "Буше Пекарня",
+    "format": "Пекарня",
+    "city": "СПб",
+    "district": "Петроградский",
+    "address": "ул. Льва Толстого, 1-3",
+    "avg_check": 850,
+    "price_tier": "₽",
+    "segment": "Бюджет ($)",
+    "chef": "Роман Певзнер & Команда Буше",
+    "concept": "Петербургская ремесленная пекарня, хлеб на закваске и городское кафе",
+    "phone": "+7 (812) 640-77-37",
+    "booking_url": "https://bushe.ru",
+    "no_booking": true,
+    "status": "published",
+    "date": "2026-08-12",
+    "scores": {
+      "food": 30,
+      "wow": 13,
+      "price": 14,
+      "service": 13,
+      "space": 8,
+      "sanitation": 8
+    },
+    "total_score": 86,
+    "grade": "Рекомендовано",
+    "value_score": 8.9,
+    "signature_dish": "Слоеный круассан с миндальным кремом",
+    "dish_review": "По оценке тайного гостя — выразительный хруст сотен слоев теста на сливочном масле 82.5% и щедрая начинка из натурального марципана.",
+    "full_review": "По нашему впечатлению, один из главных символов современной пекарской культуры Санкт-Петербурга с честной граммовкой и уютным пространством.",
+    "urban_notes": "Широкие витринные окна с видом на Петроградскую сторону и удобный доступ от метро.",
+    "ergonomics_notes": "Деревянные столики для быстрого перекуса, приятный аромат свежего хлеба и ненавязчивый инди-плейлист.",
+    "video": "",
+    "photos": [
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "private_photos": [],
+    "pros": [
+      "Высокое качество сливочного масла и заквасок в выпечке",
+      "Доступный средний чек при честном весе изделий",
+      "Стерильность витрин и щипцов для выпечки"
+    ],
+    "cons": [
+      "В утренние часы пик возможны очереди на линии кассового обслуживания"
+    ],
+    "vibe_tags": [
+      "Свежая выпечка",
+      "Завтрак",
+      "Кофе с собой",
+      "Петербург"
+    ],
+    "history": [
+      {
+        "date": "2026-08-12",
+        "score": 86,
+        "notes": "Плановый визит: категория Рекомендовано."
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0,
+    "coords": {
+      "lat": 59.9662,
+      "lng": 30.3115
+    }
+  },
+  {
+    "id": 9,
+    "name": "Engels Кофе и Вафли",
+    "format": "Кофейня",
+    "city": "Екатеринбург",
+    "district": "Центр",
+    "address": "ул. Малышева, 21/4",
+    "avg_check": 1100,
+    "price_tier": "₽₽",
+    "segment": "Средний ($$)",
+    "chef": "Команда Engels",
+    "concept": "Спешелти-кофе, фирменные сытные и сладкие вафли и современная городская среда",
+    "phone": "+7 (343) 310-21-44",
+    "booking_url": "https://engels.rest",
+    "no_booking": true,
+    "status": "published",
+    "date": "2026-08-16",
+    "scores": {
+      "food": 30,
+      "wow": 13,
+      "price": 14,
+      "service": 13,
+      "space": 8,
+      "sanitation": 8
+    },
+    "total_score": 86,
+    "grade": "Рекомендовано",
+    "value_score": 9.0,
+    "signature_dish": "Хрустящая вафля с лососем слабой соли и яйцом пашот",
+    "dish_review": "По впечатлению инспектора — идеальный контраст хрустящей корочки вафли, нежного желтка пашот и качественного слабосоленого лосося.",
+    "full_review": "По нашей оценке, один из самых популярных и стабильных утренних спотов Екатеринбурга. Высокая планка спешелти-зерна и дружелюбный сервис.",
+    "urban_notes": "Интеграция в перекресток улиц Малышева и Хохрякова, большие витражные окна и активный пешеходный трафик.",
+    "ergonomics_notes": "Зонирование на высокие столы для ноутбуков и мягкие диваны для неспешных завтраков.",
+    "video": "",
+    "photos": [
+      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "private_photos": [],
+    "pros": [
+      "Свежая обжарка арабики и стабильная экстракция эспрессо",
+      "Щедрые порции фирменных вафель",
+      "Чистота зала и открытой стойки бариста"
+    ],
+    "cons": [
+      "В выходные дни посадка осуществляется в порядке живой очереди"
+    ],
+    "vibe_tags": [
+      "Завтрак весь день",
+      "Кофе и ноутбук",
+      "Рекомендовано",
+      "Екатеринбург"
+    ],
+    "history": [
+      {
+        "date": "2026-08-16",
+        "score": 86,
+        "notes": "Плановый визит: категория Рекомендовано PLANKA GUIDE."
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0,
+    "coords": {
+      "lat": 56.8345,
+      "lng": 60.5938
+    }
+  },
+  {
+    "id": 10,
+    "name": "Ku: Рамен Изакая",
+    "format": "Fine Dining",
+    "city": "Москва",
+    "district": "Дорогомилово",
+    "address": "Кутузовский проспект, 2/1с1",
+    "avg_check": 1800,
+    "price_tier": "₽₽",
+    "segment": "Средний ($$)",
+    "chef": "Денис Лим",
+    "concept": "Аутентичный японский рамен-бар с лапшой собственного производства и бульонами долгого вываривания",
+    "phone": "+7 (495) 783-08-40",
+    "booking_url": "https://kuramen.ru",
+    "no_booking": true,
+    "status": "published",
+    "date": "2026-08-17",
+    "scores": {
+      "food": 30,
+      "wow": 13,
+      "price": 14,
+      "service": 13,
+      "space": 8,
+      "sanitation": 8
+    },
+    "total_score": 86,
+    "grade": "Рекомендовано",
+    "value_score": 8.9,
+    "signature_dish": "Тонкоцу рамен на наваристом свином бульоне",
+    "dish_review": "По оценке тайного гостя — густой коллагеновый бульон 16-часовой выварки, упругая пшеничная лапша правильной текстуры и нежнейшая свинина тясю.",
+    "full_review": "По нашему впечатлению, проект задает высокий уровень аутентичности японской кухни в Москве с честным выходом порций и быстрым ритмом кухни.",
+    "urban_notes": "Удобное расположение у гостиницы «Украина» с видом на набережную Тараса Шевченко.",
+    "ergonomics_notes": "Формат японской изакаи с посадкой у стойки открытой кухни и быстрого обслуживания.",
+    "video": "",
+    "photos": [
+      "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "private_photos": [],
+    "pros": [
+      "Собственное производство свежей лапши на японском оборудовании",
+      "Глубокий насыщенный вкус аутентичных бульонов без искусственных добавок",
+      "Быстрая отдача заказа за 6-8 минут"
+    ],
+    "cons": [
+      "В обеденные часы пик зал полностью заполнен и посадка идет в ритме живой очереди"
+    ],
+    "vibe_tags": [
+      "Аутентичный рамен",
+      "Обед",
+      "Рекомендовано",
+      "Япония"
+    ],
+    "history": [
+      {
+        "date": "2026-08-17",
+        "score": 86,
+        "notes": "Плановый визит: категория Рекомендовано."
+      }
+    ],
+    "audit_count": 1,
+    "score_delta": 0,
+    "coords": {
+      "lat": 55.7515,
+      "lng": 37.5675
+    }
   }
 ]
