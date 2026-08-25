@@ -3510,11 +3510,14 @@
         if (currentDraftsOnlyFilter && !isDraft) continue;
         if (currentFavoritesOnlyFilter && !isFavorite(v.id)) continue;
 
+        var tagsStr = (v.vibe_tags || []).join(' ').toLowerCase();
         var matchesSearch = !search || 
                             v.name.toLowerCase().indexOf(search) !== -1 || 
                             v.format.toLowerCase().indexOf(search) !== -1 || 
                             (v.signature_dish && v.signature_dish.toLowerCase().indexOf(search) !== -1) ||
                             (v.chef && v.chef.toLowerCase().indexOf(search) !== -1) ||
+                            (v.concept && v.concept.toLowerCase().indexOf(search) !== -1) ||
+                            (tagsStr && tagsStr.indexOf(search) !== -1) ||
                             v.city.toLowerCase().indexOf(search) !== -1 ||
                             (v.district && v.district.toLowerCase().indexOf(search) !== -1) ||
                             (v.address && v.address.toLowerCase().indexOf(search) !== -1);
@@ -3782,11 +3785,14 @@
         if (currentDraftsOnlyFilter && !isDraft) continue;
         if (currentFavoritesOnlyFilter && !isFavorite(v.id)) continue;
 
+        var tagsStr = (v.vibe_tags || []).join(' ').toLowerCase();
         var matchesSearch = !search || 
                             v.name.toLowerCase().indexOf(search) !== -1 || 
                             v.format.toLowerCase().indexOf(search) !== -1 || 
                             (v.signature_dish && v.signature_dish.toLowerCase().indexOf(search) !== -1) ||
                             (v.chef && v.chef.toLowerCase().indexOf(search) !== -1) ||
+                            (v.concept && v.concept.toLowerCase().indexOf(search) !== -1) ||
+                            (tagsStr && tagsStr.indexOf(search) !== -1) ||
                             v.city.toLowerCase().indexOf(search) !== -1 ||
                             (v.district && v.district.toLowerCase().indexOf(search) !== -1) ||
                             (v.address && v.address.toLowerCase().indexOf(search) !== -1);
@@ -5671,7 +5677,7 @@
       var cat = currentManualCategory;
       var html = '';
 
-      var svgDist = `<svg viewBox="0 0 760 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+      var svgDist = `<svg viewBox="0 0 840 400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
   <defs>
     <pattern id="grid_d" width="20" height="20" patternUnits="userSpaceOnUse">
       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
@@ -5679,84 +5685,76 @@
     <marker id="arr_g" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8C6D37"/>
     </marker>
-    <marker id="arr_r" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#DC2626"/>
-    </marker>
   </defs>
   <rect width="100%" height="100%" fill="url(#grid_d)"/>
 
   <!-- Badge Header -->
-  <rect x="20" y="16" width="360" height="24" rx="4" fill="#18181B"/>
-  <text x="30" y="32" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АРХИТЕКТУРНЫЙ ПЛАН: ДИСТАНЦИЯ СТОЛОВ И ПРОХОДЫ</text>
+  <rect x="24" y="20" width="380" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АРХИТЕКТУРНЫЙ ПЛАН: ДИСТАНЦИЯ СТОЛОВ И ПРОХОДЫ</text>
 
   <!-- Service Corridor Central Highlight -->
-  <rect x="320" y="50" width="120" height="250" fill="#FEF3C7" opacity="0.4" rx="4"/>
-  <text x="380" y="180" text-anchor="middle" fill="#92400E" font-size="10" font-weight="800" letter-spacing="0.5">СЕРВИСНЫЙ ПРОХОД</text>
-  <text x="380" y="195" text-anchor="middle" fill="#B45309" font-size="8.5">Ширина прохода ≥ 80–90 см</text>
+  <rect x="360" y="55" width="120" height="260" fill="#FEF3C7" opacity="0.45" rx="6"/>
+  <text x="420" y="185" text-anchor="middle" fill="#92400E" font-size="10.5" font-weight="800" letter-spacing="0.5">СЕРВИСНЫЙ ПРОХОД</text>
+  <text x="420" y="202" text-anchor="middle" fill="#B45309" font-size="9">Ширина прохода ≥ 80–90 см</text>
 
   <!-- Table 1 (Left) -->
-  <g transform="translate(160, 175)">
-    <circle r="95" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <circle r="55" fill="#FFFFFF" stroke="#18181B" stroke-width="2.5"/>
-    <circle r="50" fill="none" stroke="#E4E4E7" stroke-width="1"/>
-    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="13" font-weight="800">СТОЛ А</text>
-    <text x="0" y="18" text-anchor="middle" fill="#71717A" font-size="9">Ø 90 см</text>
+  <g transform="translate(180, 185)">
+    <circle r="100" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <circle r="60" fill="#FFFFFF" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="54" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="13" font-weight="800">СТОЛ №1</text>
+    <text x="0" y="19" text-anchor="middle" fill="#71717A" font-size="9.5">Ø 90 см</text>
     
     <!-- Chairs with backrests -->
-    <rect x="-24" y="-86" width="48" height="15" rx="4" fill="#18181B"/>
-    <path d="-18 -71 C -18 -64 18 -64 18 -71" fill="none" stroke="#18181B" stroke-width="2"/>
-    <rect x="-24" y="71" width="48" height="15" rx="4" fill="#18181B"/>
-    <path d="-18 71 C -18 64 18 64 18 71" fill="none" stroke="#18181B" stroke-width="2"/>
-    <rect x="-86" y="-24" width="15" height="48" rx="4" fill="#18181B"/>
-    <path d="-71 -18 C -64 -18 -64 18 -71 18" fill="none" stroke="#18181B" stroke-width="2"/>
-    <rect x="71" y="-24" width="15" height="48" rx="4" fill="#18181B"/>
-    <path d="71 -18 C 64 -18 64 18 71 18" fill="none" stroke="#18181B" stroke-width="2"/>
+    <rect x="-26" y="-92" width="52" height="16" rx="4" fill="#18181B"/>
+    <rect x="-26" y="76" width="52" height="16" rx="4" fill="#18181B"/>
+    <rect x="-92" y="-26" width="16" height="52" rx="4" fill="#18181B"/>
+    <rect x="76" y="-26" width="16" height="52" rx="4" fill="#18181B"/>
   </g>
 
   <!-- Table 2 (Right) -->
-  <g transform="translate(600, 175)">
-    <circle r="95" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4 4"/>
-    <circle r="55" fill="#FFFFFF" stroke="#18181B" stroke-width="2.5"/>
-    <circle r="50" fill="none" stroke="#E4E4E7" stroke-width="1"/>
-    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="13" font-weight="800">СТОЛ Б</text>
-    <text x="0" y="18" text-anchor="middle" fill="#71717A" font-size="9">Ø 90 см</text>
+  <g transform="translate(660, 185)">
+    <circle r="100" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <circle r="60" fill="#FFFFFF" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="54" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="13" font-weight="800">СТОЛ №2</text>
+    <text x="0" y="19" text-anchor="middle" fill="#71717A" font-size="9.5">Ø 90 см</text>
     
-    <rect x="-24" y="-86" width="48" height="15" rx="4" fill="#18181B"/>
-    <rect x="-24" y="71" width="48" height="15" rx="4" fill="#18181B"/>
-    <rect x="-86" y="-24" width="15" height="48" rx="4" fill="#18181B"/>
-    <rect x="71" y="-24" width="15" height="48" rx="4" fill="#18181B"/>
+    <rect x="-26" y="-92" width="52" height="16" rx="4" fill="#18181B"/>
+    <rect x="-26" y="76" width="52" height="16" rx="4" fill="#18181B"/>
+    <rect x="-92" y="-26" width="16" height="52" rx="4" fill="#18181B"/>
+    <rect x="76" y="-26" width="16" height="52" rx="4" fill="#18181B"/>
   </g>
 
   <!-- Main Dimension Arrow -->
-  <line x1="215" y1="105" x2="545" y2="105" stroke="#8C6D37" stroke-width="2.5" marker-start="url(#arr_g)" marker-end="url(#arr_g)"/>
-  <line x1="215" y1="90" x2="215" y2="150" stroke="#8C6D37" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="545" y1="90" x2="545" y2="150" stroke="#8C6D37" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="240" y1="105" x2="600" y2="105" stroke="#8C6D37" stroke-width="2.5" marker-start="url(#arr_g)" marker-end="url(#arr_g)"/>
+  <line x1="240" y1="85" x2="240" y2="155" stroke="#8C6D37" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="600" y1="85" x2="600" y2="155" stroke="#8C6D37" stroke-width="1" stroke-dasharray="3 3"/>
 
   <!-- Dimension Plaque -->
-  <rect x="305" y="88" width="150" height="34" rx="6" fill="#FFFFFF" stroke="#8C6D37" stroke-width="1.5"/>
-  <text x="380" y="104" text-anchor="middle" fill="#8C6D37" font-size="13" font-weight="900">≥ 1.20 – 1.50 м</text>
-  <text x="380" y="116" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">ЭТАЛОН PLANKA GUIDE</text>
+  <rect x="340" y="86" width="160" height="38" rx="6" fill="#FFFFFF" stroke="#8C6D37" stroke-width="1.5"/>
+  <text x="420" y="103" text-anchor="middle" fill="#8C6D37" font-size="13.5" font-weight="900">≥ 1.20 – 1.50 м</text>
+  <text x="420" y="117" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">ЭТАЛОН PLANKA GUIDE</text>
 
-  <!-- Bottom Legend -->
-  <g transform="translate(20, 315)">
-    <rect width="14" height="14" rx="3" fill="#16A34A"/>
-    <text x="22" y="11" fill="#18181B" font-size="10.5" font-weight="600">≥ 1.20 м: Зона приватности и комфортного акустического барьера (9–10 б.)</text>
+  <!-- Bottom Legend Boxes (Generous Width) -->
+  <g transform="translate(24, 345)">
+    <rect width="380" height="34" rx="5" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+    <circle cx="18" cy="17" r="6" fill="#16A34A"/>
+    <text x="32" y="21" fill="#166534" font-size="9.5" font-weight="700">≥ 1.20 м: Зона приватности и комфортной акустики (9–10 б.)</text>
   </g>
-  <g transform="translate(420, 315)">
-    <rect width="14" height="14" rx="3" fill="#DC2626"/>
-    <text x="22" y="11" fill="#18181B" font-size="10.5" font-weight="600">&lt; 0.90 м: Касание стульями, слышимость соседних бесед (-3..-5 б.)</text>
+  <g transform="translate(436, 345)">
+    <rect width="380" height="34" rx="5" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+    <circle cx="18" cy="17" r="6" fill="#DC2626"/>
+    <text x="32" y="21" fill="#991B1B" font-size="9.5" font-weight="700">&lt; 0.90 м: Касание стульями, слышимость бесед (-3..-5 б.)</text>
   </g>
 </svg>`;
-      var svgServ = `<svg viewBox="0 0 760 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+      var svgServ = `<svg viewBox="0 0 840 420" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
   <defs>
     <pattern id="grid_s" width="20" height="20" patternUnits="userSpaceOnUse">
       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
     </pattern>
     <marker id="arr_gold" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#C5A880"/>
-    </marker>
-    <marker id="arr_blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2563EB"/>
     </marker>
     <marker id="arr_teal" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0D9488"/>
@@ -5765,66 +5763,65 @@
   <rect width="100%" height="100%" fill="url(#grid_s)"/>
 
   <!-- Badge Header -->
-  <rect x="20" y="16" width="390" height="24" rx="4" fill="#18181B"/>
-  <text x="30" y="32" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">РЕСТОРАННЫЙ ЭТИКЕТ: ТРАЕКТОРИИ И СТОРОНЫ ПОДАЧИ</text>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">РЕСТОРАННЫЙ ЭТИКЕТ: ТРАЕКТОРИИ И СТОРОНЫ ПОДАЧИ</text>
 
   <!-- Central Guest & Table Assembly -->
-  <g transform="translate(380, 200)">
+  <g transform="translate(420, 210)">
     <!-- Table Surface Top Edge -->
-    <rect x="-140" y="-120" width="280" height="70" rx="12" fill="#FAFAFA" stroke="#18181B" stroke-width="2.5"/>
+    <rect x="-160" y="-125" width="320" height="75" rx="12" fill="#FAFAFA" stroke="#18181B" stroke-width="2.5"/>
     
     <!-- Table setting elements -->
-    <circle cx="0" cy="-85" r="24" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
-    <circle cx="0" cy="-85" r="18" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    <circle cx="0" cy="-88" r="26" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+    <circle cx="0" cy="-88" r="20" fill="none" stroke="#E4E4E7" stroke-width="1"/>
     
     <!-- Left Cutlery / Bread -->
-    <line x1="-34" y1="-105" x2="-34" y2="-65" stroke="#71717A" stroke-width="3"/>
-    <circle cx="-55" cy="-98" r="10" fill="#FFFFFF" stroke="#71717A" stroke-width="1.5"/>
+    <line x1="-38" y1="-110" x2="-38" y2="-66" stroke="#71717A" stroke-width="3"/>
+    <circle cx="-62" cy="-102" r="11" fill="#FFFFFF" stroke="#71717A" stroke-width="1.5"/>
     
     <!-- Right Cutlery / Glasses -->
-    <line x1="34" y1="-105" x2="34" y2="-65" stroke="#71717A" stroke-width="3"/>
-    <circle cx="55" cy="-100" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
-    <circle cx="42" cy="-106" r="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <line x1="38" y1="-110" x2="38" y2="-66" stroke="#71717A" stroke-width="3"/>
+    <circle cx="62" cy="-105" r="9" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <circle cx="48" cy="-112" r="7" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
 
     <!-- Guest Body & Chair -->
-    <!-- Chair -->
-    <rect x="-40" y="2" width="80" height="18" rx="6" fill="#18181B"/>
-    <!-- Guest Torso -->
-    <ellipse cx="0" cy="-22" rx="36" ry="20" fill="#E4E4E7" stroke="#18181B" stroke-width="2"/>
-    <!-- Guest Head -->
-    <circle cx="0" cy="-24" r="16" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
-    <text x="0" y="-20" text-anchor="middle" fill="#18181B" font-size="9" font-weight="800">ГОСТЬ</text>
+    <rect x="-45" y="8" width="90" height="20" rx="6" fill="#18181B"/>
+    <ellipse cx="0" cy="-18" rx="40" ry="22" fill="#E4E4E7" stroke="#18181B" stroke-width="2"/>
+    <circle cx="0" cy="-20" r="18" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+    <text x="0" y="-15" text-anchor="middle" fill="#18181B" font-size="10" font-weight="800">ГОСТЬ</text>
     
-    <!-- Waiter Trajectory 1: RIGHT HAND (Dish & Drinks) -->
-    <path d="M 170 30 Q 140 -60 70 -75" fill="none" stroke="#C5A880" stroke-width="3" marker-end="url(#arr_gold)"/>
-    <g transform="translate(175, 45)">
-      <rect x="-10" y="-12" width="180" height="42" rx="6" fill="#18181B"/>
-      <text x="0" y="4" fill="#C5A880" font-size="10" font-weight="900">ПОДАЧА СПРАВА</text>
-      <text x="0" y="18" fill="#FAF8F5" font-size="8.5">• Горячие блюда &amp; закуски</text>
-      <text x="0" y="27" fill="#FAF8F5" font-size="8.5">• Напитки, розлив вин и воды</text>
+    <!-- Trajectory 1: RIGHT HAND (Dish & Drinks) -->
+    <path d="M 210 25 Q 160 -70 80 -82" fill="none" stroke="#C5A880" stroke-width="3.5" marker-end="url(#arr_gold)"/>
+    <g transform="translate(190, 40)">
+      <rect x="0" y="-15" width="205" height="62" rx="6" fill="#18181B"/>
+      <text x="12" y="8" fill="#C5A880" font-size="10.5" font-weight="900">ПОДАЧА СПРАВА</text>
+      <text x="12" y="25" fill="#FAF8F5" font-size="9">• Горячие блюда и закуски</text>
+      <text x="12" y="40" fill="#FAF8F5" font-size="9">• Напитки, розлив вин и воды</text>
     </g>
 
-    <!-- Waiter Trajectory 2: LEFT HAND (Bread & Clearing) -->
-    <path d="M -170 30 Q -140 -60 -70 -75" fill="none" stroke="#0D9488" stroke-width="3" marker-end="url(#arr_teal)"/>
-    <g transform="translate(-340, 45)">
-      <rect x="0" y="-12" width="175" height="42" rx="6" fill="#0F766E"/>
-      <text x="10" y="4" fill="#FFFFFF" font-size="10" font-weight="900">СЕРВИС СЛЕВА</text>
-      <text x="10" y="18" fill="#F0FDFA" font-size="8.5">• Подача хлебной тарелки и масла</text>
-      <text x="10" y="27" fill="#F0FDFA" font-size="8.5">• Зачистка пустых тарелок (до 60 с)</text>
+    <!-- Trajectory 2: LEFT HAND (Bread & Clearing) -->
+    <path d="M -210 25 Q -160 -70 -80 -82" fill="none" stroke="#0D9488" stroke-width="3.5" marker-end="url(#arr_teal)"/>
+    <g transform="translate(-395, 40)">
+      <rect x="0" y="-15" width="205" height="62" rx="6" fill="#0F766E"/>
+      <text x="12" y="8" fill="#FFFFFF" font-size="10.5" font-weight="900">СЕРВИС СЛЕВА</text>
+      <text x="12" y="25" fill="#F0FDFA" font-size="9">• Подача хлебной тарелки и масла</text>
+      <text x="12" y="40" fill="#F0FDFA" font-size="9">• Зачистка пустых тарелок (до 60 с)</text>
     </g>
   </g>
 
-  <!-- Strict Rules Badges Bottom -->
-  <g transform="translate(20, 315)">
-    <rect width="345" height="28" rx="4" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
-    <text x="10" y="18" fill="#991B1B" font-size="9" font-weight="700">🚫 ЗАПРЕТ: Касание пальцами внутреннего обода тарелки и верхней трети чаши бокала</text>
+  <!-- Strict Rules Badges Bottom (Spacious Layout) -->
+  <g transform="translate(24, 355)">
+    <rect width="380" height="42" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+    <text x="14" y="18" fill="#991B1B" font-size="9" font-weight="800">🚫 ЗАПРЕТ ПАЛЬЦЕВОГО КОНТАКТА:</text>
+    <text x="14" y="32" fill="#7F1D1D" font-size="8.5">Не касаться обода тарелки и верхней трети чаши бокала</text>
   </g>
-  <g transform="translate(385, 315)">
-    <rect width="355" height="28" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
-    <text x="10" y="18" fill="#166534" font-size="9" font-weight="700">✓ ПРАВИЛО ЧИСТОГО СТОЛА: Пустая посуда убирается за 60 сек после сложенных приборов</text>
+  <g transform="translate(436, 355)">
+    <rect width="380" height="42" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+    <text x="14" y="18" fill="#166534" font-size="9" font-weight="800">✓ ПРАВИЛО ЧИСТОГО СТОЛА:</text>
+    <text x="14" y="32" fill="#14532D" font-size="8.5">Пустая посуда зачищается за 60 секунд после сложенных приборов</text>
   </g>
 </svg>`;
-      var svgTableSet = `<svg viewBox="0 0 760 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+      var svgTableSet = `<svg viewBox="0 0 840 400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
   <defs>
     <pattern id="grid_ts" width="20" height="20" patternUnits="userSpaceOnUse">
       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
@@ -5833,97 +5830,85 @@
   <rect width="100%" height="100%" fill="url(#grid_ts)"/>
 
   <!-- Badge Header -->
-  <rect x="20" y="16" width="380" height="24" rx="4" fill="#18181B"/>
-  <text x="30" y="32" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">ГЕОМЕТРИЯ СЕРВИРОВКИ СТОЛА: СТАНДАРТ FINE DINING</text>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">ГЕОМЕТРИЯ СЕРВИРОВКИ СТОЛА: СТАНДАРТ FINE DINING</text>
 
-  <!-- Table Edge Indicator Bottom -->
-  <line x1="40" y1="310" x2="720" y2="310" stroke="#18181B" stroke-width="3"/>
-  <text x="380" y="328" text-anchor="middle" fill="#71717A" font-size="10" font-weight="700" letter-spacing="1">КРОМКА СТОЛА СО СТОРОНЫ ГОСТЯ</text>
-  <line x1="380" y1="290" x2="380" y2="310" stroke="#8C6D37" stroke-width="1.5"/>
-  <text x="395" y="302" fill="#8C6D37" font-size="9" font-weight="800">2 см</text>
+  <!-- Table Edge Line -->
+  <line x1="40" y1="325" x2="800" y2="325" stroke="#18181B" stroke-width="3"/>
+  <text x="420" y="344" text-anchor="middle" fill="#71717A" font-size="10" font-weight="700" letter-spacing="1">КРОМКА СТОЛА СО СТОРОНЫ ГОСТЯ</text>
+  <line x1="420" y1="305" x2="420" y2="325" stroke="#8C6D37" stroke-width="1.5"/>
+  <text x="435" y="318" fill="#8C6D37" font-size="9" font-weight="800">2 см</text>
 
   <!-- 1. Center Showplate & Napkin -->
-  <g transform="translate(380, 200)">
-    <circle r="75" fill="#FAFAFA" stroke="#18181B" stroke-width="2.5"/>
-    <circle r="60" fill="#FFFFFF" stroke="#D4AF37" stroke-width="1.5"/>
-    <circle r="42" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1"/>
-    <!-- Folded Linen Napkin -->
-    <rect x="-24" y="-35" width="48" height="70" rx="3" fill="#F4F4F5" stroke="#A1A1AA" stroke-width="1"/>
-    <line x1="0" y1="-35" x2="0" y2="35" stroke="#D4D4D8" stroke-width="1"/>
-    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="10" font-weight="800">ПОДСТАНОВОЧНАЯ</text>
-    <text x="0" y="16" text-anchor="middle" fill="#18181B" font-size="9">ТАРЕЛКА (Ø30)</text>
+  <g transform="translate(420, 210)">
+    <circle r="80" fill="#FAFAFA" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="65" fill="#FFFFFF" stroke="#D4AF37" stroke-width="1.5"/>
+    <circle r="46" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1"/>
+    <rect x="-26" y="-38" width="52" height="76" rx="3" fill="#F4F4F5" stroke="#A1A1AA" stroke-width="1"/>
+    <line x1="0" y1="-38" x2="0" y2="38" stroke="#D4D4D8" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="10.5" font-weight="800">ПОДСТАНОВОЧНАЯ</text>
+    <text x="0" y="18" text-anchor="middle" fill="#18181B" font-size="9">ТАРЕЛКА (Ø30)</text>
   </g>
 
   <!-- 2. Left Cutlery (Forks) -->
-  <g transform="translate(265, 200)">
-    <!-- Main Course Fork (Inside) -->
-    <rect x="0" y="-70" width="8" height="140" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
-    <path d="-3 -70 L 11 -70 L 11 -40 L 8 -30 L 0 -30 L -3 -40 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
-    <text x="4" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Вилка осн.</text>
+  <g transform="translate(295, 210)">
+    <rect x="0" y="-75" width="9" height="150" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="-3 -75 L 12 -75 L 12 -45 L 9 -35 L 0 -35 L -3 -45 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="4" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Вилка осн.</text>
 
-    <!-- Salad/Starter Fork (Outside) -->
-    <rect x="-25" y="-55" width="7" height="125" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
-    <path d="-28 -55 L -15 -55 L -15 -30 L -18 -22 L -25 -22 L -28 -30 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
-    <text x="-21" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Закусочная</text>
+    <rect x="-28" y="-60" width="8" height="135" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="-31 -60 L -17 -60 L -17 -35 L -20 -27 L -28 -27 L -31 -35 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="-24" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Закусочная</text>
   </g>
 
   <!-- 3. Right Cutlery (Knives & Soup Spoon) -->
-  <g transform="translate(495, 200)">
-    <!-- Main Course Knife (Inside - Blade to Plate) -->
-    <rect x="0" y="-70" width="7" height="140" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
-    <path d="0 -70 Q -8 -30 0 -10 Z" fill="#D4D4D8" stroke="#18181B" stroke-width="1"/>
-    <text x="4" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Нож осн.</text>
+  <g transform="translate(545, 210)">
+    <rect x="0" y="-75" width="8" height="150" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="0 -75 Q -9 -35 0 -12 Z" fill="#D4D4D8" stroke="#18181B" stroke-width="1"/>
+    <text x="4" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Нож осн.</text>
 
-    <!-- Fish / Starter Knife -->
-    <rect x="22" y="-60" width="7" height="130" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
-    <text x="26" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Закусочный</text>
+    <rect x="25" y="-65" width="8" height="140" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="29" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Закусочный</text>
 
-    <!-- Soup Spoon (Outside) -->
-    <rect x="44" y="-55" width="6" height="125" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
-    <ellipse cx="47" cy="-45" rx="9" ry="16" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
-    <text x="47" y="90" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">Ложка</text>
+    <rect x="50" y="-60" width="7" height="135" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <ellipse cx="53" cy="-50" rx="10" ry="17" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="53" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Ложка</text>
   </g>
 
   <!-- 4. Bread Plate & Butter Knife (Top Left - 10:30) -->
-  <g transform="translate(180, 100)">
-    <circle r="36" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
-    <circle r="28" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1"/>
-    <!-- Butter knife placed diagonally -->
-    <line x1="-15" y1="18" x2="22" y2="-20" stroke="#18181B" stroke-width="3"/>
-    <text x="0" y="48" text-anchor="middle" fill="#18181B" font-size="9" font-weight="800">ПИРОЖКОВАЯ ТАРЕЛКА</text>
-    <text x="0" y="58" text-anchor="middle" fill="#71717A" font-size="8">Хлеб и масло (10:30)</text>
+  <g transform="translate(200, 105)">
+    <circle r="38" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
+    <circle r="30" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1"/>
+    <line x1="-16" y1="20" x2="24" y2="-22" stroke="#18181B" stroke-width="3"/>
+    <text x="0" y="52" text-anchor="middle" fill="#18181B" font-size="9.5" font-weight="800">ПИРОЖКОВАЯ ТАРЕЛКА</text>
+    <text x="0" y="66" text-anchor="middle" fill="#71717A" font-size="8.5">Хлеб и масло (10:30)</text>
   </g>
 
   <!-- 5. Glassware Trio (Top Right - 01:30) -->
-  <g transform="translate(580, 100)">
-    <!-- Water Glass (Highest) -->
-    <circle cx="-35" cy="10" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-    <text x="-35" y="14" text-anchor="middle" fill="#1E40AF" font-size="8" font-weight="800">ВОДА</text>
+  <g transform="translate(640, 105)">
+    <circle cx="-38" cy="12" r="20" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="-38" y="16" text-anchor="middle" fill="#1E40AF" font-size="8.5" font-weight="800">ВОДА</text>
     
-    <!-- Red Wine Glass -->
-    <circle cx="10" cy="-5" r="16" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
-    <text x="10" y="-1" text-anchor="middle" fill="#991B1B" font-size="8" font-weight="800">КРАСН.</text>
+    <circle cx="12" cy="-6" r="18" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="12" y="-2" text-anchor="middle" fill="#991B1B" font-size="8.5" font-weight="800">КРАСН.</text>
     
-    <!-- White Wine Glass -->
-    <circle cx="45" cy="20" r="14" fill="#FEFCE8" stroke="#CA8A04" stroke-width="2"/>
-    <text x="45" y="24" text-anchor="middle" fill="#854D0E" font-size="7.5" font-weight="800">БЕЛОЕ</text>
+    <circle cx="50" cy="22" r="15" fill="#FEFCE8" stroke="#CA8A04" stroke-width="2"/>
+    <text x="50" y="26" text-anchor="middle" fill="#854D0E" font-size="8" font-weight="800">БЕЛОЕ</text>
     
-    <text x="10" y="52" text-anchor="middle" fill="#18181B" font-size="9" font-weight="800">КАРТА БОКАЛОВ</text>
-    <text x="10" y="62" text-anchor="middle" fill="#71717A" font-size="8">Справа сверху (01:30)</text>
+    <text x="12" y="58" text-anchor="middle" fill="#18181B" font-size="9.5" font-weight="800">КАРТА БОКАЛОВ</text>
+    <text x="12" y="72" text-anchor="middle" fill="#71717A" font-size="8.5">Справа сверху (01:30)</text>
   </g>
 
   <!-- 6. Dessert Cutlery (Top Center - 12:00) -->
-  <g transform="translate(380, 95)">
-    <!-- Dessert Spoon (Handle right) -->
-    <line x1="-30" y1="-8" x2="30" y2="-8" stroke="#18181B" stroke-width="2.5"/>
-    <ellipse cx="-25" cy="-8" rx="7" ry="5" fill="#E4E4E7" stroke="#18181B" stroke-width="1"/>
-    <!-- Dessert Fork (Handle left) -->
-    <line x1="-30" y1="8" x2="30" y2="8" stroke="#18181B" stroke-width="2.5"/>
-    <path d="20 4 L 30 4 L 30 12 L 20 12 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1"/>
-    <text x="0" y="26" text-anchor="middle" fill="#71717A" font-size="8.5" font-weight="700">Десертные приборы (12:00)</text>
+  <g transform="translate(420, 100)">
+    <line x1="-32" y1="-8" x2="32" y2="-8" stroke="#18181B" stroke-width="2.5"/>
+    <ellipse cx="-26" cy="-8" rx="8" ry="6" fill="#E4E4E7" stroke="#18181B" stroke-width="1"/>
+    <line x1="-32" y1="10" x2="32" y2="10" stroke="#18181B" stroke-width="2.5"/>
+    <path d="22 6 L 32 6 L 32 14 L 22 14 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1"/>
+    <text x="0" y="30" text-anchor="middle" fill="#71717A" font-size="9" font-weight="700">Десертные приборы (12:00)</text>
   </g>
 </svg>`;
-      var svgLight = `<svg viewBox="0 0 760 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #18181B; border-radius: 8px; border: 1px solid #3F3F46; font-family: Inter, -apple-system, sans-serif;">
+      var svgLight = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #18181B; border-radius: 8px; border: 1px solid #3F3F46; font-family: Inter, -apple-system, sans-serif;">
   <defs>
     <radialGradient id="lightCone" cx="50%" cy="0%" r="90%">
       <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.85"/>
@@ -5933,63 +5918,61 @@
   </defs>
 
   <!-- Header -->
-  <rect x="20" y="16" width="370" height="24" rx="4" fill="#27272A"/>
-  <text x="30" y="32" fill="#D4AF37" font-size="11" font-weight="700" letter-spacing="0.5">РАЗРЕЗ ЗАЛА: СВЕТОВОЙ КОНУС 2700K И АКУСТИКА</text>
+  <rect x="24" y="20" width="390" height="26" rx="4" fill="#27272A"/>
+  <text x="36" y="37" fill="#D4AF37" font-size="11" font-weight="700" letter-spacing="0.5">РАЗРЕЗ ЗАЛА: СВЕТОВОЙ КОНУС 2700K И АКУСТИКА</text>
 
   <!-- Ceiling -->
-  <line x1="40" y1="50" x2="720" y2="50" stroke="#3F3F46" stroke-width="3"/>
-  <text x="60" y="44" fill="#71717A" font-size="9" font-weight="600">ПОТОЛОК / ЗВУКОПОГЛОЩАЮЩИЕ ПАНЕЛИ</text>
+  <line x1="40" y1="55" x2="800" y2="55" stroke="#3F3F46" stroke-width="3"/>
+  <text x="60" y="48" fill="#71717A" font-size="9" font-weight="600">ПОТОЛОК / ЗВУКОПОГЛОЩАЮЩИЕ ПАНЕЛИ</text>
 
   <!-- Pendant Lamp -->
-  <line x1="380" y1="50" x2="380" y2="90" stroke="#A1A1AA" stroke-width="2"/>
-  <path d="M 360 90 L 400 90 L 410 110 L 350 110 Z" fill="#C5A880"/>
-  <circle cx="380" cy="110" r="6" fill="#FEF08A"/>
+  <line x1="420" y1="55" x2="420" y2="95" stroke="#A1A1AA" stroke-width="2"/>
+  <path d="M 400 95 L 440 95 L 450 115 L 390 115 Z" fill="#C5A880"/>
+  <circle cx="420" cy="115" r="7" fill="#FEF08A"/>
 
   <!-- Light Cone Polygon -->
-  <polygon points="380,110 230,270 530,270" fill="url(#lightCone)"/>
-  <line x1="380" y1="110" x2="230" y2="270" stroke="#FEF08A" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
-  <line x1="380" y1="110" x2="530" y2="270" stroke="#FEF08A" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <polygon points="420,115 250,285 590,285" fill="url(#lightCone)"/>
+  <line x1="420" y1="115" x2="250" y2="285" stroke="#FEF08A" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <line x1="420" y1="115" x2="590" y2="285" stroke="#FEF08A" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
 
   <!-- Table -->
-  <rect x="250" y="270" width="260" height="14" rx="3" fill="#FAF8F5"/>
-  <rect x="370" y="284" width="20" height="60" fill="#71717A"/>
-  <rect x="320" y="340" width="120" height="8" rx="2" fill="#52525B"/>
+  <rect x="270" y="285" width="300" height="14" rx="3" fill="#FAF8F5"/>
+  <rect x="410" y="299" width="20" height="65" fill="#71717A"/>
+  <rect x="350" y="356" width="140" height="8" rx="2" fill="#52525B"/>
 
-  <!-- Plate on Table glowing in spotlight -->
-  <ellipse cx="380" cy="270" rx="30" ry="6" fill="#D4AF37"/>
-  <text x="380" y="260" text-anchor="middle" fill="#FEF08A" font-size="9" font-weight="800">АКЦЕНТ НА БЛЮДО</text>
+  <!-- Plate on Table -->
+  <ellipse cx="420" cy="285" rx="36" ry="7" fill="#D4AF37"/>
+  <text x="420" y="275" text-anchor="middle" fill="#FEF08A" font-size="9.5" font-weight="800">АКЦЕНТ НА БЛЮДО</text>
 
   <!-- Guest Silhouettes in soft shadow -->
-  <!-- Guest Left -->
-  <g transform="translate(180, 240)">
-    <circle cx="0" cy="-20" r="16" fill="#3F3F46"/>
-    <path d="M -22 15 C -22 -6 22 -6 22 15 Z" fill="#27272A"/>
-    <text x="0" y="32" text-anchor="middle" fill="#A1A1AA" font-size="8">Мягкая тень</text>
+  <g transform="translate(190, 250)">
+    <circle cx="0" cy="-22" r="18" fill="#3F3F46"/>
+    <path d="M -26 18 C -26 -6 26 -6 26 18 Z" fill="#27272A"/>
+    <text x="0" y="36" text-anchor="middle" fill="#A1A1AA" font-size="8.5">Мягкая полутень</text>
   </g>
-  <!-- Guest Right -->
-  <g transform="translate(580, 240)">
-    <circle cx="0" cy="-20" r="16" fill="#3F3F46"/>
-    <path d="M -22 15 C -22 -6 22 -6 22 15 Z" fill="#27272A"/>
-    <text x="0" y="32" text-anchor="middle" fill="#A1A1AA" font-size="8">Без ослепления</text>
+  <g transform="translate(650, 250)">
+    <circle cx="0" cy="-22" r="18" fill="#3F3F46"/>
+    <path d="M -26 18 C -26 -6 26 -6 26 18 Z" fill="#27272A"/>
+    <text x="0" y="36" text-anchor="middle" fill="#A1A1AA" font-size="8.5">Без ослепления</text>
   </g>
 
   <!-- Noise Decibel Meter Badge Left -->
-  <g transform="translate(40, 140)">
-    <rect width="150" height="58" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
-    <text x="12" y="20" fill="#86EFAC" font-size="12" font-weight="900">≤ 65 дБ</text>
-    <text x="12" y="34" fill="#FAF8F5" font-size="9" font-weight="700">АКУСТИЧЕСКИЙ НОРМАТИВ</text>
-    <text x="12" y="47" fill="#A1A1AA" font-size="8">Разговор вполголоса при 100%</text>
+  <g transform="translate(30, 150)">
+    <rect width="170" height="64" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+    <text x="14" y="22" fill="#86EFAC" font-size="13" font-weight="900">≤ 65 дБ</text>
+    <text x="14" y="38" fill="#FAF8F5" font-size="9" font-weight="700">АКУСТИЧЕСКИЙ НОРМАТИВ</text>
+    <text x="14" y="52" fill="#A1A1AA" font-size="8">Разговор вполголоса при 100%</text>
   </g>
 
   <!-- Lighting Specs Badge Right -->
-  <g transform="translate(570, 140)">
-    <rect width="150" height="58" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
-    <text x="12" y="20" fill="#FDE047" font-size="12" font-weight="900">2700K • Угол 35°</text>
-    <text x="12" y="34" fill="#FAF8F5" font-size="9" font-weight="700">ТЕПЛЫЙ СПЕКТР СВЕТА</text>
-    <text x="12" y="47" fill="#A1A1AA" font-size="8">Фокус на цвет и текстуру еды</text>
+  <g transform="translate(640, 150)">
+    <rect width="170" height="64" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+    <text x="14" y="22" fill="#FDE047" font-size="13" font-weight="900">2700K • Угол 35°</text>
+    <text x="14" y="38" fill="#FAF8F5" font-size="9" font-weight="700">ТЕПЛЫЙ СПЕКТР СВЕТА</text>
+    <text x="14" y="52" fill="#A1A1AA" font-size="8">Фокус на цвет и текстуру еды</text>
   </g>
 </svg>`;
-      var svgDish = `<svg viewBox="0 0 760 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+      var svgDish = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
   <defs>
     <pattern id="grid_da" width="20" height="20" patternUnits="userSpaceOnUse">
       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
@@ -5998,208 +5981,598 @@
   <rect width="100%" height="100%" fill="url(#grid_da)"/>
 
   <!-- Badge Header -->
-  <rect x="20" y="16" width="370" height="24" rx="4" fill="#18181B"/>
-  <text x="30" y="32" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АНАТОМИЯ БЛЮДА: СРЕЗ ВКУСА, ТЕКСТУРЫ И ТЕМПЕРАТУРА</text>
+  <rect x="24" y="20" width="390" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АНАТОМИЯ БЛЮДА: СРЕЗ ВКУСА, ТЕКСТУРЫ И ТЕМПЕРАТУРА</text>
 
-  <!-- Designer Ceramic Plate Elevation -->
-  <g transform="translate(380, 210)">
-    <!-- Plate base -->
-    <path d="M -240 40 Q -180 80 0 80 Q 180 80 240 40 Q 250 35 240 30 Q 170 65 0 65 Q -170 65 -240 30 Z" fill="#18181B"/>
-    <ellipse cx="0" cy="30" rx="240" ry="25" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
-    <ellipse cx="0" cy="30" rx="190" ry="18" fill="#F4F4F5" stroke="#E4E4E7" stroke-width="1"/>
+  <!-- Designer Ceramic Plate -->
+  <g transform="translate(420, 220)">
+    <path d="M -260 45 Q -190 85 0 85 Q 190 85 260 45 Q 270 40 260 35 Q 180 70 0 70 Q -180 70 -260 35 Z" fill="#18181B"/>
+    <ellipse cx="0" cy="35" rx="260" ry="28" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
+    <ellipse cx="0" cy="35" rx="200" ry="20" fill="#F4F4F5" stroke="#E4E4E7" stroke-width="1"/>
 
     <!-- Layer 1: Silky Sauce Base (35%) -->
-    <path d="M -110 32 Q 0 45 110 30 Q 60 18 -110 32 Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
+    <path d="M -120 36 Q 0 50 120 34 Q 60 20 -120 36 Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
     
-    <!-- Layer 2: Main Juicy Core (50% - Medium Rare Cut) -->
-    <path d="M -70 26 C -70 5 70 5 70 26 C 70 36 -70 36 -70 26 Z" fill="#F87171" stroke="#DC2626" stroke-width="2"/>
-    <!-- Internal juicy pink core -->
-    <ellipse cx="0" cy="22" rx="48" ry="10" fill="#EF4444"/>
-    <ellipse cx="0" cy="22" rx="32" ry="6" fill="#DC2626"/>
+    <!-- Layer 2: Main Juicy Core (50%) -->
+    <path d="M -80 30 C -80 6 80 6 80 30 C 80 40 -80 40 -80 30 Z" fill="#F87171" stroke="#DC2626" stroke-width="2"/>
+    <ellipse cx="0" cy="25" rx="55" ry="11" fill="#EF4444"/>
+    <ellipse cx="0" cy="25" rx="36" ry="7" fill="#DC2626"/>
 
-    <!-- Layer 3: Crisp Texture / Herbs / Tuile (15%) -->
-    <path d="M -35 2 L -10 -25 L 15 -18 L 40 4 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
-    <circle cx="-8" cy="-5" r="3" fill="#16A34A"/>
-    <circle cx="12" cy="-8" r="4" fill="#16A34A"/>
-    <circle cx="2" cy="0" r="2.5" fill="#16A34A"/>
+    <!-- Layer 3: Crisp Texture / Herbs (15%) -->
+    <path d="M -40 4 L -12 -28 L 18 -20 L 45 6 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <circle cx="-10" cy="-6" r="3.5" fill="#16A34A"/>
+    <circle cx="14" cy="-9" r="4.5" fill="#16A34A"/>
+    <circle cx="3" cy="1" r="3" fill="#16A34A"/>
 
     <!-- Temperature Probe Pointer -->
-    <line x1="-120" y1="-50" x2="-20" y2="20" stroke="#DC2626" stroke-width="2"/>
-    <circle cx="-20" cy="20" r="4" fill="#DC2626"/>
-    <g transform="translate(-230, -85)">
-      <rect width="140" height="42" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
-      <text x="12" y="18" fill="#DC2626" font-size="11" font-weight="900">52–54°C</text>
-      <text x="12" y="32" fill="#991B1B" font-size="8.5" font-weight="700">ТЕМПЕРАТУРА ЯДРА</text>
+    <line x1="-140" y1="-55" x2="-25" y2="22" stroke="#DC2626" stroke-width="2"/>
+    <circle cx="-25" cy="22" r="4" fill="#DC2626"/>
+    <g transform="translate(-290, -95)">
+      <rect width="155" height="46" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="14" y="20" fill="#DC2626" font-size="12" font-weight="900">52–54°C</text>
+      <text x="14" y="35" fill="#991B1B" font-size="9" font-weight="700">ТЕМПЕРАТУРА ЯДРА</text>
     </g>
 
     <!-- Texture Rule 1: Crisp -->
-    <line x1="30" y1="-20" x2="120" y2="-60" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 3"/>
-    <g transform="translate(125, -85)">
-      <rect width="130" height="38" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1"/>
-      <text x="10" y="16" fill="#B45309" font-size="9.5" font-weight="800">1. ХРУСТ (15%)</text>
-      <text x="10" y="29" fill="#78350F" font-size="8">Чипсы, краст, орехи</text>
+    <line x1="35" y1="-22" x2="140" y2="-65" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(145, -95)">
+      <rect width="145" height="42" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1"/>
+      <text x="12" y="18" fill="#B45309" font-size="10" font-weight="800">1. ХРУСТ (15%)</text>
+      <text x="12" y="32" fill="#78350F" font-size="8.5">Чипсы, краст, орехи</text>
     </g>
 
     <!-- Texture Rule 2: Sauce -->
-    <line x1="80" y1="35" x2="140" y2="70" stroke="#CA8A04" stroke-width="1.5" stroke-dasharray="3 3"/>
-    <g transform="translate(145, 60)">
-      <rect width="135" height="38" rx="6" fill="#FEFCE8" stroke="#CA8A04" stroke-width="1"/>
-      <text x="10" y="16" fill="#854D0E" font-size="9.5" font-weight="800">2. ШЕЛКОВИСТОСТЬ (35%)</text>
-      <text x="10" y="29" fill="#713F12" font-size="8">Эмульсия, баланс умами</text>
+    <line x1="90" y1="38" x2="160" y2="75" stroke="#CA8A04" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(165, 65)">
+      <rect width="150" height="42" rx="6" fill="#FEFCE8" stroke="#CA8A04" stroke-width="1"/>
+      <text x="12" y="18" fill="#854D0E" font-size="10" font-weight="800">2. ШЕЛКОВИСТОСТЬ (35%)</text>
+      <text x="12" y="32" fill="#713F12" font-size="8.5">Эмульсия, баланс умами</text>
     </g>
 
-    <!-- Plate Rim Cleanliness Indicator -->
-    <line x1="-180" y1="32" x2="-180" y2="70" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="3 3"/>
-    <g transform="translate(-230, 60)">
-      <rect width="140" height="38" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1"/>
-      <text x="10" y="16" fill="#166534" font-size="9.5" font-weight="800">3. ZERO DROPS (100%)</text>
-      <text x="10" y="29" fill="#14532D" font-size="8">Стерильная кромка борта</text>
+    <!-- Plate Rim Cleanliness -->
+    <line x1="-190" y1="36" x2="-190" y2="75" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(-260, 65)">
+      <rect width="155" height="42" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1"/>
+      <text x="12" y="18" fill="#166534" font-size="10" font-weight="800">3. ZERO DROPS (100%)</text>
+      <text x="12" y="32" fill="#14532D" font-size="8.5">Стерильная кромка борта</text>
     </g>
+  </g>
+</svg>`;
+      var svgCoffee = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">СТАНДАРТ СПЕШЕЛТИ-КОФЕ: ЭКСТРАКЦИЯ И МОЛОКО</text>
+
+  <!-- 3 Parameter Cards -->
+  <g transform="translate(24, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="120" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">1. ЭКСТРАКЦИЯ</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">25–30 секунд</text>
+    <text x="16" y="82" fill="#71717A" font-size="9">Brew Ratio: 1:2 (18г in / 36г out)</text>
+    <text x="16" y="105" fill="#18181B" font-size="10" font-weight="700">• Вода: TDS 75–120 ppm</text>
+    <text x="16" y="125" fill="#18181B" font-size="10" font-weight="700">• Температура бойлера: 92–94°C</text>
+    <text x="16" y="145" fill="#18181B" font-size="10" font-weight="700">• Зерно: свежая обжарка 7–35 дней</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="26" y="190" fill="#166534" font-size="9" font-weight="800">✓ ЭТАЛОН ПЛАНКИ (30–35 б.):</text>
+    <text x="26" y="206" fill="#14532D" font-size="8.5">Чистая сладость, кислотность спелых ягод,</text>
+    <text x="26" y="220" fill="#14532D" font-size="8.5">отсутствие зольности и горечи.</text>
+  </g>
+
+  <g transform="translate(295, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="120" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">2. МИКРОПЕНА</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">60–65°C Глянец</text>
+    <text x="16" y="82" fill="#71717A" font-size="9">Шелковистая текстура без пузырей</text>
+    <text x="16" y="105" fill="#18181B" font-size="10" font-weight="700">• Молоко: цельное 3.2% или овсяное</text>
+    <text x="16" y="125" fill="#18181B" font-size="10" font-weight="700">• Латте-арт: симметричный рисунок</text>
+    <text x="16" y="145" fill="#18181B" font-size="10" font-weight="700">• Посуда: Loveramics / Acme</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <text x="26" y="190" fill="#991B1B" font-size="9" font-weight="800">🚫 ШТРАФ ЗА ПЕРЕГРЕВ (&gt;70°C):</text>
+    <text x="26" y="206" fill="#7F1D1D" font-size="8.5">Разрушение молочных сахаров,</text>
+    <text x="26" y="220" fill="#7F1D1D" font-size="8.5">привкус кипяченого молока (-4 б.).</text>
+  </g>
+
+  <g transform="translate(565, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="135" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">3. НОУТБУК &amp; СРЕДА</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">Розетки ≥ 50%</text>
+    <text x="16" y="82" fill="#71717A" font-size="9">Высота столов: ровно 75 см</text>
+    <text x="16" y="105" fill="#18181B" font-size="10" font-weight="700">• Wi-Fi: от 50 Мбит/с без сбоев</text>
+    <text x="16" y="125" fill="#18181B" font-size="10" font-weight="700">• Акустика: ненавязчивый инди-лоуфай</text>
+    <text x="16" y="145" fill="#18181B" font-size="10" font-weight="700">• Питьевая вода: бесплатный кувшин</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="26" y="190" fill="#166534" font-size="9" font-weight="800">✓ СТАНДАРТ ТРЕТЬЕГО МЕСТА:</text>
+    <text x="26" y="206" fill="#14532D" font-size="8.5">Возможность комфортной работы</text>
+    <text x="26" y="220" fill="#14532D" font-size="8.5">без косых взглядов персонала.</text>
+  </g>
+</svg>`;
+      var svgBar = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #18181B; border-radius: 8px; border: 1px solid #3F3F46; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#18181B"/>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#27272A"/>
+  <text x="36" y="37" fill="#D4AF37" font-size="11" font-weight="700" letter-spacing="0.5">СТАНДАРТ БАРОВ: МОНОЛИТНЫЙ ЛЕД И МИКСОЛОГИЯ</text>
+
+  <!-- Left: Ice Block Diagram -->
+  <g transform="translate(60, 80)">
+    <rect width="320" height="260" rx="8" fill="#27272A" stroke="#3F3F46"/>
+    <text x="20" y="32" fill="#D4AF37" font-size="12" font-weight="800">1. МОНОЛИТНЫЙ КРИСТАЛЬНЫЙ ЛЕД</text>
+    <text x="20" y="50" fill="#A1A1AA" font-size="9">Блочное вымораживание (Zero bubbles)</text>
+    
+    <!-- 3D Ice Cube Vector -->
+    <g transform="translate(160, 140)">
+      <polygon points="0,-45 45,-20 0,5 -45,-20" fill="#BAE6FD" stroke="#38BDF8" stroke-width="1.5" opacity="0.9"/>
+      <polygon points="-45,-20 0,5 0,55 -45,30" fill="#7DD3FC" stroke="#0284C7" stroke-width="1.5" opacity="0.8"/>
+      <polygon points="45,-20 0,5 0,55 45,30" fill="#38BDF8" stroke="#0284C7" stroke-width="1.5" opacity="0.85"/>
+      <text x="0" y="15" text-anchor="middle" fill="#0C4A6E" font-size="11" font-weight="900">5×5 см</text>
+    </g>
+    <text x="20" y="235" fill="#FAF8F5" font-size="9">• Чистая вода без запахов морозильной камеры</text>
+    <text x="20" y="250" fill="#FAF8F5" font-size="9">• Минимальное разбавление (медленный таяние)</text>
+  </g>
+
+  <!-- Right: Balance Triangle & Speed -->
+  <g transform="translate(430, 80)">
+    <rect width="350" height="260" rx="8" fill="#27272A" stroke="#3F3F46"/>
+    <text x="20" y="32" fill="#D4AF37" font-size="12" font-weight="800">2. БАЛАНС МИКСОЛОГИИ И СКОРОСТЬ</text>
+    <text x="20" y="50" fill="#A1A1AA" font-size="9">Тайминг отдачи первого коктейля: до 3–4 мин</text>
+    
+    <!-- Cocktail Balance Triangle -->
+    <polygon points="175,90 85,175 265,175" fill="none" stroke="#D4AF37" stroke-width="2"/>
+    <circle cx="175" cy="90" r="6" fill="#FDE047"/>
+    <text x="175" y="80" text-anchor="middle" fill="#FEF08A" font-size="9.5" font-weight="800">SPIRIT (Крепость)</text>
+    
+    <circle cx="85" cy="175" r="6" fill="#F87171"/>
+    <text x="75" y="195" text-anchor="middle" fill="#FCA5A5" font-size="9.5" font-weight="800">SOUR (Кислотность)</text>
+    
+    <circle cx="265" cy="175" r="6" fill="#60A5FA"/>
+    <text x="275" y="195" text-anchor="middle" fill="#93C5FD" font-size="9.5" font-weight="800">SWEET (Сладость)</text>
+
+    <text x="20" y="235" fill="#FAF8F5" font-size="9">• Предварительное охлаждение бокала до -5°C</text>
+    <text x="20" y="250" fill="#FAF8F5" font-size="9">• Авторские кордиалы и бесплатная вода гостю</text>
+  </g>
+</svg>`;
+      var svgBakery = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">СТАНДАРТ ПЕКАРЕН: СЛОИСТОСТЬ И ЗАКВАСКИ</text>
+
+  <!-- Left: Croissant Anatomy -->
+  <g transform="translate(40, 70)">
+    <rect width="360" height="280" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#8C6D37" font-size="12" font-weight="800">1. АНАТОМИЯ СРЕЗА КРУАССАНА</text>
+    
+    <!-- Honeycomb crumb vector -->
+    <g transform="translate(180, 125)">
+      <!-- Outer croissant crust -->
+      <path d="M -120 40 Q 0 -60 120 40 Q 0 70 -120 40 Z" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+      <!-- Honeycomb cells inside -->
+      <ellipse cx="-40" cy="5" rx="18" ry="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <ellipse cx="0" cy="-8" rx="22" ry="15" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <ellipse cx="45" cy="8" rx="16" ry="11" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <ellipse cx="-15" cy="22" rx="14" ry="9" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <ellipse cx="25" cy="20" rx="15" ry="10" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+    </g>
+    <text x="20" y="215" fill="#18181B" font-size="10" font-weight="700">• Сливочное масло: строго 82.5% (без маргарина)</text>
+    <text x="20" y="235" fill="#18181B" font-size="10" font-weight="700">• Мякиш: ячеистая структура «honeycomb»</text>
+    <text x="20" y="255" fill="#18181B" font-size="10" font-weight="700">• Звуковой тест: звонкий хруст при сжатии</text>
+  </g>
+
+  <!-- Right: Sourdough Bread & Transparency -->
+  <g transform="translate(430, 70)">
+    <rect width="370" height="280" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#8C6D37" font-size="12" font-weight="800">2. ХЛЕБ НА ЗАКВАСКЕ И ЧЕСТНЫЙ ВЕС</text>
+    
+    <g transform="translate(185, 125)">
+      <!-- Sourdough loaf cross section -->
+      <path d="M -110 40 Q 0 -50 110 40 Z" fill="#FEF3C7" stroke="#78350F" stroke-width="2.5"/>
+      <!-- Sourdough air pockets -->
+      <circle cx="-50" cy="15" r="9" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="-10" cy="-5" r="14" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="40" cy="10" r="11" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="15" cy="22" r="8" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+    </g>
+    <text x="20" y="215" fill="#18181B" font-size="10" font-weight="700">• Ферментация: холодная расстойка 18–24 часа</text>
+    <text x="20" y="235" fill="#18181B" font-size="10" font-weight="700">• Вес: честный выход буханки в граммах (±5%)</text>
+    <text x="20" y="255" fill="#18181B" font-size="10" font-weight="700">• Санитария: индивидуальные щипцы и крафт-пакет</text>
+  </g>
+</svg>`;
+      var svgCanteen = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="430" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">СТАНДАРТ FAST CASUAL: МАРМИТЫ И ЛИНИЯ ПОДНОСОВ</text>
+
+  <!-- 3 Streamlined Stage Cards -->
+  <g transform="translate(24, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="130" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">1. ТЕМПЕРАТУРА</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">Мармиты</text>
+    <text x="16" y="95" fill="#DC2626" font-size="11" font-weight="800">• Первые блюда: ≥ 75°C</text>
+    <text x="16" y="115" fill="#EA580C" font-size="11" font-weight="800">• Вторые блюда: ≥ 65°C</text>
+    <text x="16" y="135" fill="#2563EB" font-size="11" font-weight="800">• Холодные салаты: ≤ 4–6°C</text>
+    <rect x="16" y="165" width="218" height="85" rx="5" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <text x="26" y="185" fill="#991B1B" font-size="9" font-weight="800">🚫 ШТРАФ ЗА ОСТЫВШЕЕ:</text>
+    <text x="26" y="201" fill="#7F1D1D" font-size="8.5">Застывший жир на поверхности супа</text>
+    <text x="26" y="215" fill="#7F1D1D" font-size="8.5">или остывший гарнир (&lt;50°C)</text>
+    <text x="26" y="229" fill="#7F1D1D" font-size="8.5">карается снижением до 1–2 баллов.</text>
+  </g>
+
+  <g transform="translate(295, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="130" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">2. ЛИНИЯ РАЗДАЧИ</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">Ритм до 90 сек</text>
+    <text x="16" y="85" fill="#71717A" font-size="9">Время движения гостя от входа до кассы</text>
+    <text x="16" y="110" fill="#18181B" font-size="10" font-weight="700">• Скорость нарезки и выдачи</text>
+    <text x="16" y="130" fill="#18181B" font-size="10" font-weight="700">• Прозрачные ценники с граммовкой</text>
+    <text x="16" y="150" fill="#18181B" font-size="10" font-weight="700">• Защитные стеклянные экраны</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="26" y="190" fill="#166534" font-size="9" font-weight="800">✓ ЭТАЛОННАЯ ЛОГИСТИКА:</text>
+    <text x="26" y="206" fill="#14532D" font-size="8.5">Очередь двигается непрерывно,</text>
+    <text x="26" y="220" fill="#14532D" font-size="8.5">без задержек на весовом контроле.</text>
+  </g>
+
+  <g transform="translate(565, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="135" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">3. САНИТАРИЯ</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">Сухие подносы</text>
+    <text x="16" y="85" fill="#71717A" font-size="9">Стерильность приборов и столов</text>
+    <text x="16" y="110" fill="#18181B" font-size="10" font-weight="700">• Подносы: сухие, без жирной пленки</text>
+    <text x="16" y="130" fill="#18181B" font-size="10" font-weight="700">• Приборы: в индивидуальных конвертах</text>
+    <text x="16" y="150" fill="#18181B" font-size="10" font-weight="700">• Уборка стола: в течение 90 секунд</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="26" y="190" fill="#166534" font-size="9" font-weight="800">✓ БЕЗОПАСНОСТЬ ГОСТЯ:</text>
+    <text x="26" y="206" fill="#14532D" font-size="8.5">Стерильные салфетки и доступный</text>
+    <text x="26" y="220" fill="#14532D" font-size="8.5">чистый санузел с горячей водой.</text>
   </g>
 </svg>`;
 
       if (cat === 'coffee') {
-        html = '<div style="display: flex; flex-direction: column; gap: 1.5rem;">' +
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ СПЕШЕЛТИ-КОФЕЕН</span>' +
-            '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 800; margin: 0.25rem 0 0.75rem;">Методика инспекции кофеен и эспрессо-баров</h4>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Инспектор оценивает кофейню по параметрам свежести обжарки, чистоты экстракции, качества молока и эргономики рабочих мест с розетками.</p>' +
+        html = '<div style="display: flex; flex-direction: column; gap: 1.75rem;">' +
+          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">СТАНДАРТ СПЕШЕЛТИ-КОФЕЕН</span>' +
+            '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Методический регламент инспекции кофеен</h4>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Анализ зерна класса Specialty, водоподготовки (TDS 75–120 ppm), температуры микропены и эргономики работы с ноутбуком.</p>' +
           '</div>' +
-
+          '<div>' + svgCoffee + '</div>' +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">1. Кофейное сырье и Молоко (0..35 баллов)</strong>' +
-            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.6; color: var(--text-body);">' +
-              '<li><strong>30–35 б. (Эталон):</strong> 100% арабика Specialty свежей обжарки (от 7 до 35 дней), молоко цельное 3.2% или качественная безлактозная альтернатива, водоподготовка с минерализацией TDS 75–120 ppm, температура напитка 60–65°C.</li>' +
-              '<li><strong>22–29 б. (Стандарт):</strong> Коммерческая арабика, легкий перегрев молока (выше 70°C).</li>' +
-              '<li><strong>0–21 б. (Штраф):</strong> Примесь робусты, привкус гари, затхлое зерно.</li>' +
+            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">Детальная градуировка 100-балльной шкалы для кофеен:</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.7; color: var(--text-body);">' +
+              '<li><strong>1. Сырье и экстракция (0..35 б.):</strong> 100% арабика спешелти свежей обжарки (9–10 б.), молоко 3.2% или овсяная альтернатива (7–8 б.), чистота дескрипторов вкуса (6–7 б.), температура 60–65°C (5 б.), водоподготовка TDS 75–120 ppm (5 б.).</li>' +
+              '<li><strong>2. WOW и Латте-арт (0..15 б.):</strong> Авторский раф / фильтр (5–6 б.), четкий контрастный латте-арт и посуда Loveramics (4 б.), свежий десерт (4–5 б.).</li>' +
+              '<li><strong>3. Честность цены (0..15 б.):</strong> Обоснованность наценки на чашку (5 б.), честный объем в мл (5 б.), бесплатная питьевая вода гостю (5 б.).</li>' +
+              '<li><strong>4. Сервис и Бариста (0..15 б.):</strong> Экспертность бариста по дескрипторам зерна (5 б.), скорость отдачи за 3–4 мин (5 б.), приветливость (5 б.).</li>' +
+              '<li><strong>5. Урбанистика (0..10 б.):</strong> Розетки у ≥50% столов (4 б.), терраса и витринные окна (3 б.), качественный акустический плейлист (3 б.).</li>' +
+              '<li><strong>6. Санитария (0..10 б.):</strong> Чистота паровой трубки форсунки и холдеров (5 б.), стерильность гостевого санузла (5 б.).</li>' +
             '</ul>' +
-          '</div>' +
-
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">2. Эргономика и условия для работы с ноутбуком (0..10 баллов)</strong>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Наличие розеток у ≥50% столов, устойчивый Wi-Fi от 50 Мбит/с, комфортная высота столов (75 см) и умеренный фоновый звук без дребезжания кофемолки.</p>' +
           '</div>' +
         '</div>';
       } else if (cat === 'bar') {
-        html = '<div style="display: flex; flex-direction: column; gap: 1.5rem;">' +
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ БАРОВ И СПИКИЗИ</span>' +
-            '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 800; margin: 0.25rem 0 0.75rem;">Регламент аудита коктейльных баров и миксологии</h4>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Оценка монолитного кристального льда, авторских кордиалов, скорости отдачи коктейлей (до 4 мин) и атмосферы спикизи.</p>' +
+        html = '<div style="display: flex; flex-direction: column; gap: 1.75rem;">' +
+          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">СТАНДАРТ КОКТЕЙЛЬНЫХ БАРОВ</span>' +
+            '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Регламент тайного аудита баров и спикизи</h4>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Оценка монолитного прозрачного льда, баланса кислотности и сладости, скорости отдачи коктейля и спикизи-культуры.</p>' +
           '</div>' +
+          '<div>' + svgBar + '</div>' +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">1. Кристальный монолитный лед (0..15 баллов)</strong>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Лед собственного блочного вымораживания (кубы 5х5 см) без воздушных пузырей и посторонних запахов морозильной камеры. Охлаждение бокала перед наливом.</p>' +
+            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">Детальная градуировка 100-балльной шкалы для баров:</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.7; color: var(--text-body);">' +
+              '<li><strong>1. Базовый алкоголь и сырье (0..35 б.):</strong> Качественный премиальный дистиллят (9–10 б.), монолитный прозрачный лед без пузырей (7–8 б.), свежевыжатые соки и авторские кордиалы (6–7 б.), правильная температура бокала (5 б.), чистая вода к напиткам (5 б.).</li>' +
+              '<li><strong>2. WOW и Миксология (0..15 б.):</strong> Фирменный твист / концептуальный коктейль (5–6 б.), авторская подача и стекло Nude/Riedel (4 б.), комплимент от бармена (4–5 б.).</li>' +
+              '<li><strong>3. Честность цены (0..15 б.):</strong> Обоснованность наценки на порцию (5 б.), честный объем порции напитка (5 б.), прозрачный счет без доплат за лед (5 б.).</li>' +
+              '<li><strong>4. Сервис и Бармен (0..15 б.):</strong> Эрудиция бармена и контакт с гостем (5 б.), скорость отдачи первого напитка за 3–4 мин (5 б.), чистота станции (5 б.).</li>' +
+              '<li><strong>5. Атмосфера и Звук (0..10 б.):</strong> Локация спикизи и посадка у стойки (4 б.), выверенный вечерний свет (3 б.), акустический баланс без оглушения (3 б.).</li>' +
+              '<li><strong>6. Санитария (0..10 б.):</strong> Стерильность шейкеров и барного инвентаря (5 б.), идеальная чистота санузла в ночные часы (5 б.).</li>' +
+            '</ul>' +
           '</div>' +
         '</div>';
       } else if (cat === 'bakery') {
-        html = '<div style="display: flex; flex-direction: column; gap: 1.5rem;">' +
+        html = '<div style="display: flex; flex-direction: column; gap: 1.75rem;">' +
+          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">СТАНДАРТ РЕМЕСЛЕННЫХ ПЕКАРЕН</span>' +
+            '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Аудит слоеного теста и заквасочного хлеба</h4>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Контроль натурального сливочного масла 82.5%, ячеистой структуры мякиша «honeycomb» и честного веса выпечки.</p>' +
+          '</div>' +
+          '<div>' + svgBakery + '</div>' +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ РЕМЕСЛЕННЫХ ПЕКАРЕН</span>' +
-            '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 800; margin: 0.25rem 0 0.75rem;">Аудит выпечки на закваске и слоеного теста</h4>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Контроль натурального сливочного масла 82.5%, структуры мякиша «honeycomb» и честного веса изделий.</p>' +
+            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">Детальная градуировка 100-балльной шкалы для пекарен:</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.7; color: var(--text-body);">' +
+              '<li><strong>1. Мука, Масло и Сырье (0..35 б.):</strong> Мука высшего сорта и живые закваски (9–10 б.), натуральное сливочное масло 82.5% без пальмовых жиров (7–8 б.), свежие ягоды и шоколад Callebaut (6–7 б.), качественный кофе/чай (5 б.), утренняя свежесть (5 б.).</li>' +
+              '<li><strong>2. WOW и Слоистость (0..15 б.):</strong> Фирменный круассан / краффин (5–6 б.), хруст корочки и воздушный сотовый мякиш (4 б.), сезонная новинка (4–5 б.).</li>' +
+              '<li><strong>3. Честность цены и Вес (0..15 б.):</strong> Справедливая цена ремесленного хлеба (5 б.), точный вес изделия по весам (5 б.), прозрачный ценник с составом (5 б.).</li>' +
+              '<li><strong>4. Сервис и Упаковка (0..15 б.):</strong> Знание персоналом составов теста (5 б.), скорость упаковки в крафт-пакеты (5 б.), доброжелательность (5 б.).</li>' +
+              '<li><strong>5. Урбанистика и Аромат (0..10 б.):</strong> Уютные столики для перекуса (4 б.), диалог с пешеходной улицей (3 б.), аппетитный аромат без запаха гари (3 б.).</li>' +
+              '<li><strong>6. Санитария (0..10 б.):</strong> Стерильность щипцов, перчаток и витрин (5 б.), чистота гостевого санузла (5 б.).</li>' +
+            '</ul>' +
           '</div>' +
         '</div>';
       } else if (cat === 'canteen') {
-        html = '<div style="display: flex; flex-direction: column; gap: 1.5rem;">' +
+        html = '<div style="display: flex; flex-direction: column; gap: 1.75rem;">' +
+          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.25rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">СТАНДАРТ FAST CASUAL & СТОЛОВЫХ</span>' +
+            '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Регламент аудита линии раздачи и мармитов</h4>' +
+            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Контроль температуры подачи (супы ≥75°C, горячее ≥65°C), скорости движения подносов и сухости посуды.</p>' +
+          '</div>' +
+          '<div>' + svgCanteen + '</div>' +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ FAST CASUAL & СТОЛОВЫХ</span>' +
-            '<h4 class="font-serif" style="font-size: 1.25rem; font-weight: 800; margin: 0.25rem 0 0.75rem;">Регламент линии раздачи и чистоты подносов</h4>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Температура мармитов (супы ≥75°C, горячее ≥65°C), скорость прохождения кассы до 90 секунд и стерильность приборов.</p>' +
+            '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">Детальная градуировка 100-балльной шкалы для столовых:</strong>' +
+            '<ul style="margin-left: 1.25rem; font-size: 0.75rem; line-height: 1.7; color: var(--text-body);">' +
+              '<li><strong>1. Свежесть раздачи (0..35 б.):</strong> Свежесть сырья и блюд дня (8–10 б.), температура мармитов (супы ≥75°C, горячее ≥65°C) (7–8 б.), баланс гарниров и салатов (6–7 б.), свежий хлеб и морс (5 б.), качественное масло для жарки (5 б.).</li>' +
+              '<li><strong>2. WOW и Выкладка (0..15 б.):</strong> Фирменное блюдо столовой (4–6 б.), аккуратная выкладка на мармитах (4 б.), домашняя выпечка / компот (4–5 б.).</li>' +
+              '<li><strong>3. Честность цены ланча (0..15 б.):</strong> Доступность комплексного обеда (5 б.), честный вес котлет и порций супа (5 б.), чек без скрытых доплат за соусы (5 б.).</li>' +
+              '<li><strong>4. Скорость раздачи (0..15 б.):</strong> Движение очереди до 90 сек на гостя (5 б.), вежливость персонала на раздаче (4–5 б.), оперативная уборка столов (4–5 б.).</li>' +
+              '<li><strong>5. Среда и Посадка (0..10 б.):</strong> Удобная навигация и линия подносов (4 б.), устойчивые столы (3 б.), мощная вентиляция без запаха кухни (3 б.).</li>' +
+              '<li><strong>6. Стерильность (0..10 б.):</strong> Сухие чистые подносы и упакованные приборы (5 б.), стерильность санузлов (5 б.).</li>' +
+            '</ul>' +
           '</div>' +
         '</div>';
       } else {
-        // FULL DETAILED TRAINING ATLAS FOR FINE DINING & RESTAURANTS
+        // EXHAUSTIVE DETAILED TRAINING ATLAS & COMPLETE 19-CRITERIA GRADING GUIDE FOR FINE DINING
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
           
           // Header Banner
-          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.5rem;">' +
+          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.14) 0%, rgba(24,24,27,0.7) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.5rem;">' +
             '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">ПРОФЕССИОНАЛЬНЫЙ АТЛАС ТАЙНОГО АУДИТА</span>' +
-            '<h4 class="font-serif" style="font-size: 1.45rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Обучающий курс инспектора: Рестораны & Fine Dining</h4>' +
-            '<p style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.6;">Наглядное руководство с архитектурными схемами, нормативами дистанций, траекториями ресторанного этикета и правилами выставления баллов по 100-балльной шкале PLANKA GUIDE.</p>' +
+            '<h4 class="font-serif" style="font-size: 1.5rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Обучающий курс инспектора: Рестораны & Fine Dining</h4>' +
+            '<p style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.6;">Полное методическое руководство с архитектурными векторными схемами и исчерпывающим регламентом выставления оценок по всем 19 пунктам чек-листа.</p>' +
           '</div>' +
 
-          // MODULE 1: Table Spacing & Urban Ergonomics
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
+          // 1. GASTRONOMY & RAW INGREDIENTS (MAX 35 PTS)
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
             '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 01 • СРЕДА И УРБАНИСТИКА</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
-            '</div>' +
-            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">1. Норматив дистанции между столами и эргономика посадки</h5>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Инспектор обязан зафиксировать физическое расстояние между соседними посадочными местами. Дистанция определяет приватность беседы гостей и безопасность сервисного прохода официантов.</p>' +
-            
-            // Embedded SVG 1
-            '<div style="margin: 0.5rem 0;">' + svgDist + '</div>' +
-
-            '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">' +
-              '<div style="background: var(--bg-page); border-left: 3px solid #16A34A; padding: 0.75rem; border-radius: 0 0.35rem 0.35rem 0;">' +
-                '<strong style="font-size: 0.75rem; color: var(--text-main); display: block; margin-bottom: 0.25rem;">✓ Высший стандарт (9–10 баллов):</strong>' +
-                '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5; margin: 0;">Расстояние между спинками стульев от 1.2 до 1.5 м. Сервисный проход от 80 см. Гости за соседними столами не слышат деталей чужого разговора.</p>' +
-              '</div>' +
-              '<div style="background: var(--bg-page); border-left: 3px solid #DC2626; padding: 0.75rem; border-radius: 0 0.35rem 0.35rem 0;">' +
-                '<strong style="font-size: 0.75rem; color: var(--text-main); display: block; margin-bottom: 0.25rem;">✗ Нарушение стандарта (&lt; 6 баллов):</strong>' +
-                '<p style="font-size: 0.6875rem; color: var(--text-body); line-height: 1.5; margin: 0;">Дистанция менее 0.9 м. Официант задевает гостя одеждой при подаче. Ощущение скученности и акустический дискомфорт.</p>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-
-          // MODULE 2: Service Trajectories & Waiter Etiquette
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 02 • СЕРВИС И ЭТИКЕТ</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
-            '</div>' +
-            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">2. Траектории ресторанного сервиса и подача блюд</h5>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Инспектор отслеживает стороны подачи блюд, хват посуды и соблюдение правила чистого стола.</p>' +
-            
-            // Embedded SVG 2
-            '<div style="margin: 0.5rem 0;">' + svgServ + '</div>' +
-
-            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.85rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<strong style="color: var(--gold-deep); display: block; margin-bottom: 0.35rem;">Ключевые контрольные маркеры сервиса:</strong>' +
-              '• <strong>Подача горячего и напитков:</strong> Всегда справа от гостя правой рукой с открытым корпусом.<br>' +
-              '• <strong>Хлебная тарелка и зачистка:</strong> Слева от гостя левой рукой.<br>' +
-              '• <strong>Запрет пальцевого контакта:</strong> Официант держит бокалы строго за ножку, тарелки — снизу за основание, никогда не касаясь пальцами зеркала тарелки или края бокала.' +
-            '</div>' +
-          '</div>' +
-
-          // MODULE 3: Table Setting & Geometry
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 03 • СЕРВИРОВКА И ЭСТЕТИКА</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
-            '</div>' +
-            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">3. Геометрия классической сервировки стола</h5>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Проверка точности раскладки приборов, дистанции от края стола (ровно 2 см), ориентации лезвий ножей к тарелке и чистоты хрусталя.</p>' +
-            
-            // Embedded SVG 3
-            '<div style="margin: 0.5rem 0;">' + svgTableSet + '</div>' +
-          '</div>' +
-
-          // MODULE 4: Lighting Cone & Acoustics
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 04 • СВЕТ И АКУСТИКА</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
-            '</div>' +
-            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">4. Световой конус 2700K и акустическое зонирование зала</h5>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Направленный теплый свет фокусирует взгляд гостя на блюде, оставляя лица гостей в деликатной мягкой полутени. Уровень шума в зале не должен превышать 65 дБ.</p>' +
-            
-            // Embedded SVG 4
-            '<div style="margin: 0.5rem 0;">' + svgLight + '</div>' +
-          '</div>' +
-
-          // MODULE 5: Gastronomy & Dish Anatomy
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">МОДУЛЬ 05 • ГАСТРОНОМИЯ И СРЕЗ ВКУСА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 01 • ГАСТРОНОМИЯ И СЫРЬЕ</span>' +
               '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 35 баллов</span>' +
             '</div>' +
-            '<h5 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin: 0;">5. Анатомия эталонного блюда и баланс текстур</h5>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Каждое главное блюдо оценивается по правилу трех текстур (хруст, шелковистость, сочность), точности термического контроля ядра и безупречной чистоте борта тарелки.</p>' +
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">1. Гастрономия, органолептика и срез вкуса блюда</h5>' +
             
-            // Embedded SVG 5
-            '<div style="margin: 0.5rem 0;">' + svgDish + '</div>' +
+            '<div>' + svgDish + '</div>' +
+
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
+              '<strong style="font-size: 0.875rem; color: var(--gold-deep);">Градуировка шкалы оценивания подкритериев:</strong>' +
+              
+              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.1. Свежесть сырья (Шкала 0..10 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>9–10 б. (Выдающийся уровень):</strong> Премиальное фермерское охлажденное мясо (зерновой откорм 21+ день вызревания), дикая рыба шоковой заморозки без кристаллов льда, сезонные грунтовые овощи с насыщенным природным ароматом.<br>' +
+                  '• <strong>6–8 б. (Хорошо):</strong> Качественные коммерческие ингредиенты стабильного качества, свежая фермерская рыба (лосось/сибас), стандартные овощи.<br>' +
+                  '• <strong>3–5 б. (Удовлетворительно):</strong> Признаки повторной разморозки (потеря сока, волокнистость филе), парниковые водянистые томаты.<br>' +
+                  '• <strong>0–2 б. (Брак):</strong> Заветренные края, окисление жиров, посторонние привкусы свежести белка.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.2. Точность прожарки и термообработки (Шкала 0..8 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>7–8 б. (Идеал):</strong> Точнейшее попадание в запрошенную степень прожарки (52–54°C Medium Rare), сочное розовое ядро без серого кольца пересушенных краев.<br>' +
+                  '• <strong>5–6 б. (Хорошо):</strong> Отклонение на полутон (Medium вместо Medium Rare), но сочность мяса полностью сохранена.<br>' +
+                  '• <strong>3–4 б. (Слабо):</strong> Неравномерная прожарка (подгоревший колер при холодном центре).<br>' +
+                  '• <strong>0–2 б. (Брак):</strong> Полный пережар (Well Done вместо Medium Rare), сухая резиновая текстура рыбы/птицы.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.3. Баланс соусов и дескрипторов (Шкала 0..7 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>6–7 б. (Идеал):</strong> Глубокий многоуровневый соус собственного приготовления (демиглас, бер-блан, велюте), баланс умами и деликатной кислотности, шелковистая эмульсия.<br>' +
+                  '• <strong>4–5 б. (Хорошо):</strong> Приятный соус, незначительный крен в соль или сладость.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Готовые порошковые базы, расслоившееся масло, свернувшиеся сливки.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.4. Температура подачи блюда (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Горячие блюда подаются на подогретых тарелках (60–65°C), супы 75–80°C, холодные закуски 8–12°C.<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Блюдо теплое, но тарелка комнатной температуры.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Остывшее блюдо с застывающим жиром на холодной тарелке.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.5. Вода и чистый лед (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Бесплатная подача графина фильтрованной воды гостю при посадке, кристальный лед без пузырей и запахов.<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Чистая вода, но предлагается только бутилированная за отдельную плату.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Вода с привкусом водопровода, мутный лед с посторонним запахом.' +
+                '</span>' +
+              '</div>' +
+
+            '</div>' +
+          '</div>' +
+
+          // 2. WOW-EFFECT & PRESENTATION (MAX 15 PTS)
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 02 • WOW-ЭФФЕКТ И ПОДАЧА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">2. Мастерство кухни, фирменное блюдо и сервировка</h5>' +
+
+            '<div>' + svgTableSet + '</div>' +
+
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
+              '<strong style="font-size: 0.875rem; color: var(--gold-deep);">Градуировка шкалы оценивания подкритериев:</strong>' +
+              
+              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.1. Фирменное блюдо (Signature Dish) (Шкала 0..6 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5–6 б. (Выдающийся уровень):</strong> Авторская самобытная концепция, триада текстур (хруст, соус, сочное ядро), блюдо формирует гастрономическую идентичность заведения.<br>' +
+                  '• <strong>3–4 б. (Хорошо):</strong> Вкусно, но стандартно для рынка (базовый тартар или стейк без авторского почерка).<br>' +
+                  '• <strong>0–2 б. (Слабо):</strong> Неудачный баланс вкуса, несоответствие описанию.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.2. Посуда и подача (Шкала 0..4 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>4 б. (Идеал):</strong> Авторская керамика ручной работы (или Narumi/Loveramics), правило Zero drops (стерильная кромка борта тарелки).<br>' +
+                  '• <strong>3 б. (Хорошо):</strong> Качественная ресторанная посуда без сколов.<br>' +
+                  '• <strong>0–2 б. (Штраф):</strong> Масс-маркет фаянс, случайные капли жира на бортах, микросколы.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.3. Комплимент шефа (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Изысканный амисбуш (amuse-bouche) перед заказом, свежевыпеченный теплый хлеб с авторским взбитым маслом.<br>' +
+                  '• <strong>3–4 б. (Хорошо):</strong> Базовая хлебная корзина с маслом.<br>' +
+                  '• <strong>0–2 б. (Слабо):</strong> Полное отсутствие комплиментарных жестов при высоком чеке.' +
+                '</span>' +
+              '</div>' +
+
+            '</div>' +
+          '</div>' +
+
+          // 3. HONEST PRICING & PORTION (MAX 15 PTS)
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 03 • ЧЕСТНОСТЬ ЦЕНЫ И ПОРЦИИ</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">3. Прозрачность ценообразования и граммовка</h5>' +
+
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
+              '<div style="border-left: 3px solid #D4AF37; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">3.1. Обоснованность наценки (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Честный фудкост (Food Cost 28–35%), справедливая наценка на винную и чайную карту, высокий индекс ценности (Value for Money).<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Умеренная наценка в рамках премиум-сегмента.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Неоправданно завышенная наценка на чай/воду (х10 от себестоимости).' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #D4AF37; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">3.2. Честный выход порции (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Реальный вес соответствует или превышает меню, баланс дорогого белка (мяса/рыбы не менее 60% от веса блюда).<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Соответствие заявленной граммовке с погрешностью до 5%.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Недовес свыше 10%, тарелка заполнена листьями салата вместо основного продукта.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #D4AF37; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">3.3. Прозрачность счета (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Корректный фискальный чек, отсутствие скрытых сервисных сборов, удобная оплата картой/QR.<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Понятный счет, предупреждение о платных позициях.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Включение сервисного сбора (10%) мелким шрифтом без предупреждения, навязанный платный хлеб.' +
+                '</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          // 4. SERVICE, TIMING & WAITER ETIQUETTE (MAX 15 PTS)
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 04 • СЕРВИС, ТАЙМИНГ И ЭТИКЕТ</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">4. Ритм отдачи, траектории сервиса и ресторанный этикет</h5>' +
+
+            '<div>' + svgServ + '</div>' +
+
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
+              '<div style="border-left: 3px solid #2563EB; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">4.1. Знание меню и вин (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Официант знает все ингредиенты, аллергены, технику приготовления и дает точную винную рекомендацию.<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Уверенное знание меню, уточнение сложных вопросов на кухне в течение 1 мин.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Неуверенность, незнание составов соусов, чтение по шпаргалке.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #2563EB; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">4.2. Тайминг 12–15 мин (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Встреча до 45 сек, напитки за 3–4 мин, отдача горячего ровно на 12–15 минуте синхронно всем гостям.<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Небольшая задержка горячего блюда (16–20 мин).<br>' +
+                  '• <strong>3 б. (Долго):</strong> Ожидание 21–25 мин, рассинхрон подачи гостям за одним столом.<br>' +
+                  '• <strong>1–2 б. (Критично):</strong> Задержка горячего свыше 25 мин без предупреждения.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #2563EB; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">4.3. Чистый стол и этикет (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Подача блюда справа правой рукой, хлеб и зачистка слева, зачистка пустой посуды в течение 60 секунд, смена приборов перед каждым курсом.<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Корректный сервис, уборка посуды за 2–3 мин.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Грязная посуда стоит >5 мин, официант тянется через стол, касание пальцами обода тарелок.' +
+                '</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          // 5. URBAN PLANNING, SPACING & LIGHTING (MAX 10 PTS)
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 05 • СРЕДА И УРБАНИСТИКА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">5. Урбанистическая среда, дистанция столов и свет</h5>' +
+
+            '<div>' + svgDist + '</div>' +
+            '<div>' + svgLight + '</div>' +
+
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
+              '<div style="border-left: 3px solid #059669; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">5.1. Диалог с улицей и терраса (Шкала 0..4 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>4 б. (Идеал):</strong> Безбарьерный вход в одном уровне с мощением или пандус ≤5%, широкие витринные окна, терраса не перекрывает тротуар.<br>' +
+                  '• <strong>3 б. (Хорошо):</strong> Удобный вход со ступенями и поручнем, аккуратная фасадная вывеска.<br>' +
+                  '• <strong>0–2 б. (Штраф):</strong> Крутые скользкие ступени без пандуса, глухой фасад без диалога с городом.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #059669; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">5.2. Эргономика посадки и зонирование (Шкала 0..3 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>3 б. (Идеал):</strong> Дистанция между столами ≥ 1.20–1.50 м, кресла с поддержкой поясницы, сервисный проход от 80 см.<br>' +
+                  '• <strong>2 б. (Норма):</strong> Дистанция 1.0–1.2 м, удобные стулья.<br>' +
+                  '• <strong>0–1 б. (Штраф):</strong> Дистанция &lt; 0.90 м (гости задевают друг друга стульями), шатающиеся столы.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #059669; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">5.3. Акустика и мягкий свет (Шкала 0..3 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>3 б. (Идеал):</strong> Направленный свет 2700K (угол 35° строго на центр стола), звукопоглощающие панели, фоновый шум зала ≤ 65 дБ.<br>' +
+                  '• <strong>2 б. (Норма):</strong> Приятное освещение, умеренный фоновый звук.<br>' +
+                  '• <strong>0–1 б. (Штраф):</strong> Ослепляющий свет в глаза, шум в зале &gt; 75 дБ (невозможно говорить вполголоса).' +
+                '</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          // 6. SANITATION & RESTROOMS (MAX 10 PTS)
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 06 • САНИТАРИЯ И САsection</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">6. Стерильность зала, приборов и гостевых санузлов</h5>' +
+
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
+              '<div style="border-left: 3px solid #0D9488; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">6.1. Чистота бокалов и приборов (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Идеально натертый хрусталь без отпечатков и разводов капель, стерильные полированные приборы.<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Чисто, единичные мелкие ворсинки от салфетки.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Разводы от посудомойки, отпечатки пальцев, жирные следы на приборах.' +
+                '</span>' +
+              '</div>' +
+
+              '<div style="border-left: 3px solid #0D9488; padding-left: 0.85rem;">' +
+                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">6.2. Стерильность санузла (Шкала 0..5 баллов):</strong>' +
+                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
+                  '• <strong>5 б. (Идеал):</strong> Безупречная чистота раковин и пола в часы пик, премиальное жидкое мыло и крем для рук (Zielinski/L’Occitane), тканевые полотенца, приятный аромат.<br>' +
+                  '• <strong>4 б. (Хорошо):</strong> Чисто, качественное стандартное мыло и бумажные полотенца.<br>' +
+                  '• <strong>0–3 б. (Штраф):</strong> Переполненная корзина, мокрый скользкий пол, отсутствие мыла или бумаги.' +
+                '</span>' +
+              '</div>' +
+            '</div>' +
           '</div>' +
 
         '</div>';
