@@ -6,7 +6,7 @@
   <title>PLANKA GUIDE — Независимый ресторанный гид и стандарт качества</title>
   
   <!-- SECURITY META HEADERS & CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data: blob:; media-src 'self' https: data: blob:; connect-src 'self' https: data: blob:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; media-src 'self' https: data: blob:; connect-src 'self' https: data: blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -23,7 +23,7 @@
     }
   </script>
 
-  <!-- EXACT BRAND FAVICON (WHITE RECTANGLE WITH THIN BLACK BORDER & SERIF 'P') -->
+  <!-- EXACT BRAND FAVICON (MATCHING WHITE BOX WITH BLACK BORDER & SERIF 'P') -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='24' y='24' width='464' height='464' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-weight='900' font-size='320' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
   <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect x='24' y='24' width='464' height='464' rx='96' fill='%23FFFFFF' stroke='%2318181B' stroke-width='40'/%3E%3Ctext x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Playfair Display, Georgia, serif' font-weight='900' font-size='320' fill='%2318181B'%3EP%3C/text%3E%3C/svg%3E">
 
@@ -40,11 +40,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&display=swap" rel="stylesheet">
 
-  <!-- LEAFLET MAP ENGINE WITH SRI HASHES -->
+  <!-- LEAFLET MAP ENGINE WITH SRI -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
 
   <style>
+    /* CSS VARIABLES: DUAL LUXURY PALETTE */
     :root {
       --bg-page: #FAF8F5;
       --bg-surface: #FFFFFF;
@@ -136,30 +137,27 @@
     }
     
     .desktop-header-bar {
-      height: 4.5rem;
+      height: 4.75rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1.5rem;
       width: 100%;
-      flex-wrap: nowrap;
     }
 
     .desktop-nav-group {
       display: flex;
       align-items: center;
-      gap: 1.15rem;
+      gap: 1.25rem;
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      flex-shrink: 0;
     }
     .desktop-nav-group a {
       color: inherit;
       text-decoration: none;
       transition: color 0.15s ease;
-      white-space: nowrap;
     }
     .desktop-nav-group a:hover {
       color: var(--gold-deep);
@@ -168,43 +166,18 @@
     .desktop-actions-group {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-      flex-wrap: nowrap;
-    }
-
-    /* Dedicated Inspector Sub-Header Bar (Prevents Header Overflow) */
-    .inspector-sub-header {
-      background: #18181B;
-      color: #FFFFFF;
-      border-bottom: 1.5px solid var(--gold-border);
-      padding: 0.5rem 0;
-      font-size: 0.75rem;
-      animation: modalFadeIn 0.2s ease;
-    }
-    .inspector-sub-header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .inspector-toolbar-btns {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+      gap: 0.65rem;
     }
 
     .mobile-header-wrapper {
       display: none;
       flex-direction: column;
-      gap: 0.5rem;
-      padding: 0.65rem 0;
+      gap: 0.65rem;
+      padding: 0.75rem 0;
       width: 100%;
     }
 
-    @media (max-width: 960px) {
+    @media (max-width: 860px) {
       .desktop-header-bar {
         display: none !important;
       }
@@ -217,17 +190,17 @@
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.75rem;
       cursor: pointer;
       text-decoration: none;
       flex-shrink: 0;
     }
     .brand-mark {
-      width: 2.15rem;
-      height: 2.15rem;
-      background: #FFFFFF;
-      color: #18181B;
-      border: 1.75px solid #18181B;
+      width: 2.25rem;
+      height: 2.25rem;
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1.75px solid var(--text-main);
       border-radius: 0.35rem;
       display: flex;
       align-items: center;
@@ -237,11 +210,6 @@
       font-size: 1.15rem;
       letter-spacing: -0.02em;
     }
-    body.dark-theme .brand-mark {
-      background: #18181B;
-      color: #FFFFFF;
-      border-color: #FFFFFF;
-    }
     .brand-title-wrap {
       display: flex;
       flex-direction: column;
@@ -249,7 +217,7 @@
     .brand-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--text-main);
@@ -260,7 +228,7 @@
       font-family: ui-monospace, monospace;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       color: var(--text-muted);
       margin-top: 0.15rem;
     }
@@ -270,10 +238,10 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.35rem;
+      gap: 0.4rem;
       font-weight: 700;
       font-size: 0.75rem;
-      padding: 0.55rem 1rem;
+      padding: 0.6rem 1.25rem;
       border-radius: 0.35rem;
       border: 1px solid transparent;
       cursor: pointer;
@@ -559,7 +527,7 @@
       color: #FFFFFF;
     }
 
-    /* CLEAN LEAFLET MAP & REMOVAL OF DEFAULT POLITICAL/FLAG ATTRIBUTION */
+    /* CLEAN LEAFLET MAP ATTRIBUTION (NO FLAGS OR POLITICAL SYMBOLS) */
     .leaflet-control-attribution a[href*="leafletjs"] {
       display: none !important;
     }
@@ -1293,23 +1261,21 @@
     .gap-4 { gap: 1rem; }
     .text-center { text-align: center; }
 
-    /* STOPWATCH TIMER STYLES */
+    /* STOPWATCH WIDGET STYLES */
     .stopwatch-box {
-      background: var(--bg-page);
-      border: 1px solid var(--border-color);
+      background: #18181B;
+      color: #FFFFFF;
       border-radius: 0.5rem;
-      padding: 0.85rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
+      padding: 1.25rem;
+      border: 1px solid #3F3F46;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
     .stopwatch-display {
       font-family: ui-monospace, monospace;
-      font-size: 1.25rem;
+      font-size: 1.75rem;
       font-weight: 900;
-      color: var(--text-main);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
+      color: #D4AF37;
     }
 
     @media (max-width: 860px) {
@@ -1352,8 +1318,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
   <div id="offlineStatusBar" class="offline-status-bar">⚡ Автономный режим — гид доступен без интернета</div>
-
-  <!-- HEADER -->
+<!-- HEADER -->
   <header>
     <div class="container">
       
@@ -1999,7 +1964,184 @@
       </div>
     </div>
   </div>
-<!-- MODAL: LEGAL POLICY (AIRTIGHT CONSTITUTIONAL & REGULATORY SHIELD) -->
+
+  <!-- MODAL: DETAILED INSPECTOR MANUAL & ARCHITECTURAL SCHEMATICS -->
+  <div id="inspectorManualModal" class="modal-overlay" onclick="closeInspectorManualModal()">
+    <div class="modal-box" style="max-width: 920px; padding: 2.25rem;" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+        <div>
+          <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--gold-deep); letter-spacing: 0.12em;">ПРОФЕССИОНАЛЬНЫЙ СТАНДАРТ АУДИТА</span>
+          <h3 class="font-serif" style="font-size: 1.45rem; font-weight: 900; color: inherit; margin-top: 0.15rem;">Методическое руководство инспектора PLANKA GUIDE</h3>
+        </div>
+        <button onclick="closeInspectorManualModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2.25rem; height: 2.25rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
+      </div>
+
+      <div style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65; display: flex; flex-direction: column; gap: 2rem; max-height: 72vh; overflow-y: auto; padding-right: 0.5rem;">
+        
+        <!-- SECTION 0: RADAR OVERVIEW & WEIGHT DISTRIBUTION -->
+        <div style="background: var(--bg-page); border: 1.5px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem;">
+          <div class="flex items-center justify-between" style="margin-bottom: 0.75rem;">
+            <strong style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main);">Весовая иерархия 6 критериев стандарта (100 баллов)</strong>
+            <span style="font-family: ui-monospace, monospace; font-size: 0.6875rem; font-weight: 800; color: var(--gold-deep);">МЕТОДОЛОГИЯ PLANKA</span>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--text-body); margin-bottom: 1rem; line-height: 1.5;">
+            Инспекция объединяет гастрономический анализ органолептики с объективными инженерными замерами тайминга, акустики и урбанистической среды.
+          </p>
+
+          <!-- SVG SCHEMATIC 1: RADAR WEIGHT BAR -->
+          <svg viewBox="0 0 760 110" style="width: 100%; height: auto; display: block; margin: 0 auto;">
+            <rect x="10" y="25" width="260" height="32" rx="4" fill="#18181B" />
+            <text x="140" y="46" fill="#FFF" font-size="11" font-weight="800" font-family="ui-monospace, monospace" text-anchor="middle">1. СЫРЬЕ И ВКУС (35 б.)</text>
+            
+            <rect x="275" y="25" width="112" height="32" rx="4" fill="#8C6D37" />
+            <text x="331" y="46" fill="#FFF" font-size="10" font-weight="800" font-family="ui-monospace, monospace" text-anchor="middle">2. WOW (15 б.)</text>
+            
+            <rect x="392" y="25" width="112" height="32" rx="4" fill="#52525B" />
+            <text x="448" y="46" fill="#FFF" font-size="10" font-weight="800" font-family="ui-monospace, monospace" text-anchor="middle">3. ЦЕНА (15 б.)</text>
+            
+            <rect x="509" y="25" width="112" height="32" rx="4" fill="#3F3F46" />
+            <text x="565" y="46" fill="#FFF" font-size="10" font-weight="800" font-family="ui-monospace, monospace" text-anchor="middle">4. СЕРВИС (15 б.)</text>
+            
+            <rect x="626" y="25" width="70" height="32" rx="4" fill="#27272A" />
+            <text x="661" y="46" fill="#D4AF37" font-size="9" font-weight="800" font-family="ui-monospace, monospace" text-anchor="middle">5. СРЕДА (10)</text>
+
+            <rect x="701" y="25" width="50" height="32" rx="4" fill="#18181B" stroke="#D4AF37" stroke-width="1.5"/>
+            <text x="726" y="46" fill="#FFF" font-size="9" font-weight="800" font-family="ui-monospace, monospace" text-anchor="middle">6. САН(10)</text>
+
+            <text x="140" y="76" fill="#71717A" font-size="9" text-anchor="middle">35% веса</text>
+            <text x="331" y="76" fill="#71717A" font-size="9" text-anchor="middle">15% веса</text>
+            <text x="448" y="76" fill="#71717A" font-size="9" text-anchor="middle">15% веса</text>
+            <text x="565" y="76" fill="#71717A" font-size="9" text-anchor="middle">15% веса</text>
+            <text x="661" y="76" fill="#71717A" font-size="9" text-anchor="middle">10% веса</text>
+            <text x="726" y="76" fill="#71717A" font-size="9" text-anchor="middle">10% веса</text>
+          </svg>
+        </div>
+
+        <!-- SECTION 1: CRITERIA 1 - RAW QUALITY & GASTRONOMY (35 POINTS) -->
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+          <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
+            <h4 class="font-serif" style="font-size: 1.15rem; font-weight: 900; color: inherit;">1. Качество сырья и органолептика (Шкала 0–35 баллов)</h4>
+            <span class="badge-gold">Базовый вес 35%</span>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--text-body); margin-bottom: 0.75rem;">
+            Оценка свежести базового сырья, чистоты температурной обработки, соусного баланса и стабильности рецептуры.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 0.75rem 1rem; border-radius: 0.35rem;">
+              <strong style="color: var(--gold-deep); display: block; font-family: ui-monospace, monospace; margin-bottom: 0.15rem;">30–35 БАЛЛОВ (ВЫДАЮЩИЙСЯ УРОВЕНЬ / ЗНАК КАЧЕСТВА)</strong>
+              Исключительное качество сырья: дикая рыба шоковой заморозки без кристаллизации, говядина зернового/травяного откорма выдержанной ферментации, фермерская птица, 100% арабика спешелти свежей обжарки 88+ баллов SCA, сливочное масло 82.5% без растительных заменителей. Идеальная внутренняя температура отдачи (52–54°C для медиум-рейр, 62–65°C для кофе).
+            </div>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 0.75rem 1rem; border-radius: 0.35rem;">
+              <strong style="color: var(--text-main); display: block; font-family: ui-monospace, monospace; margin-bottom: 0.15rem;">22–29 БАЛЛОВ (РЕКОМЕНДОВАННЫЙ СТАНДАРТ)</strong>
+              Качественные коммерческие ингредиенты стабильного качества. Корректная термическая обработка, незначительные отклонения в соусном балансе (легкий избыток соли или кислотности), стабильный кофе базового спешелти-сегмента.
+            </div>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 0.75rem 1rem; border-radius: 0.35rem;">
+              <strong style="color: var(--text-muted); display: block; font-family: ui-monospace, monospace; margin-bottom: 0.15rem;">15–21 БАЛЛ (БАЗОВЫЙ УРОВЕНЬ)</strong>
+              Использование промышленных полуфабрикатов, порошковых соусных баз или перемороженной рыбы с потерей влаги и волокнистой структурой.
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: SERVICE TIMING & STOPWATCH BLUEPRINT (15 POINTS) -->
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+          <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
+            <h4 class="font-serif" style="font-size: 1.15rem; font-weight: 900; color: inherit;">2. Сервис, тайминг и ресторанный этикет (Шкала 0–15 баллов)</h4>
+            <span class="badge-gold">Шкала секундомера</span>
+          </div>
+
+          <!-- SVG SCHEMATIC 2: SERVICE TIMELINE CURVE -->
+          <div style="background: #18181B; padding: 1.25rem; border-radius: 0.5rem; margin-bottom: 0.85rem;">
+            <svg viewBox="0 0 760 120" style="width: 100%; height: auto; display: block;">
+              <line x1="40" y1="60" x2="720" y2="60" stroke="#3F3F46" stroke-width="2" />
+              
+              <!-- Checkpoint 1: Host Meeting -->
+              <circle cx="80" cy="60" r="10" fill="#D4AF37" />
+              <text x="80" y="38" fill="#D4AF37" font-size="10" font-weight="900" font-family="ui-monospace, monospace" text-anchor="middle">&lt; 30 СЕК</text>
+              <text x="80" y="90" fill="#FFF" font-size="9" font-weight="700" text-anchor="middle">Встреча гостя</text>
+
+              <!-- Checkpoint 2: First Drink -->
+              <circle cx="260" cy="60" r="10" fill="#D4AF37" />
+              <text x="260" y="38" fill="#D4AF37" font-size="10" font-weight="900" font-family="ui-monospace, monospace" text-anchor="middle">3-4 МИН</text>
+              <text x="260" y="90" fill="#FFF" font-size="9" font-weight="700" text-anchor="middle">Подача напитков</text>
+
+              <!-- Checkpoint 3: Hot Food -->
+              <circle cx="500" cy="60" r="12" fill="#FFFFFF" stroke="#D4AF37" stroke-width="3" />
+              <text x="500" y="35" fill="#FFFFFF" font-size="11" font-weight="900" font-family="ui-monospace, monospace" text-anchor="middle">12-15 МИН</text>
+              <text x="500" y="90" fill="#D4AF37" font-size="9" font-weight="800" text-anchor="middle">Отдача горячего</text>
+
+              <!-- Checkpoint 4: Bill -->
+              <circle cx="680" cy="60" r="10" fill="#D4AF37" />
+              <text x="680" y="38" fill="#D4AF37" font-size="10" font-weight="900" font-family="ui-monospace, monospace" text-anchor="middle">&lt; 2 МИН</text>
+              <text x="680" y="90" fill="#FFF" font-size="9" font-weight="700" text-anchor="middle">Расчет чека</text>
+            </svg>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 0.75rem 1rem; border-radius: 0.35rem;">
+              <strong style="color: var(--gold-deep); display: block; font-family: ui-monospace, monospace;">13–15 БАЛЛОВ (ЭТАЛОННЫЙ СЕРВИС)</strong>
+              Синхронная отдача горячих блюд всем гостям за столом ровно на 12–15 минуте. Безупречное знание карты аллергенов и винтажей. Правило чистого стола: пустая посуда убирается в течение 60 секунд после завершения курса.
+            </div>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 0.75rem 1rem; border-radius: 0.35rem;">
+              <strong style="color: var(--text-main); display: block; font-family: ui-monospace, monospace;">9–12 БАЛЛОВ (ДОПУСТИМЫЙ СТАНДАРТ)</strong>
+              Отдача горячего блюда с задержкой 18–22 минут. Заминка официанта при вопросе о составе соуса, ожидание счета свыше 5 минут.
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: URBAN ENVIRONMENT & SPATIAL ERGONOMICS BLUEPRINT (10 POINTS) -->
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+          <div class="flex items-center justify-between" style="margin-bottom: 0.5rem;">
+            <h4 class="font-serif" style="font-size: 1.15rem; font-weight: 900; color: inherit;">3. Урбанистика, эргономика и акустика (Шкала 0–10 баллов)</h4>
+            <span class="badge-gold">Архитектурный замер</span>
+          </div>
+
+          <!-- SVG SCHEMATIC 3: SPATIAL ERGONOMICS & URBAN INTERFACE -->
+          <div style="background: #18181B; padding: 1.25rem; border-radius: 0.5rem; margin-bottom: 0.85rem;">
+            <svg viewBox="0 0 760 160" style="width: 100%; height: auto; display: block;">
+              <!-- Sidewalk & Entrance -->
+              <rect x="20" y="20" width="160" height="120" rx="4" fill="#27272A" stroke="#3F3F46"/>
+              <text x="100" y="45" fill="#A1A1AA" font-size="9" font-weight="700" text-anchor="middle">ТРОТУАР И ВХОД</text>
+              <line x1="40" y1="90" x2="160" y2="90" stroke="#D4AF37" stroke-width="2"/>
+              <text x="100" y="80" fill="#D4AF37" font-size="9" font-weight="800" text-anchor="middle">Пандус &le; 5%</text>
+              <text x="100" y="115" fill="#FFF" font-size="8" text-anchor="middle">Безбарьерный доступ</text>
+
+              <!-- Seating Distance -->
+              <rect x="210" y="20" width="280" height="120" rx="4" fill="#27272A" stroke="#3F3F46"/>
+              <text x="350" y="45" fill="#A1A1AA" font-size="9" font-weight="700" text-anchor="middle">ЭРГОНОМИКА РАССАДКИ</text>
+              <circle cx="280" cy="85" r="18" fill="#3F3F46" stroke="#D4AF37" stroke-width="1.5"/>
+              <circle cx="420" cy="85" r="18" fill="#3F3F46" stroke="#D4AF37" stroke-width="1.5"/>
+              <line x1="298" y1="85" x2="402" y2="85" stroke="#D4AF37" stroke-dasharray="3,3" stroke-width="1.5"/>
+              <text x="350" y="80" fill="#D4AF37" font-size="10" font-weight="900" font-family="ui-monospace, monospace" text-anchor="middle">&ge; 1.2 М</text>
+              <text x="350" y="125" fill="#FFF" font-size="8" text-anchor="middle">Приватность и свободный проход</text>
+
+              <!-- Acoustic & Lighting -->
+              <rect x="520" y="20" width="220" height="120" rx="4" fill="#27272A" stroke="#3F3F46"/>
+              <text x="630" y="45" fill="#A1A1AA" font-size="9" font-weight="700" text-anchor="middle">АКУСТИКА И СВЕТ</text>
+              <path d="M570 100 Q630 65 690 100" fill="none" stroke="#D4AF37" stroke-width="2"/>
+              <text x="630" y="85" fill="#D4AF37" font-size="9" font-weight="800" text-anchor="middle">2700K теплый конус</text>
+              <text x="630" y="120" fill="#FFF" font-size="8" text-anchor="middle">Шум зала &le; 65 дБ</text>
+            </svg>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 0.75rem 1rem; border-radius: 0.35rem;">
+              <strong style="color: var(--gold-deep); display: block; font-family: ui-monospace, monospace;">9–10 БАЛЛОВ (ВЫСШИЙ СТАНДАРТ ПРОСТРАНСТВА)</strong>
+              Удобный вход в одном уровне с мощением улицы, продуманная буферная зона при входе, дистанция между столиками от 1.2 до 1.5 метров, акустические звукопоглощающие панели (возможность комфортного разговора вполголоса при 100% посадке), направленный мягкий свет на блюда.
+            </div>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 0.75rem 1rem; border-radius: 0.35rem;">
+              <strong style="color: var(--text-main); display: block; font-family: ui-monospace, monospace;">6–8 БАЛЛОВ (ДОПУСТИМЫЙ СТАНДАРТ)</strong>
+              Плотная посадка с расстоянием между столами менее 0.9 м, гул зала в вечерние часы, отсутствие розеток в зонах работы за ноутбуком в кофейнях.
+            </div>
+          </div>
+        </div>
+
+        <button onclick="closeInspectorManualModal()" type="button" class="btn btn-dark" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem;">Понятно, закрыть методическое руководство</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LEGAL POLICY (AIRTIGHT CONSTITUTIONAL & REGULATORY SHIELD) -->
   <div id="legalModal" class="modal-overlay" onclick="closeLegalModal()">
     <div class="modal-box" style="max-width: 720px; padding: 2.25rem;" onclick="event.stopPropagation()">
       <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.25rem;">
@@ -2542,6 +2684,54 @@
             <input type="checkbox" id="formNoBooking">
             <span style="font-weight: 700; color: var(--text-body);">Бронь столов не предусмотрена (живая очередь, столовая, фастфуд)</span>
           </label>
+        </div>
+
+        
+        <!-- FIELD AUDIT STOPWATCH & TIMING CALCULATOR -->
+        <div class="stopwatch-box">
+          <div class="flex items-center justify-between" style="border-bottom: 1px solid #3F3F46; padding-bottom: 0.65rem; margin-bottom: 0.85rem;">
+            <div class="flex items-center gap-2">
+              <span style="background: #D4AF37; color: #18181B; font-size: 0.625rem; font-family: ui-monospace, monospace; font-weight: 900; padding: 0.15rem 0.5rem; border-radius: 0.25rem;">СЕКУНДОМЕР ИНСПЕКТОРА</span>
+              <strong style="font-size: 0.8125rem; color: #FFF;">Замеры тайминга обслуживания в реальном времени</strong>
+            </div>
+            <span id="timingScoreBadge" style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: #D4AF37;">Тайминг: +5 б. (Идеал)</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: center; margin-bottom: 0.85rem;">
+            <div>
+              <span style="font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; color: #A1A1AA; display: block; margin-bottom: 0.2rem;">Текущий замер времени:</span>
+              <div id="stopwatchDisplay" class="stopwatch-display">00:00.0</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" id="btnStopwatchToggle" onclick="toggleStopwatch()" class="btn btn-gold" style="padding: 0.5rem 1rem; font-size: 0.6875rem;">⏱ Старт</button>
+              <button type="button" onclick="lapStopwatch()" class="btn btn-light" style="padding: 0.5rem 0.75rem; font-size: 0.6875rem; background: #27272A; color: #FFF;">📌 Отсечка</button>
+              <button type="button" onclick="resetStopwatch()" class="btn btn-light" style="padding: 0.5rem 0.75rem; font-size: 0.6875rem; background: #27272A; color: #FFF;">↻ Сброс</button>
+            </div>
+          </div>
+
+          <!-- Recorded Timing Laps Table -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; background: #27272A; padding: 0.65rem; border-radius: 0.35rem; font-size: 0.6875rem; text-align: center;">
+            <div>
+              <span style="color: #A1A1AA; display: block; font-size: 0.5625rem;">Встреча гостя:</span>
+              <strong id="lapMeeting" style="color: #FFF; font-family: ui-monospace, monospace;">--</strong>
+            </div>
+            <div>
+              <span style="color: #A1A1AA; display: block; font-size: 0.5625rem;">Подача напитка:</span>
+              <strong id="lapDrink" style="color: #FFF; font-family: ui-monospace, monospace;">--</strong>
+            </div>
+            <div>
+              <span style="color: #A1A1AA; display: block; font-size: 0.5625rem;">Отдача горячего:</span>
+              <strong id="lapFood" style="color: #FFF; font-family: ui-monospace, monospace;">--</strong>
+            </div>
+            <div>
+              <span style="color: #A1A1AA; display: block; font-size: 0.5625rem;">Расчет чека:</span>
+              <strong id="lapBill" style="color: #FFF; font-family: ui-monospace, monospace;">--</strong>
+            </div>
+          </div>
+
+          <button type="button" onclick="applyTimingToAuditChecklist()" class="btn btn-light" style="width: 100%; margin-top: 0.75rem; padding: 0.5rem; font-size: 0.6875rem; background: #3F3F46; color: #D4AF37; font-weight: 800;">
+            ⚡ Рассчитать и применить баллы тайминга к чек-листу
+          </button>
         </div>
 
         <!-- DYNAMIC CATEGORY-SPECIFIC GRANULAR CHECKLIST -->
@@ -5070,7 +5260,7 @@
       }
     });
 
-        // PWA Service Worker Registration with updateViaCache: 'none' (Anti-Zombie Cache Strategy)
+                // PWA Service Worker Registration
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
         navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(function(reg) {
@@ -5300,13 +5490,7 @@
       container.innerHTML = html;
     }
 
-    function openInspectorManualModal() {
-      setManualCategory('finedining', null);
-      openModal('inspectorManualModal');
-    }
-    function closeInspectorManualModal() {
-      closeModal('inspectorManualModal');
-    }
+    
 
     // FIELD STOPWATCH TIMERS FOR INSPECTOR AUDIT
     var activeTimerIntervals = {};
@@ -5595,6 +5779,158 @@
       }
 
       container.innerHTML = html;
+    }
+
+    
+    // FIELD INSPECTION STOPWATCH ENGINE WITH LAP CALIBRATION
+    var stopwatchInterval = null;
+    var stopwatchStartTime = 0;
+    var stopwatchElapsedTime = 0;
+    var stopwatchRunning = false;
+    var stopwatchLaps = { meeting: null, drink: null, food: null, bill: null };
+    var currentLapIndex = 0;
+
+    function formatTimeMs(ms) {
+      var totalSec = Math.floor(ms / 1000);
+      var minutes = Math.floor(totalSec / 60);
+      var seconds = totalSec % 60;
+      var tenths = Math.floor((ms % 1000) / 100);
+      return (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds + '.' + tenths;
+    }
+
+    function updateStopwatchDisplay() {
+      var now = Date.now();
+      var total = stopwatchElapsedTime + (stopwatchRunning ? (now - stopwatchStartTime) : 0);
+      var disp = document.getElementById('stopwatchDisplay');
+      if (disp) disp.innerText = formatTimeMs(total);
+    }
+
+    function toggleStopwatch() {
+      var btn = document.getElementById('btnStopwatchToggle');
+      if (!stopwatchRunning) {
+        stopwatchStartTime = Date.now();
+        stopwatchInterval = setInterval(updateStopwatchDisplay, 100);
+        stopwatchRunning = true;
+        if (btn) { btn.innerText = '⏸ Пауза'; btn.style.background = '#DC2626'; btn.style.color = '#FFF'; }
+      } else {
+        stopwatchElapsedTime += Date.now() - stopwatchStartTime;
+        clearInterval(stopwatchInterval);
+        stopwatchRunning = false;
+        if (btn) { btn.innerText = '▶ Продолжить'; btn.style.background = 'var(--gold-accent)'; btn.style.color = '#18181B'; }
+        updateStopwatchDisplay();
+      }
+    }
+
+    function lapStopwatch() {
+      var now = Date.now();
+      var totalMs = stopwatchElapsedTime + (stopwatchRunning ? (now - stopwatchStartTime) : 0);
+      var formatted = formatTimeMs(totalMs);
+
+      if (currentLapIndex === 0) {
+        stopwatchLaps.meeting = totalMs;
+        var el1 = document.getElementById('lapMeeting');
+        if (el1) el1.innerText = formatted;
+        currentLapIndex++;
+      } else if (currentLapIndex === 1) {
+        stopwatchLaps.drink = totalMs;
+        var el2 = document.getElementById('lapDrink');
+        if (el2) el2.innerText = formatted;
+        currentLapIndex++;
+      } else if (currentLapIndex === 2) {
+        stopwatchLaps.food = totalMs;
+        var el3 = document.getElementById('lapFood');
+        if (el3) el3.innerText = formatted;
+        currentLapIndex++;
+      } else if (currentLapIndex === 3) {
+        stopwatchLaps.bill = totalMs;
+        var el4 = document.getElementById('lapBill');
+        if (el4) el4.innerText = formatted;
+        currentLapIndex++;
+      }
+      recalcTimingScore();
+    }
+
+    function resetStopwatch() {
+      if (stopwatchRunning) toggleStopwatch();
+      stopwatchStartTime = 0;
+      stopwatchElapsedTime = 0;
+      currentLapIndex = 0;
+      stopwatchLaps = { meeting: null, drink: null, food: null, bill: null };
+      var disp = document.getElementById('stopwatchDisplay');
+      if (disp) disp.innerText = '00:00.0';
+      var el1 = document.getElementById('lapMeeting'); if (el1) el1.innerText = '--';
+      var el2 = document.getElementById('lapDrink'); if (el2) el2.innerText = '--';
+      var el3 = document.getElementById('lapFood'); if (el3) el3.innerText = '--';
+      var el4 = document.getElementById('lapBill'); if (el4) el4.innerText = '--';
+      var btn = document.getElementById('btnStopwatchToggle');
+      if (btn) { btn.innerText = '⏱ Старт'; btn.style.background = 'var(--gold-accent)'; btn.style.color = '#18181B'; }
+    }
+
+    function recalcTimingScore() {
+      var badge = document.getElementById('timingScoreBadge');
+      var foodMs = stopwatchLaps.food || (stopwatchElapsedTime > 0 ? stopwatchElapsedTime : null);
+      if (!badge) return;
+
+      if (!foodMs) {
+        badge.innerText = 'Тайминг: ожидает замера';
+        return;
+      }
+
+      var sec = Math.floor(foodMs / 1000);
+      var min = Math.floor(sec / 60);
+
+      var fmt = document.getElementById('formFormat') ? document.getElementById('formFormat').value : 'Fine Dining';
+
+      if (fmt === 'Кофейня') {
+        if (min <= 3) badge.innerText = 'Эспрессо ' + min + 'м ' + (sec%60) + 'с (+5 б. Идеал)';
+        else if (min <= 5) badge.innerText = 'Кофе ' + min + 'м (+4 б. Норма)';
+        else badge.innerText = 'Кофе ' + min + 'м (+2 б. Задержка)';
+      } else if (fmt === 'Коктейльный бар') {
+        if (min <= 4) badge.innerText = 'Коктейль ' + min + 'м (+5 б. Идеал)';
+        else if (min <= 7) badge.innerText = 'Коктейль ' + min + 'м (+4 б. Норма)';
+        else badge.innerText = 'Коктейль ' + min + 'м (+2 б. Задержка)';
+      } else {
+        if (min >= 11 && min <= 16) badge.innerText = 'Горячее ' + min + 'м ' + (sec%60) + 'с (+5 б. Идеал)';
+        else if (min <= 20) badge.innerText = 'Горячее ' + min + 'м (+4 б. Хорошо)';
+        else if (min <= 25) badge.innerText = 'Горячее ' + min + 'м (+3 б. Долго)';
+        else badge.innerText = 'Горячее ' + min + 'м (+1 б. Критично)';
+      }
+    }
+
+    function applyTimingToAuditChecklist() {
+      var foodMs = stopwatchLaps.food || (stopwatchElapsedTime > 0 ? stopwatchElapsedTime : null);
+      if (!foodMs) {
+        alert('Сначала запустите секундомер и зафиксируйте отсечку времени подачи горячего блюда или напитка.');
+        return;
+      }
+
+      var sec = Math.floor(foodMs / 1000);
+      var min = Math.floor(sec / 60);
+      var targetScore = 5;
+
+      var fmt = document.getElementById('formFormat') ? document.getElementById('formFormat').value : 'Fine Dining';
+      if (fmt === 'Кофейня') {
+        targetScore = min <= 3 ? 5 : (min <= 5 ? 4 : 2);
+      } else if (fmt === 'Коктейльный бар') {
+        targetScore = min <= 4 ? 5 : (min <= 7 ? 4 : 2);
+      } else {
+        targetScore = (min >= 11 && min <= 16) ? 5 : (min <= 20 ? 4 : (min <= 25 ? 3 : 1));
+      }
+
+      // Slider sub_r13 controls timing across rubrics
+      var timingSlider = document.getElementById('sub_r13');
+      if (timingSlider) {
+        timingSlider.value = targetScore;
+        recalcGranularScore();
+        alert('Замер ' + min + ' мин ' + (sec % 60) + ' сек успешно применен к шкале сервиса: ' + targetScore + ' из 5 баллов!');
+      }
+    }
+
+    function openInspectorManualModal() {
+      openModal('inspectorManualModal');
+    }
+    function closeInspectorManualModal() {
+      closeModal('inspectorManualModal');
     }
 
     // Start Application
