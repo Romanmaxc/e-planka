@@ -3851,8 +3851,10 @@
       var html = '';
       for (var i = 0; i < topVenues.length; i++) {
         var tv = topVenues[i];
-        var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : '';
-        var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80';
+        var fallbackUri = getVenueFallbackSvg(tv.name, tv.format, tv.city);
+        var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
+        var fallbackUri = getVenueFallbackSvg(tv.name, tv.format, tv.city);
+        var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
         var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" loading="lazy" onerror="this.src=\'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80\'">';
 
         var vibePills = (tv.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + escapeHTML(t) + '</span>'; }).join(' ');
@@ -3895,6 +3897,46 @@
     }
 
     // Render Catalog
+    
+    // OFFLINE & UNBLOCKED LUXURY SVG PLACEHOLDER GENERATOR FOR RUSSIAN NETWORKS
+    function getVenueFallbackSvg(name, format, city) {
+      var icon = '🍽';
+      var bg1 = '#18181B';
+      var bg2 = '#27272A';
+      if (format && (format.indexOf('Кофе') !== -1 || format.indexOf('кофейн') !== -1)) { icon = '☕'; bg1 = '#2A1E17'; bg2 = '#1E1610'; }
+      else if (format && (format.indexOf('Бар') !== -1 || format.indexOf('бар') !== -1)) { icon = '🍸'; bg1 = '#131B2E'; bg2 = '#0B111E'; }
+      else if (format && (format.indexOf('Пекарн') !== -1 || format.indexOf('пекарн') !== -1)) { icon = '🥐'; bg1 = '#2D2013'; bg2 = '#1E140B'; }
+      else if (format && (format.indexOf('Столов') !== -1 || format.indexOf('Casual') !== -1)) { icon = '🍲'; bg1 = '#1E2419'; bg2 = '#13180F'; }
+      else if (format && (format.indexOf('Fine') !== -1 || format.indexOf('Роскош') !== -1)) { icon = '🍷'; bg1 = '#2D1418'; bg2 = '#1B0B0E'; }
+
+      var cleanName = (name || 'PLANKA GUIDE').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      var cleanFormat = (format || 'Ресторанный гид').replace(/&/g, '&amp;');
+      var cleanCity = (city || '').replace(/&/g, '&amp;');
+
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">' +
+        '<defs>' +
+          '<linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">' +
+            '<stop offset="0%" stop-color="' + bg1 + '"/>' +
+            '<stop offset="100%" stop-color="' + bg2 + '"/>' +
+          '</linearGradient>' +
+          '<radialGradient id="glowG" cx="50%" cy="45%" r="55%">' +
+            '<stop offset="0%" stop-color="#C5A880" stop-opacity="0.28"/>' +
+            '<stop offset="100%" stop-color="#18181B" stop-opacity="0"/>' +
+          '</radialGradient>' +
+        '</defs>' +
+        '<rect width="100%" height="100%" fill="url(#bgGrad)"/>' +
+        '<circle cx="400" cy="220" r="240" fill="url(#glowG)"/>' +
+        '<rect x="30" y="30" width="740" height="440" rx="14" fill="none" stroke="#3F3F46" stroke-width="1.5" stroke-dasharray="6 6"/>' +
+        '<circle cx="400" cy="180" r="60" fill="#18181B" stroke="#C5A880" stroke-width="2.5"/>' +
+        '<text x="400" y="196" text-anchor="middle" font-size="44" fill="#D4AF37">' + icon + '</text>' +
+        '<text x="400" y="295" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="34" font-weight="900" fill="#FAF8F5" letter-spacing="0.02em">' + cleanName + '</text>' +
+        '<text x="400" y="335" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#C5A880" text-transform="uppercase" letter-spacing="0.12em">' + cleanFormat + (cleanCity ? ' • ' + cleanCity : '') + '</text>' +
+        '<text x="400" y="380" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" font-weight="800" fill="#71717A" letter-spacing="0.16em">PLANKA GUIDE • QUALITY STANDARD</text>' +
+      '</svg>';
+      
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
     function renderVenues() {
       var ribbonTrack = document.getElementById('venuesRibbonTrack');
       var gridContainer = document.getElementById('venuesGridView');
@@ -3955,7 +3997,8 @@
         var isQuality = item.total_score >= 90;
         var isItemDraft = (item.status === 'draft');
         
-        var coverImg = (item.photos && item.photos.length > 0) ? item.photos[0] : 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80';
+        var fallbackUri = getVenueFallbackSvg(item.name, item.format, item.city);
+        var coverImg = (item.photos && item.photos.length > 0) ? item.photos[0] : fallbackUri;
         var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(item.name) + '" loading="lazy" onerror="this.src=\'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80\'">';
 
         var vibePills = (item.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + t + '</span>'; }).join(' ');
@@ -6677,6 +6720,7 @@
       };
 
       if (cat === 'coffee') {
+        // COFFEE CHAPTER FULL
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
           makeHeader('Спешелти-кофейни', 'Анализ спешелти-зерна свежей обжарки (SCA 84+), водоподготовки (TDS 75–120 ppm), температуры микропены (60–65°C), этикета бариста и эргономики рабочих мест.') +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
@@ -6691,12 +6735,25 @@
               '• <strong>Контроль паровой трубки:</strong> Бариста обязан продувать и протирать паровую трубку чистой влажной салфеткой сразу после каждого взбивания молока.' +
             '</div>' +
             '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
-              '<strong style="font-size: 0.875rem; color: var(--gold-deep);">Пошаговая разбалловка 5 подкритериев кофейни:</strong>' +
               '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.1. 100% арабика спешелти (0..10 б.):</strong> 10 б. — свежая обжарка (7–35 дней), SCA 86+, чистый баланс; 7–8 б. — коммерческая спешелти; 4–5 б. — темная старая обжарка; 0–3 б. — робуста, горечь, зольность.</div>' +
               '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.2. Молоко 3.2% / альтернатива (0..8 б.):</strong> 8 б. — натуральное молоко 3.2% или овсяная основа без сахара; 5–6 б. — стандарт; 0–3 б. — порошковое молоко.</div>' +
               '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.3. Чистота дескрипторов вкуса (0..7 б.):</strong> 7 б. — отчетливые ноты ягод/цитрусов, чистый финиш; 4–5 б. — средний баланс; 0–3 б. — вяжущая горечь.</div>' +
               '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.4. Температура напитка 60–65°C (0..5 б.):</strong> 5 б. — 60–65°C; 0–2 б. — перегрев выше 70°C (привкус кипяченого молока).</div>' +
               '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.5. Водоподготовка TDS 75–120 ppm (0..5 б.):</strong> 5 б. — осмос с реминерализацией; 0–2 б. — жесткая вода с накипью.</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ КОФЕ • ЛАТТЕ-АРТ, СЕРВИС И НОУТБУКИ</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 65 баллов</span>' +
+            '</div>' +
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
+              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.1. Авторский кофе / фильтр (0..6 б.):</strong> 6 б. — яркий фильтр-кофе или авторский раф на натуральных базах; 0–2 б. — химозные сиропы.</div>' +
+              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.2. Латте-арт и посуда Loveramics (0..4 б.):</strong> 4 б. — симметричный контрастный латте-арт, толстостенный фарфор; 0–2 б. — размытая пена.</div>' +
+              '<div style="border-left: 3px solid #D4AF37; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">3.1. Бесплатная питьевая вода (0..5 б.):</strong> 5 б. — кувшин чистой воды на станции; 0–2 б. — отказ в воде.</div>' +
+              '<div style="border-left: 3px solid #2563EB; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">4.1. Скорость отдачи за 3–4 мин (0..5 б.):</strong> 5 б. — отдача напитка за 3–4 мин; 0–2 б. — задержка свыше 8 мин.</div>' +
+              '<div style="border-left: 3px solid #059669; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">5.1. Розетки и ноутбуки (0..4 б.):</strong> 4 б. — розетки у ≥50% мест, скоростной Wi-Fi; 0–1 б. — запрет на ноутбуки.</div>' +
+              '<div style="border-left: 3px solid #0D9488; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">6.1. Чистота паровой трубки (0..5 б.):</strong> 5 б. — идеальная чистота форсунки и холдеров; 0–2 б. — засохшее молоко.</div>' +
             '</div>' +
           '</div>' +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">' +
@@ -6706,6 +6763,7 @@
           '</div>' +
         '</div>';
       } else if (cat === 'bar') {
+        // BAR CHAPTER FULL
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
           makeHeader('Коктейльные бары', 'Оценка авторской миксологии, монолитного кристального льда 5×5 см, спикизи-культуры, контактной стойки и баланса вкуса.') +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
@@ -6736,6 +6794,7 @@
           '</div>' +
         '</div>';
       } else if (cat === 'bakery') {
+        // BAKERY CHAPTER FULL
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
           makeHeader('Ремесленные пекарни', 'Контроль натурального сливочного масла 82.5%, ячеистой структуры мякиша «honeycomb», честного веса и хлеба на живых заквасках.') +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
@@ -6765,6 +6824,7 @@
           '</div>' +
         '</div>';
       } else if (cat === 'canteen') {
+        // CANTEEN CHAPTER FULL
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
           makeHeader('Fast Casual & Столовые', 'Контроль температуры подачи (супы ≥75°C, горячее ≥65°C), скорости движения подносов до 90 сек и стерильности приборов.') +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
@@ -6797,6 +6857,7 @@
         // BISTRO CHAPTER FULL
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
           makeHeader('Рестораны & Бистро', 'Городская авторская гастрономия, открытый огонь и дровяные печи, честный средний чек и непринужденный европейский сервис.') +
+          
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
             '<div class="flex items-center justify-between">' +
               '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 01 • ГАСТРОНОМИЯ И ДРОВЯНАЯ ПЕЧЬ</span>' +
@@ -6834,9 +6895,11 @@
           '</div>' +
         '</div>';
       } else {
-        // FINE DINING CHAPTER FULL
+        // FINE DINING FULL CHAPTER (ALL 19 DETAILED RUBRICS WITH EXACT POINT-BY-POINT BREAKDOWN)
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
           makeHeader('Роскошные рестораны & Fine Dining', 'Архитектурные схемы пространства, точная побалльная разбалловка 19 подкритериев, практические скрипты диалогов с персоналом и наглядное руководство по фотофиксации «Как надо» и «Как не надо».') +
+
+          // 1. GASTRONOMY & RAW INGREDIENTS (MAX 35 PTS)
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
             '<div class="flex items-center justify-between">' +
               '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 01 • ГАСТРОНОМИЯ И СЫРЬЕ</span>' +
@@ -6859,6 +6922,8 @@
               '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.5. Вода и лед (0..5 б.):</strong> 5 б. — бесплатный графин воды гостю, кристальный лед без запахов; 0–2 б. — навязывание дорогой бутылки.</div>' +
             '</div>' +
           '</div>' +
+
+          // 2. WOW-EFFECT & PRESENTATION (MAX 15 PTS)
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
             '<div class="flex items-center justify-between">' +
               '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 02 • WOW-ЭФФЕКТ И ПОДАЧА</span>' +
@@ -6866,7 +6931,14 @@
             '</div>' +
             '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">2. Мастерство кухни, фирменное блюдо и сервировка</h5>' +
             '<div>' + svgTableSet + '</div>' +
+            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
+              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.1. Фирменное блюдо (0..6 б.):</strong> 6 б. — шедевр авторской кухни, 3 текстуры; 5 б. — превосходно; 4 б. — базовый стейк; 0–2 б. — провал.</div>' +
+              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.2. Посуда и подача (0..4 б.):</strong> 4 б. — авторская керамика, Zero drops; 3 б. — норма; 0–2 б. — сколы, капли.</div>' +
+              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;"><strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.3. Комплимент шефа (0..5 б.):</strong> 5 б. — амисбуш и теплый хлеб; 3–4 б. — хлебная корзина; 0–2 б. — отсутствие жестов.</div>' +
+            '</div>' +
           '</div>' +
+
+          // 3. SERVICE, SPACING & SANITATION
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
             '<div class="flex items-center justify-between">' +
               '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИИ 04, 05, 06 • СЕРВИС, СРЕДА И САНИТАРИЯ</span>' +
@@ -6876,12 +6948,15 @@
             '<div>' + svgDist + '</div>' +
             '<div>' + svgLight + '</div>' +
           '</div>' +
+
+          // 4. PHOTO GUIDELINES MODULE
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">' +
             '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">РЕГЛАМЕНТ ФОТО- И ВИДЕОФИКСАЦИИ</span>' +
             '<div>' + svgPPhoto1 + '</div>' +
             '<div>' + svgPPhoto2 + '</div>' +
             '<div>' + svgPPhoto3 + '</div>' +
           '</div>' +
+
         '</div>';
       }
 
