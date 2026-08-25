@@ -1314,6 +1314,137 @@
       .lightbox-arrow-left { left: 0.5rem; }
       .lightbox-arrow-right { right: 0.5rem; }
     }
+
+    /* MOBILE MODAL & RESPONSIVENESS FIXES */
+    @media (max-width: 768px) {
+      .modal-overlay {
+        padding: 0.35rem !important;
+        align-items: flex-start !important;
+      }
+      .modal-box {
+        padding: 1.25rem 0.85rem !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 0.5rem !important;
+        overflow-x: hidden !important;
+      }
+      .dossier-layout-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+      }
+      .dossier-triptych-grid {
+        height: 190px !important;
+      }
+      .modal-box > div:first-child[style*="-2.25rem"] {
+        margin: -1.25rem -0.85rem 1.25rem -0.85rem !important;
+      }
+      .stopwatch-box {
+        padding: 0.85rem !important;
+      }
+      .stopwatch-display {
+        font-size: 1.65rem !important;
+      }
+      .stopwatch-laps-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.4rem !important;
+      }
+      .checklist-sliders-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.65rem !important;
+      }
+      .radar-spider-svg {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 auto !important;
+      }
+      .btn {
+        white-space: normal !important;
+        text-align: center !important;
+      }
+      .legal-reglament-box {
+        margin: 1.5rem auto 0 auto !important;
+        max-width: 100% !important;
+        padding: 1.25rem !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+      }
+    }
+
+    /* INTERACTIVE RANGE SLIDERS WITH FLOATING TOOLTIP & LIVE BADGE */
+    .range-slider-group {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.45rem;
+      padding: 0.65rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      position: relative;
+    }
+    .range-slider-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .range-slider-header label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0;
+    }
+    .range-value-pill {
+      font-size: 0.6875rem;
+      font-family: ui-monospace, monospace;
+      font-weight: 900;
+      color: var(--gold-deep);
+      background: var(--bg-subtle);
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.25rem;
+      border: 1px solid var(--border-subtle);
+    }
+    .range-slider-track-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .slider-floating-bubble {
+      position: absolute;
+      top: -2.25rem;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      background: var(--gold-deep);
+      color: #FFFFFF;
+      font-family: ui-monospace, monospace;
+      font-size: 0.6875rem;
+      font-weight: 900;
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.3rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      white-space: nowrap;
+      z-index: 50;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .slider-floating-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 4px 4px 0;
+      border-style: solid;
+      border-color: var(--gold-deep) transparent transparent transparent;
+    }
+    .slider-floating-bubble.visible {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -1945,8 +2076,9 @@
       </div>
 
       <!-- Format Switcher inside Manual -->
-      <div class="filter-pills" style="justify-content: flex-start; margin-bottom: 1.25rem;">
-        <button onclick="setManualCategory('finedining', this)" type="button" class="filter-btn active manual-tab-btn">🍷 Рестораны & Fine Dining</button>
+      <div class="filter-pills" style="justify-content: flex-start; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.4rem;">
+        <button onclick="setManualCategory('finedining', this)" type="button" class="filter-btn active manual-tab-btn">🍷 Роскошные рестораны & Fine Dining</button>
+        <button onclick="setManualCategory('bistro', this)" type="button" class="filter-btn manual-tab-btn">🍽 Рестораны & Бистро</button>
         <button onclick="setManualCategory('coffee', this)" type="button" class="filter-btn manual-tab-btn">☕ Спешелти-кофейни</button>
         <button onclick="setManualCategory('bar', this)" type="button" class="filter-btn manual-tab-btn">🍸 Коктейльные бары</button>
         <button onclick="setManualCategory('bakery', this)" type="button" class="filter-btn manual-tab-btn">🥐 Ремесленные пекарни</button>
@@ -6229,23 +6361,18 @@
   <rect x="20" y="14" width="450" height="24" rx="4" fill="#18181B"/>
   <text x="30" y="30" fill="#FAF8F5" font-size="10.5" font-weight="700" letter-spacing="0.5">ФОТОФИКСАЦИЯ 1: ФАСАД И ВХОДНАЯ ГРУППА</text>
 
-  <!-- Left: DO (Как надо) -->
+  <!-- Left: DO -->
   <g transform="translate(20, 50)">
     <rect width="390" height="210" rx="6" fill="#FFFFFF" stroke="#86EFAC" stroke-width="2"/>
     <rect x="12" y="12" width="135" height="22" rx="4" fill="#16A34A"/>
     <text x="20" y="27" fill="#FFFFFF" font-size="10" font-weight="800">✓ КАК НАДО (ЭТАЛОН)</text>
     
-    <!-- Graphic diagram -->
     <g transform="translate(20, 50)">
-      <!-- Street line and building facade at 35 degrees -->
       <line x1="0" y1="90" x2="220" y2="90" stroke="#71717A" stroke-width="2"/>
-      <!-- Building angled -->
       <polygon points="40,20 180,35 180,90 40,90" fill="#E4E4E7" stroke="#18181B" stroke-width="2"/>
       <rect x="70" y="45" width="35" height="45" fill="#FFFFFF" stroke="#18181B" stroke-width="1.5"/>
       <text x="87" y="70" text-anchor="middle" fill="#8C6D37" font-size="7.5" font-weight="800">ВХОД</text>
-      <!-- Sidewalk & Ramp -->
       <line x1="105" y1="90" x2="140" y2="78" stroke="#16A34A" stroke-width="2"/>
-      <!-- Camera Icon at 35 degrees -->
       <g transform="translate(195, 80)">
         <circle cx="0" cy="0" r="10" fill="#16A34A"/>
         <text x="0" y="3" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="900">35°</text>
@@ -6262,7 +6389,7 @@
     </g>
   </g>
 
-  <!-- Right: DON'T (Как не надо) -->
+  <!-- Right: DON'T -->
   <g transform="translate(430, 50)">
     <rect width="390" height="210" rx="6" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="2"/>
     <rect x="12" y="12" width="145" height="22" rx="4" fill="#DC2626"/>
@@ -6270,7 +6397,6 @@
 
     <g transform="translate(20, 50)">
       <rect x="20" y="20" width="140" height="70" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
-      <!-- Blocked by giant blur/sun -->
       <circle cx="90" cy="55" r="25" fill="#EF4444" opacity="0.25"/>
       <line x1="20" y1="20" x2="160" y2="90" stroke="#DC2626" stroke-width="2"/>
       <line x1="160" y1="20" x2="20" y2="90" stroke="#DC2626" stroke-width="2"/>
@@ -6282,7 +6408,7 @@
       <text x="0" y="32" fill="#18181B" font-size="8.5">• Заваленный горизонт (&gt;10°)</text>
       <text x="0" y="48" fill="#18181B" font-size="8.5">• Слепящее солнце в объектив</text>
       <text x="0" y="64" fill="#18181B" font-size="8.5">• Лица прохожих крупным планом</text>
-      <text x="0" y="80" fill="#991B1B" font-size="8.5" font-weight="700">(риск юридических претензий)</text>
+      <text x="0" y="80" fill="#991B1B" font-size="8.5" font-weight="700">(риск претензий по 152.1 ГК)</text>
     </g>
   </g>
 </svg>`;
@@ -6298,12 +6424,9 @@
     <text x="20" y="27" fill="#FFFFFF" font-size="10" font-weight="800">✓ КАК НАДО (ЭТАЛОН)</text>
     
     <g transform="translate(20, 55)">
-      <!-- Plate at 45 deg -->
       <ellipse cx="65" cy="55" rx="55" ry="25" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
       <ellipse cx="65" cy="53" rx="30" ry="12" fill="#FEF08A" stroke="#D97706" stroke-width="1.5"/>
-      <!-- Soft Light ray -->
       <line x1="0" y1="10" x2="45" y2="40" stroke="#CA8A04" stroke-width="1.5" stroke-dasharray="3 3"/>
-      <!-- Camera angle 45 deg -->
       <g transform="translate(135, 20)">
         <rect width="26" height="18" rx="3" fill="#16A34A"/>
         <circle cx="13" cy="9" r="5" fill="#FFFFFF"/>
@@ -6329,10 +6452,8 @@
 
     <g transform="translate(20, 55)">
       <circle cx="65" cy="55" r="45" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
-      <!-- Harsh smartphone shadow on dish -->
       <polygon points="45,40 100,50 85,85 30,75" fill="#7F1D1D" opacity="0.45"/>
       <circle cx="65" cy="55" r="12" fill="#EF4444" opacity="0.6"/>
-      <!-- 90 deg top flash -->
       <text x="65" y="58" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="900">90° ВСПЫШКА</text>
     </g>
 
@@ -6362,10 +6483,8 @@
       <line x1="15" y1="30" x2="85" y2="30" stroke="#71717A" stroke-width="1"/>
       <line x1="15" y1="45" x2="85" y2="45" stroke="#71717A" stroke-width="1"/>
       <line x1="15" y1="60" x2="85" y2="60" stroke="#71717A" stroke-width="1"/>
-      <!-- Time highlight -->
       <rect x="12" y="75" width="76" height="18" rx="2" fill="#FEF3C7" stroke="#D97706"/>
       <text x="50" y="87" text-anchor="middle" fill="#92400E" font-size="7.5" font-weight="900">ВРЕМЯ: 19:42</text>
-      <!-- Total and QR -->
       <rect x="15" y="100" width="22" height="22" fill="#18181B"/>
       <text x="45" y="115" fill="#18181B" font-size="8.5" font-weight="900">ИТОГ: 5 400 ₽</text>
     </g>
@@ -6402,13 +6521,17 @@
   </g>
 </svg>`;
 
+      var makeHeader = function(title, desc) {
+        return '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.16) 0%, rgba(24,24,27,0.85) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.5rem;">' +
+          '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">ПРОФЕССИОНАЛЬНЫЙ АТЛАС ТАЙНОГО АУДИТА</span>' +
+          '<h4 class="font-serif" style="font-size: 1.55rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Полный курс тайного инспектора: ' + title + '</h4>' +
+          '<p style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65;">' + desc + '</p>' +
+        '</div>';
+      };
+
       if (cat === 'coffee') {
         html = '<div style="display: flex; flex-direction: column; gap: 1.75rem;">' +
-          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">СТАНДАРТ СПЕШЕЛТИ-КОФЕЕН</span>' +
-            '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Методический регламент инспекции кофеен</h4>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Анализ зерна класса Specialty, водоподготовки (TDS 75–120 ppm), температуры микропены и эргономики работы с ноутбуком.</p>' +
-          '</div>' +
+          makeHeader('Спешелти-кофейни', 'Анализ зерна класса Specialty, водоподготовки (TDS 75–120 ppm), температуры микропены и эргономики работы с ноутбуком.') +
           '<div>' + svgCoffee + '</div>' +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
             '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">Детальная градуировка 100-балльной шкалы для кофеен:</strong>' +
@@ -6425,11 +6548,7 @@
         '</div>';
       } else if (cat === 'bar') {
         html = '<div style="display: flex; flex-direction: column; gap: 1.75rem;">' +
-          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">СТАНДАРТ КОКТЕЙЛЬНЫХ БАРОВ</span>' +
-            '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Регламент тайного аудита баров и спикизи</h4>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Оценка монолитного прозрачного льда, баланса кислотности и сладости, скорости отдачи коктейля и спикизи-культуры.</p>' +
-          '</div>' +
+          makeHeader('Коктейльные бары', 'Оценка монолитного прозрачного льда, баланса кислотности и сладости, скорости отдачи коктейля и спикизи-культуры.') +
           '<div>' + svgBar + '</div>' +
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.25rem;">' +
             '<strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">Детальная градуировка 100-балльной шкалы для баров:</strong>' +
@@ -6446,34 +6565,55 @@
         '</div>';
       } else if (cat === 'bakery') {
         html = '<div style="display: flex; flex-direction: column; gap: 1.75rem;">' +
-          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">СТАНДАРТ РЕМЕСЛЕННЫХ ПЕКАРЕН</span>' +
-            '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Аудит слоеного теста и заквасочного хлеба</h4>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Контроль натурального сливочного масла 82.5%, ячеистой структуры мякиша «honeycomb» и честного веса выпечки.</p>' +
-          '</div>' +
+          makeHeader('Ремесленные пекарни', 'Контроль натурального сливочного масла 82.5%, ячеистой структуры мякиша «honeycomb» и честного веса выпечки.') +
           '<div>' + svgBakery + '</div>' +
           '<div>' + svgPPhoto2 + '</div>' +
         '</div>';
       } else if (cat === 'canteen') {
         html = '<div style="display: flex; flex-direction: column; gap: 1.75rem;">' +
-          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.12) 0%, rgba(24,24,27,0.6) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.25rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">СТАНДАРТ FAST CASUAL & СТОЛОВЫХ</span>' +
-            '<h4 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Регламент аудита линии раздачи и мармитов</h4>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Контроль температуры подачи (супы ≥75°C, горячее ≥65°C), скорости движения подносов и сухости посуды.</p>' +
-          '</div>' +
+          makeHeader('Fast Casual & Столовые', 'Контроль температуры подачи (супы ≥75°C, горячее ≥65°C), скорости движения подносов и сухости посуды.') +
           '<div>' + svgCanteen + '</div>' +
           '<div>' + svgPPhoto3 + '</div>' +
         '</div>';
-      } else {
-        // EXHAUSTIVE EXPANDED TRAINING MANUAL FOR FINE DINING & RESTAURANTS
+      } else if (cat === 'bistro') {
+        // DETAILED CHAPTER FOR RESTAURANTS & BISTRO
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
+          makeHeader('Рестораны & Бистро', 'Городская авторская гастрономия, открытый огонь и дровяные печи, честный средний чек и непринужденный европейский сервис.') +
           
-          // Header Banner
-          '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.16) 0%, rgba(24,24,27,0.85) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.5rem;">' +
-            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">ПРОФЕССИОНАЛЬНЫЙ АТЛАС ТАЙНОГО АУДИТА</span>' +
-            '<h4 class="font-serif" style="font-size: 1.55rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Полный курс тайного инспектора: Рестораны & Fine Dining</h4>' +
-            '<p style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65;">Архитектурные схемы пространства, точная побалльная разбалловка 19 подкритериев, практические скрипты диалогов с персоналом и наглядное руководство по фотофиксации «Как надо» и «Как не надо».</p>' +
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ БИСТРО • СЫРЬЕ И КУХНЯ</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 35 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">1. Гастрономия бистро, гриль, дровяная печь и свежесть</h5>' +
+            '<div>' + svgDish + '</div>' +
+            '<div style="background: #18181B; color: #FAF8F5; border-radius: 0.4rem; padding: 1rem; font-size: 0.75rem; line-height: 1.6;">' +
+              '<strong style="color: #D4AF37; display: block; font-size: 0.8125rem; margin-bottom: 0.35rem;">🕵️ СПЕЦИФИКА ИНСПЕКЦИИ БИСТРО:</strong>' +
+              '• <strong>Дровяная печь и тесто:</strong> При заказе пиццы/лепешек инспектор проверяет леопардовый колер корочки и ферментацию (тесто должно быть легким, не вызывающим тяжести).<br>' +
+              '• <strong>Открытая кухня:</strong> Оцените порядок на раздаче, чистоту поварских фартуков и отсутствие завалов посуды в поле зрения гостей.' +
+            '</div>' +
           '</div>' +
+
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
+            '<div class="flex items-center justify-between">' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">СТАНДАРТ БИСТРО • СРЕДА И ПОСАДКА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
+            '</div>' +
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">2. Эргономика пространства и посадка</h5>' +
+            '<div>' + svgDist + '</div>' +
+            '<div>' + svgLight + '</div>' +
+          '</div>' +
+
+          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">РЕГЛАМЕНТ ФОТОФИКСАЦИИ БИСТРО</span>' +
+            '<div>' + svgPPhoto1 + '</div>' +
+            '<div>' + svgPPhoto2 + '</div>' +
+          '</div>' +
+        '</div>';
+      } else {
+        // FINE DINING FULL CHAPTER
+        html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
+          makeHeader('Роскошные рестораны & Fine Dining', 'Архитектурные схемы пространства, точная побалльная разбалловка 19 подкритериев, практические скрипты диалогов с персоналом и наглядное руководство по фотофиксации «Как надо» и «Как не надо».') +
 
           // 1. GASTRONOMY & RAW INGREDIENTS (MAX 35 PTS)
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
@@ -6482,71 +6622,12 @@
               '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 35 баллов</span>' +
             '</div>' +
             '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">1. Гастрономия, органолептика и срез вкуса блюда</h5>' +
-            
             '<div>' + svgDish + '</div>' +
-
-            // Practical Inspection Advice & Secret Script
             '<div style="background: #18181B; color: #FAF8F5; border-radius: 0.4rem; padding: 1rem; font-size: 0.75rem; line-height: 1.6;">' +
               '<strong style="color: #D4AF37; display: block; font-size: 0.8125rem; margin-bottom: 0.35rem;">🕵️ ПРАКТИЧЕСКИЙ СОВЕТ И СКРИПТ ПРОВЕРКИ СЫРЬЯ:</strong>' +
               '• <strong>Что спросить у официанта:</strong> «Подскажите, мясо в тар-таре / стейке — какой откорм и сколько дней вызревания? Рыба сегодня охлажденная или дикая шоковой заморозки?»<br>' +
               '• <strong>На что смотреть:</strong> При нарезке стейка или рыбы из мяса не должна выделяться мутная водянистая жидкость (признак переморозки). Волокна должны сохранять упругость.<br>' +
               '• <strong>Проба соуса:</strong> Зачерпните соус отдельно ложкой до смешивания с гарниром. Эмульсия должна быть однородной, без слоя отделившегося прозрачного масла.' +
-            '</div>' +
-
-            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
-              '<strong style="font-size: 0.875rem; color: var(--gold-deep);">Пошаговая разбалловка 5 подкритериев:</strong>' +
-              
-              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.1. Свежесть сырья (Шкала 0..10 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>10 б. (Абсолютный эталон):</strong> Премиальное фермерское охлажденное мясо (зерновой откорм 21+ день влажного/сухого вызревания), дикая рыба шоковой заморозки без кристаллизации, органические сезонные овощи.<br>' +
-                  '• <strong>8–9 б. (Превосходно):</strong> Высококлассное сырье, аквакультурная рыба высшего сорта (дикий лосось/сибас), свежие травы.<br>' +
-                  '• <strong>6–7 б. (Хорошо):</strong> Качественные коммерческие продукты стабильного вкуса без дефектов.<br>' +
-                  '• <strong>4–5 б. (Удовлетворительно):</strong> Заметные признаки глубокой повторной заморозки рыбы (потеря влаги, сухость волокон), водянистые парниковые томаты.<br>' +
-                  '• <strong>0–3 б. (Брак / Недопустимо):</strong> Признаки заветривания, окисления жиров, посторонний запах мяса/рыбы.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.2. Точность прожарки и термообработки (Шкала 0..8 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>8 б. (Идеал):</strong> Стопроцентное попадание в 52–54°C для Medium Rare. Розовый центр от края до края без серых вареных ободков.<br>' +
-                  '• <strong>7 б. (Отлично):</strong> Незначительное отклонение в четверть тона, идеальная сочность ядра.<br>' +
-                  '• <strong>5–6 б. (Хорошо):</strong> Отклонение на полутон (Medium вместо Medium Rare), сочность сохранена.<br>' +
-                  '• <strong>3–4 б. (Слабо):</strong> Пересушенные жесткие края при сыром центре («градиент сковороды»).<br>' +
-                  '• <strong>0–2 б. (Брак):</strong> Полный пережар (Well Done вместо Medium Rare), сухая резиновая текстура.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.3. Баланс соусов и дескрипторов (Шкала 0..7 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>7 б. (Идеал):</strong> Авторский соус собственного приготовления долгого уваривания (демиглас, бер-блан, велюте), баланс умами и шелковистая эмульсия.<br>' +
-                  '• <strong>5–6 б. (Хорошо):</strong> Приятный сбалансированный соус, незначительный крен в соль или сладость.<br>' +
-                  '• <strong>3–4 б. (Посредственно):</strong> Простой соус без глубины, легкий избыток соли.<br>' +
-                  '• <strong>0–2 б. (Штраф):</strong> Расслоившееся масло, свернувшиеся сливки, порошковые готовые смеси.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.4. Температура подачи блюда (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Горячее подается на подогретом фарфоре (60–65°C), супы 75–80°C, тартары и севиче 8–12°C.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Блюдо теплое, тарелка нейтральной комнатной температуры.<br>' +
-                  '• <strong>2–3 б. (Удовлетворительно):</strong> Блюдо успело остыть на раздаче, жир начинает застывать на керамике.<br>' +
-                  '• <strong>0–1 б. (Брак):</strong> Холодное горячее блюдо (простой на кухне свыше 10 минут).' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #16A34A; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">1.5. Вода и чистый лед (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Бесплатный графин фильтрованной питьевой воды гостю при посадке, прозрачный кристальный лед без пузырей и запахов.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Чистая вода, но предлагается только за плату; стандартный пищевой лед.<br>' +
-                  '• <strong>2–3 б. (Удовлетворительно):</strong> Вода с легким запахом хлора, мутный лед.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Неприятный привкус водопровода, навязывание дорогой бутилированной воды.' +
-                '</span>' +
-              '</div>' +
             '</div>' +
           '</div>' +
 
@@ -6557,240 +6638,25 @@
               '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
             '</div>' +
             '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">2. Мастерство кухни, фирменное блюдо и сервировка</h5>' +
-
             '<div>' + svgTableSet + '</div>' +
-
-            // Secret Inspector Advice
-            '<div style="background: #18181B; color: #FAF8F5; border-radius: 0.4rem; padding: 1rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<strong style="color: #D4AF37; display: block; font-size: 0.8125rem; margin-bottom: 0.35rem;">🕵️ ПРАКТИЧЕСКИЙ СОВЕТ ПО ОЦЕНКЕ WOW-ЭФФЕКТА:</strong>' +
-              '• <strong>Заказ Signature Dish:</strong> Закажите именно то блюдо, которое ресторан заявляет как флагманское. Оцените, есть ли в нем уникальная идея шефа или это типовое блюдо.<br>' +
-              '• <strong>Правило Zero drops:</strong> Внимательно осмотрите борта тарелки до первого прикосновения приборов. На глянце фарфора не должно быть случайных брызг или отпечатков пальцев повара раздачи.' +
-            '</div>' +
-
-            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
-              '<strong style="font-size: 0.875rem; color: var(--gold-deep);">Пошаговая разбалловка подкритериев:</strong>' +
-              
-              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.1. Фирменное блюдо (Signature Dish) (Шкала 0..6 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>6 б. (Шедевр):</strong> Уникальная авторская рецептура, триада текстур (хруст, шелковистый соус, сочное ядро), эмоциональный вкусовой финал.<br>' +
-                  '• <strong>5 б. (Выдающийся уровень):</strong> Превосходное блюдо с выраженным авторским почерком.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Вкусно, но стандартно (базовый стейк рибай или классический тартар).<br>' +
-                  '• <strong>2–3 б. (Посредственно):</strong> Невыразительный вкус, несоответствие описанию.<br>' +
-                  '• <strong>0–1 б. (Провал):</strong> Испорченное или грубо несбалансированное блюдо.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.2. Посуда и подача (Шкала 0..4 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>4 б. (Идеал):</strong> Авторская керамика ручной работы (или Loveramics/Narumi), чистота борта Zero drops, тактильный восторг.<br>' +
-                  '• <strong>3 б. (Хорошо):</strong> Качественная ресторанная посуда без сколов.<br>' +
-                  '• <strong>2 б. (Посредственно):</strong> Дешевый фаянс, капли на бортах.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Сколы на тарелке, трещины, жирные разводы.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #8C6D37; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">2.3. Комплимент шефа (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Авторский амисбуш (amuse-bouche) перед заказом, теплый свежий хлеб со взбитым маслом, комплиментарный дижестив.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Свежий хлеб с маслом или мини-комплимент.<br>' +
-                  '• <strong>2–3 б. (Базово):</strong> Стандартные хлебные палочки.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Полное отсутствие комплиментарных жестов при высоком чеке.' +
-                '</span>' +
-              '</div>' +
-            '</div>' +
           '</div>' +
 
-          // 3. HONEST PRICING & PORTION (MAX 15 PTS)
+          // 3. SERVICE & SPACING
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
             '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 03 • ЧЕСТНОСТЬ ЦЕНЫ И ПОРЦИИ</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 04 & 05 • СЕРВИС, ЭТИКЕТ И СРЕДА</span>' +
+              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 25 баллов</span>' +
             '</div>' +
-            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">3. Прозрачность счета, наценка и честная граммовка</h5>' +
-
-            '<div style="background: #18181B; color: #FAF8F5; border-radius: 0.4rem; padding: 1rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<strong style="color: #D4AF37; display: block; font-size: 0.8125rem; margin-bottom: 0.35rem;">🕵️ ПРАКТИЧЕСКИЙ СОВЕТ ПО АУДИТУ ЧЕКА:</strong>' +
-              '• <strong>Сверка позиций:</strong> Проверьте, не включили ли в чек платный хлеб, воду или соус, которые подавались под видом «комплимента».<br>' +
-              '• <strong>Сервисный сбор:</strong> Включение автоматических 10% «за обслуживание» в чек без прямого согласия гостя карается снижением оценки по прозрачности счета до 0–1 балла.' +
-            '</div>' +
-
-            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
-              '<div style="border-left: 3px solid #D4AF37; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">3.1. Обоснованность наценки (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Честный фудкост (Food Cost 28–35%), справедливая наценка на винную и чайную карту, высокий индекс ценности (Value for Money).<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Умеренная наценка в рамках премиум-сегмента.<br>' +
-                  '• <strong>2–3 б. (Посредственно):</strong> Завышенная наценка на базовые позиции (чай x10 от себестоимости).<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Неоправданно завышенные цены при дешевом сырье.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #D4AF37; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">3.2. Честный выход порции (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Вес соответствует или превышает меню, белок (мясо/рыба) составляет не менее 60% от массы блюда.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Соответствие граммовке с погрешностью до 5%.<br>' +
-                  '• <strong>2–3 б. (Удовлетворительно):</strong> Недовес 10–15%, тарелка заполнена зеленью вместо мяса.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Грубый обман по граммовке (&gt;20% недовеса).' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #D4AF37; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">3.3. Прозрачность счета (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Корректный фискальный чек, отсутствие скрытых доплат, удобная оплата картой/СБП/QR.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Понятный счет, предупреждение о платных опциях.<br>' +
-                  '• <strong>2–3 б. (Замечание):</strong> Включение сервисного сбора 10% мелким шрифтом.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Принудительные скрытые доплаты, отказ в безналичной оплате.' +
-                '</span>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-
-          // 4. SERVICE, TIMING & WAITER ETIQUETTE (MAX 15 PTS)
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 04 • СЕРВИС, ТАЙМИНГ И ЭТИКЕТ</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 15 баллов</span>' +
-            '</div>' +
-            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">4. Ритм отдачи, траектории сервиса и ресторанный этикет</h5>' +
-
+            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">3. Ритм отдачи, траектории сервиса и урбанистика</h5>' +
             '<div>' + svgServ + '</div>' +
-
-            // Practical Inspection Advice & Dialogue Scripts
-            '<div style="background: #18181B; color: #FAF8F5; border-radius: 0.4rem; padding: 1rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<strong style="color: #D4AF37; display: block; font-size: 0.8125rem; margin-bottom: 0.35rem;">🕵️ ПРАКТИЧЕСКИЕ СКРИПТЫ ПРОВЕРКИ ОФИЦИАНТА:</strong>' +
-              '• <strong>Тест на аллергены:</strong> «В этом соусе есть лактоза или скрытый глютен? Чем загущали базу?» (Официант высшей лиги отвечает мгновенно без ухода на кухню).<br>' +
-              '• <strong>Тест на винный пейринг:</strong> «Какое вино по бокалам лучше всего подчеркнет текстуру этой рыбы/мяса и почему?» (Оценивается умение аргументировать кислотность и танины).<br>' +
-              '• <strong>Скрытый секундомер:</strong> Отсекайте этапы Т1 (встреча до 45 с), Т2 (напитки до 4 мин), Т3 (горячее за 12–15 мин) и Т4 (расчет до 2 мин) на смарт-часах или боковой клавишей телефона в кармане.' +
-            '</div>' +
-
-            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
-              '<div style="border-left: 3px solid #2563EB; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">4.1. Знание меню и вин (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Безупречное знание карты аллергенов, техкарт блюд и винтажей вин. Уверенные и точные гастрономические рекомендации.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Хорошее знание меню, уточнение сложных вопросов на кухне за 1 минуту.<br>' +
-                  '• <strong>2–3 б. (Посредственно):</strong> Неуверенность, незнание состава соуса, чтение меню по блокноту.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Полное незнание меню, дезинформация об аллергенах.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #2563EB; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">4.2. Тайминг 12–15 мин (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Встреча гостя до 45 сек, напитки за 3–4 мин, отдача горячего ровно на 12–15 минуте синхронно всем гостям.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Небольшая задержка горячего блюда (16–20 мин).<br>' +
-                  '• <strong>3 б. (Долго):</strong> Ожидание 21–25 мин, рассинхрон подачи гостям за одним столом.<br>' +
-                  '• <strong>1–2 б. (Критично):</strong> Задержка горячего свыше 25 мин без предупреждения.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #2563EB; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">4.3. Чистый стол и этикет (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Подача блюда справа правой рукой, хлеб и зачистка слева, зачистка пустой посуды в течение 60 секунд, смена приборов перед каждым курсом.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Корректный сервис, уборка посуды за 2–3 мин.<br>' +
-                  '• <strong>2–3 б. (Замечание):</strong> Пустая посуда стоит >5 мин, официант тянется через стол.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Грубость, касание пальцами обода тарелок и чаши бокалов.' +
-                '</span>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-
-          // 5. URBAN PLANNING, SPACING & LIGHTING (MAX 10 PTS)
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 05 • СРЕДА И УРБАНИСТИКА</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
-            '</div>' +
-            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">5. Урбанистическая среда, дистанция столов и свет</h5>' +
-
             '<div>' + svgDist + '</div>' +
             '<div>' + svgLight + '</div>' +
-
-            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
-              '<div style="border-left: 3px solid #059669; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">5.1. Диалог с улицей и терраса (Шкала 0..4 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>4 б. (Идеал):</strong> Безбарьерный вход в одном уровне с мощением или пандус ≤5%, витринные окна, уютная летняя терраса без помех пешеходам.<br>' +
-                  '• <strong>3 б. (Хорошо):</strong> Удобные ступени с поручнем, аккуратная вывеска.<br>' +
-                  '• <strong>2 б. (Посредственно):</strong> Крутые ступени, темная входная группа.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Недоступность для маломобильных гостей, разбитое крыльцо.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #059669; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">5.2. Эргономика посадки и зонирование (Шкала 0..3 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>3 б. (Идеал):</strong> Дистанция между столами ≥ 1.20–1.50 м, кресла с поддержкой поясницы, сервисный проход от 80 см.<br>' +
-                  '• <strong>2 б. (Норма):</strong> Дистанция 1.0–1.2 м, удобные стулья.<br>' +
-                  '• <strong>1 б. (Тесно):</strong> Дистанция &lt; 0.90 м (гости задевают друг друга стульями).<br>' +
-                  '• <strong>0 б. (Штраф):</strong> Экстремальная теснота, шатающиеся столы.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #059669; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">5.3. Акустика и мягкий свет (Шкала 0..3 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>3 б. (Идеал):</strong> Направленный свет 2700K (угол 35° строго на центр стола), звукопоглощающие панели, фоновый шум зала ≤ 65 дБ.<br>' +
-                  '• <strong>2 б. (Норма):</strong> Приятное освещение, умеренный фоновый звук.<br>' +
-                  '• <strong>1 б. (Дискомфорт):</strong> Шум в зале &gt; 75 дБ, слепящий свет в глаза.<br>' +
-                  '• <strong>0 б. (Штраф):</strong> Оглушающий гул, невозможно слышать собеседника.' +
-                '</span>' +
-              '</div>' +
-            '</div>' +
           '</div>' +
 
-          // 6. SANITATION & RESTROOMS (MAX 10 PTS)
-          '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: var(--gold-deep);">КРИТЕРИЙ 06 • САНИТАРИЯ И САНУЗЕЛ</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">Макс. 10 баллов</span>' +
-            '</div>' +
-            '<h5 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 0;">6. Стерильность зала, приборов и гостевых санузлов</h5>' +
-
-            '<div style="background: #18181B; color: #FAF8F5; border-radius: 0.4rem; padding: 1rem; font-size: 0.75rem; line-height: 1.6;">' +
-              '<strong style="color: #D4AF37; display: block; font-size: 0.8125rem; margin-bottom: 0.35rem;">🕵️ ПРАКТИЧЕСКИЙ СОВЕТ ПО САНИТАРИИ:</strong>' +
-              '• <strong>Тест бокала на просвет:</strong> Поднимите бокал на уровень глаз против теплого источника света. На чаше не должно быть разводов посудомоечной машины, ворсинок полотенца или мутных капель.<br>' +
-              '• <strong>Инспекция санузла в час пик:</strong> Посетите санузел в разгар посадки (20:00–21:30). Зеркала должны быть сухими без брызг, в дозаторах — крем и мыло, корзины не должны быть переполнены.' +
-            '</div>' +
-
-            '<div style="background: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">' +
-              '<div style="border-left: 3px solid #0D9488; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">6.1. Чистота бокалов и приборов (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Идеально натертый хрусталь без отпечатков и разводов капель, стерильные полированные приборы.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Чисто, единичные мелкие ворсинки от салфетки.<br>' +
-                  '• <strong>2–3 б. (Замечание):</strong> Разводы от посудомойки, отпечатки пальцев на ножке.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Следы помады на бокале, жирные приборы.' +
-                '</span>' +
-              '</div>' +
-
-              '<div style="border-left: 3px solid #0D9488; padding-left: 0.85rem;">' +
-                '<strong style="font-size: 0.8125rem; color: var(--text-main); display: block;">6.2. Стерильность санузла (Шкала 0..5 баллов):</strong>' +
-                '<span style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">' +
-                  '• <strong>5 б. (Идеал):</strong> Безупречная чистота раковин и пола в часы пик, премиальное мыло и крем для рук (Zielinski/L’Occitane), тканевые полотенца, приятный аромат.<br>' +
-                  '• <strong>4 б. (Хорошо):</strong> Чисто, качественное мыло и бумажные полотенца.<br>' +
-                  '• <strong>2–3 б. (Замечание):</strong> Переполненная корзина, мокрый пол, отсутствие крема.<br>' +
-                  '• <strong>0–1 б. (Штраф):</strong> Грязь, мокрый скользкий пол, отсутствие мыла или бумаги.' +
-                '</span>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-
-          // 7. COMPREHENSIVE PHOTO & VIDEO GUIDELINES MODULE (КАК НАДО И КАК НЕ НАДО)
+          // 4. PHOTO GUIDELINES MODULE
           '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">' +
-            '<div class="flex items-center justify-between">' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">РЕГЛАМЕНТ ФОТО- И ВИДЕОФИКСАЦИИ</span>' +
-              '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.5rem; border-radius: 0.25rem;">СТАНДАРТ КАЧЕСТВА ФОТО</span>' +
-            '</div>' +
+            '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">РЕГЛАМЕНТ ФОТО- И ВИДЕОФИКСАЦИИ</span>' +
             '<h5 style="font-size: 1.25rem; font-weight: 900; color: var(--text-main); margin: 0;">Памятка инспектора: как фотографировать заведение (Ракурсы «Как надо» и «Как не надо»)</h5>' +
-            '<p style="font-size: 0.75rem; color: var(--text-body); line-height: 1.6;">Каждая инспекция должна сопровождаться безупречными фотоматериалами. Некачественные или юридически уязвимые снимки бракуются аудиторской комиссией.</p>' +
-            
             '<div>' + svgPPhoto1 + '</div>' +
             '<div>' + svgPPhoto2 + '</div>' +
             '<div>' + svgPPhoto3 + '</div>' +
