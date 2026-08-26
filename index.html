@@ -3223,6 +3223,8 @@
         list.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.8125rem;">Входящих заявок от гостей пока нет.</div>';
       } else {
         var html = '';
+
+
         for (var i = 0; i < guestSuggestions.length; i++) {
           var s = guestSuggestions[i];
           html += '<div style="background: var(--bg-page); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1rem; display: flex; justify-content: space-between; align-items: start; gap: 1rem;">' +
@@ -3685,7 +3687,7 @@
         var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
         var fallbackUri = getVenueFallbackSvg(tv.name, tv.format, tv.city);
         var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
-        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
 
         var vibePills = (tv.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + escapeHTML(t) + '</span>'; }).join(' ');
 
@@ -3829,7 +3831,7 @@
         
         var fallbackUri = getVenueFallbackSvg(item.name, item.format, item.city);
         var coverImg = (item.photos && item.photos.length > 0) ? item.photos[0] : fallbackUri;
-        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(item.name) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(item.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
 
         var vibePills = (item.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + t + '</span>'; }).join(' ');
 
@@ -5413,6 +5415,153 @@
     window.addEventListener('DOMContentLoaded', handleUrlRouting);
 
     
+    function renderInspectorTimers() {
+      var fmtEl = document.getElementById('formFormat');
+      var fmt = fmtEl ? fmtEl.value : 'Fine Dining';
+      var grid = document.getElementById('inspectorTimersGrid');
+      if (!grid) return;
+
+      var timerConfigs = [];
+      if (fmt === 'Кофейня') {
+        timerConfigs = [
+          { id: "t_order", label: "Прием заказа", target: "≤ 1 мин" },
+          { id: "t_brew", label: "Экстракция кофе", target: "2–3 мин" },
+          { id: "t_serve", label: "Отдача напитка", target: "3–4 мин" }
+        ];
+      } else if (fmt === 'Коктейльный бар') {
+        timerConfigs = [
+          { id: "t_greet", label: "Встреча и вода", target: "≤ 1 мин" },
+          { id: "t_cocktail", label: "Отдача коктейля", target: "3–5 мин" }
+        ];
+      } else if (fmt === 'Столовая') {
+        timerConfigs = [
+          { id: "t_queue", label: "Скорость очереди", target: "≤ 3 мин" },
+          { id: "t_cash", label: "Кассовый расчет", target: "≤ 45 сек" }
+        ];
+      } else if (fmt === 'Пекарня') {
+        timerConfigs = [
+          { id: "t_checkout", label: "Обслуживание кассы", target: "≤ 1 мин" }
+        ];
+      } else {
+        timerConfigs = [
+          { id: "t_greet", label: "Встреча гостя", target: "≤ 30 сек" },
+          { id: "t_drink", label: "Подача напитков", target: "3–5 мин" },
+          { id: "t_hot", label: "Отдача горячего", target: "12–15 мин" },
+          { id: "t_bill", label: "Расчет и чек", target: "≤ 2 мин" }
+        ];
+      }
+
+      var html = '';
+      for (var i = 0; i < timerConfigs.length; i++) {
+        var tc = timerConfigs[i];
+        if (typeof activeTimerSeconds[tc.id] !== 'number') activeTimerSeconds[tc.id] = 0;
+        
+        var sec = activeTimerSeconds[tc.id];
+        var mins = Math.floor(sec / 60).toString().padStart(2, '0');
+        var secs = (sec % 60).toString().padStart(2, '0');
+
+        html += '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 0.4rem; padding: 0.65rem; text-align: center;">' +
+          '<span style="font-size: 0.625rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 0.2rem;">' + tc.label + ' (' + tc.target + ')</span>' +
+          '<div id="timer_display_' + tc.id + '" class="font-mono" style="font-size: 1.15rem; font-weight: 900; color: var(--text-main); margin-bottom: 0.35rem;">' + mins + ':' + secs + '</div>' +
+          '<div class="flex items-center justify-center gap-1">' +
+            '<button type="button" onclick="startTimer(\'' + tc.id + '\')" class="btn btn-dark" style="padding: 0.2rem 0.45rem; font-size: 0.625rem;">Старт</button>' +
+            '<button type="button" onclick="stopTimer(\'' + tc.id + '\')" class="btn btn-light" style="padding: 0.2rem 0.45rem; font-size: 0.625rem;">Стоп</button>' +
+          '</div>' +
+        '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    function startTimer(id) {
+      if (activeTimerIntervals[id]) return;
+      activeTimerIntervals[id] = setInterval(function() {
+        activeTimerSeconds[id] = (activeTimerSeconds[id] || 0) + 1;
+        var sec = activeTimerSeconds[id];
+        var mins = Math.floor(sec / 60).toString().padStart(2, '0');
+        var secs = (sec % 60).toString().padStart(2, '0');
+        var el = document.getElementById('timer_display_' + id);
+        if (el) el.innerText = mins + ':' + secs;
+      }, 1000);
+    }
+
+    function stopTimer(id) {
+      if (activeTimerIntervals[id]) {
+        clearInterval(activeTimerIntervals[id]);
+        activeTimerIntervals[id] = null;
+      }
+    }
+
+    function resetAllTimers() {
+      for (var k in activeTimerIntervals) {
+        if (activeTimerIntervals[k]) clearInterval(activeTimerIntervals[k]);
+      }
+      activeTimerIntervals = {};
+      activeTimerSeconds = {};
+      renderInspectorTimers();
+    }
+
+    
+    // LIVE STOPWATCH ENGINE (4 INSPECTION TIMERS)
+    var timerIntervals = [null, null, null, null];
+    var timerSeconds = [0, 0, 0, 0];
+    var timerRunning = [false, false, false, false];
+
+    function openStopwatchModal() {
+      openModal('stopwatchModal');
+    }
+    function closeStopwatchModal() {
+      closeModal('stopwatchModal');
+    }
+
+    function toggleTimer(slot) {
+      var idx = slot - 1;
+      var btn = document.getElementById('timerBtn' + slot);
+      if (timerRunning[idx]) {
+        clearInterval(timerIntervals[idx]);
+        timerRunning[idx] = false;
+        if (btn) {
+          btn.innerText = 'Старт';
+          btn.classList.remove('btn-gold');
+          btn.classList.add('btn-dark');
+        }
+      } else {
+        timerRunning[idx] = true;
+        if (btn) {
+          btn.innerText = 'Стоп';
+          btn.classList.remove('btn-dark');
+          btn.classList.add('btn-gold');
+        }
+        timerIntervals[idx] = setInterval(function() {
+          timerSeconds[idx]++;
+          updateTimerDisplay(slot);
+        }, 1000);
+      }
+    }
+
+    function resetTimer(slot) {
+      var idx = slot - 1;
+      clearInterval(timerIntervals[idx]);
+      timerRunning[idx] = false;
+      timerSeconds[idx] = 0;
+      var btn = document.getElementById('timerBtn' + slot);
+      if (btn) {
+        btn.innerText = 'Старт';
+        btn.classList.remove('btn-gold');
+        btn.classList.add('btn-dark');
+      }
+      updateTimerDisplay(slot);
+    }
+
+    function updateTimerDisplay(slot) {
+      var idx = slot - 1;
+      var sec = timerSeconds[idx];
+      var m = Math.floor(sec / 60);
+      var s = sec % 60;
+      var str = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+      var el = document.getElementById('timerDisplay' + slot);
+      if (el) el.innerText = str;
+    }
+
     // INTERACTIVE INSPECTOR MANUAL CATEGORY SWITCHER & RICH CONTENT
     var currentManualCategory = 'finedining';
 
@@ -5443,7 +5592,885 @@
       if (!container) return;
 
       var cat = currentManualCategory;
-      var html = `
+      var html = '';
+
+      var makeHeader = function(title, desc) {
+        return '<div style="background: linear-gradient(135deg, rgba(197,168,128,0.16) 0%, rgba(24,24,27,0.85) 100%); border: 1px solid var(--gold-deep); border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem;">' +
+          '<span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 900; color: var(--gold-deep); letter-spacing: 1px;">ПРОФЕССИОНАЛЬНЫЙ АТЛАС ТАЙНОГО АУДИТА</span>' +
+          '<h4 class="font-serif" style="font-size: 1.55rem; font-weight: 900; margin: 0.35rem 0 0.5rem; color: var(--text-main);">Полный курс тайного инспектора: ' + title + '</h4>' +
+          '<p style="font-size: 0.8125rem; color: var(--text-body); line-height: 1.65;">' + desc + '</p>' +
+        '</div>';
+      };
+
+      var svgDist = `<svg viewBox="0 0 840 400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <pattern id="grid_d" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
+    </pattern>
+    <marker id="arr_g" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8C6D37"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid_d)"/>
+
+  <!-- Badge Header -->
+  <rect x="24" y="20" width="380" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АРХИТЕКТУРНЫЙ ПЛАН: ДИСТАНЦИЯ СТОЛОВ И ПРОХОДЫ</text>
+
+  <!-- Service Corridor Central Highlight -->
+  <rect x="360" y="55" width="120" height="260" fill="#FEF3C7" opacity="0.45" rx="6"/>
+  <text x="420" y="185" text-anchor="middle" fill="#92400E" font-size="10.5" font-weight="800" letter-spacing="0.5">СЕРВИСНЫЙ ПРОХОД</text>
+  <text x="420" y="202" text-anchor="middle" fill="#B45309" font-size="9">Ширина прохода ≥ 80–90 см</text>
+
+  <!-- Table 1 (Left) -->
+  <g transform="translate(180, 185)">
+    <circle r="100" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <circle r="60" fill="#FFFFFF" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="54" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="13" font-weight="800">СТОЛ №1</text>
+    <text x="0" y="19" text-anchor="middle" fill="#71717A" font-size="9.5">Ø 90 см</text>
+    
+    <!-- Chairs with backrests -->
+    <rect x="-26" y="-92" width="52" height="16" rx="4" fill="#18181B"/>
+    <rect x="-26" y="76" width="52" height="16" rx="4" fill="#18181B"/>
+    <rect x="-92" y="-26" width="16" height="52" rx="4" fill="#18181B"/>
+    <rect x="76" y="-26" width="16" height="52" rx="4" fill="#18181B"/>
+  </g>
+
+  <!-- Table 2 (Right) -->
+  <g transform="translate(660, 185)">
+    <circle r="100" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <circle r="60" fill="#FFFFFF" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="54" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="13" font-weight="800">СТОЛ №2</text>
+    <text x="0" y="19" text-anchor="middle" fill="#71717A" font-size="9.5">Ø 90 см</text>
+    
+    <rect x="-26" y="-92" width="52" height="16" rx="4" fill="#18181B"/>
+    <rect x="-26" y="76" width="52" height="16" rx="4" fill="#18181B"/>
+    <rect x="-92" y="-26" width="16" height="52" rx="4" fill="#18181B"/>
+    <rect x="76" y="-26" width="16" height="52" rx="4" fill="#18181B"/>
+  </g>
+
+  <!-- Main Dimension Arrow -->
+  <line x1="240" y1="105" x2="600" y2="105" stroke="#8C6D37" stroke-width="2.5" marker-start="url(#arr_g)" marker-end="url(#arr_g)"/>
+  <line x1="240" y1="85" x2="240" y2="155" stroke="#8C6D37" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="600" y1="85" x2="600" y2="155" stroke="#8C6D37" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- Dimension Plaque -->
+  <rect x="340" y="86" width="160" height="38" rx="6" fill="#FFFFFF" stroke="#8C6D37" stroke-width="1.5"/>
+  <text x="420" y="103" text-anchor="middle" fill="#8C6D37" font-size="13.5" font-weight="900">≥ 1.20 – 1.50 м</text>
+  <text x="420" y="117" text-anchor="middle" fill="#18181B" font-size="8.5" font-weight="700">ЭТАЛОН PLANKA GUIDE</text>
+
+  <!-- Bottom Legend Boxes (Generous Width) -->
+  <g transform="translate(24, 345)">
+    <rect width="380" height="34" rx="5" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+    <circle cx="18" cy="17" r="6" fill="#16A34A"/>
+    <text x="32" y="21" fill="#166534" font-size="9.5" font-weight="700">≥ 1.20 м: Зона приватности и комфортной акустики (9–10 б.)</text>
+  </g>
+  <g transform="translate(436, 345)">
+    <rect width="380" height="34" rx="5" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+    <circle cx="18" cy="17" r="6" fill="#DC2626"/>
+    <text x="32" y="21" fill="#991B1B" font-size="9.5" font-weight="700">&lt; 0.90 м: Касание стульями, слышимость бесед (-3..-5 б.)</text>
+  </g>
+</svg>`;
+      var svgServ = `<svg viewBox="0 0 840 420" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <pattern id="grid_s" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
+    </pattern>
+    <marker id="arr_gold" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#C5A880"/>
+    </marker>
+    <marker id="arr_teal" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0D9488"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid_s)"/>
+
+  <!-- Badge Header -->
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">РЕСТОРАННЫЙ ЭТИКЕТ: ТРАЕКТОРИИ И СТОРОНЫ ПОДАЧИ</text>
+
+  <!-- Central Guest & Table Assembly -->
+  <g transform="translate(420, 210)">
+    <!-- Table Surface Top Edge -->
+    <rect x="-160" y="-125" width="320" height="75" rx="12" fill="#FAFAFA" stroke="#18181B" stroke-width="2.5"/>
+    
+    <!-- Table setting elements -->
+    <circle cx="0" cy="-88" r="26" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+    <circle cx="0" cy="-88" r="20" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+    
+    <!-- Left Cutlery / Bread -->
+    <line x1="-38" y1="-110" x2="-38" y2="-66" stroke="#71717A" stroke-width="3"/>
+    <circle cx="-62" cy="-102" r="11" fill="#FFFFFF" stroke="#71717A" stroke-width="1.5"/>
+    
+    <!-- Right Cutlery / Glasses -->
+    <line x1="38" y1="-110" x2="38" y2="-66" stroke="#71717A" stroke-width="3"/>
+    <circle cx="62" cy="-105" r="9" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+    <circle cx="48" cy="-112" r="7" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+
+    <!-- Guest Body & Chair -->
+    <rect x="-45" y="8" width="90" height="20" rx="6" fill="#18181B"/>
+    <ellipse cx="0" cy="-18" rx="40" ry="22" fill="#E4E4E7" stroke="#18181B" stroke-width="2"/>
+    <circle cx="0" cy="-20" r="18" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+    <text x="0" y="-15" text-anchor="middle" fill="#18181B" font-size="10" font-weight="800">ГОСТЬ</text>
+    
+    <!-- Trajectory 1: RIGHT HAND (Dish & Drinks) -->
+    <path d="M 210 25 Q 160 -70 80 -82" fill="none" stroke="#C5A880" stroke-width="3.5" marker-end="url(#arr_gold)"/>
+    <g transform="translate(190, 40)">
+      <rect x="0" y="-15" width="205" height="62" rx="6" fill="#18181B"/>
+      <text x="12" y="8" fill="#C5A880" font-size="10.5" font-weight="900">ПОДАЧА СПРАВА</text>
+      <text x="12" y="25" fill="#FAF8F5" font-size="9">• Горячие блюда и закуски</text>
+      <text x="12" y="40" fill="#FAF8F5" font-size="9">• Напитки, розлив вин и воды</text>
+    </g>
+
+    <!-- Trajectory 2: LEFT HAND (Bread & Clearing) -->
+    <path d="M -210 25 Q -160 -70 -80 -82" fill="none" stroke="#0D9488" stroke-width="3.5" marker-end="url(#arr_teal)"/>
+    <g transform="translate(-395, 40)">
+      <rect x="0" y="-15" width="205" height="62" rx="6" fill="#0F766E"/>
+      <text x="12" y="8" fill="#FFFFFF" font-size="10.5" font-weight="900">СЕРВИС СЛЕВА</text>
+      <text x="12" y="25" fill="#F0FDFA" font-size="9">• Подача хлебной тарелки и масла</text>
+      <text x="12" y="40" fill="#F0FDFA" font-size="9">• Зачистка пустых тарелок (до 60 с)</text>
+    </g>
+  </g>
+
+  <!-- Strict Rules Badges Bottom (Spacious Layout) -->
+  <g transform="translate(24, 355)">
+    <rect width="380" height="42" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+    <text x="14" y="18" fill="#991B1B" font-size="9" font-weight="800">🚫 ЗАПРЕТ ПАЛЬЦЕВОГО КОНТАКТА:</text>
+    <text x="14" y="32" fill="#7F1D1D" font-size="8.5">Не касаться обода тарелки и верхней трети чаши бокала</text>
+  </g>
+  <g transform="translate(436, 355)">
+    <rect width="380" height="42" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+    <text x="14" y="18" fill="#166534" font-size="9" font-weight="800">✓ ПРАВИЛО ЧИСТОГО СТОЛА:</text>
+    <text x="14" y="32" fill="#14532D" font-size="8.5">Пустая посуда зачищается за 60 секунд после сложенных приборов</text>
+  </g>
+</svg>`;
+      var svgTableSet = `<svg viewBox="0 0 840 400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <pattern id="grid_ts" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid_ts)"/>
+
+  <!-- Badge Header -->
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">ГЕОМЕТРИЯ СЕРВИРОВКИ СТОЛА: СТАНДАРТ FINE DINING</text>
+
+  <!-- Table Edge Line -->
+  <line x1="40" y1="325" x2="800" y2="325" stroke="#18181B" stroke-width="3"/>
+  <text x="420" y="344" text-anchor="middle" fill="#71717A" font-size="10" font-weight="700" letter-spacing="1">КРОМКА СТОЛА СО СТОРОНЫ ГОСТЯ</text>
+  <line x1="420" y1="305" x2="420" y2="325" stroke="#8C6D37" stroke-width="1.5"/>
+  <text x="435" y="318" fill="#8C6D37" font-size="9" font-weight="800">2 см</text>
+
+  <!-- 1. Center Showplate & Napkin -->
+  <g transform="translate(420, 210)">
+    <circle r="80" fill="#FAFAFA" stroke="#18181B" stroke-width="2.5"/>
+    <circle r="65" fill="#FFFFFF" stroke="#D4AF37" stroke-width="1.5"/>
+    <circle r="46" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1"/>
+    <rect x="-26" y="-38" width="52" height="76" rx="3" fill="#F4F4F5" stroke="#A1A1AA" stroke-width="1"/>
+    <line x1="0" y1="-38" x2="0" y2="38" stroke="#D4D4D8" stroke-width="1"/>
+    <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="10.5" font-weight="800">ПОДСТАНОВОЧНАЯ</text>
+    <text x="0" y="18" text-anchor="middle" fill="#18181B" font-size="9">ТАРЕЛКА (Ø30)</text>
+  </g>
+
+  <!-- 2. Left Cutlery (Forks) -->
+  <g transform="translate(295, 210)">
+    <rect x="0" y="-75" width="9" height="150" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="-3 -75 L 12 -75 L 12 -45 L 9 -35 L 0 -35 L -3 -45 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="4" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Вилка осн.</text>
+
+    <rect x="-28" y="-60" width="8" height="135" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="-31 -60 L -17 -60 L -17 -35 L -20 -27 L -28 -27 L -31 -35 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="-24" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Закусочная</text>
+  </g>
+
+  <!-- 3. Right Cutlery (Knives & Soup Spoon) -->
+  <g transform="translate(545, 210)">
+    <rect x="0" y="-75" width="8" height="150" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <path d="0 -75 Q -9 -35 0 -12 Z" fill="#D4D4D8" stroke="#18181B" stroke-width="1"/>
+    <text x="4" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Нож осн.</text>
+
+    <rect x="25" y="-65" width="8" height="140" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="29" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Закусочный</text>
+
+    <rect x="50" y="-60" width="7" height="135" rx="2" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <ellipse cx="53" cy="-50" rx="10" ry="17" fill="#E4E4E7" stroke="#18181B" stroke-width="1.5"/>
+    <text x="53" y="96" text-anchor="middle" fill="#18181B" font-size="9" font-weight="700">Ложка</text>
+  </g>
+
+  <!-- 4. Bread Plate & Butter Knife (Top Left - 10:30) -->
+  <g transform="translate(200, 105)">
+    <circle r="38" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
+    <circle r="30" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1"/>
+    <line x1="-16" y1="20" x2="24" y2="-22" stroke="#18181B" stroke-width="3"/>
+    <text x="0" y="52" text-anchor="middle" fill="#18181B" font-size="9.5" font-weight="800">ПИРОЖКОВАЯ ТАРЕЛКА</text>
+    <text x="0" y="66" text-anchor="middle" fill="#71717A" font-size="8.5">Хлеб и масло (10:30)</text>
+  </g>
+
+  <!-- 5. Glassware Trio (Top Right - 01:30) -->
+  <g transform="translate(640, 105)">
+    <circle cx="-38" cy="12" r="20" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="-38" y="16" text-anchor="middle" fill="#1E40AF" font-size="8.5" font-weight="800">ВОДА</text>
+    
+    <circle cx="12" cy="-6" r="18" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <text x="12" y="-2" text-anchor="middle" fill="#991B1B" font-size="8.5" font-weight="800">КРАСН.</text>
+    
+    <circle cx="50" cy="22" r="15" fill="#FEFCE8" stroke="#CA8A04" stroke-width="2"/>
+    <text x="50" y="26" text-anchor="middle" fill="#854D0E" font-size="8" font-weight="800">БЕЛОЕ</text>
+    
+    <text x="12" y="58" text-anchor="middle" fill="#18181B" font-size="9.5" font-weight="800">КАРТА БОКАЛОВ</text>
+    <text x="12" y="72" text-anchor="middle" fill="#71717A" font-size="8.5">Справа сверху (01:30)</text>
+  </g>
+
+  <!-- 6. Dessert Cutlery (Top Center - 12:00) -->
+  <g transform="translate(420, 100)">
+    <line x1="-32" y1="-8" x2="32" y2="-8" stroke="#18181B" stroke-width="2.5"/>
+    <ellipse cx="-26" cy="-8" rx="8" ry="6" fill="#E4E4E7" stroke="#18181B" stroke-width="1"/>
+    <line x1="-32" y1="10" x2="32" y2="10" stroke="#18181B" stroke-width="2.5"/>
+    <path d="22 6 L 32 6 L 32 14 L 22 14 Z" fill="#E4E4E7" stroke="#18181B" stroke-width="1"/>
+    <text x="0" y="30" text-anchor="middle" fill="#71717A" font-size="9" font-weight="700">Десертные приборы (12:00)</text>
+  </g>
+</svg>`;
+      var svgLight = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #18181B; border-radius: 8px; border: 1px solid #3F3F46; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <radialGradient id="lightCone" cx="50%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#FDE047" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#18181B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Header -->
+  <rect x="24" y="20" width="390" height="26" rx="4" fill="#27272A"/>
+  <text x="36" y="37" fill="#D4AF37" font-size="11" font-weight="700" letter-spacing="0.5">РАЗРЕЗ ЗАЛА: СВЕТОВОЙ КОНУС 2700K И АКУСТИКА</text>
+
+  <!-- Ceiling -->
+  <line x1="40" y1="55" x2="800" y2="55" stroke="#3F3F46" stroke-width="3"/>
+  <text x="60" y="48" fill="#71717A" font-size="9" font-weight="600">ПОТОЛОК / ЗВУКОПОГЛОЩАЮЩИЕ ПАНЕЛИ</text>
+
+  <!-- Pendant Lamp -->
+  <line x1="420" y1="55" x2="420" y2="95" stroke="#A1A1AA" stroke-width="2"/>
+  <path d="M 400 95 L 440 95 L 450 115 L 390 115 Z" fill="#C5A880"/>
+  <circle cx="420" cy="115" r="7" fill="#FEF08A"/>
+
+  <!-- Light Cone Polygon -->
+  <polygon points="420,115 250,285 590,285" fill="url(#lightCone)"/>
+  <line x1="420" y1="115" x2="250" y2="285" stroke="#FEF08A" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <line x1="420" y1="115" x2="590" y2="285" stroke="#FEF08A" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+
+  <!-- Table -->
+  <rect x="270" y="285" width="300" height="14" rx="3" fill="#FAF8F5"/>
+  <rect x="410" y="299" width="20" height="65" fill="#71717A"/>
+  <rect x="350" y="356" width="140" height="8" rx="2" fill="#52525B"/>
+
+  <!-- Plate on Table -->
+  <ellipse cx="420" cy="285" rx="36" ry="7" fill="#D4AF37"/>
+  <text x="420" y="275" text-anchor="middle" fill="#FEF08A" font-size="9.5" font-weight="800">АКЦЕНТ НА БЛЮДО</text>
+
+  <!-- Guest Silhouettes in soft shadow -->
+  <g transform="translate(190, 250)">
+    <circle cx="0" cy="-22" r="18" fill="#3F3F46"/>
+    <path d="M -26 18 C -26 -6 26 -6 26 18 Z" fill="#27272A"/>
+    <text x="0" y="36" text-anchor="middle" fill="#A1A1AA" font-size="8.5">Мягкая полутень</text>
+  </g>
+  <g transform="translate(650, 250)">
+    <circle cx="0" cy="-22" r="18" fill="#3F3F46"/>
+    <path d="M -26 18 C -26 -6 26 -6 26 18 Z" fill="#27272A"/>
+    <text x="0" y="36" text-anchor="middle" fill="#A1A1AA" font-size="8.5">Без ослепления</text>
+  </g>
+
+  <!-- Noise Decibel Meter Badge Left -->
+  <g transform="translate(30, 150)">
+    <rect width="170" height="64" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+    <text x="14" y="22" fill="#86EFAC" font-size="13" font-weight="900">≤ 65 дБ</text>
+    <text x="14" y="38" fill="#FAF8F5" font-size="9" font-weight="700">АКУСТИЧЕСКИЙ НОРМАТИВ</text>
+    <text x="14" y="52" fill="#A1A1AA" font-size="8">Разговор вполголоса при 100%</text>
+  </g>
+
+  <!-- Lighting Specs Badge Right -->
+  <g transform="translate(640, 150)">
+    <rect width="170" height="64" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+    <text x="14" y="22" fill="#FDE047" font-size="13" font-weight="900">2700K • Угол 35°</text>
+    <text x="14" y="38" fill="#FAF8F5" font-size="9" font-weight="700">ТЕПЛЫЙ СПЕКТР СВЕТА</text>
+    <text x="14" y="52" fill="#A1A1AA" font-size="8">Фокус на цвет и текстуру еды</text>
+  </g>
+</svg>`;
+      var svgDish = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs>
+    <pattern id="grid_da" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid_da)"/>
+
+  <!-- Badge Header -->
+  <rect x="24" y="20" width="390" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АНАТОМИЯ БЛЮДА: СРЕЗ ВКУСА, ТЕКСТУРЫ И ТЕМПЕРАТУРА</text>
+
+  <!-- Designer Ceramic Plate -->
+  <g transform="translate(420, 220)">
+    <path d="M -260 45 Q -190 85 0 85 Q 190 85 260 45 Q 270 40 260 35 Q 180 70 0 70 Q -180 70 -260 35 Z" fill="#18181B"/>
+    <ellipse cx="0" cy="35" rx="260" ry="28" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
+    <ellipse cx="0" cy="35" rx="200" ry="20" fill="#F4F4F5" stroke="#E4E4E7" stroke-width="1"/>
+
+    <!-- Layer 1: Silky Sauce Base (35%) -->
+    <path d="M -120 36 Q 0 50 120 34 Q 60 20 -120 36 Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
+    
+    <!-- Layer 2: Main Juicy Core (50%) -->
+    <path d="M -80 30 C -80 6 80 6 80 30 C 80 40 -80 40 -80 30 Z" fill="#F87171" stroke="#DC2626" stroke-width="2"/>
+    <ellipse cx="0" cy="25" rx="55" ry="11" fill="#EF4444"/>
+    <ellipse cx="0" cy="25" rx="36" ry="7" fill="#DC2626"/>
+
+    <!-- Layer 3: Crisp Texture / Herbs (15%) -->
+    <path d="M -40 4 L -12 -28 L 18 -20 L 45 6 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <circle cx="-10" cy="-6" r="3.5" fill="#16A34A"/>
+    <circle cx="14" cy="-9" r="4.5" fill="#16A34A"/>
+    <circle cx="3" cy="1" r="3" fill="#16A34A"/>
+
+    <!-- Temperature Probe Pointer -->
+    <line x1="-140" y1="-55" x2="-25" y2="22" stroke="#DC2626" stroke-width="2"/>
+    <circle cx="-25" cy="22" r="4" fill="#DC2626"/>
+    <g transform="translate(-290, -95)">
+      <rect width="155" height="46" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="14" y="20" fill="#DC2626" font-size="12" font-weight="900">52–54°C</text>
+      <text x="14" y="35" fill="#991B1B" font-size="9" font-weight="700">ТЕМПЕРАТУРА ЯДРА</text>
+    </g>
+
+    <!-- Texture Rule 1: Crisp -->
+    <line x1="35" y1="-22" x2="140" y2="-65" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(145, -95)">
+      <rect width="145" height="42" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1"/>
+      <text x="12" y="18" fill="#B45309" font-size="10" font-weight="800">1. ХРУСТ (15%)</text>
+      <text x="12" y="32" fill="#78350F" font-size="8.5">Чипсы, краст, орехи</text>
+    </g>
+
+    <!-- Texture Rule 2: Sauce -->
+    <line x1="90" y1="38" x2="160" y2="75" stroke="#CA8A04" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(165, 65)">
+      <rect width="150" height="42" rx="6" fill="#FEFCE8" stroke="#CA8A04" stroke-width="1"/>
+      <text x="12" y="18" fill="#854D0E" font-size="10" font-weight="800">2. ШЕЛКОВИСТОСТЬ (35%)</text>
+      <text x="12" y="32" fill="#713F12" font-size="8.5">Эмульсия, баланс умами</text>
+    </g>
+
+    <!-- Plate Rim Cleanliness -->
+    <line x1="-190" y1="36" x2="-190" y2="75" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <g transform="translate(-260, 65)">
+      <rect width="155" height="42" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1"/>
+      <text x="12" y="18" fill="#166534" font-size="10" font-weight="800">3. ZERO DROPS (100%)</text>
+      <text x="12" y="32" fill="#14532D" font-size="8.5">Стерильная кромка борта</text>
+    </g>
+  </g>
+</svg>`;
+      var svgBKitchen = `<svg viewBox="0 0 840 400" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <defs><pattern id="grid_bk" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#F4F4F5" stroke-width="1"/></pattern></defs>
+  <rect width="100%" height="100%" fill="url(#grid_bk)"/>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">ПЛАН БИСТРО: ОТКРЫТАЯ КУХНЯ, РАЗДАЧА И ЗАЛ</text>
+  <g transform="translate(40, 65)">
+    <rect width="760" height="95" rx="6" fill="#F4F4F5" stroke="#18181B" stroke-width="2"/>
+    <text x="20" y="24" fill="#18181B" font-size="11" font-weight="800">ЗОНА ОТКРЫТОЙ КУХНИ (OPEN KITCHEN PASS)</text>
+    <rect x="20" y="35" width="150" height="48" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <text x="95" y="58" text-anchor="middle" fill="#B45309" font-size="9.5" font-weight="900">ДРОВЯНАЯ ПЕЧЬ</text>
+    <text x="95" y="72" text-anchor="middle" fill="#78350F" font-size="8">350–400°C Живой огонь</text>
+    <rect x="190" y="35" width="170" height="48" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+    <text x="275" y="58" text-anchor="middle" fill="#991B1B" font-size="9.5" font-weight="900">РОБУСТА ГРИЛЬ &amp; ХОСПЕР</text>
+    <text x="275" y="72" text-anchor="middle" fill="#7F1D1D" font-size="8">Чистота решеток и вытяжки</text>
+    <rect x="380" y="35" width="360" height="48" rx="4" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+    <text x="560" y="58" text-anchor="middle" fill="#166534" font-size="9.5" font-weight="900">ЛИНИЯ РАЗДАЧИ И ТЕПЛОВОЙ МОСТ (PASS)</text>
+    <text x="560" y="72" text-anchor="middle" fill="#14532D" font-size="8">Синхронная отдача горячего за 12–15 мин • Zero drops</text>
+  </g>
+  <rect x="40" y="170" width="760" height="40" fill="#FEF3C7" opacity="0.4" rx="4"/>
+  <text x="420" y="195" text-anchor="middle" fill="#92400E" font-size="10" font-weight="800" letter-spacing="0.5">СЕРВИСНЫЙ ПРОХОД ОФИЦИАНТОВ (ШИРИНА ≥ 90 см)</text>
+  <g transform="translate(40, 225)">
+    <g transform="translate(100, 50)">
+      <circle r="45" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+      <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="11" font-weight="800">СТОЛ 1</text>
+      <rect x="-18" y="-62" width="36" height="12" rx="3" fill="#18181B"/><rect x="-18" y="50" width="36" height="12" rx="3" fill="#18181B"/>
+      <rect x="-62" y="-18" width="12" height="36" rx="3" fill="#18181B"/><rect x="50" y="-18" width="12" height="36" rx="3" fill="#18181B"/>
+    </g>
+    <g transform="translate(380, 50)">
+      <circle r="45" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+      <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="11" font-weight="800">СТОЛ 2</text>
+      <rect x="-18" y="-62" width="36" height="12" rx="3" fill="#18181B"/><rect x="-18" y="50" width="36" height="12" rx="3" fill="#18181B"/>
+      <rect x="-62" y="-18" width="12" height="36" rx="3" fill="#18181B"/><rect x="50" y="-18" width="12" height="36" rx="3" fill="#18181B"/>
+    </g>
+    <g transform="translate(660, 50)">
+      <circle r="45" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+      <text x="0" y="4" text-anchor="middle" fill="#18181B" font-size="11" font-weight="800">СТОЛ 3</text>
+      <rect x="-18" y="-62" width="36" height="12" rx="3" fill="#18181B"/><rect x="-18" y="50" width="36" height="12" rx="3" fill="#18181B"/>
+      <rect x="-62" y="-18" width="12" height="36" rx="3" fill="#18181B"/><rect x="50" y="-18" width="12" height="36" rx="3" fill="#18181B"/>
+    </g>
+    <line x1="150" y1="10" x2="330" y2="10" stroke="#8C6D37" stroke-width="2"/>
+    <text x="240" y="5" text-anchor="middle" fill="#8C6D37" font-size="10" font-weight="900">≥ 1.10 – 1.20 м</text>
+  </g>
+  <g transform="translate(24, 355)">
+    <rect width="380" height="32" rx="4" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="14" y="20" fill="#166534" font-size="9" font-weight="700">✓ ПОРЯДОК НА ОТКРЫТОЙ КУХНЕ: Чистые фартуки, порядок на столах</text>
+  </g>
+  <g transform="translate(436, 355)">
+    <rect width="380" height="32" rx="4" fill="#FEF3C7" stroke="#FDE68A"/>
+    <text x="14" y="20" fill="#92400E" font-size="9" font-weight="700">⚡ СКОРОСТЬ КУХНИ: Горячее 12–15 мин, пицца из печи за 8–10 мин</text>
+  </g>
+</svg>`;
+      var svgBOven = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="440" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">АНАТОМИЯ ВЫПЕЧКИ ИЗ ДРОВЯНОЙ ПЕЧИ: СРЕЗ БОРТА</text>
+  <g transform="translate(40, 70)">
+    <rect width="360" height="280" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#8C6D37" font-size="12" font-weight="800">1. СРЕЗ БОРТА ПИЦЦЫ («CANOTTO»)</text>
+    <g transform="translate(180, 125)">
+      <path d="M -110 35 Q 0 -55 110 35 Q 0 65 -110 35 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+      <ellipse cx="-70" cy="15" rx="8" ry="5" fill="#18181B"/><ellipse cx="-20" cy="-20" rx="10" ry="6" fill="#18181B"/>
+      <ellipse cx="40" cy="-15" rx="7" ry="4" fill="#18181B"/><ellipse cx="75" cy="18" rx="9" ry="5" fill="#18181B"/>
+      <circle cx="-40" cy="8" r="14" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <circle cx="0" cy="-5" r="18" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <circle cx="45" cy="5" r="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+    </g>
+    <text x="20" y="215" fill="#18181B" font-size="10" font-weight="700">• Ферментация: 24–48 ч (легкость для пищеварения)</text>
+    <text x="20" y="235" fill="#18181B" font-size="10" font-weight="700">• Леопардовый колер: мелкие пятна пропекания</text>
+    <text x="20" y="255" fill="#18181B" font-size="10" font-weight="700">• Текстура: воздушный упругий борт без клейкости</text>
+  </g>
+  <g transform="translate(430, 70)">
+    <rect width="370" height="280" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#8C6D37" font-size="12" font-weight="800">2. ГРИЛЬ &amp; ПОДАЧА «В СТОЛ» (SHARING)</text>
+    <g transform="translate(185, 125)">
+      <ellipse cx="0" cy="15" rx="120" ry="35" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
+      <rect x="-70" y="0" width="140" height="25" rx="6" fill="#F87171" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="0" y="16" text-anchor="middle" fill="#991B1B" font-size="9.5" font-weight="900">ТОМЛЕНОЕ РЕБРО / ТАРТАР</text>
+    </g>
+    <text x="20" y="215" fill="#18181B" font-size="10" font-weight="700">• Формат Sharing: сервировочные приборы к каждому блюду</text>
+    <text x="20" y="235" fill="#18181B" font-size="10" font-weight="700">• Температура: горячая сковорода/чугун на подставке</text>
+    <text x="20" y="255" fill="#18181B" font-size="10" font-weight="700">• Зачистка: пустая посуда убирается за 90 секунд</text>
+  </g>
+</svg>`;
+      var svgCoffee = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">СТАНДАРТ СПЕШЕЛТИ-КОФЕ: ЭКСТРАКЦИЯ И МОЛОКО</text>
+
+  <!-- 3 Parameter Cards -->
+  <g transform="translate(24, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="120" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">1. ЭКСТРАКЦИЯ</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">25–30 секунд</text>
+    <text x="16" y="82" fill="#71717A" font-size="9">Brew Ratio: 1:2 (18г in / 36г out)</text>
+    <text x="16" y="105" fill="#18181B" font-size="10" font-weight="700">• Вода: TDS 75–120 ppm</text>
+    <text x="16" y="125" fill="#18181B" font-size="10" font-weight="700">• Температура бойлера: 92–94°C</text>
+    <text x="16" y="145" fill="#18181B" font-size="10" font-weight="700">• Зерно: свежая обжарка 7–35 дней</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="26" y="190" fill="#166534" font-size="9" font-weight="800">✓ ЭТАЛОН ПЛАНКИ (30–35 б.):</text>
+    <text x="26" y="206" fill="#14532D" font-size="8.5">Чистая сладость, кислотность спелых ягод,</text>
+    <text x="26" y="220" fill="#14532D" font-size="8.5">отсутствие зольности и горечи.</text>
+  </g>
+
+  <g transform="translate(295, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="120" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">2. МИКРОПЕНА</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">60–65°C Глянец</text>
+    <text x="16" y="82" fill="#71717A" font-size="9">Шелковистая текстура без пузырей</text>
+    <text x="16" y="105" fill="#18181B" font-size="10" font-weight="700">• Молоко: цельное 3.2% или овсяное</text>
+    <text x="16" y="125" fill="#18181B" font-size="10" font-weight="700">• Латте-арт: симметричный рисунок</text>
+    <text x="16" y="145" fill="#18181B" font-size="10" font-weight="700">• Посуда: Loveramics / Acme</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <text x="26" y="190" fill="#991B1B" font-size="9" font-weight="800">🚫 ШТРАФ ЗА ПЕРЕГРЕВ (&gt;70°C):</text>
+    <text x="26" y="206" fill="#7F1D1D" font-size="8.5">Разрушение молочных сахаров,</text>
+    <text x="26" y="220" fill="#7F1D1D" font-size="8.5">привкус кипяченого молока (-4 б.).</text>
+  </g>
+
+  <g transform="translate(565, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="135" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">3. НОУТБУК &amp; СРЕДА</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">Розетки ≥ 50%</text>
+    <text x="16" y="82" fill="#71717A" font-size="9">Высота столов: ровно 75 см</text>
+    <text x="16" y="105" fill="#18181B" font-size="10" font-weight="700">• Wi-Fi: от 50 Мбит/с без сбоев</text>
+    <text x="16" y="125" fill="#18181B" font-size="10" font-weight="700">• Акустика: ненавязчивый инди-лоуфай</text>
+    <text x="16" y="145" fill="#18181B" font-size="10" font-weight="700">• Питьевая вода: бесплатный кувшин</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="26" y="190" fill="#166534" font-size="9" font-weight="800">✓ СТАНДАРТ ТРЕТЬЕГО МЕСТА:</text>
+    <text x="26" y="206" fill="#14532D" font-size="8.5">Возможность комфортной работы</text>
+    <text x="26" y="220" fill="#14532D" font-size="8.5">без косых взглядов персонала.</text>
+  </g>
+</svg>`;
+      var svgBar = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #18181B; border-radius: 8px; border: 1px solid #3F3F46; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#18181B"/>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#27272A"/>
+  <text x="36" y="37" fill="#D4AF37" font-size="11" font-weight="700" letter-spacing="0.5">СТАНДАРТ БАРОВ: МОНОЛИТНЫЙ ЛЕД И МИКСОЛОГИЯ</text>
+
+  <!-- Left: Ice Block Diagram -->
+  <g transform="translate(60, 80)">
+    <rect width="320" height="260" rx="8" fill="#27272A" stroke="#3F3F46"/>
+    <text x="20" y="32" fill="#D4AF37" font-size="12" font-weight="800">1. МОНОЛИТНЫЙ КРИСТАЛЬНЫЙ ЛЕД</text>
+    <text x="20" y="50" fill="#A1A1AA" font-size="9">Блочное вымораживание (Zero bubbles)</text>
+    
+    <!-- 3D Ice Cube Vector -->
+    <g transform="translate(160, 140)">
+      <polygon points="0,-45 45,-20 0,5 -45,-20" fill="#BAE6FD" stroke="#38BDF8" stroke-width="1.5" opacity="0.9"/>
+      <polygon points="-45,-20 0,5 0,55 -45,30" fill="#7DD3FC" stroke="#0284C7" stroke-width="1.5" opacity="0.8"/>
+      <polygon points="45,-20 0,5 0,55 45,30" fill="#38BDF8" stroke="#0284C7" stroke-width="1.5" opacity="0.85"/>
+      <text x="0" y="15" text-anchor="middle" fill="#0C4A6E" font-size="11" font-weight="900">5×5 см</text>
+    </g>
+    <text x="20" y="235" fill="#FAF8F5" font-size="9">• Чистая вода без запахов морозильной камеры</text>
+    <text x="20" y="250" fill="#FAF8F5" font-size="9">• Минимальное разбавление (медленный таяние)</text>
+  </g>
+
+  <!-- Right: Balance Triangle & Speed -->
+  <g transform="translate(430, 80)">
+    <rect width="350" height="260" rx="8" fill="#27272A" stroke="#3F3F46"/>
+    <text x="20" y="32" fill="#D4AF37" font-size="12" font-weight="800">2. БАЛАНС МИКСОЛОГИИ И СКОРОСТЬ</text>
+    <text x="20" y="50" fill="#A1A1AA" font-size="9">Тайминг отдачи первого коктейля: до 3–4 мин</text>
+    
+    <!-- Cocktail Balance Triangle -->
+    <polygon points="175,90 85,175 265,175" fill="none" stroke="#D4AF37" stroke-width="2"/>
+    <circle cx="175" cy="90" r="6" fill="#FDE047"/>
+    <text x="175" y="80" text-anchor="middle" fill="#FEF08A" font-size="9.5" font-weight="800">SPIRIT (Крепость)</text>
+    
+    <circle cx="85" cy="175" r="6" fill="#F87171"/>
+    <text x="75" y="195" text-anchor="middle" fill="#FCA5A5" font-size="9.5" font-weight="800">SOUR (Кислотность)</text>
+    
+    <circle cx="265" cy="175" r="6" fill="#60A5FA"/>
+    <text x="275" y="195" text-anchor="middle" fill="#93C5FD" font-size="9.5" font-weight="800">SWEET (Сладость)</text>
+
+    <text x="20" y="235" fill="#FAF8F5" font-size="9">• Предварительное охлаждение бокала до -5°C</text>
+    <text x="20" y="250" fill="#FAF8F5" font-size="9">• Авторские кордиалы и бесплатная вода гостю</text>
+  </g>
+</svg>`;
+      var svgBarStation = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #18181B; border-radius: 8px; border: 1px solid #3F3F46; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#18181B"/>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#27272A"/>
+  <text x="36" y="37" fill="#D4AF37" font-size="11" font-weight="700" letter-spacing="0.5">ЭРГОНОМИКА БАРНОЙ СТОЙКИ И СТАНЦИИ СПИКИЗИ</text>
+  <g transform="translate(40, 65)">
+    <rect width="760" height="95" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="2"/>
+    <text x="20" y="24" fill="#D4AF37" font-size="11" font-weight="800">БАРНАЯ СТАНЦИЯ (COCKTAIL WORKSTATION)</text>
+    <rect x="20" y="35" width="170" height="48" rx="4" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="105" y="58" text-anchor="middle" fill="#38BDF8" font-size="9.5" font-weight="900">СПИДРАК &amp; ЛЕДОГЕНЕРАТОР</text>
+    <text x="105" y="72" text-anchor="middle" fill="#BAE6FD" font-size="8">Монолитный прозрачный лед 5х5</text>
+    <rect x="210" y="35" width="180" height="48" rx="4" fill="#0F172A" stroke="#C5A880" stroke-width="1.5"/>
+    <text x="300" y="58" text-anchor="middle" fill="#C5A880" font-size="9.5" font-weight="900">БАРНЫЙ КОВРИК &amp; ДЖИГГЕРЫ</text>
+    <text x="300" y="72" text-anchor="middle" fill="#D4CEBE" font-size="8">Стерильность и промывка после смешивания</text>
+    <rect x="410" y="35" width="330" height="48" rx="4" fill="#0F172A" stroke="#10B981" stroke-width="1.5"/>
+    <text x="575" y="58" text-anchor="middle" fill="#10B981" font-size="9.5" font-weight="900">КОНТАКТНАЯ ЗОНА ГОСТЯ (BAR TOP)</text>
+    <text x="575" y="72" text-anchor="middle" fill="#6EE7B7" font-size="8">Ширина столешницы 60 см • Бесплатная вода</text>
+  </g>
+  <g transform="translate(40, 185)">
+    <rect width="760" height="150" rx="6" fill="#27272A" stroke="#3F3F46" stroke-width="1.5"/>
+    <text x="20" y="24" fill="#FAF8F5" font-size="10.5" font-weight="800">ПОСАДКА ЗА БАРНОЙ СТОЙКОЙ (ВЫСОТА СТУЛЬЕВ 75 СМ)</text>
+    <g transform="translate(140, 75)"><circle r="26" fill="#18181B" stroke="#D4AF37" stroke-width="2"/><circle r="18" fill="#27272A"/><text x="0" y="4" text-anchor="middle" fill="#FAF8F5" font-size="9" font-weight="800">МЕСТО 1</text></g>
+    <g transform="translate(380, 75)"><circle r="26" fill="#18181B" stroke="#D4AF37" stroke-width="2"/><circle r="18" fill="#27272A"/><text x="0" y="4" text-anchor="middle" fill="#FAF8F5" font-size="9" font-weight="800">МЕСТО 2</text></g>
+    <g transform="translate(620, 75)"><circle r="26" fill="#18181B" stroke="#D4AF37" stroke-width="2"/><circle r="18" fill="#27272A"/><text x="0" y="4" text-anchor="middle" fill="#FAF8F5" font-size="9" font-weight="800">МЕСТО 3</text></g>
+    <line x1="180" y1="75" x2="340" y2="75" stroke="#C5A880" stroke-width="2"/>
+    <text x="260" y="70" text-anchor="middle" fill="#D4AF37" font-size="10" font-weight="900">≥ 70–80 см</text>
+    <line x1="420" y1="75" x2="580" y2="75" stroke="#C5A880" stroke-width="2"/>
+    <text x="500" y="70" text-anchor="middle" fill="#D4AF37" font-size="10" font-weight="900">≥ 70–80 см</text>
+  </g>
+</svg>`;
+      var svgBakery = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="410" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">СТАНДАРТ ПЕКАРЕН: СЛОИСТОСТЬ И ЗАКВАСКИ</text>
+
+  <!-- Left: Croissant Anatomy -->
+  <g transform="translate(40, 70)">
+    <rect width="360" height="280" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#8C6D37" font-size="12" font-weight="800">1. АНАТОМИЯ СРЕЗА КРУАССАНА</text>
+    
+    <!-- Honeycomb crumb vector -->
+    <g transform="translate(180, 125)">
+      <!-- Outer croissant crust -->
+      <path d="M -120 40 Q 0 -60 120 40 Q 0 70 -120 40 Z" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+      <!-- Honeycomb cells inside -->
+      <ellipse cx="-40" cy="5" rx="18" ry="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <ellipse cx="0" cy="-8" rx="22" ry="15" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <ellipse cx="45" cy="8" rx="16" ry="11" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <ellipse cx="-15" cy="22" rx="14" ry="9" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+      <ellipse cx="25" cy="20" rx="15" ry="10" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+    </g>
+    <text x="20" y="215" fill="#18181B" font-size="10" font-weight="700">• Сливочное масло: строго 82.5% (без маргарина)</text>
+    <text x="20" y="235" fill="#18181B" font-size="10" font-weight="700">• Мякиш: ячеистая структура «honeycomb»</text>
+    <text x="20" y="255" fill="#18181B" font-size="10" font-weight="700">• Звуковой тест: звонкий хруст при сжатии</text>
+  </g>
+
+  <!-- Right: Sourdough Bread & Transparency -->
+  <g transform="translate(430, 70)">
+    <rect width="370" height="280" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#8C6D37" font-size="12" font-weight="800">2. ХЛЕБ НА ЗАКВАСКЕ И ЧЕСТНЫЙ ВЕС</text>
+    
+    <g transform="translate(185, 125)">
+      <!-- Sourdough loaf cross section -->
+      <path d="M -110 40 Q 0 -50 110 40 Z" fill="#FEF3C7" stroke="#78350F" stroke-width="2.5"/>
+      <!-- Sourdough air pockets -->
+      <circle cx="-50" cy="15" r="9" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="-10" cy="-5" r="14" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="40" cy="10" r="11" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="15" cy="22" r="8" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+    </g>
+    <text x="20" y="215" fill="#18181B" font-size="10" font-weight="700">• Ферментация: холодная расстойка 18–24 часа</text>
+    <text x="20" y="235" fill="#18181B" font-size="10" font-weight="700">• Вес: честный выход буханки в граммах (±5%)</text>
+    <text x="20" y="255" fill="#18181B" font-size="10" font-weight="700">• Санитария: индивидуальные щипцы и крафт-пакет</text>
+  </g>
+</svg>`;
+      var svgBakeryBread = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="440" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">ЗАКВАСОЧНЫЙ ХЛЕБ: СТРУКТУРА ПОР И ФЕРМЕНТАЦИЯ</text>
+  <g transform="translate(40, 70)">
+    <rect width="360" height="280" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#8C6D37" font-size="12" font-weight="800">1. СТРУКТУРА МЯКИША (TARTINE STYLE)</text>
+    <g transform="translate(180, 125)">
+      <path d="M -110 40 Q 0 -55 110 40 Z" fill="#FEF3C7" stroke="#78350F" stroke-width="2.5"/>
+      <circle cx="-55" cy="18" r="10" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="-15" cy="-5" r="16" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="45" cy="12" r="12" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+      <circle cx="15" cy="24" r="9" fill="#FFFFFF" stroke="#78350F" stroke-width="1.5"/>
+    </g>
+    <text x="20" y="215" fill="#18181B" font-size="10" font-weight="700">• Закваска: Levain 100% гидратации</text>
+    <text x="20" y="235" fill="#18181B" font-size="10" font-weight="700">• Пористость: крупные глянцевые ячейки</text>
+    <text x="20" y="255" fill="#18181B" font-size="10" font-weight="700">• Корка: темно-карамельная с микротрещинами</text>
+  </g>
+  <g transform="translate(430, 70)">
+    <rect width="370" height="280" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#8C6D37" font-size="12" font-weight="800">2. ВИТРИНА И САНИТАРИЯ ЩИПЦОВ</text>
+    <g transform="translate(185, 125)">
+      <rect x="-120" y="-30" width="240" height="60" rx="4" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+      <text x="0" y="5" text-anchor="middle" fill="#166534" font-size="11" font-weight="900">ВИТРИНА С ЗАЩИТНЫМ СТЕКЛОМ</text>
+      <text x="0" y="20" text-anchor="middle" fill="#14532D" font-size="8.5">Индивидуальные щипцы / перчатки</text>
+    </g>
+    <text x="20" y="215" fill="#18181B" font-size="10" font-weight="700">• Упаковка: крафт-пакеты (сохранение хруста)</text>
+    <text x="20" y="235" fill="#18181B" font-size="10" font-weight="700">• Контроль веса: весы на кассе (±5%)</text>
+    <text x="20" y="255" fill="#18181B" font-size="10" font-weight="700">• Свежесть: утренний замес (до 4–6 часов)</text>
+  </g>
+</svg>`;
+      var svgCanteen = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="430" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">СТАНДАРТ FAST CASUAL: МАРМИТЫ И ЛИНИЯ ПОДНОСОВ</text>
+
+  <!-- 3 Streamlined Stage Cards -->
+  <g transform="translate(24, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="130" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">1. ТЕМПЕРАТУРА</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">Мармиты</text>
+    <text x="16" y="95" fill="#DC2626" font-size="11" font-weight="800">• Первые блюда: ≥ 75°C</text>
+    <text x="16" y="115" fill="#EA580C" font-size="11" font-weight="800">• Вторые блюда: ≥ 65°C</text>
+    <text x="16" y="135" fill="#2563EB" font-size="11" font-weight="800">• Холодные салаты: ≤ 4–6°C</text>
+    <rect x="16" y="165" width="218" height="85" rx="5" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <text x="26" y="185" fill="#991B1B" font-size="9" font-weight="800">🚫 ШТРАФ ЗА ОСТЫВШЕЕ:</text>
+    <text x="26" y="201" fill="#7F1D1D" font-size="8.5">Застывший жир на поверхности супа</text>
+    <text x="26" y="215" fill="#7F1D1D" font-size="8.5">или остывший гарнир (&lt;50°C)</text>
+    <text x="26" y="229" fill="#7F1D1D" font-size="8.5">карается снижением до 1–2 баллов.</text>
+  </g>
+
+  <g transform="translate(295, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="130" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">2. ЛИНИЯ РАЗДАЧИ</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">Ритм до 90 сек</text>
+    <text x="16" y="85" fill="#71717A" font-size="9">Время движения гостя от входа до кассы</text>
+    <text x="16" y="110" fill="#18181B" font-size="10" font-weight="700">• Скорость нарезки и выдачи</text>
+    <text x="16" y="130" fill="#18181B" font-size="10" font-weight="700">• Прозрачные ценники с граммовкой</text>
+    <text x="16" y="150" fill="#18181B" font-size="10" font-weight="700">• Защитные стеклянные экраны</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="26" y="190" fill="#166534" font-size="9" font-weight="800">✓ ЭТАЛОННАЯ ЛОГИСТИКА:</text>
+    <text x="26" y="206" fill="#14532D" font-size="8.5">Очередь двигается непрерывно,</text>
+    <text x="26" y="220" fill="#14532D" font-size="8.5">без задержек на весовом контроле.</text>
+  </g>
+
+  <g transform="translate(565, 70)">
+    <rect width="250" height="270" rx="8" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <rect x="16" y="16" width="135" height="22" rx="4" fill="#18181B"/>
+    <text x="24" y="31" fill="#D4AF37" font-size="9.5" font-weight="800">3. САНИТАРИЯ</text>
+    <text x="16" y="65" fill="#18181B" font-size="13" font-weight="800">Сухие подносы</text>
+    <text x="16" y="85" fill="#71717A" font-size="9">Стерильность приборов и столов</text>
+    <text x="16" y="110" fill="#18181B" font-size="10" font-weight="700">• Подносы: сухие, без жирной пленки</text>
+    <text x="16" y="130" fill="#18181B" font-size="10" font-weight="700">• Приборы: в индивидуальных конвертах</text>
+    <text x="16" y="150" fill="#18181B" font-size="10" font-weight="700">• Уборка стола: в течение 90 секунд</text>
+    <rect x="16" y="170" width="218" height="80" rx="5" fill="#F0FDF4" stroke="#86EFAC"/>
+    <text x="26" y="190" fill="#166534" font-size="9" font-weight="800">✓ БЕЗОПАСНОСТЬ ГОСТЯ:</text>
+    <text x="26" y="206" fill="#14532D" font-size="8.5">Стерильные салфетки и доступный</text>
+    <text x="26" y="220" fill="#14532D" font-size="8.5">чистый санузел с горячей водой.</text>
+  </g>
+</svg>`;
+      var svgCanteenFlow = `<svg viewBox="0 0 840 380" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="24" y="20" width="440" height="26" rx="4" fill="#18181B"/>
+  <text x="36" y="37" fill="#FAF8F5" font-size="11" font-weight="700" letter-spacing="0.5">ЛОГИСТИКА ЛИНИИ РАЗДАЧИ И ТАЙМИНГ ДО 90 СЕК</text>
+  <g transform="translate(40, 75)">
+    <rect width="760" height="120" rx="8" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
+    <rect x="20" y="20" width="160" height="80" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+    <text x="100" y="48" text-anchor="middle" fill="#1D4ED8" font-size="10" font-weight="900">1. СТАНЦИЯ ПОДНОСОВ</text>
+    <text x="100" y="65" text-anchor="middle" fill="#1E40AF" font-size="8.5">Сухие подносы и приборы</text>
+    <text x="100" y="80" text-anchor="middle" fill="#1E40AF" font-size="8">Тайминг: 0–15 сек</text>
+    <rect x="200" y="20" width="170" height="80" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+    <text x="285" y="48" text-anchor="middle" fill="#B45309" font-size="10" font-weight="900">2. МАРМИТЫ И САЛАТЫ</text>
+    <text x="285" y="65" text-anchor="middle" fill="#78350F" font-size="8.5">Супы ≥75°C, салаты ≤6°C</text>
+    <text x="285" y="80" text-anchor="middle" fill="#78350F" font-size="8">Тайминг: 15–45 сек</text>
+    <rect x="390" y="20" width="170" height="80" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+    <text x="475" y="48" text-anchor="middle" fill="#991B1B" font-size="10" font-weight="900">3. ГОРЯЧИЕ БЛЮДА</text>
+    <text x="475" y="65" text-anchor="middle" fill="#7F1D1D" font-size="8.5">Мясо/гарниры ≥65°C</text>
+    <text x="475" y="80" text-anchor="middle" fill="#7F1D1D" font-size="8">Тайминг: 45–70 сек</text>
+    <rect x="580" y="20" width="160" height="80" rx="4" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+    <text x="660" y="48" text-anchor="middle" fill="#166534" font-size="10" font-weight="900">4. КАССА И РАСЧЕТ</text>
+    <text x="660" y="65" text-anchor="middle" fill="#14532D" font-size="8.5">Оплата картой / СБП / QR</text>
+    <text x="660" y="80" text-anchor="middle" fill="#14532D" font-size="8">Итог: ≤ 90 сек на гостя</text>
+  </g>
+  <g transform="translate(40, 220)">
+    <rect width="360" height="130" rx="6" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#16A34A" font-size="11" font-weight="900">✓ САНИТАРНЫЙ СТАНДАРТ ЛИНИИ:</text>
+    <text x="20" y="52" fill="#18181B" font-size="9.5">• Стеклянные защитные экраны над мармитами</text>
+    <text x="20" y="72" fill="#18181B" font-size="9.5">• Индивидуальные бумажные чехлы для приборов</text>
+    <text x="20" y="92" fill="#18181B" font-size="9.5">• Прозрачные ценники с выходом в граммах</text>
+  </g>
+  <g transform="translate(430, 220)">
+    <rect width="370" height="130" rx="6" fill="#FFFFFF" stroke="#E4E4E7" stroke-width="1.5"/>
+    <text x="20" y="30" fill="#DC2626" font-size="11" font-weight="900">🚫 КРИТИЧЕСКИЕ НАРУШЕНИЯ (-5 Б.):</text>
+    <text x="20" y="52" fill="#18181B" font-size="9.5">• Мокрые или липкие подносы с жирным налетом</text>
+    <text x="20" y="72" fill="#18181B" font-size="9.5">• Остывшие вторые блюда (&lt;50°C) с застывшим жиром</text>
+    <text x="20" y="92" fill="#18181B" font-size="9.5">• Задержка очереди на кассе свыше 3 минут</text>
+  </g>
+</svg>`;
+      
+      var svgPPhoto1 = `<svg viewBox="0 0 840 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="20" y="14" width="450" height="24" rx="4" fill="#18181B"/>
+  <text x="30" y="30" fill="#FAF8F5" font-size="10.5" font-weight="700" letter-spacing="0.5">ФОТОФИКСАЦИЯ 1: ФАСАД И ВХОДНАЯ ГРУППА</text>
+  <g transform="translate(20, 50)">
+    <rect width="390" height="210" rx="6" fill="#FFFFFF" stroke="#86EFAC" stroke-width="2"/>
+    <rect x="12" y="12" width="135" height="22" rx="4" fill="#16A34A"/>
+    <text x="20" y="27" fill="#FFFFFF" font-size="10" font-weight="800">✓ КАК НАДО (ЭТАЛОН)</text>
+    <g transform="translate(20, 50)">
+      <line x1="0" y1="90" x2="220" y2="90" stroke="#71717A" stroke-width="2"/>
+      <polygon points="40,20 180,35 180,90 40,90" fill="#E4E4E7" stroke="#18181B" stroke-width="2"/>
+      <rect x="70" y="45" width="35" height="45" fill="#FFFFFF" stroke="#18181B" stroke-width="1.5"/>
+      <text x="87" y="70" text-anchor="middle" fill="#8C6D37" font-size="7.5" font-weight="800">ВХОД</text>
+      <line x1="105" y1="90" x2="140" y2="78" stroke="#16A34A" stroke-width="2"/>
+      <g transform="translate(195, 80)"><circle cx="0" cy="0" r="10" fill="#16A34A"/><text x="0" y="3" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="900">35°</text></g>
+      <line x1="195" y1="70" x2="110" y2="55" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="3 3"/>
+    </g>
+    <g transform="translate(230, 45)">
+      <text x="0" y="16" fill="#166534" font-size="9.5" font-weight="800">• Ракурс 30–45° с тротуара</text>
+      <text x="0" y="32" fill="#18181B" font-size="8.5">• Видна вывеска и уровень входа</text>
+      <text x="0" y="48" fill="#18181B" font-size="8.5">• Фиксация пандуса / ступеней</text>
+      <text x="0" y="64" fill="#18181B" font-size="8.5">• Без крупных лиц прохожих</text>
+      <text x="0" y="80" fill="#166534" font-size="8.5" font-weight="700">(соблюдение ст. 152.1 ГК РФ)</text>
+    </g>
+  </g>
+  <g transform="translate(430, 50)">
+    <rect width="390" height="210" rx="6" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="2"/>
+    <rect x="12" y="12" width="145" height="22" rx="4" fill="#DC2626"/>
+    <text x="20" y="27" fill="#FFFFFF" font-size="10" font-weight="800">✗ КАК НЕ НАДО (БРАК)</text>
+    <g transform="translate(20, 50)">
+      <rect x="20" y="20" width="140" height="70" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+      <circle cx="90" cy="55" r="25" fill="#EF4444" opacity="0.25"/>
+      <line x1="20" y1="20" x2="160" y2="90" stroke="#DC2626" stroke-width="2"/>
+      <line x1="160" y1="20" x2="20" y2="90" stroke="#DC2626" stroke-width="2"/>
+      <text x="90" y="60" text-anchor="middle" fill="#991B1B" font-size="8.5" font-weight="800">ЗАСВЕТ / В УПОР</text>
+    </g>
+    <g transform="translate(195, 45)">
+      <text x="0" y="16" fill="#991B1B" font-size="9.5" font-weight="800">• Съемка в упор с 1 метра</text>
+      <text x="0" y="32" fill="#18181B" font-size="8.5">• Заваленный горизонт (&gt;10°)</text>
+      <text x="0" y="48" fill="#18181B" font-size="8.5">• Слепящее солнце в объектив</text>
+      <text x="0" y="64" fill="#18181B" font-size="8.5">• Лица прохожих крупным планом</text>
+      <text x="0" y="80" fill="#991B1B" font-size="8.5" font-weight="700">(риск претензий по 152.1 ГК)</text>
+    </g>
+  </g>
+</svg>`;
+      var svgPPhoto2 = `<svg viewBox="0 0 840 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="20" y="14" width="460" height="24" rx="4" fill="#18181B"/>
+  <text x="30" y="30" fill="#FAF8F5" font-size="10.5" font-weight="700" letter-spacing="0.5">ФОТОФИКСАЦИЯ 2: ГЛАВНОЕ БЛЮДО И МИКРОВИДЕО</text>
+  <g transform="translate(20, 50)">
+    <rect width="390" height="210" rx="6" fill="#FFFFFF" stroke="#86EFAC" stroke-width="2"/>
+    <rect x="12" y="12" width="135" height="22" rx="4" fill="#16A34A"/>
+    <text x="20" y="27" fill="#FFFFFF" font-size="10" font-weight="800">✓ КАК НАДО (ЭТАЛОН)</text>
+    <g transform="translate(20, 55)">
+      <ellipse cx="65" cy="55" rx="55" ry="25" fill="#FAFAFA" stroke="#18181B" stroke-width="2"/>
+      <ellipse cx="65" cy="53" rx="30" ry="12" fill="#FEF08A" stroke="#D97706" stroke-width="1.5"/>
+      <line x1="0" y1="10" x2="45" y2="40" stroke="#CA8A04" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <g transform="translate(135, 20)"><rect width="26" height="18" rx="3" fill="#16A34A"/><circle cx="13" cy="9" r="5" fill="#FFFFFF"/><text x="13" y="30" text-anchor="middle" fill="#16A34A" font-size="9" font-weight="900">45°</text></g>
+      <line x1="135" y1="30" x2="80" y2="50" stroke="#16A34A" stroke-width="1.5"/>
+    </g>
+    <g transform="translate(195, 45)">
+      <text x="0" y="16" fill="#166534" font-size="9.5" font-weight="800">• Угол съемки ровно 45°</text>
+      <text x="0" y="32" fill="#18181B" font-size="8.5">• Естественный рассеянный свет</text>
+      <text x="0" y="48" fill="#18181B" font-size="8.5">• Фокус на глянце соуса и срезе</text>
+      <text x="0" y="64" fill="#18181B" font-size="8.5">• Стерильный чистый борт тарелки</text>
+      <text x="0" y="80" fill="#166534" font-size="8.5" font-weight="700">• Микро-видео: 8–12 сек без звука</text>
+    </g>
+  </g>
+  <g transform="translate(430, 50)">
+    <rect width="390" height="210" rx="6" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="2"/>
+    <rect x="12" y="12" width="145" height="22" rx="4" fill="#DC2626"/>
+    <text x="20" y="27" fill="#FFFFFF" font-size="10" font-weight="800">✗ КАК НЕ НАДО (БРАК)</text>
+    <g transform="translate(20, 55)">
+      <circle cx="65" cy="55" r="45" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+      <polygon points="45,40 100,50 85,85 30,75" fill="#7F1D1D" opacity="0.45"/>
+      <circle cx="65" cy="55" r="12" fill="#EF4444" opacity="0.6"/>
+      <text x="65" y="58" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="900">90° ВСПЫШКА</text>
+    </g>
+    <g transform="translate(195, 45)">
+      <text x="0" y="16" fill="#991B1B" font-size="9.5" font-weight="800">• Вертикальная съемка 90°</text>
+      <text x="0" y="32" fill="#18181B" font-size="8.5">• Вспышка (белые блики жира)</text>
+      <text x="0" y="48" fill="#18181B" font-size="8.5">• Падающая тень от смартфона</text>
+      <text x="0" y="64" fill="#18181B" font-size="8.5">• Смятые салфетки на фоне</text>
+      <text x="0" y="80" fill="#991B1B" font-size="8.5" font-weight="700">• Смазанное дрожащее видео</text>
+    </g>
+  </g>
+</svg>`;
+      var svgPPhoto3 = `<svg viewBox="0 0 840 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #E4E4E7; font-family: Inter, -apple-system, sans-serif;">
+  <rect width="100%" height="100%" fill="#FAFAFA"/>
+  <rect x="20" y="14" width="460" height="24" rx="4" fill="#18181B"/>
+  <text x="30" y="30" fill="#FAF8F5" font-size="10.5" font-weight="700" letter-spacing="0.5">ФОТОФИКСАЦИЯ 3: ФИСКАЛЬНЫЙ ЧЕК И СЛУЖЕБНЫЕ ЗОНЫ</text>
+  <g transform="translate(20, 50)">
+    <rect width="390" height="210" rx="6" fill="#FFFFFF" stroke="#86EFAC" stroke-width="2"/>
+    <rect x="12" y="12" width="135" height="22" rx="4" fill="#16A34A"/>
+    <text x="20" y="27" fill="#FFFFFF" font-size="10" font-weight="800">✓ КАК НАДО (ЭТАЛОН)</text>
+    <g transform="translate(30, 45)">
+      <rect x="0" y="0" width="100" height="135" rx="3" fill="#FFFFFF" stroke="#18181B" stroke-width="1.5"/>
+      <line x1="15" y1="15" x2="85" y2="15" stroke="#18181B" stroke-width="2"/>
+      <line x1="15" y1="30" x2="85" y2="30" stroke="#71717A" stroke-width="1"/>
+      <line x1="15" y1="45" x2="85" y2="45" stroke="#71717A" stroke-width="1"/>
+      <line x1="15" y1="60" x2="85" y2="60" stroke="#71717A" stroke-width="1"/>
+      <rect x="12" y="75" width="76" height="18" rx="2" fill="#FEF3C7" stroke="#D97706"/>
+      <text x="50" y="87" text-anchor="middle" fill="#92400E" font-size="7.5" font-weight="900">ВРЕМЯ: 19:42</text>
+      <rect x="15" y="100" width="22" height="22" fill="#18181B"/>
+      <text x="45" y="115" fill="#18181B" font-size="8.5" font-weight="900">ИТОГ: 5 400 ₽</text>
+    </g>
+    <g transform="translate(165, 45)">
+      <text x="0" y="16" fill="#166534" font-size="9.5" font-weight="800">• Чек расправлен на столе</text>
+      <text x="0" y="32" fill="#18181B" font-size="8.5">• Строго параллельно камере</text>
+      <text x="0" y="48" fill="#18181B" font-size="8.5">• Четко видно время заказа (Т1/Т4)</text>
+      <text x="0" y="64" fill="#18181B" font-size="8.5">• Видны все позиции и сумма</text>
+      <text x="0" y="80" fill="#166534" font-size="8.5" font-weight="700">• Скрытый архив: санузел/кухня</text>
+    </g>
+  </g>
+  <g transform="translate(430, 50)">
+    <rect width="390" height="210" rx="6" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="2"/>
+    <rect x="12" y="12" width="145" height="22" rx="4" fill="#DC2626"/>
+    <text x="20" y="27" fill="#FFFFFF" font-size="10" font-weight="800">✗ КАК НЕ НАДО (БРАК)</text>
+    <g transform="translate(30, 45)">
+      <path d="M 10 5 L 80 15 L 95 110 L 15 130 Z" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+      <line x1="25" y1="30" x2="70" y2="40" stroke="#EF4444" stroke-width="2"/>
+      <ellipse cx="60" cy="80" rx="35" ry="20" fill="#DC2626" opacity="0.3"/>
+      <text x="50" y="85" text-anchor="middle" fill="#7F1D1D" font-size="8" font-weight="900">РАЗМЫТО / ПАЛЬЦЫ</text>
+    </g>
+    <g transform="translate(165, 45)">
+      <text x="0" y="16" fill="#991B1B" font-size="9.5" font-weight="800">• Смятый чек в руке</text>
+      <text x="0" y="32" fill="#18181B" font-size="8.5">• Пальцы закрывают сумму/время</text>
+      <text x="0" y="48" fill="#18181B" font-size="8.5">• Размытый нечитаемый шрифт</text>
+      <text x="0" y="64" fill="#18181B" font-size="8.5">• Съемка в темноте со смазом</text>
+      <text x="0" y="80" fill="#991B1B" font-size="8.5" font-weight="700">• Невозможно верифицировать чек</text>
+    </g>
+  </g>
+</svg>`;
+
+      if (cat === 'finedining' || !cat) {
+        html = `
         <!-- UNIFIED LUXURY HEADER -->
         <div style="background: linear-gradient(135deg, #18181B 0%, #27272A 100%); color: #FAF8F5; padding: 1.75rem; border-radius: 8px; border: 1px solid #3F3F46; margin-bottom: 1.75rem; box-shadow: 0 4px 20px rgba(0,0,0,0.25);">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(197, 168, 128, 0.3); padding-bottom: 1rem; margin-bottom: 1rem;">
@@ -6070,7 +7097,7 @@
           </div>
         </div>
     `;
-      if (cat === 'coffee') {
+      } else if (cat === 'coffee') {
         // COFFEE CHAPTER FULL
         html = '<div style="display: flex; flex-direction: column; gap: 2rem;">' +
           makeHeader('Спешелти-кофейни', 'Анализ спешелти-зерна свежей обжарки (SCA 84+), водоподготовки (TDS 75–120 ppm), температуры микропены (60–65°C), этикета бариста и эргономики рабочих мест.') +
@@ -6585,6 +7612,8 @@
         alert('Замеры тайминга успешно применены к чек-листу сервиса:\n' + breakdownNote);
       }
     }
+
+
 
     // Start Application
     checkTheme();
