@@ -3625,8 +3625,18 @@
 
       for (var i = 0; i < topVenues.length; i++) {
         var v = topVenues[i];
-        var imgUrl = (v.photos && v.photos.length > 0) ? v.photos[0] : '';
-        slidesHtml += '<div class="hero-slide" style="background-image: url(' + imgUrl + ');"></div>';
+        var fallback = getVenueFallbackSvg(v.name, v.format, v.city);
+        var imgUrl = (v.photos && v.photos.length > 0) ? v.photos[0] : fallback;
+
+        if (v.video) {
+          slidesHtml += '<div class="hero-slide" style="position: relative; overflow: hidden; background-color: #18181B;">' +
+            '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" style="position: absolute; top:0; left:0; width: 100%; height: 100%; object-fit: cover;" poster="' + fallback + '">' +
+              '<source src="' + escapeHTML(v.video) + '" type="video/mp4">' +
+            '</video>' +
+          '</div>';
+        } else {
+          slidesHtml += '<div class="hero-slide" style="background-image: url(' + imgUrl + '), url(' + fallback + ');"></div>';
+        }
         dotsHtml += '<div class="hero-dot ' + (i === (heroFeaturedIndex % topVenues.length) ? 'active' : '') + '" onclick="setHeroSlide(' + i + ')"></div>';
       }
 
@@ -7058,48 +7068,64 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- БЛОК 7. ПАМЯТКА ПО ФОТОФИКСАЦИИ (✓ КАК НАДО vs ✗ КАК НЕ НАДО) -->
+        <!-- БЛОК 7. ПАМЯТКА ПО ФОТОФИКСАЦИИ И АРХИТЕКТУРНЫЕ СХЕМЫ СЪЕМКИ -->
         <!-- ========================================================================= -->
         <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
             <div>
               <span style="font-size: 0.65rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #D4AF37; letter-spacing: 0.1em;">ПРОТОКОЛ ТАЙНОГО АУДИТА</span>
-              <h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.15rem 0 0 0; color: var(--text-main);">7. Памятка по фотофиксации (5 обязательных ракурсов)</h3>
+              <h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.15rem 0 0 0; color: var(--text-main);">7. Памятка по фотофиксации и схемы ракурсов съемки</h3>
             </div>
             <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Стандарт PLANKA GUIDE</span>
+          </div>
+
+          <!-- Vector Schematics for Photo Protocol -->
+          <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem;">
+            <div>
+              <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: #8C6D37; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">СХЕМА 1: ГЕОМЕТРИЯ СЪЕМКИ ФАСАДА И УЛИЧНОГО ДИАЛОГА (УГОЛ 30–45°)</span>
+              ${svgPPhoto1}
+            </div>
+            <div>
+              <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: #8C6D37; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">СХЕМА 2: СЪЕМКА ГЛАВНОГО БЛЮДА, МАКРО-СРЕЗА И МИКРОВИДЕО (8–12 СЕК)</span>
+              ${svgPPhoto2}
+            </div>
+            <div>
+              <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: #8C6D37; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">СХЕМА 3: ВНУТРЕННЯЯ ОБСТАНОВКА ЗАЛА, ДИСТАНЦИЯ СТОЛОВ И ЧЕК</span>
+              ${svgPPhoto3}
+            </div>
           </div>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
             <!-- Angle 1: Table & Plate -->
             <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 1: Фирменное блюдо (Сверху / 45°)</strong>
+              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 1: Фирменное блюдо и микровидео (45°)</strong>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #166534; background: #F0FDF4; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; border: 1px solid #BBF7D0;">
-                <strong>✓ КАК НАДО:</strong> Теплый акцентный свет на тарелку, четкий фокус на текстуре и корочке, отсутствие теней от смартфона.
+                <strong>✓ КАК НАДО:</strong> Угол 45°, теплый акцентный свет, четкий фокус на текстуре и корочке. Микровизуализация 8–12 сек без звука в движении.
               </div>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #991B1B; background: #FEF2F2; padding: 0.5rem; border-radius: 4px; border: 1px solid #FECACA;">
-                <strong>✗ КАК НЕ НАДО:</strong> Съемка со вспышкой «в лоб» (убивает объем и цвет), размытый фокус, тень от руки инспектора.
+                <strong>✗ КАК НЕ НАДО:</strong> Вспышка в лоб (убивает объем), размытый фокус, тень от смартфона или руки инспектора.
               </div>
             </div>
 
             <!-- Angle 2: Cut / Texture -->
             <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 2: Макро-срез прожарки / сочности</strong>
+              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 2: Макро-срез прожарки / сочности / теста</strong>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #166534; background: #F0FDF4; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; border: 1px solid #BBF7D0;">
-                <strong>✓ КАК НАДО:</strong> Аккуратный срез ножом по центру, демонстрация однородного розового ядра и слоистости.
+                <strong>✓ КАК НАДО:</strong> Аккуратный срез ножом по центру, демонстрация однородного розового ядра, пористости борта и сочности.
               </div>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #991B1B; background: #FEF2F2; padding: 0.5rem; border-radius: 4px; border: 1px solid #FECACA;">
-                <strong>✗ КАК НЕ НАДО:</strong> Разломанное вилкой блюдо, грязные следы соуса вокруг, нерезкий кадр.
+                <strong>✗ КАК НЕ НАДО:</strong> Разломанное вилкой блюдо, грязные следы вокруг, смазанное нерезкое фото.
               </div>
             </div>
 
             <!-- Angle 3: Table Setting & Distance -->
             <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 3: Геометрия сервировки и зал</strong>
+              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 3: Интерьер, геометрия и дистанция столов</strong>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #166534; background: #F0FDF4; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; border: 1px solid #BBF7D0;">
-                <strong>✓ КАК НАДО:</strong> Общий план стола с дистанцией до соседнего стола, выглаженная скатерть, хрусталь.
+                <strong>✓ КАК НАДО:</strong> Общий план зала со столом на переднем плане, видна дистанция до соседних столов (≥1.2 м).
               </div>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #991B1B; background: #FEF2F2; padding: 0.5rem; border-radius: 4px; border: 1px solid #FECACA;">
-                <strong>✗ КАК НЕ НАДО:</strong> Съемка лиц других гостей крупным планом (нарушение ст. 152.1 ГК РФ).
+                <strong>✗ КАК НЕ НАДО:</strong> Съемка лиц других гостей крупным планом (строгий запрет по ст. 152.1 ГК РФ).
               </div>
             </div>
 
@@ -7107,7 +7133,7 @@
             <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
               <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 4: Фискальный чек визита</strong>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #166534; background: #F0FDF4; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; border: 1px solid #BBF7D0;">
-                <strong>✓ КАК НАДО:</strong> Четкий плоский кадр чека при хорошем освещении, видны все позиции, дата, время и сумма.
+                <strong>✓ КАК НАДО:</strong> Четкий плоский снимок чека при хорошем освещении, видны все позиции, дата, время и итоговая сумма.
               </div>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #991B1B; background: #FEF2F2; padding: 0.5rem; border-radius: 4px; border: 1px solid #FECACA;">
                 <strong>✗ КАК НЕ НАДО:</strong> Смятый, засвеченный или обрезанный чек без итоговой суммы и даты.
@@ -7819,48 +7845,64 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- БЛОК 7. ПАМЯТКА ПО ФОТОФИКСАЦИИ В БИСТРО -->
+        <!-- БЛОК 7. ПАМЯТКА ПО ФОТОФИКСАЦИИ И АРХИТЕКТУРНЫЕ СХЕМЫ СЪЕМКИ -->
         <!-- ========================================================================= -->
         <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
             <div>
               <span style="font-size: 0.65rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: #D4AF37; letter-spacing: 0.1em;">ПРОТОКОЛ ТАЙНОГО АУДИТА</span>
-              <h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.15rem 0 0 0; color: var(--text-main);">7. Памятка по фотофиксации в бистро (5 обязательных ракурсов)</h3>
+              <h3 class="font-serif" style="font-size: 1.35rem; font-weight: 900; margin: 0.15rem 0 0 0; color: var(--text-main);">7. Памятка по фотофиксации и схемы ракурсов съемки</h3>
             </div>
             <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">Стандарт PLANKA GUIDE</span>
           </div>
 
+          <!-- Vector Schematics for Photo Protocol -->
+          <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem;">
+            <div>
+              <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: #8C6D37; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">СХЕМА 1: ГЕОМЕТРИЯ СЪЕМКИ ФАСАДА И УЛИЧНОГО ДИАЛОГА (УГОЛ 30–45°)</span>
+              ${svgPPhoto1}
+            </div>
+            <div>
+              <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: #8C6D37; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">СХЕМА 2: СЪЕМКА ГЛАВНОГО БЛЮДА, МАКРО-СРЕЗА И МИКРОВИДЕО (8–12 СЕК)</span>
+              ${svgPPhoto2}
+            </div>
+            <div>
+              <span style="font-size: 0.6875rem; font-family: ui-monospace, monospace; font-weight: 800; color: #8C6D37; text-transform: uppercase; display: block; margin-bottom: 0.35rem;">СХЕМА 3: ВНУТРЕННЯЯ ОБСТАНОВКА ЗАЛА, ДИСТАНЦИЯ СТОЛОВ И ЧЕК</span>
+              ${svgPPhoto3}
+            </div>
+          </div>
+
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-            <!-- Angle 1: Dish from Oven/Grill -->
+            <!-- Angle 1: Table & Plate -->
             <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 1: Блюдо из печи / гриля (угол 45°)</strong>
+              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 1: Фирменное блюдо и микровидео (45°)</strong>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #166534; background: #F0FDF4; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; border: 1px solid #BBF7D0;">
-                <strong>✓ КАК НАДО:</strong> Фокус на хрустящей корочке, расплавленном сыре или карамелизации мяса при естественном/теплом свете.
+                <strong>✓ КАК НАДО:</strong> Угол 45°, теплый акцентный свет, четкий фокус на текстуре и корочке. Микровизуализация 8–12 сек без звука в движении.
               </div>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #991B1B; background: #FEF2F2; padding: 0.5rem; border-radius: 4px; border: 1px solid #FECACA;">
-                <strong>✗ КАК НЕ НАДО:</strong> Съемка со вспышкой сверху, размытый фокус, посторонние предметы в кадре.
+                <strong>✗ КАК НЕ НАДО:</strong> Вспышка в лоб (убивает объем), размытый фокус, тень от смартфона или руки инспектора.
               </div>
             </div>
 
-            <!-- Angle 2: Cut / Crust -->
+            <!-- Angle 2: Cut / Texture -->
             <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 2: Макро-срез теста / мяса</strong>
+              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 2: Макро-срез прожарки / сочности / теста</strong>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #166534; background: #F0FDF4; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; border: 1px solid #BBF7D0;">
-                <strong>✓ КАК НАДО:</strong> Срез борта пиццы с демонстрацией крупных пор и воздушности или срез стейка.
+                <strong>✓ КАК НАДО:</strong> Аккуратный срез ножом по центру, демонстрация однородного розового ядра, пористости борта и сочности.
               </div>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #991B1B; background: #FEF2F2; padding: 0.5rem; border-radius: 4px; border: 1px solid #FECACA;">
-                <strong>✗ КАК НЕ НАДО:</strong> Раздавленный край куска, смазанное нерезкое фото.
+                <strong>✗ КАК НЕ НАДО:</strong> Разломанное вилкой блюдо, грязные следы вокруг, смазанное нерезкое фото.
               </div>
             </div>
 
-            <!-- Angle 3: Open Kitchen / Hall -->
+            <!-- Angle 3: Table Setting & Distance -->
             <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 3: Зал и открытая кухня</strong>
+              <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 3: Интерьер, геометрия и дистанция столов</strong>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #166534; background: #F0FDF4; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; border: 1px solid #BBF7D0;">
-                <strong>✓ КАК НАДО:</strong> Общий план интерьера, открытая раздача, дистанция между столами.
+                <strong>✓ КАК НАДО:</strong> Общий план зала со столом на переднем плане, видна дистанция до соседних столов (≥1.2 м).
               </div>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #991B1B; background: #FEF2F2; padding: 0.5rem; border-radius: 4px; border: 1px solid #FECACA;">
-                <strong>✗ КАК НЕ НАДО:</strong> Крупный план лиц посторонних гостей (нарушение ст. 152.1 ГК РФ).
+                <strong>✗ КАК НЕ НАДО:</strong> Съемка лиц других гостей крупным планом (строгий запрет по ст. 152.1 ГК РФ).
               </div>
             </div>
 
@@ -7868,10 +7910,10 @@
             <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
               <strong style="font-size: 0.875rem; color: var(--text-main); display: block; margin-bottom: 0.5rem;">📸 Ракурс 4: Фискальный чек визита</strong>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #166534; background: #F0FDF4; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.4rem; border: 1px solid #BBF7D0;">
-                <strong>✓ КАК НАДО:</strong> Четкий плоский снимок чека при хорошем свете с читаемыми позициями, датой и суммой.
+                <strong>✓ КАК НАДО:</strong> Четкий плоский снимок чека при хорошем освещении, видны все позиции, дата, время и итоговая сумма.
               </div>
               <div style="font-size: 0.75rem; line-height: 1.5; color: #991B1B; background: #FEF2F2; padding: 0.5rem; border-radius: 4px; border: 1px solid #FECACA;">
-                <strong>✗ КАК НЕ НАДО:</strong> Смятый, обрезанный чек без итоговой суммы и даты визита.
+                <strong>✗ КАК НЕ НАДО:</strong> Смятый, засвеченный или обрезанный чек без итоговой суммы и даты.
               </div>
             </div>
           </div>
