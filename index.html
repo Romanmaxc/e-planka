@@ -373,8 +373,7 @@
       overflow: hidden;
       background-color: #111113;
     }
-    .hero-slide-img,
-    .hero-slide-video {
+    .hero-slide-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -2255,50 +2254,42 @@
 
   <!-- MODAL: SYNC & EXPORT -->
   <div id="syncModal" class="modal-overlay" onclick="closeSyncModal()">
-    <div class="modal-box" style="max-width: 580px; padding: 2.25rem;" onclick="event.stopPropagation()">
+    <div class="modal-box" style="max-width: 540px; padding: 2.25rem;" onclick="event.stopPropagation()">
       <div class="flex items-center justify-between" style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.85rem; margin-bottom: 1.35rem;">
-        <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: inherit;">Синхронизация с Google Таблицей и базой</h3>
+        <h3 class="font-serif" style="font-size: 1.25rem; font-weight: 900; color: inherit;">Управление базой данных и публикация</h3>
         <button onclick="closeSyncModal()" type="button" style="background: var(--bg-subtle); border: none; width: 2rem; height: 2rem; border-radius: 9999px; cursor: pointer; font-weight: 900;">✕</button>
       </div>
 
       <div style="font-size: 0.8125rem; color: var(--text-body); display: flex; flex-direction: column; gap: 1.25rem;">
         
-        <!-- Google Sheets Cloud Sync Section -->
+        <!-- Google Sheets Master Database Link -->
         <div style="background: #18181B; color: #FFFFFF; padding: 1.35rem; border-radius: 0.5rem; border: 1px solid #3F3F46;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.35rem;">
-            <strong style="font-size: 0.875rem; color: #FFFFFF;">📊 Онлайн-синхронизация с Google Таблицей</strong>
-            <span style="font-size: 0.625rem; background: #27272A; color: #C5A880; font-family: ui-monospace, monospace; padding: 0.15rem 0.45rem; border-radius: 0.25rem; font-weight: 800;">GOOGLE SHEETS API</span>
+            <strong style="font-size: 0.875rem; color: #FFFFFF;">📊 Мастер-база на Google Диске</strong>
+            <span style="font-size: 0.625rem; background: #27272A; color: #C5A880; font-family: ui-monospace, monospace; padding: 0.15rem 0.45rem; border-radius: 0.25rem; font-weight: 800;">GOOGLE SHEETS</span>
           </div>
-          <p style="font-size: 0.75rem; color: #D4CEBE; line-height: 1.5; margin-bottom: 0.85rem;">
-            Единая мастер-база со всеми 19 критериями, баллами, черновиками и фото на Google Диске:
+          <p style="font-size: 0.75rem; color: #D4CEBE; line-height: 1.5; margin-bottom: 1rem;">
+            Таблица со всеми 6 специализированными калькуляторами категорий, формулами, баллами и архивом в папке <code>02_Database_Table</code>:
           </p>
-          
-          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.85rem;">
-            <a href="https://drive.google.com/file/d/1VzVhiaGymAFS-FqGyzBTq2A72wceuKv6/view?usp=drivesdk" target="_blank" class="btn btn-gold" style="flex: 1; text-align: center; text-decoration: none; font-weight: 800; font-size: 0.75rem; padding: 0.65rem;">
-              📊 Открыть мастер-базу на Диске
-            </a>
-          </div>
-
-          <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.75rem;">
-            <label style="font-size: 0.6875rem; color: #A1A1AA; font-family: ui-monospace, monospace; font-weight: 800;">URL веб-приложения Google Apps Script (Web App):</label>
-            <input type="url" id="googleScriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" style="background: #27272A; color: #FFFFFF; border: 1px solid #3F3F46; padding: 0.65rem; border-radius: 0.35rem; font-size: 0.75rem; width: 100%;">
-          </div>
-
-          <button id="btnSyncGoogleSheet" onclick="syncGoogleSheetNow()" type="button" class="btn btn-gold" style="width: 100%; font-weight: 900; padding: 0.75rem;">
-            🔄 Синхронизировать с Google Таблицей сейчас
-          </button>
+          <a href="https://drive.google.com/file/d/1VzVhiaGymAFS-FqGyzBTq2A72wceuKv6/view?usp=drivesdk" target="_blank" class="btn btn-gold" style="display: block; text-align: center; text-decoration: none; font-weight: 900; font-size: 0.8125rem; padding: 0.75rem;">
+            📊 Открыть мастер-базу на Google Диске
+          </a>
         </div>
 
-        <!-- GitHub JSON Deploy Section -->
+        <!-- GitHub Deploy Export / Import -->
         <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 0.5rem;">
           <div class="flex items-center justify-between" style="margin-bottom: 0.25rem;">
-            <strong style="color: inherit; font-size: 0.8125rem;">Экспорт / Импорт venues.json</strong>
-            <span style="font-size: 0.625rem; color: var(--text-muted); font-family: ui-monospace, monospace; font-weight: 800;">ОФЛАЙН / GITHUB</span>
+            <strong style="color: inherit; font-size: 0.8125rem;">🚀 Публикация аудитов на сайт (GitHub)</strong>
+            <span style="font-size: 0.625rem; color: var(--text-muted); font-family: ui-monospace, monospace; font-weight: 800;">СИНХРОНИЗАЦИЯ</span>
           </div>
-          <p style="font-size: 0.6875rem; color: var(--text-muted); margin-bottom: 0.65rem;">Скачайте JSON для коммита на GitHub или загрузите файл с другого устройства:</p>
+          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.85rem;">
+            Скачайте обновленный файл <code>venues.json</code> со всеми вашими черновиками и новыми аудитами и загрузите его в GitHub-репозиторий для мгновенного обновления сайта:
+          </p>
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button onclick="exportDatabaseJSON()" type="button" class="btn btn-dark" style="flex: 1; font-size: 0.75rem; padding: 0.6rem;">📥 Скачать venues.json</button>
-            <label class="btn btn-light" style="flex: 1; font-size: 0.75rem; padding: 0.6rem; text-align: center; cursor: pointer;">
+            <button onclick="exportDatabaseJSON()" type="button" class="btn btn-dark" style="flex: 1; font-size: 0.75rem; padding: 0.65rem; font-weight: 800;">
+              📥 Скачать venues.json
+            </button>
+            <label class="btn btn-light" style="flex: 1; font-size: 0.75rem; padding: 0.65rem; text-align: center; cursor: pointer; font-weight: 800;">
               📤 Загрузить JSON
               <input type="file" id="importDatabaseInput" accept=".json" onchange="importDatabaseJSON(event)" style="display: none;">
             </label>
@@ -2970,7 +2961,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v67');
+      var stored = localStorage.getItem('planka_guide_db_v68');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -2978,12 +2969,10 @@
           for (var pi = 0; pi < parsed.length; pi++) {
             existingMap[parsed[pi].id] = parsed[pi];
           }
-          // Merge initialVenues (base 10) with user-created audits/drafts
           var mergedList = [];
           for (var vi = 0; vi < initialVenues.length; vi++) {
             var baseV = initialVenues[vi];
             if (existingMap[baseV.id]) {
-              // keep local changes if any, but ensure assets are valid
               var saved = existingMap[baseV.id];
               saved.photos = baseV.photos;
               saved.video = baseV.video;
@@ -2993,7 +2982,6 @@
               mergedList.push(baseV);
             }
           }
-          // Add remaining user created drafts / audits
           for (var k in existingMap) {
             mergedList.unshift(existingMap[k]);
           }
@@ -3069,7 +3057,7 @@
 
     function saveDB() {
       try {
-        safeSetItem('planka_guide_db_v67', JSON.stringify(venues));
+        safeSetItem('planka_guide_db_v68', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
@@ -3612,9 +3600,9 @@
         var v = venues[i];
         var isDraft = (v.status === 'draft');
         if (currentDraftsOnlyFilter) {
-          if (!isDraft) continue; // In drafts filter, show ALL drafts
+          if (!isDraft) continue;
         } else {
-          if (isDraft && !isAdmin) continue; // In general catalog, show published only unless admin
+          if (isDraft && !isAdmin) continue;
         }
         if (currentFavoritesOnlyFilter && !isFavorite(v.id)) continue;
 
@@ -3725,17 +3713,9 @@
         var fallback = getVenueFallbackSvg(v.name, v.format, v.city);
         var imgUrl = (v.photos && v.photos.length > 0) ? sanitizeMediaSrc(v.photos[0]) : fallback;
 
-        if (v.video) {
-          slidesHtml += '<div class="hero-slide">' +
-            '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="hero-slide-video" poster="' + imgUrl + '">' +
-              '<source src="' + escapeHTML(v.video) + '" type="video/mp4">' +
-            '</video>' +
-          '</div>';
-        } else {
-          slidesHtml += '<div class="hero-slide">' +
-            '<img src="' + imgUrl + '" class="hero-slide-img" alt="' + escapeHTML(v.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallback + '\';">' +
-          '</div>';
-        }
+        slidesHtml += '<div class="hero-slide">' +
+          '<img src="' + imgUrl + '" class="hero-slide-img" alt="' + escapeHTML(v.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallback + '\';">' +
+        '</div>';
         dotsHtml += '<div class="hero-dot ' + (i === (heroFeaturedIndex % topVenues.length) ? 'active' : '') + '" onclick="setHeroSlide(' + i + ')"></div>';
       }
 
@@ -3840,14 +3820,7 @@
         var tv = topVenues[i];
                 var fallbackUri = getVenueFallbackSvg(tv.name, tv.format, tv.city);
         var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
-        var coverMediaHtml = '';
-        if (tv.video) {
-          coverMediaHtml = '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="card-cover-media" style="width: 100%; height: 100%; object-fit: cover; background: #111113;" poster="' + coverImg + '">' +
-            '<source src="' + escapeHTML(tv.video) + '" type="video/mp4">' +
-          '</video>';
-        } else {
-          coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
-        }
+        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
         if (tv.video) {
           coverMediaHtml = '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="card-cover-media" style="width: 100%; height: 100%; object-fit: cover; background: #111113;" poster="' + fallbackUri + '">' +
             '<source src="' + escapeHTML(tv.video) + '" type="video/mp4">' +
@@ -3900,40 +3873,15 @@
     
     // OFFLINE & UNBLOCKED LUXURY SVG PLACEHOLDER GENERATOR FOR RUSSIAN NETWORKS
     function getVenueFallbackSvg(name, format, city) {
-      var icon = '🍽';
-      var bg1 = '#18181B';
-      var bg2 = '#27272A';
-      if (format && (format.indexOf('Кофе') !== -1 || format.indexOf('кофейн') !== -1)) { icon = '☕'; bg1 = '#2A1E17'; bg2 = '#1E1610'; }
-      else if (format && (format.indexOf('Бар') !== -1 || format.indexOf('бар') !== -1)) { icon = '🍸'; bg1 = '#131B2E'; bg2 = '#0B111E'; }
-      else if (format && (format.indexOf('Пекарн') !== -1 || format.indexOf('пекарн') !== -1)) { icon = '🥐'; bg1 = '#2D2013'; bg2 = '#1E140B'; }
-      else if (format && (format.indexOf('Столов') !== -1 || format.indexOf('Casual') !== -1)) { icon = '🍲'; bg1 = '#1E2419'; bg2 = '#13180F'; }
-      else if (format && (format.indexOf('Fine') !== -1 || format.indexOf('Роскош') !== -1)) { icon = '🍷'; bg1 = '#2D1418'; bg2 = '#1B0B0E'; }
-
-      var cleanName = (name || 'PLANKA GUIDE').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-      var cleanFormat = (format || 'Ресторанный гид').replace(/&/g, '&amp;');
-      var cleanCity = (city || '').replace(/&/g, '&amp;');
-
       var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">' +
         '<defs>' +
           '<linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">' +
-            '<stop offset="0%" stop-color="' + bg1 + '"/>' +
-            '<stop offset="100%" stop-color="' + bg2 + '"/>' +
+            '<stop offset="0%" stop-color="#18181B"/>' +
+            '<stop offset="100%" stop-color="#111113"/>' +
           '</linearGradient>' +
-          '<radialGradient id="glowG" cx="50%" cy="45%" r="55%">' +
-            '<stop offset="0%" stop-color="#C5A880" stop-opacity="0.28"/>' +
-            '<stop offset="100%" stop-color="#18181B" stop-opacity="0"/>' +
-          '</radialGradient>' +
         '</defs>' +
         '<rect width="100%" height="100%" fill="url(#bgGrad)"/>' +
-        '<circle cx="400" cy="220" r="240" fill="url(#glowG)"/>' +
-        '<rect x="30" y="30" width="740" height="440" rx="14" fill="none" stroke="#3F3F46" stroke-width="1.5" stroke-dasharray="6 6"/>' +
-        '<circle cx="400" cy="180" r="60" fill="#18181B" stroke="#C5A880" stroke-width="2.5"/>' +
-        '<text x="400" y="196" text-anchor="middle" font-size="44" fill="#D4AF37">' + icon + '</text>' +
-        '<text x="400" y="295" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="34" font-weight="900" fill="#FAF8F5" letter-spacing="0.02em">' + cleanName + '</text>' +
-        '<text x="400" y="335" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#C5A880" text-transform="uppercase" letter-spacing="0.12em">' + cleanFormat + (cleanCity ? ' • ' + cleanCity : '') + '</text>' +
-        '<text x="400" y="380" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" font-weight="800" fill="#71717A" letter-spacing="0.16em">PLANKA GUIDE • QUALITY STANDARD</text>' +
       '</svg>';
-      
       return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
     }
 
@@ -3952,9 +3900,9 @@
         var v = venues[i];
         var isDraft = (v.status === 'draft');
         if (currentDraftsOnlyFilter) {
-          if (!isDraft) continue; // In drafts filter, show ALL drafts
+          if (!isDraft) continue;
         } else {
-          if (isDraft && !isAdmin) continue; // In general catalog, show published only unless admin
+          if (isDraft && !isAdmin) continue;
         }
         if (currentFavoritesOnlyFilter && !isFavorite(v.id)) continue;
 
@@ -4802,66 +4750,8 @@
     }
 
     function openSyncModal() {
-      var input = document.getElementById('googleScriptUrlInput');
-      if (input) {
-        try {
-          input.value = localStorage.getItem('planka_gas_url') || '';
-        } catch(e) {}
-      }
       openModal('syncModal');
     }
-
-    function syncGoogleSheetNow() {
-      var input = document.getElementById('googleScriptUrlInput');
-      var url = input ? input.value.trim() : '';
-      if (url) {
-        try { safeSetItem('planka_gas_url', url); } catch(e) {}
-      } else {
-        try { url = localStorage.getItem('planka_gas_url') || ''; } catch(e) {}
-      }
-
-      if (!url) {
-        alert('Пожалуйста, введите URL веб-приложения Google Apps Script. Инструкция и готовый скрипт размещены на вкладке «Google Apps Script (Код)» в вашей таблице.');
-        return;
-      }
-
-      var btn = document.getElementById('btnSyncGoogleSheet');
-      if (btn) {
-        btn.disabled = true;
-        btn.innerText = '⏳ Синхронизация с таблицей...';
-      }
-
-      fetch(url + '?action=getVenues')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          if (data && data.venues && Array.isArray(data.venues) && data.venues.length > 0) {
-            var remoteList = data.venues;
-            var localMap = {};
-            for (var i = 0; i < venues.length; i++) {
-              localMap[venues[i].id] = venues[i];
-            }
-            for (var j = 0; j < remoteList.length; j++) {
-              localMap[remoteList[j].id] = remoteList[j];
-            }
-            venues = Object.values(localMap);
-            saveDB();
-            alert('Синхронизация завершена! Обновлено ' + remoteList.length + ' карточек из Google Таблицы.');
-            closeSyncModal();
-          } else {
-            alert('Ответ от Google Таблицы получен, но список заведений пуст.');
-          }
-        })
-        .catch(function(err) {
-          alert('Ошибка онлайн-синхронизации с Google Таблицей: ' + err.message + '. Убедитесь, что веб-приложение развернуто с доступом "Все" (Anyone).');
-        })
-        .finally(function() {
-          if (btn) {
-            btn.disabled = false;
-            btn.innerText = '🔄 Синхронизировать с Google Таблицей сейчас';
-          }
-        });
-    }
-
     function closeSyncModal() {
       closeModal('syncModal');
     }
