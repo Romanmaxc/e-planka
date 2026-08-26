@@ -11,7 +11,53 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <!-- ANTI-CLICKJACKING FRAME-BUSTING DEFENSE -->
-  <style id="antiClickjack">body{display:none !important;}</style>
+  <style id="antiClickjack">body{display:none !important;}
+    /* =========================================================================
+       INSPECTOR CONTROLS & SUB-HEADER ELEVATION (EXPERT CLICKABILITY FIX)
+       ========================================================================= */
+    .inspector-sub-header,
+    .inspector-controls {
+      position: relative !important;
+      z-index: 9999 !important;
+      pointer-events: auto !important;
+      background: #18181B;
+      border-top: 1px solid #27272A;
+      border-bottom: 1px solid #3F3F46;
+      padding: 0.65rem 0;
+      width: 100%;
+    }
+    .inspector-sub-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      position: relative !important;
+      z-index: 10000 !important;
+      pointer-events: auto !important;
+    }
+    .inspector-toolbar-btns {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      position: relative !important;
+      z-index: 10001 !important;
+      pointer-events: auto !important;
+    }
+    .inspector-sub-header button,
+    .inspector-toolbar-btns button,
+    .inspector-controls button,
+    .inspector-toolbar-btns .btn,
+    button[onclick],
+    div[onclick] {
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      -webkit-tap-highlight-color: transparent !important;
+      touch-action: manipulation !important;
+    }
+
+  </style>
   <script>
     if (self === top) {
       var antiClickjack = document.getElementById("antiClickjack");
@@ -2305,7 +2351,7 @@
             <span style="display: block; font-size: 0.625rem; font-family: ui-monospace, monospace; text-transform: uppercase; font-weight: 800; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 0.45rem;">ФИРМЕННОЕ БЛЮДО (SIGNATURE DISH)</span>
             <div id="modalSignatureVideoWrap" style="position: relative; margin-bottom: 0.85rem; border-radius: 0.4rem; overflow: hidden; height: 220px; background: #18181B;">
               <img id="modalSignaturePoster" src="" alt="Фирменное блюдо" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-              <video id="modalSignatureVideo" src="" poster="" autoplay muted loop playsinline style="position: absolute; top:0; left:0; width: 100%; height: 100%; object-fit: cover; display: none;" onloadeddata="this.style.display='block';"></video>
+              <video id="modalSignatureVideo" src="" poster="" autoplay muted loop playsinline webkit-playsinline preload="metadata" style="position: absolute; top:0; left:0; width: 100%; height: 100%; object-fit: cover; display: none; background: #111113;" onloadeddata="this.style.display='block';"></video>
             </div>
             <h4 class="font-serif" id="modalDish" style="font-weight: 900; font-size: 1.25rem; color: inherit;">Черная треска с муссом из трав</h4>
             <p id="modalDishReview" class="font-serif" style="font-style: italic; color: var(--text-body); font-size: 0.9375rem; margin-top: 0.45rem; line-height: 1.6;">
@@ -3684,10 +3730,15 @@
       for (var i = 0; i < topVenues.length; i++) {
         var tv = topVenues[i];
         var fallbackUri = getVenueFallbackSvg(tv.name, tv.format, tv.city);
-        var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
-        var fallbackUri = getVenueFallbackSvg(tv.name, tv.format, tv.city);
-        var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
-        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        var coverMediaHtml = '';
+        if (tv.video) {
+          coverMediaHtml = '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="card-cover-media" style="width: 100%; height: 100%; object-fit: cover; background: #111113;" poster="' + fallbackUri + '">' +
+            '<source src="' + escapeHTML(tv.video) + '" type="video/mp4">' +
+          '</video>';
+        } else {
+          var coverImg = (tv.photos && tv.photos.length > 0) ? tv.photos[0] : fallbackUri;
+          coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        }
 
         var vibePills = (tv.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + escapeHTML(t) + '</span>'; }).join(' ');
 
@@ -3829,9 +3880,16 @@
         var isQuality = item.total_score >= 90;
         var isItemDraft = (item.status === 'draft');
         
-        var fallbackUri = getVenueFallbackSvg(item.name, item.format, item.city);
-        var coverImg = (item.photos && item.photos.length > 0) ? item.photos[0] : fallbackUri;
-        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(item.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+                var fallbackUri = getVenueFallbackSvg(item.name, item.format, item.city);
+        var coverMediaHtml = '';
+        if (item.video) {
+          coverMediaHtml = '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="card-cover-media" style="width: 100%; height: 100%; object-fit: cover; background: #111113;" poster="' + fallbackUri + '">' +
+            '<source src="' + escapeHTML(item.video) + '" type="video/mp4">' +
+          '</video>';
+        } else {
+          var coverImg = (item.photos && item.photos.length > 0) ? item.photos[0] : fallbackUri;
+          coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(item.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        }
 
         var vibePills = (item.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + t + '</span>'; }).join(' ');
 
