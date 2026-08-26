@@ -355,23 +355,39 @@
     }
     .hero-slider-track {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       display: flex;
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
     }
     .hero-slide {
+      width: 100%;
       min-width: 100%;
+      max-width: 100%;
+      flex: 0 0 100%;
       height: 100%;
-      background-size: cover;
-      background-position: center;
       position: relative;
+      overflow: hidden;
+      background-color: #111113;
+    }
+    .hero-slide-img,
+    .hero-slide-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
     }
     .hero-overlay-gradient {
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(17,17,19,0.92) 0%, rgba(17,17,19,0.7) 45%, rgba(17,17,19,0.25) 100%);
+      background: linear-gradient(90deg, rgba(17,17,19,0.92) 0%, rgba(17,17,19,0.65) 45%, rgba(17,17,19,0.2) 100%);
       pointer-events: none;
       z-index: 5;
     }
@@ -1336,13 +1352,33 @@
     }
 
     @media (max-width: 860px) {
+      .michelin-hero {
+        min-height: 520px !important;
+      }
+      .hero-content-container {
+        min-height: 520px !important;
+        padding: 2.25rem 1rem 1.5rem 1rem !important;
+        justify-content: flex-end !important;
+      }
+      .hero-overlay-gradient {
+        background: linear-gradient(180deg, rgba(17,17,19,0.25) 0%, rgba(17,17,19,0.7) 45%, rgba(17,17,19,0.96) 100%) !important;
+      }
       .hero-title {
         font-size: 1.65rem !important;
         line-height: 1.2 !important;
+        margin-bottom: 0.5rem !important;
       }
       .hero-desc {
         font-size: 0.8125rem !important;
-        line-height: 1.5 !important;
+        line-height: 1.45 !important;
+        margin-bottom: 1rem !important;
+      }
+      .hero-slider-nav {
+        display: none !important;
+      }
+      .hero-featured-box {
+        margin-top: 1rem !important;
+        width: 100% !important;
       }
       .modal-box {
         max-width: 95vw !important;
@@ -3639,9 +3675,17 @@
         var fallback = getVenueFallbackSvg(v.name, v.format, v.city);
         var imgUrl = (v.photos && v.photos.length > 0) ? sanitizeMediaSrc(v.photos[0]) : fallback;
 
-        slidesHtml += '<div class="hero-slide">' +
-          '<img src="' + imgUrl + '" class="hero-slide-img" alt="' + escapeHTML(v.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallback + '\';">' +
-        '</div>';
+        if (v.video) {
+          slidesHtml += '<div class="hero-slide">' +
+            '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="hero-slide-video" poster="' + imgUrl + '">' +
+              '<source src="' + escapeHTML(v.video) + '" type="video/mp4">' +
+            '</video>' +
+          '</div>';
+        } else {
+          slidesHtml += '<div class="hero-slide">' +
+            '<img src="' + imgUrl + '" class="hero-slide-img" alt="' + escapeHTML(v.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallback + '\';">' +
+          '</div>';
+        }
         dotsHtml += '<div class="hero-dot ' + (i === (heroFeaturedIndex % topVenues.length) ? 'active' : '') + '" onclick="setHeroSlide(' + i + ')"></div>';
       }
 
@@ -3746,7 +3790,14 @@
         var tv = topVenues[i];
                 var fallbackUri = getVenueFallbackSvg(tv.name, tv.format, tv.city);
         var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
-        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        var coverMediaHtml = '';
+        if (tv.video) {
+          coverMediaHtml = '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="card-cover-media" style="width: 100%; height: 100%; object-fit: cover; background: #111113;" poster="' + coverImg + '">' +
+            '<source src="' + escapeHTML(tv.video) + '" type="video/mp4">' +
+          '</video>';
+        } else {
+          coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        }
         if (tv.video) {
           coverMediaHtml = '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="card-cover-media" style="width: 100%; height: 100%; object-fit: cover; background: #111113;" poster="' + fallbackUri + '">' +
             '<source src="' + escapeHTML(tv.video) + '" type="video/mp4">' +
