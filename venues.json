@@ -34,9 +34,9 @@
     "ergonomics_notes": "Мягкий направленный вечерний свет, комфортная глубина кресел и выверенное зонирование столиков под куполом.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/white_rabbit_1.webp",
+      "./assets/photos/white_rabbit_2.webp",
+      "./assets/photos/white_rabbit_3.webp"
     ],
     "private_photos": [
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"
@@ -109,9 +109,9 @@
     "ergonomics_notes": "Уютная монолитная посадка вокруг общего стола, камерный теплый свет и акустический комфорт для живого общения.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/el_copitas_1.webp",
+      "./assets/photos/el_copitas_2.webp",
+      "./assets/photos/el_copitas_3.webp"
     ],
     "private_photos": [
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"
@@ -179,9 +179,9 @@
     "ergonomics_notes": "Антикварная мебель, мягкие диваны, приглушенный теплый свет и тихая акустика зала «Библиотека».",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/cafe_pushkin_1.webp",
+      "./assets/photos/cafe_pushkin_2.webp",
+      "./assets/photos/cafe_pushkin_3.webp"
     ],
     "private_photos": [],
     "pros": [
@@ -247,9 +247,9 @@
     "ergonomics_notes": "Комфортная дистанция между столиками, стильное тактильное дерево в отделке и качественный акустический баланс.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/soyka_1.webp",
+      "./assets/photos/soyka_2.webp",
+      "./assets/photos/soyka_3.webp"
     ],
     "private_photos": [],
     "pros": [
@@ -315,9 +315,9 @@
     "ergonomics_notes": "Открытая посадка у открытой кухни, качественная вытяжка без дыма и устойчивые дубовые столы.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/gastroli_1.webp",
+      "./assets/photos/gastroli_2.webp",
+      "./assets/photos/gastroli_3.webp"
     ],
     "private_photos": [],
     "pros": [
@@ -383,9 +383,9 @@
     "ergonomics_notes": "Компактный зал с плотной европейской посадкой и акцентным светом над каждым столом.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/duo_gastrobar_1.webp",
+      "./assets/photos/duo_gastrobar_2.webp",
+      "./assets/photos/duo_gastrobar_3.webp"
     ],
     "private_photos": [],
     "pros": [
@@ -451,9 +451,9 @@
     "ergonomics_notes": "Удобные полукресла, наличие розеток у большинства столов и комфортный фоновый звук.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/coffeemania_1.webp",
+      "./assets/photos/coffeemania_2.webp",
+      "./assets/photos/coffeemania_3.webp"
     ],
     "private_photos": [],
     "pros": [
@@ -519,9 +519,9 @@
     "ergonomics_notes": "Деревянные столики для быстрого перекуса, приятный аромат свежего хлеба и ненавязчивый инди-плейлист.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/bushe_1.webp",
+      "./assets/photos/bushe_2.webp",
+      "./assets/photos/bushe_3.webp"
     ],
     "private_photos": [],
     "pros": [
@@ -587,9 +587,9 @@
     "ergonomics_notes": "Зонирование на высокие столы для ноутбуков и мягкие диваны для неспешных завтраков.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/engels_1.webp",
+      "./assets/photos/engels_2.webp",
+      "./assets/photos/engels_3.webp"
     ],
     "private_photos": [],
     "pros": [
@@ -655,9 +655,9 @@
     "ergonomics_notes": "Формат японской изакаи с посадкой у стойки открытой кухни и быстрого обслуживания.",
     "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     "photos": [
-      "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80"
+      "./assets/photos/ku_ramen_1.webp",
+      "./assets/photos/ku_ramen_2.webp",
+      "./assets/photos/ku_ramen_3.webp"
     ],
     "private_photos": [],
     "pros": [

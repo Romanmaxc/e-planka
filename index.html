@@ -2892,7 +2892,7 @@
     function sanitizeMediaSrc(url) {
       if (!url || typeof url !== 'string') return '';
       var trimmed = url.trim();
-      if (/^(https?:\/\/|data:image\/|data:video\/|blob:)/i.test(trimmed)) {
+      if (/^(\.\/|\/|assets\/|https?:\/\/|data:image\/|data:video\/|blob:)/i.test(trimmed)) {
         return trimmed;
       }
       return '';
