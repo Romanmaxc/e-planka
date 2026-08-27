@@ -1,4 +1,4 @@
-const CACHE_NAME = 'planka-guide-v70-cache';
+const CACHE_NAME = 'planka-guide-v71-cache';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -34,17 +34,6 @@ const STATIC_ASSETS = [
   './assets/photos/white_rabbit_1.webp',
   './assets/photos/white_rabbit_2.webp',
   './assets/photos/white_rabbit_3.webp',
-  './assets/videos/bushe.mp4',
-  './assets/videos/cafe_pushkin.mp4',
-  './assets/videos/coffeemania.mp4',
-  './assets/videos/duo_gastrobar.mp4',
-  './assets/videos/el_copitas.mp4',
-  './assets/videos/engels.mp4',
-  './assets/videos/gastroli.mp4',
-  './assets/videos/ku_ramen.mp4',
-  './assets/videos/soyka.mp4',
-  './assets/videos/test.mp4',
-  './assets/videos/white_rabbit.mp4',
   'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&display=swap',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
