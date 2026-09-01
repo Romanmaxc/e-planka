@@ -2271,7 +2271,7 @@
           <p style="font-size: 0.75rem; color: #D4CEBE; line-height: 1.5; margin-bottom: 1rem;">
             Таблица со всеми 6 специализированными калькуляторами категорий, формулами, баллами и архивом в папке <code>02_Database_Table</code>:
           </p>
-          <a href="https://drive.google.com/file/d/18ifzcmQ8cEHMkndux9VQmShj8kQoG4fz/view?usp=drivesdk" target="_blank" class="btn btn-gold" style="display: block; text-align: center; text-decoration: none; font-weight: 900; font-size: 0.8125rem; padding: 0.75rem;">
+          <a href="https://drive.google.com/file/d/1VzVhiaGymAFS-FqGyzBTq2A72wceuKv6/view?usp=drivesdk" target="_blank" class="btn btn-gold" style="display: block; text-align: center; text-decoration: none; font-weight: 900; font-size: 0.8125rem; padding: 0.75rem;">
             📊 Открыть мастер-базу на Google Диске
           </a>
         </div>
@@ -2961,9 +2961,7 @@
 
     var venues = JSON.parse(JSON.stringify(initialVenues));
     try {
-      var stored = localStorage.getItem('planka_guide_db_v70') || 
-                   localStorage.getItem('planka_guide_db_v69') || 
-                   localStorage.getItem('planka_guide_db_v68');
+      var stored = localStorage.getItem('planka_guide_db_v69');
       if (stored) {
         var parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -3059,7 +3057,7 @@
 
     function saveDB() {
       try {
-        safeSetItem('planka_guide_db_v70', JSON.stringify(venues));
+        safeSetItem('planka_guide_db_v69', JSON.stringify(venues));
       } catch(e) {}
       updateStats();
       renderHeroSlides();
@@ -3716,7 +3714,7 @@
         var imgUrl = (v.photos && v.photos.length > 0) ? sanitizeMediaSrc(v.photos[0]) : fallback;
 
         slidesHtml += '<div class="hero-slide">' +
-          '<img src="' + imgUrl + '" class="hero-slide-img" alt="' + escapeHTML(v.name) + '" decoding="async" referrerpolicy="no-referrer" onerror="handleMediaImgError(this, ' + v.id + ')">' +
+          '<img src="' + imgUrl + '" class="hero-slide-img" alt="' + escapeHTML(v.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallback + '\';">' +
         '</div>';
         dotsHtml += '<div class="hero-dot ' + (i === (heroFeaturedIndex % topVenues.length) ? 'active' : '') + '" onclick="setHeroSlide(' + i + ')"></div>';
       }
@@ -3822,7 +3820,15 @@
         var tv = topVenues[i];
                 var fallbackUri = getVenueFallbackSvg(tv.name, tv.format, tv.city);
         var coverImg = (tv.photos && tv.photos.length > 0) ? sanitizeMediaSrc(tv.photos[0]) : fallbackUri;
-        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleMediaImgError(this, ' + tv.id + ')">';
+        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        if (tv.video) {
+          coverMediaHtml = '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="card-cover-media" style="width: 100%; height: 100%; object-fit: cover; background: #111113;" poster="' + fallbackUri + '">' +
+            '<source src="' + escapeHTML(tv.video) + '" type="video/mp4">' +
+          '</video>';
+        } else {
+          var coverImg = (tv.photos && tv.photos.length > 0) ? tv.photos[0] : fallbackUri;
+          coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(tv.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        }
 
         var vibePills = (tv.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + escapeHTML(t) + '</span>'; }).join(' ');
 
@@ -3866,36 +3872,7 @@
     // Render Catalog
     
     // OFFLINE & UNBLOCKED LUXURY SVG PLACEHOLDER GENERATOR FOR RUSSIAN NETWORKS
-        // MULTI-TIER ANTI-BLOCKING IMAGE FAILOVER ENGINE (WORKS 100% IN RF & GLOBALLY)
-    function handleMediaImgError(imgEl, venueId) {
-      if (!imgEl) return;
-      var v = null;
-      if (typeof venueId === 'number' || typeof venueId === 'string') {
-        for (var i = 0; i < venues.length; i++) {
-          if (venues[i].id == venueId) { v = venues[i]; break; }
-        }
-      }
-      var name = v ? v.name : 'PLANKA GUIDE';
-      var format = v ? v.format : '';
-      var city = v ? v.city : '';
-      var curSrc = imgEl.src || '';
-
-      // Tier 1: Try high-speed unblocked image proxy CDN
-      if (curSrc.indexOf('images.unsplash.com') !== -1 && curSrc.indexOf('wsrv.nl') === -1) {
-        imgEl.onerror = function() {
-          imgEl.onerror = null;
-          imgEl.src = getVenueFallbackSvg(name, format, city);
-        };
-        imgEl.src = 'https://wsrv.nl/?url=' + encodeURIComponent(curSrc) + '&w=800&q=80&output=webp';
-        return;
-      }
-
-      // Tier 2: Final fallback to luxury SVG
-      imgEl.onerror = null;
-      imgEl.src = getVenueFallbackSvg(name, format, city);
-    }
-
-function getVenueFallbackSvg(name, format, city) {
+    function getVenueFallbackSvg(name, format, city) {
       var cleanName = (name || 'PLANKA GUIDE').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       var cleanCity = (city || '').replace(/&/g, '&amp;');
       var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">' +
@@ -3977,7 +3954,15 @@ function getVenueFallbackSvg(name, format, city) {
         
                         var fallbackUri = getVenueFallbackSvg(item.name, item.format, item.city);
         var coverImg = (item.photos && item.photos.length > 0) ? sanitizeMediaSrc(item.photos[0]) : fallbackUri;
-        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(item.name) + '" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleMediaImgError(this, ' + item.id + ')">';
+        var coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(item.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        if (item.video) {
+          coverMediaHtml = '<video autoplay loop muted playsinline webkit-playsinline preload="metadata" class="card-cover-media" style="width: 100%; height: 100%; object-fit: cover; background: #111113;" poster="' + fallbackUri + '">' +
+            '<source src="' + escapeHTML(item.video) + '" type="video/mp4">' +
+          '</video>';
+        } else {
+          var coverImg = (item.photos && item.photos.length > 0) ? item.photos[0] : fallbackUri;
+          coverMediaHtml = '<img src="' + coverImg + '" class="card-cover-media" alt="' + escapeHTML(item.name) + '" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';">';
+        }
 
         var vibePills = (item.vibe_tags || []).slice(0, 2).map(function(t){ return '<span class="vibe-tag-pill">' + t + '</span>'; }).join(' ');
 
@@ -4477,7 +4462,7 @@ function getVenueFallbackSvg(name, format, city) {
           displayPhotos.push(photos[0]);
         }
         for (var i = 0; i < 3; i++) {
-          var fallbackUri = getVenueFallbackSvg(activeModalVenue.name, activeModalVenue.format, activeModalVenue.city); phtml += '<img src="' + displayPhotos[i] + '" class="dossier-triptych-img" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="handleMediaImgError(this, ' + activeModalVenue.id + ')" onclick="openPhotoLightboxDirect(' + activeModalVenue.id + ', event)" alt="Фото заведения">';
+          var fallbackUri = getVenueFallbackSvg(activeModalVenue.name, activeModalVenue.format, activeModalVenue.city); phtml += '<img src="' + displayPhotos[i] + '" class="dossier-triptych-img" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=\'' + fallbackUri + '\';" onclick="openPhotoLightboxDirect(activeModalVenue.id, event)" alt="Фото заведения">';
         }
       } else {
         phtml = '<div style="grid-column: 1/-1; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.8125rem;">Фотографии инспекции пока не добавлены</div>';
@@ -4776,38 +4761,7 @@ function getVenueFallbackSvg(name, format, city) {
       closeModal('syncModal');
     }
 
-        // ASYNC FRESH DATABASE LOADER FROM GITHUB PAGES
-    function fetchFreshVenues() {
-      if (window.location.protocol === 'file:') return;
-      fetch('./venues.json?t=' + Date.now(), { cache: 'no-cache' })
-        .then(function(res) {
-          if (res.ok) return res.json();
-          throw new Error('Network response not ok');
-        })
-        .then(function(remoteVenues) {
-          if (Array.isArray(remoteVenues) && remoteVenues.length > 0) {
-            var draftList = venues.filter(function(v) { return v.status === 'draft'; });
-            var remoteMap = {};
-            for (var i = 0; i < remoteVenues.length; i++) {
-              remoteMap[remoteVenues[i].id] = remoteVenues[i];
-            }
-            var merged = [];
-            for (var d = 0; d < draftList.length; d++) {
-              merged.push(draftList[d]);
-            }
-            for (var r = 0; r < remoteVenues.length; r++) {
-              merged.push(remoteVenues[r]);
-            }
-            venues = merged;
-            saveDB();
-          }
-        })
-        .catch(function(err) {
-          console.log('Using local/cached dataset:', err.message);
-        });
-    }
-
-function exportDatabaseJSON() {
+    function exportDatabaseJSON() {
       var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(venues, null, 2));
       var dl = document.createElement('a');
       dl.setAttribute("href", dataStr);
